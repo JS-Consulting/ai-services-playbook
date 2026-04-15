@@ -1053,3 +1053,154 @@ a.service-cell { text-decoration: none; color: inherit; cursor: pointer; }
   .page-hero { min-height: 68vh; padding: 6.5rem 0 3rem; }
   .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
 }
+
+/* ══════════════════════════════════════════════
+   Legal Pages (Privacy / Terms)
+   ══════════════════════════════════════════════ */
+.legal-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(7rem, 12vw, 10rem) var(--section-px) clamp(4rem, 8vw, 6rem);
+  color: var(--color-text-secondary);
+}
+.legal-page h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0 0 0.75rem;
+}
+.legal-page .last-updated {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-bottom: 3rem;
+  letter-spacing: 0.02em;
+}
+.legal-page h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin: 3rem 0 1rem;
+  letter-spacing: -0.01em;
+}
+.legal-page h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 2rem 0 0.75rem;
+  letter-spacing: 0;
+}
+.legal-page p,
+.legal-page li {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+.legal-page p { margin: 0 0 1.25rem; }
+.legal-page ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+}
+.legal-page li { margin-bottom: 0.5rem; }
+.legal-page a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  transition: text-decoration-color var(--transition-fast);
+}
+.legal-page a:hover { text-decoration-color: var(--color-text); }
+.legal-page address {
+  font-style: normal;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* ══════════════════════════════════════════════
+   Footer Legal Links Row
+   ══════════════════════════════════════════════ */
+.footer-bottom {
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+.footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+.footer-legal-links a {
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+.footer-legal-links a:hover { color: var(--color-text); }
+.footer-legal-links .sep {
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+@media (max-width: 768px) {
+  .footer-legal-links { margin-left: 0; justify-content: center; }
+}
+
+/* ══════════════════════════════════════════════
+   Cookie Consent Banner
+   ══════════════════════════════════════════════ */
+.cookie-banner {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  padding: 1.25rem 1.5rem;
+  animation: cookie-slide-up 0.35s ease-out;
+}
+@keyframes cookie-slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.cookie-banner-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.cookie-banner-text {
+  margin: 0;
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.cookie-banner-text a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cookie-banner-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.cookie-banner .btn {
+  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+}
+@media (max-width: 768px) {
+  .cookie-banner { padding: 1rem 1.25rem; }
+  .cookie-banner-inner { flex-direction: column; align-items: stretch; gap: 1rem; }
+  .cookie-banner-actions { justify-content: stretch; }
+  .cookie-banner-actions .btn { flex: 1; justify-content: center; }
+}
