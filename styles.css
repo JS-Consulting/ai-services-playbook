@@ -695,8 +695,12 @@ a.service-cell { text-decoration: none; color: inherit; cursor: pointer; }
 
 /* ── Page Hero (sub-pages) ── */
 .page-hero {
-  padding: 8rem 0 3.5rem;
-  background: var(--color-bg-alt);
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8rem 0 4rem;
+  background: var(--color-bg);
   position: relative;
   overflow: hidden;
 }
@@ -715,6 +719,21 @@ a.service-cell { text-decoration: none; color: inherit; cursor: pointer; }
   position: relative;
   z-index: 1;
 }
+
+.page-hero h1 {
+  max-width: 1000px;
+  font-size: clamp(2.75rem, 6.5vw, 5.25rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+}
+
+.page-hero-tagline {
+  max-width: 640px;
+  margin-bottom: 2rem;
+}
+
+.page-hero .btn { align-self: flex-start; }
 
 .page-hero-label {
   font-size: 0.6875rem;
@@ -1040,6 +1059,6 @@ a.service-cell { text-decoration: none; color: inherit; cursor: pointer; }
   .cards-grid { grid-template-columns: 1fr; }
   .persona-grid { grid-template-columns: 1fr; }
   .comparison-grid { grid-template-columns: 1fr; }
-  .page-hero { padding: 6.5rem 0 2rem; }
+  .page-hero { min-height: 68vh; padding: 6.5rem 0 3rem; }
   .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
 }
