@@ -119,6 +119,8 @@
           <h2>What fund managers are telling us.</h2>
         </div>
       </div>
+    </div>
+    <div class="quotes-breakout">
       <div class="quotes-grid reveal">
         <div class="quote-card">
           <blockquote>&ldquo;We know AI is going to change how we source and diligence deals. We just don't know where to start without wasting six months on the wrong tools.&rdquo;</blockquote>
@@ -145,8 +147,8 @@
           <span>About Us</span>
         </div>
         <div class="section-heading">
-          <h2>Two lenses. Every room.</h2>
-          <p>Technical depth meets deal-floor credibility. Both consultants present in every session.</p>
+          <h2>Comprehensive AI depth. Real deal experience.</h2>
+          <p>Technical depth meets deal-floor credibility.</p>
         </div>
       </div>
       <div class="team-grid reveal">
@@ -235,6 +237,7 @@
 
   <!-- ── Section 5: How We Work ── -->
   <section class="section" id="process">
+    <canvas class="process-waves" id="process-waves"></canvas>
     <div class="container">
       <div class="reveal">
         <div class="section-badge">
@@ -356,9 +359,9 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Hero sine waves
-    (function() {
-      const canvas = document.getElementById('hero-waves');
+    // Sine wave canvases (hero + process section)
+    function initWaves(canvasId) {
+      const canvas = document.getElementById(canvasId);
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       let w, h, time = 0;
@@ -423,7 +426,10 @@
       window.addEventListener('resize', resize);
       resize();
       draw();
-    })();
+    }
+
+    initWaves('hero-waves');
+    initWaves('process-waves');
   </script>
 </body>
 </html>
