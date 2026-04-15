@@ -238,10 +238,22 @@ p {
   justify-content: flex-end;
   padding: 0 0 4rem;
   position: relative;
+  overflow: hidden;
+}
+
+.hero-waves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 .hero-content {
   max-width: 1000px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -256,7 +268,27 @@ p {
   padding: 1.5rem 0;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
+  position: relative;
   overflow: hidden;
+}
+
+.marquee-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(to left, var(--color-bg) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.marquee-wrap {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
 .marquee-label {
@@ -266,16 +298,23 @@ p {
   text-transform: uppercase;
   color: var(--color-text-muted);
   padding-left: var(--section-px);
-  margin-bottom: 0;
-  display: inline-block;
+  padding-right: 1.5rem;
   white-space: nowrap;
-  margin-right: 2rem;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  background: var(--color-bg);
 }
 
-.marquee-wrap {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+.marquee-label::after {
+  content: '';
+  position: absolute;
+  top: -1.5rem;
+  bottom: -1.5rem;
+  right: -80px;
+  width: 80px;
+  background: linear-gradient(to right, var(--color-bg), transparent);
+  pointer-events: none;
 }
 
 .marquee-track {
@@ -389,10 +428,10 @@ p {
 
 .team-photo {
   width: 100%;
-  aspect-ratio: 3 / 4;
-  border-radius: var(--radius-card);
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
   margin-bottom: 1.25rem;
-  background: var(--color-surface);
+  background: #d8d8da;
   overflow: hidden;
 }
 
@@ -400,11 +439,8 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(30%);
-  transition: filter var(--transition-med);
+  filter: grayscale(100%);
 }
-
-.team-card:hover .team-photo img { filter: grayscale(0%); }
 
 .team-card h3 {
   font-family: var(--font-body);
