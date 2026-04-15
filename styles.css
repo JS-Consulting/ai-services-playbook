@@ -731,6 +731,7 @@ a.service-cell { text-decoration: none; color: inherit; cursor: pointer; }
   font-size: clamp(2.75rem, 6.5vw, 5.25rem);
   letter-spacing: -0.05em;
   line-height: 1;
+  min-height: 3em;
 }
 
 .page-hero-tagline {
@@ -742,25 +743,6 @@ a.service-cell { text-decoration: none; color: inherit; cursor: pointer; }
   text-transform: uppercase;
   color: var(--color-text-muted);
   margin-bottom: 1.25rem;
-}
-
-.page-hero-label {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-accent-light);
-  margin-bottom: 1rem;
-}
-
-.page-hero h1 {
-  margin-bottom: 0.75rem;
-}
-
-.page-hero-tagline {
-  font-size: 1.0625rem;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
 }
 
 /* ── Track Overview ── */
