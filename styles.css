@@ -542,13 +542,13 @@ p {
 
 .team-card {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 180px 1fr;
   gap: 1.75rem;
   align-items: stretch;
 }
 
 .team-photo {
-  width: 120px;
+  width: 180px;
   border-radius: 14px;
   background: var(--color-surface);
   overflow: hidden;
