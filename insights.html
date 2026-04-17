@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team — Convolving</title>
-  <meta name="description" content="Meet the Convolving team. AI architecture depth meets deal-floor credibility. Based in Switzerland.">
-  <meta property="og:title" content="Team — Convolving">
-  <meta property="og:description" content="Meet the Convolving team. AI architecture depth meets deal-floor credibility.">
+  <title>Insights — Convolving</title>
+  <meta name="description" content="Notes, briefings and field reports on AI in investment work. Written for partners and operators.">
+  <meta property="og:title" content="Insights — Convolving">
+  <meta property="og:description" content="Notes, briefings and field reports on AI in investment work.">
   <meta property="og:type" content="website">
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +24,8 @@
         <a href="strategy.html">Strategy</a>
         <a href="infrastructure.html">Infrastructure</a>
         <a href="partnerships.html">Partnerships</a>
-        <a href="insights.html">Insights</a>
-        <a href="team.html" aria-current="page">Team</a>
+        <a href="insights.html" aria-current="page">Insights</a>
+        <a href="team.html">Team</a>
         <span class="nav-cta">
           <a href="mailto:info@hebbian.ch" class="btn">
             Book a Coffee
@@ -39,13 +39,13 @@
     </div>
   </header>
 
-  <!-- ── Hero ── -->
-  <section class="hero">
+  <!-- ── Page Hero ── -->
+  <section class="page-hero">
     <canvas class="hero-waves" id="hero-waves"></canvas>
     <div class="container">
       <div class="hero-content">
-        <p class="hero-eyebrow">The people behind Convolving</p>
-        <h1>Comprehensive AI depth.<br>Real deal experience.</h1>
+        <p class="page-hero-tagline">Field notes from the deal floor</p>
+        <h1>Notes from the deal floor.</h1>
         <a href="mailto:info@hebbian.ch" class="btn">
           Book a Coffee
           <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
@@ -54,106 +54,135 @@
     </div>
   </section>
 
-  <!-- ── Founders ── -->
-  <section class="section" id="founders">
+  <!-- ── Track Overview ── -->
+  <section class="section section-compact">
     <div class="container">
-      <div class="reveal">
-        <div class="section-badge">
-          <span>Founders</span>
-        </div>
-        <div class="section-heading">
-          <h2>Technical depth meets deal-floor credibility.</h2>
-          <p>No generalists. No resellers. Two founders who have lived both sides of the table.</p>
-        </div>
-      </div>
-      <div class="team-grid reveal">
-        <div class="team-card">
-          <div class="team-photo">
-            <img src="assets/cameron-weibel.jpeg" alt="Cameron Weibel">
-          </div>
-          <div>
-            <h3>Cameron Weibel</h3>
-            <div class="team-role">Co-Founder &middot; Manager of AI, SWISS (Lufthansa Group)</div>
-            <p class="team-bio">AI architecture, model orchestration, MCP infrastructure, and agentic system design. Built and deployed enterprise AI infrastructure across Lufthansa Group. ETH-adjacent. Domain authority on applied AI in regulated, complex organisations.</p>
-          </div>
-        </div>
-        <div class="team-card">
-          <div class="team-photo">
-            <img src="assets/spencer-johnson.jpeg" alt="Spencer Johnson">
-          </div>
-          <div>
-            <h3>Spencer Johnson</h3>
-            <div class="team-role">Co-Founder &middot; Deals Strategy &amp; Value Creation, PwC CH</div>
-            <p class="team-bio">30+ deals across PE, VC, and family offices. Led PwC Switzerland's AI adoption strategy. Ex-Tesla. Deep fluency in deal environments, investment process reality, and bridging AI capability with business workflows.</p>
-          </div>
-        </div>
+      <div class="track-overview reveal">
+        <p>Briefings, field reports and opinionated takes on how AI is &mdash; and isn't &mdash; changing investment work. Written for partners and operators, not general audiences. We publish when we have something to say. No cadence, no SEO, no newsletter churn.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── Advisory Network ── -->
-  <section class="section section-alt" id="advisors">
+  <!-- ── Featured ── -->
+  <section class="section section-alt">
     <div class="container">
       <div class="reveal">
         <div class="section-badge">
-          <span>Advisory Network</span>
-        </div>
-        <div class="section-heading">
-          <h2>Backed by the institutions setting the pace.</h2>
-          <p>Nine senior advisors across frontier AI, regulated finance, and fund operations &mdash; convened when the question warrants it. We don't publish the roster. When a client engagement needs a specific perspective, we make the introduction.</p>
+          <span>Featured</span>
         </div>
       </div>
-      <div class="cards-grid reveal">
-        <div class="card">
-          <h4>Frontier AI</h4>
-          <p>Systems design, enterprise deployment, and the intersection of machine learning research with real-world implementation at scale.</p>
+      <article class="insight-featured reveal">
+        <div class="insight-featured-viz">
+          <canvas id="featureViz"></canvas>
         </div>
-        <div class="card">
-          <h4>Regulated Finance</h4>
-          <p>AI adoption within financial services, regulatory frameworks, compliance, and institutional change management at banks and asset managers.</p>
+        <div class="insight-featured-body">
+          <span class="insight-tag">State of the Union</span>
+          <h2>The adoption gap is operational, not technical.</h2>
+          <p>Six months of workshops across European PE, VC and family offices &mdash; a pattern report on why most firms have bought the tools but not the habit, and the three structural moves that actually close the gap.</p>
+          <a href="#" class="link-arrow">Read the briefing
+            <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
         </div>
-        <div class="card">
-          <h4>Fund Operations</h4>
-          <p>Investment process design, deal-team workflows, and the operational requirements of modern PE, VC, and family-office teams.</p>
-        </div>
-      </div>
+      </article>
     </div>
   </section>
 
-  <!-- ── Operating Principles ── -->
+  <!-- ── Field Notes ── -->
   <section class="section">
     <div class="container">
       <div class="reveal">
         <div class="section-badge">
-          <span>How We Operate</span>
+          <span>Recent</span>
         </div>
         <div class="section-heading">
-          <h2>Three commitments.</h2>
+          <h2>Field notes.</h2>
+          <p>Short pieces on what we're learning from engagements, tooling shifts, and the hard parts of adoption.</p>
         </div>
       </div>
-      <div class="cards-grid reveal">
-        <div class="card">
-          <h4>Both founders, always</h4>
-          <p>Every workshop, every sprint, every IC briefing has both of us present. No associate-led delivery. No handoff after the sales call.</p>
-        </div>
-        <div class="card">
-          <h4>Artifacts over decks</h4>
-          <p>Every engagement ships working tooling, a trained team, or a specific roadmap. If we can't name the artifact, the engagement doesn't start.</p>
-        </div>
-        <div class="card">
-          <h4>Bounded capacity</h4>
-          <p>We run a small number of engagements concurrently &mdash; by design. If you're reading this and we're full, we'll tell you and point you elsewhere.</p>
-        </div>
+      <div class="insights-list reveal">
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">2026 &middot; Apr</span>
+          <div class="insight-row-body">
+            <h3>What "MCP-native" actually means for a deal team.</h3>
+            <p>The Model Context Protocol isn't infrastructure trivia &mdash; it's the thing that decides whether AI sits alongside your workflow or inside it.</p>
+          </div>
+          <span class="insight-tag">Infrastructure</span>
+          <span class="insight-row-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">2026 &middot; Mar</span>
+          <div class="insight-row-body">
+            <h3>Top-down and bottom-up, at the same time.</h3>
+            <p>Why the Adoption Programme insists on running IC-level briefings and analyst-level builds concurrently &mdash; and what happens when you don't.</p>
+          </div>
+          <span class="insight-tag">Strategy</span>
+          <span class="insight-row-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">2026 &middot; Feb</span>
+          <div class="insight-row-body">
+            <h3>The CIM-analysis demo that keeps working.</h3>
+            <p>A small, repeatable live build we've run twelve times now &mdash; and why it converts sceptics faster than any deck we've written.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-row-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">2026 &middot; Jan</span>
+          <div class="insight-row-body">
+            <h3>Institutional memory is an AI problem.</h3>
+            <p>Every firm we've met has the same data problem: the last twenty deal memos, sitting in four different places, nobody reads them. Knowledge architecture is the fix.</p>
+          </div>
+          <span class="insight-tag">Infrastructure</span>
+          <span class="insight-row-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">2025 &middot; Dec</span>
+          <div class="insight-row-body">
+            <h3>On refusing retainers without deliverables.</h3>
+            <p>A short note on why every Convolving engagement is scoped to a defined artifact &mdash; and why the industry's drift toward vague retainers has produced so little useful work.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-row-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">2025 &middot; Nov</span>
+          <div class="insight-row-body">
+            <h3>What we stopped putting in workshops.</h3>
+            <p>The five slides, demos and "opportunity maps" we cut from every engagement in the last twelve months &mdash; and what replaced them.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-row-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
       </div>
     </div>
   </section>
 
-  <!-- ── CTA Section ── -->
+  <!-- ── CTA ── -->
   <section class="cta-section">
     <div class="container">
       <div class="reveal">
-        <h2>Ready to explore?</h2>
-        <p>Book a coffee. We'll talk through where AI fits in your process. No pitch, no pressure.</p>
+        <h2>Want the briefings direct?</h2>
+        <p>We don't run a newsletter. But if we've already met, we're happy to send pieces as they're published.</p>
         <a href="mailto:info@hebbian.ch" class="btn">
           Book a Coffee
           <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
@@ -229,13 +258,11 @@
       let w, h, time = 0;
       let mouse = { x: 0.5, y: 0.5, active: false };
       let sm = { x: 0.5, y: 0.5 };
-
       function resize() {
         const r = canvas.parentElement.getBoundingClientRect();
         w = canvas.width = r.width;
         h = canvas.height = r.height;
       }
-
       canvas.parentElement.addEventListener('mousemove', (e) => {
         const r = canvas.parentElement.getBoundingClientRect();
         mouse.x = (e.clientX - r.left) / r.width;
@@ -243,7 +270,6 @@
         mouse.active = true;
       });
       canvas.parentElement.addEventListener('mouseleave', () => { mouse.active = false; });
-
       const waves = [
         { amp: 40, freq: 0.008, spd: 0.02, y: 0.6, col: [50,120,190,0.5], lw: 2 },
         { amp: 30, freq: 0.012, spd: 0.015, y: 0.5, col: [70,150,220,0.35], lw: 1.5 },
@@ -251,7 +277,6 @@
         { amp: 25, freq: 0.015, spd: 0.025, y: 0.4, col: [60,130,200,0.25], lw: 1 },
         { amp: 35, freq: 0.01, spd: 0.018, y: 0.55, col: [30,80,140,0.4], lw: 2 },
       ];
-
       function draw() {
         ctx.clearRect(0, 0, w, h);
         time++;
@@ -259,7 +284,6 @@
         sm.y += ((mouse.active ? mouse.y : 0.5) - sm.y) * 0.05;
         const ampM = 1 + (sm.y - 0.5) * 1.5;
         const phaseO = (sm.x - 0.5) * 5;
-
         if (mouse.active) {
           const g = ctx.createRadialGradient(sm.x * w, sm.y * h, 0, sm.x * w, sm.y * h, 250);
           g.addColorStop(0, 'rgba(50,120,190,0.12)');
@@ -267,7 +291,6 @@
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, w, h);
         }
-
         waves.forEach(wv => {
           ctx.beginPath();
           ctx.moveTo(0, h * wv.y);
@@ -281,18 +304,58 @@
           ctx.lineWidth = wv.lw;
           ctx.stroke();
         });
-
         requestAnimationFrame(draw);
       }
-
       window.addEventListener('resize', resize);
       resize();
       draw();
     }
-
     initWaves('hero-waves');
 
-    // Cookie consent
+    // Featured insight convolution viz
+    (function(){
+      const c = document.getElementById('featureViz');
+      if (!c) return;
+      const ctx = c.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      let w, h, t = 0;
+      function resize(){
+        const r = c.parentElement.getBoundingClientRect();
+        c.width = w = Math.max(1, Math.floor(r.width * dpr));
+        c.height = h = Math.max(1, Math.floor(r.height * dpr));
+        c.style.width = r.width + 'px';
+        c.style.height = r.height + 'px';
+      }
+      resize();
+      window.addEventListener('resize', resize);
+      const accent = 'rgba(58, 120, 184, ';
+      function draw(){
+        ctx.clearRect(0, 0, w, h);
+        t += 0.008;
+        ctx.lineWidth = 1 * dpr;
+        ctx.strokeStyle = 'rgba(42, 90, 140, 0.08)';
+        const grid = 28 * dpr;
+        for (let x = 0; x < w; x += grid) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+        for (let y = 0; y < h; y += grid) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath();
+          for (let x = 0; x <= w; x += 2) {
+            const nx = x / w;
+            const y1 = Math.sin(nx * 6 + t * 1.2) * 0.12;
+            const y2 = Math.sin(nx * 9 - t * 0.8 + i) * 0.08;
+            const conv = (y1 + y2) * (1 - Math.abs(nx - 0.5) * 1.6);
+            const yy = h * 0.5 + conv * h * (1 + i * 0.3);
+            if (x === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+          }
+          ctx.strokeStyle = accent + (0.55 - i * 0.15) + ')';
+          ctx.lineWidth = (2 - i * 0.5) * dpr;
+          ctx.stroke();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
     document.querySelectorAll('[data-cookie-prefs]').forEach(el => {
       el.addEventListener('click', e => { e.preventDefault(); if (window.CookieConsent) window.CookieConsent.show(); });
     });
