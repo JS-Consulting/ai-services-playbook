@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infrastructure &amp; Tooling — Convolving</title>
+<meta name="description" content="Bespoke AI infrastructure for investment teams. Knowledge architecture, Claude Enterprise deployment, custom workflows.">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-accent="blue">
+
+<header class="header">
+  <div class="header-inner">
+    <a href="Convolving.html" class="logo" aria-label="Convolving home">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="8" cy="12" r="4" stroke="currentColor" stroke-width="1.3" opacity=".55"/>
+          <circle cx="16" cy="12" r="4" stroke="currentColor" stroke-width="1.3" opacity=".9"/>
+          <circle cx="12" cy="12" r="1.3" fill="currentColor"/>
+        </svg>
+      </span>
+      Convolving
+    </a>
+    <nav class="nav" id="nav">
+      <a href="strategy.html">Strategy</a>
+      <a href="infrastructure.html" class="active">Infrastructure</a>
+      <a href="partners.html">Partners</a>
+      <a href="insights.html">Insights</a>
+      <a href="team.html">Team</a>
+    </nav>
+    <div class="nav-right">
+      <a href="mailto:info@hebbian.ch" class="btn header-cta">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
+  <div class="page-hero-gradient"></div>
+  <div class="container-wide">
+    <div class="page-hero-inner">
+      <div>
+        <div class="page-hero-meta">
+          <span>Track 02</span><span class="sep"></span>
+          <span>Bespoke technical builds</span>
+        </div>
+        <h1>Infrastructure &amp; <span class="hl">tooling.</span></h1>
+        <p class="page-hero-sub">Your firm. Your data. Your workflows. Custom-built infrastructure for how your team actually works — scoped and shipped as production systems.</p>
+        <div class="hero-actions">
+          <a href="mailto:info@hebbian.ch" class="btn">
+            Book a coffee
+            <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+          <a href="#builds" class="btn btn-ghost">
+            See what we build
+            <span class="dot"><svg viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span>
+          </a>
+        </div>
+      </div>
+      <aside class="page-hero-aside">
+        <p class="q">"Past the training phase. Production systems on your own data — knowledge bases, deal screening, automated workflows. Not more workshops."</p>
+        <p class="a">— For the advanced firm</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="eyebrow reveal">Premise</div>
+    <p class="lede reveal" style="margin-top:1.5rem">
+      Bespoke technical builds for your firm, your data, your workflows. Everything is scoped and built specifically for you. Custom-built infrastructure for how your team actually works.
+    </p>
+  </div>
+</section>
+
+<!-- ── What we build ── -->
+<section class="section section-alt" id="builds">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">What we build</div>
+      <h2>Three categories of work.</h2>
+      <p>Each engagement is scoped independently. Deliverables are production-quality systems, not prototypes.</p>
+    </div>
+    <div class="principle-grid" style="grid-template-columns:repeat(3,1fr)">
+      <article class="principle reveal">
+        <span class="principle-num">01 · Knowledge</span>
+        <div class="offering-glyph" style="margin-bottom:1.5rem">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3">
+            <circle cx="24" cy="14" r="10"/>
+            <circle cx="14" cy="34" r="8"/>
+            <circle cx="34" cy="34" r="8"/>
+            <line x1="24" y1="24" x2="14" y2="26" stroke-dasharray="3 2"/>
+            <line x1="24" y1="24" x2="34" y2="26" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <h4>Knowledge Architecture</h4>
+        <p style="margin-bottom:1rem">Your firm's deal memos, IC materials, research notes, and portfolio data — indexed, searchable, and queryable via AI. The institutional memory your team has never had.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;padding-top:1rem;border-top:1px solid var(--line)">
+          <span class="offering-meta" style="margin:0"><span>Scoped engagement</span></span>
+        </div>
+      </article>
+      <article class="principle reveal d1">
+        <span class="principle-num">02 · Deployment</span>
+        <div class="offering-glyph" style="margin-bottom:1.5rem">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3">
+            <rect x="8" y="12" width="32" height="24" rx="3"/>
+            <path d="M8 18h32"/>
+            <circle cx="13" cy="15" r="1.5" fill="currentColor" fill-opacity="0.3"/>
+            <circle cx="18" cy="15" r="1.5" fill="currentColor" fill-opacity="0.3"/>
+          </svg>
+        </div>
+        <h4>Claude Enterprise Deployment</h4>
+        <p style="margin-bottom:1rem">Account configuration, team structure, SSO, data governance, and compliance documentation. We handle IT and procurement so the investment team doesn't have to.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;padding-top:1rem;border-top:1px solid var(--line)">
+          <span class="offering-meta" style="margin:0"><span>Included w/ Adoption</span></span>
+        </div>
+      </article>
+      <article class="principle reveal d2">
+        <span class="principle-num">03 · Workflows</span>
+        <div class="offering-glyph" style="margin-bottom:1.5rem">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3">
+            <path d="M10 24h8l4-10 8 20 4-10h8" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h4>Custom Workflows &amp; Skills</h4>
+        <p style="margin-bottom:1rem">Deal screening pipelines, automated CIM analysis, portfolio monitoring, research synthesis. Includes MCP server infrastructure and agentic system design.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;padding-top:1rem;border-top:1px solid var(--line)">
+          <span class="offering-meta" style="margin:0"><span>Production-quality</span></span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── Process ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">How engagements run</div>
+      <h2>Scoped, built, handed over.</h2>
+      <p>No retainers without deliverables. Every build is a defined piece of work with a defined artifact.</p>
+    </div>
+    <div class="journey-rail">
+      <div class="journey-progress"><i style="width:100%"></i></div>
+      <div class="journey-steps">
+        <div class="jstep active reveal">
+          <span class="jstep-marker"></span>
+          <span class="jstep-num">01 · Scope</span>
+          <h3>Map the workflow</h3>
+          <p>We sit with your team, watch the work, and scope the smallest build that will move the needle. Written scope and fixed fee.</p>
+        </div>
+        <div class="jstep active reveal d1">
+          <span class="jstep-marker"></span>
+          <span class="jstep-num">02 · Build</span>
+          <h3>Ship the system</h3>
+          <p>Two senior engineers. Weekly demos against real data. Production deployment from day one — never a throwaway prototype.</p>
+        </div>
+        <div class="jstep active reveal d2">
+          <span class="jstep-marker"></span>
+          <span class="jstep-num">03 · Embed</span>
+          <h3>Train the operators</h3>
+          <p>Documentation, runbooks, and hands-on training with the people who will own the system day-to-day. They leave confident.</p>
+        </div>
+        <div class="jstep active reveal d3">
+          <span class="jstep-marker"></span>
+          <span class="jstep-num">04 · Hand over</span>
+          <h3>Walk away, or stay</h3>
+          <p>Source code, infrastructure access, and full documentation are yours. Optional Fractional CAIO engagement for ongoing evolution.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Who ── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Who this is for</div>
+      <h2>One profile.</h2>
+    </div>
+    <div class="persona-grid" style="grid-template-columns:1fr;max-width:820px">
+      <div class="persona reveal" data-n="A">
+        <span class="persona-tag">The advanced firm</span>
+        <h3>You're past the training phase.</h3>
+        <p>Your team already has strong internal AI adoption. You want purpose-built systems on your own data: knowledge bases, deal screening pipelines, automated workflows. Not more workshops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Ready to build?</h2>
+    <p>Book a coffee. We'll scope what custom infrastructure looks like for your team.</p>
+    <div class="cta-actions">
+      <a href="mailto:info@hebbian.ch" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="partners.html" class="btn btn-ghost">
+        Ongoing partnerships
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:info@hebbian.ch" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Work</div>
+        <ul class="footer-list">
+          <li><a href="strategy.html">Strategy &amp; Adoption →</a></li>
+          <li><a href="infrastructure.html">Infrastructure →</a></li>
+          <li><a href="partners.html">Partners →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="team.html">Team</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="mailto:info@hebbian.ch">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:info@hebbian.ch">info@hebbian.ch</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/subpage.js?v=1776456030485"></script>
+</body>
+</html>
