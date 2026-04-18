@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The two-hour AI audit — Convolving</title>
+<meta name="description" content="A practical exercise any deal team can run before committing to anything. Not a strategy, not a roadmap. Two hours and a whiteboard.">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-accent="blue">
+
+<!-- ── Header (shared) ── -->
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="header-logo" aria-label="Convolving home">
+      <img src="../assets/convolving-logo-white.svg" alt="Convolving" height="28">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="../strategy.html">Strategy</a>
+      <a href="../infrastructure.html">Infrastructure</a>
+      <a href="../partnerships.html">Partnerships</a>
+      <a href="../insights.html" class="active">Insights</a>
+      <a href="../team.html">Team</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Article hero ── -->
+<section class="page-hero article-hero">
+  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
+  <div class="page-hero-gradient"></div>
+  <div class="container-wide">
+    <div class="page-hero-inner article-hero-inner">
+      <div class="article-hero-lead">
+        <div class="crumb">
+          <a href="../insights.html">Insights</a>
+          <span class="sep">/</span>
+          <span class="cur">Field note</span>
+        </div>
+        <span class="eyebrow"><span class="eyebrow-num">01</span>Field note</span>
+        <h1>The two-hour <span class="hl">audit</span>.</h1>
+        <p class="lede">A practical exercise any deal team can run before committing to anything. Not a strategy, not a roadmap. Two hours and a whiteboard.</p>
+        <div class="article-meta">
+          <span class="author">Convolving Editors</span>
+          <span class="sep"></span>
+          <span>October 2025</span>
+          <span class="sep"></span>
+          <span>5 min read</span>
+          <span class="insight-tag">Method</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Article body ── -->
+<section class="section">
+  <div class="container">
+    <article class="article-body">
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">02</span>Why bother</span>
+        <h2>Most teams skip the thing that should happen first.</h2>
+        <p>The sequence is almost universal. A partner comes back from a conference. Or a portfolio company demo lands. Or a competitor announces something. The firm decides it is "doing AI." Within two weeks there is a vendor shortlist. Within six weeks there is a pilot. Within six months there is a quietly failed pilot and a lingering question about what went wrong.</p>
+        <p>What went wrong, almost always, is that nobody asked the prior question: <em>what problem are we actually trying to solve, and does it have the right shape for an AI solution?</em></p>
+        <p>The two-hour audit is not a strategy. It is not a roadmap. It does not produce a vendor recommendation or a business case. It produces something more useful at this stage: a short list of candidates that are worth investigating further, and a longer list of things that are not. That is the thing that should happen before any vendor conversation, before any pilot, before any internal working group is convened.</p>
+        <p>Most teams skip it because it feels too simple. It is simple. That is the point. The goal is not to produce a comprehensive AI strategy in two hours. The goal is to not spend six months on the wrong problem.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">03</span>How to run it</span>
+        <h2>Four blocks of thirty minutes. One whiteboard.</h2>
+
+        <h3>Block 1: List every repetitive task the team does (30 minutes)</h3>
+        <p>Go around the room. Ask everyone to name the things they do more than once a week that feel like they could be done faster or better. Do not filter yet. Write everything on the board. Meeting prep, research synthesis, memo drafts, portfolio monitoring summaries, LP update templates, CIM analysis, reference call notes, calendar management, covenant tracking — all of it.</p>
+        <p>The goal is volume. A room of six people should generate thirty to fifty items without much trouble. If the list is short, someone is editing before they should be. The discipline is: write it down, do not evaluate it yet.</p>
+
+        <h3>Block 2: Rate each item (30 minutes)</h3>
+        <p>For every item on the board, assign three scores, each from one to five: time-per-week, frequency, and pain level. Time-per-week is how many hours the task consumes across the team. Frequency is how often it recurs. Pain level is a gut score — how much does this task feel like the wrong use of expensive attention?</p>
+        <p>Multiply the three numbers. You now have a rough priority score for each item. This is not rigorous. It is directional. The point is to surface the top third and the bottom third quickly, not to produce a defensible ROI model.</p>
+
+        <h3>Block 3: Apply the failure-mode filter (30 minutes)</h3>
+        <p>Take the top third of your scored list. For each item, ask one question: what happens when the AI gets it wrong? If the answer is "someone catches it in review," the failure mode is boring — and boring failure modes are what you want. If the answer involves a regulator, a limited partner, a live transaction, or a decision that cannot easily be reversed, the failure mode is interesting. Interesting failure modes are not disqualifying, but they require different architecture and a longer timeline. Set those aside in a separate column.</p>
+        <p>Look for the overlap: high time-per-week, high frequency, high pain, boring failure mode. Those are your candidates.</p>
+
+        <h3>Block 4: End with three candidates (30 minutes)</h3>
+        <p>Not thirty. Not ten. Three. The instinct to hedge by keeping everything on the list is the instinct that kills programmes. Each candidate needs a name, a one-sentence description of what the AI would do, and the name of one person who will own evaluating it further. That is the output of the audit. Three named candidates, three owners, and a populated kill list showing why everything else was set aside.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">04</span>What you will find</span>
+        <h2>The best candidates are boring. That is expected.</h2>
+        <p>Run this exercise with enough deal teams and the patterns stabilise quickly. The candidates that survive are almost always the same shape: meeting prep and action-item extraction, research synthesis and first-draft memo sections, portfolio monitoring summaries, and first-pass analysis of standardised documents — CIMs, financials, data room indices.</p>
+        <p>These feel unexciting. They are unexciting. They are also the right shape: repetitive, time-consuming, forgiving of small errors, already performed by humans who would rather spend their attention elsewhere. A well-scoped AI tool for meeting prep or research synthesis can return one to two hours per person per week without any process change beyond the tool itself.</p>
+        <p>The exciting candidates — automated deal screening, AI-driven risk flagging, dynamic LP reporting — almost always fail the failure-mode test at this stage. Not because they are impossible, but because they require data infrastructure that usually does not exist yet, governance decisions that have not been made, and evaluation frameworks that take months to build properly. They belong on a different roadmap.</p>
+        <p>Teams that lead with the exciting candidates tend to either stall in scoping or build something fragile that erodes trust in AI tooling broadly. Teams that start with the boring candidates build early wins, establish evaluation habits, and earn the credibility to tackle the more complex work later. The audit is how you find the boring candidates before you spend six months on the exciting ones.</p>
+      </section>
+
+      <aside class="compare-note">
+        The output of the audit is not a list of AI projects. It is a ranked list of data problems and workflow problems. Those are different roadmaps.
+      </aside>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">05</span>What to do next</span>
+        <h2>The audit produces candidates. Candidates need one more question.</h2>
+        <p>Each of the three candidates from your audit needs a second round of scrutiny before anything is built or bought. The question is not "which vendor do we call" or "how long will this take." The question is: does the data already exist to feed a model, or do we have a data problem first?</p>
+        <p>This is where many programmes discover that their AI problem is actually a data problem. The deal team wants AI-assisted portfolio monitoring. The underlying data is split across three systems, partially in PDFs, and partially in someone's head. The AI is not the first step. Cleaning and structuring the data is the first step. That is a different project with a different owner and a different timeline.</p>
+        <p>For each candidate, write down: what data does this task require, where does that data currently live, and in what form. If the answer is "it lives in a structured, accessible system and we have at least three months of historical examples," you have a real candidate. If the answer is "it lives in inboxes, meeting notes, and tribal knowledge," you have a data project that precedes the AI project.</p>
+        <p>The audit produces candidates. The data-readiness check turns those candidates into either projects or pre-projects. Both are useful outputs. Neither requires a vendor conversation to produce. That is the audit's value: two hours of structured thinking that tells you what shape your actual work is before you commit to any of it.</p>
+      </section>
+
+      <!-- Byline card -->
+      <div class="article-byline">
+        <div class="avatar" aria-hidden="true">C</div>
+        <div>
+          <div class="byline-name">Convolving Editors</div>
+          <div class="byline-role">Field notes · Zurich / Oberrieden</div>
+          <div class="byline-bio">Pattern reports from the engagements we run with European PE, VC and family offices. Written for partners and operators, not general audiences.</div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<!-- ── Related insights ── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="article-related">
+      <div class="section-head-inline reveal">
+        <div class="section-badge">Keep reading</div>
+        <h2>Related field notes.</h2>
+      </div>
+      <div class="insights-list">
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Sep</span>
+          <div class="insight-body">
+            <h3>Prompts are policy.</h3>
+            <p>When you write a shared prompt for your team, you are not writing a shortcut. You are encoding your firm's analytical standards into language.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Aug</span>
+          <div class="insight-body">
+            <h3>The IC briefing problem.</h3>
+            <p>Senior partners do not adopt AI tools through demos. They adopt when something solves a problem they have this week.</p>
+          </div>
+          <span class="insight-tag">Strategy</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Nov</span>
+          <div class="insight-body">
+            <h3>Why most AI workshops leave nothing behind.</h3>
+            <p>The difference between a workshop that produces artifacts and one that produces a slide deck with action items nobody does.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA + footer (shared) ── -->
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Want to run this on your team's workflow?</h2>
+    <p>We run this exercise at the start of every strategy engagement. Book a coffee — we can walk one workflow through it, on the whiteboard, no deck.</p>
+    <div class="cta-actions">
+      <a href="mailto:team@convolving.com" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="../insights.html" class="btn btn-ghost">
+        More field notes
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Work</div>
+        <ul class="footer-list">
+          <li><a href="../strategy.html">Strategy &amp; Adoption →</a></li>
+          <li><a href="../infrastructure.html">Infrastructure →</a></li>
+          <li><a href="../partnerships.html">Partners →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="../team.html">Team</a></li>
+          <li><a href="../insights.html">Insights</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../cookie-consent.js" defer></script>
+<script src="../assets/subpage.js?v=1776505475"></script>
+</body>
+</html>

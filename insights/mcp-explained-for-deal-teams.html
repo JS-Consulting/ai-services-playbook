@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP explained for deal teams — Convolving</title>
+<meta name="description" content="The Model Context Protocol is not infrastructure trivia. It is the architectural decision that determines whether your AI tools sit beside your workflow or inside it.">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-accent="blue">
+
+<!-- ── Header (shared) ── -->
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="header-logo" aria-label="Convolving home">
+      <img src="../assets/convolving-logo-white.svg" alt="Convolving" height="28">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="../strategy.html">Strategy</a>
+      <a href="../infrastructure.html">Infrastructure</a>
+      <a href="../partnerships.html">Partnerships</a>
+      <a href="../insights.html" class="active">Insights</a>
+      <a href="../team.html">Team</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Article hero ── -->
+<section class="page-hero article-hero">
+  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
+  <div class="page-hero-gradient"></div>
+  <div class="container-wide">
+    <div class="page-hero-inner article-hero-inner">
+      <div class="article-hero-lead">
+        <div class="crumb">
+          <a href="../insights.html">Insights</a>
+          <span class="sep">/</span>
+          <span class="cur">Field note</span>
+        </div>
+        <span class="eyebrow"><span class="eyebrow-num">01</span>Field note</span>
+        <h1>MCP explained for <span class="hl">deal teams.</span></h1>
+        <p class="lede">The Model Context Protocol is not infrastructure trivia. It is the architectural decision that determines whether your AI tools sit beside your workflow or inside it. Here is what it means for a deal team, without the engineering.</p>
+        <div class="article-meta">
+          <span class="author">Convolving Editors</span>
+          <span class="sep"></span>
+          <span>April 2025</span>
+          <span class="sep"></span>
+          <span>5 min read</span>
+          <span class="insight-tag">Infrastructure</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Article body ── -->
+<section class="section">
+  <div class="container">
+    <article class="article-body">
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">02</span>The problem it solves</span>
+        <h2>Copy. Paste. Repeat. This is not a workflow.</h2>
+        <p>Today, most investment teams use AI by pasting content into a chat window. The model answers. They paste the answer into a document. This works. It is also the least powerful version of the integration — the equivalent of hiring a brilliant analyst and making them sit in a separate building with no access to your systems, to whom you read documents aloud over the phone and transcribe their replies by hand.</p>
+        <p>The problem is not the model's quality. The problem is reach. A model that cannot see your pipeline, your documents, or your data can only reason about what you paste into it. That means every query requires a human to locate the relevant information, copy it in, and transfer the output back out. The analyst is still doing the context work. The AI is just formatting the result.</p>
+        <p>MCP changes the question from "what can I ask the model" to "what can the model see and do." That is not a technical distinction. It is an operational one — and it determines whether AI sits beside your workflow or inside it.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">03</span>What MCP actually is</span>
+        <h2>A standard, not a product.</h2>
+        <p>The Model Context Protocol is an open standard — released by Anthropic in late 2024 — that defines how AI models connect to external tools and data sources. Think of it as a universal socket. Before MCP, every integration between an AI model and an external system required bespoke engineering: custom APIs, one-off connectors, fragile middleware. MCP standardises that interface so that any compliant tool can plug into any compliant model.</p>
+        <p>In practice, this means an MCP-connected model can reach your deal pipeline, query your research databases, pull the latest board pack from your document vault, or read a live cap table — directly, in the same conversation, without copy-paste. Same model. Different reach.</p>
+        <p>The technical machinery underneath is not especially complicated, but the non-technical implication is significant: the boundary between "what the model knows" and "what your firm knows" can be made permeable, selectively and deliberately. You choose which systems to connect. You choose what the model can read. You choose — and this matters — what it can do, versus what it can only see.</p>
+        <p>That last distinction is where most of the architectural thinking in a well-designed MCP implementation lives. Read access and write access are not the same risk. A model that can read your pipeline is powerful. A model that can update it is powerful and consequential. These require different guardrails, and the smart implementation separates them explicitly.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">04</span>Three investment use cases</span>
+        <h2>What it looks like when it works.</h2>
+
+        <h3>1. Deal pipeline query</h3>
+        <p>"Which of our active deals has a revenue multiple above 8x and a management team we've backed before?" Today, this question takes thirty minutes. Someone pulls the pipeline tracker, filters by stage, cross-references the metrics tab, and then searches a separate CRM or mental model for management team history. The answer is often approximate.</p>
+        <p>With MCP connecting the model to the pipeline database and the relationship CRM, the same query runs in seconds and returns sourced results. Not a guess — a query against live data, with the supporting rows available if you want to check the reasoning. The model does not need to know the answer in advance; it needs to know how to ask the right system.</p>
+
+        <h3>2. Research synthesis</h3>
+        <p>A sector research task today involves locating the relevant broker reports, reading through six or eight of them, and producing a synthesis that captures the consensus view alongside the minority positions and the contradictions between analysts. A capable analyst can do this in four hours. A rushed one produces a summary that flattens the contradictions into consensus.</p>
+        <p>An MCP-connected model with access to your research library can read those six broker reports and surface the three analytical contradictions — the points where analysts diverge in their assumptions or conclusions — as a structured output, in minutes. The analyst's job becomes evaluating the contradictions, not finding them. That is the shift worth paying attention to.</p>
+
+        <h3>3. Portfolio monitoring</h3>
+        <p>Most portfolio monitoring relies on humans to notice when something has changed. A portco misses its monthly revenue target. The EBITDA margin slips below the threshold that would ordinarily trigger a call with management. These signals exist in the data; what is missing is the automated act of looking at the data and comparing it against the agreed standard.</p>
+        <p>An MCP-connected workflow can flag weekly when a portco metric crosses a threshold — not with a raw data dump, but with the supporting context already assembled: the relevant trend line, the last three board pack numbers, the agreed target. The portfolio manager receives a note that is already halfway to a decision, not a spreadsheet that requires forty minutes of interpretation.</p>
+      </section>
+
+      <aside class="compare-note">
+        "The question is not 'should we use MCP.' It is 'which workflows are worth connecting, and which are better left as paste-and-review.' Most are the latter. A few are not."
+      </aside>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">05</span>What MCP is not</span>
+        <h2>Larger reach, larger blast radius.</h2>
+        <p>MCP is not magic, and teams that treat it as such will have a bad time. The model still makes errors. It will misread a data field, misunderstand a query intent, or confuse two portcos with similar names. These errors happen in paste-and-review workflows too — the difference is that MCP-connected systems have larger blast radii when they go wrong. The model can do more, so mistakes can propagate further before a human catches them.</p>
+        <p>A model that reads the wrong row in a cap table and pastes the wrong number into a memo is a small, catchable error. A model that reads the wrong row and writes the number into a live system — or triggers a downstream workflow based on it — is a different category of problem. The architecture has to reflect that difference explicitly.</p>
+        <p>Well-designed MCP infrastructure for investment teams follows a few non-negotiable principles. Read-only connections are the default; write access requires a deliberate design decision and a confirmation step. Sensitive systems — anything touching LP communications, regulatory filings, or external correspondence — are not connected in early versions. And every connection is documented: what can the model see, what can it do, and who approved it.</p>
+        <p>This is not excessive caution. It is the discipline that makes MCP trustworthy enough to actually use. The teams we see getting the most out of connected AI infrastructure are the ones who were conservative about what they connected first — who built trust with a read-only pipeline query before they considered anything that wrote back. The capability compounds. The governance has to keep pace.</p>
+        <p>The teams we see getting into trouble are the ones who connected everything they could access, as fast as they could, because the demo was impressive. MCP is an amplifier. It amplifies good workflow design and bad workflow design in equal measure.</p>
+      </section>
+
+      <!-- Byline card -->
+      <div class="article-byline">
+        <div class="avatar" aria-hidden="true">C</div>
+        <div>
+          <div class="byline-name">Convolving Editors</div>
+          <div class="byline-role">Field notes · Zurich / Oberrieden</div>
+          <div class="byline-bio">Pattern reports from the engagements we run with European PE, VC and family offices. Written for partners and operators, not general audiences.</div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<!-- ── Related insights ── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="article-related">
+      <div class="section-head-inline reveal">
+        <div class="section-badge">Keep reading</div>
+        <h2>Related field notes.</h2>
+      </div>
+      <div class="insights-list">
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Mar</span>
+          <div class="insight-body">
+            <h3>Three adoption metrics that aren't vanity.</h3>
+            <p>"Seats activated" is not an adoption metric. Here are three numbers that are, and how to baseline them before you start.</p>
+          </div>
+          <span class="insight-tag">Strategy</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Feb</span>
+          <div class="insight-body">
+            <h3>Why most AI workshops leave nothing behind.</h3>
+            <p>The pattern is consistent: a full day, a long list, and nothing you can run on Monday morning. Here is what the better ones do differently.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Jan</span>
+          <div class="insight-body">
+            <h3>Prompts are policy.</h3>
+            <p>A prompt written once, used by ten people, for a year, is a policy document. Most firms treat it like a sticky note.</p>
+          </div>
+          <span class="insight-tag">Infrastructure</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA + footer (shared) ── -->
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>We design MCP-native infrastructure for investment teams.</h2>
+    <p>Book a coffee — we'll show you what a connected deal team actually looks like.</p>
+    <div class="cta-actions">
+      <a href="mailto:team@convolving.com" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="../insights.html" class="btn btn-ghost">
+        More field notes
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Work</div>
+        <ul class="footer-list">
+          <li><a href="../strategy.html">Strategy &amp; Adoption →</a></li>
+          <li><a href="../infrastructure.html">Infrastructure →</a></li>
+          <li><a href="../partnerships.html">Partners →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="../team.html">Team</a></li>
+          <li><a href="../insights.html">Insights</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../cookie-consent.js" defer></script>
+<script src="../assets/subpage.js?v=1776505475"></script>
+</body>
+</html>

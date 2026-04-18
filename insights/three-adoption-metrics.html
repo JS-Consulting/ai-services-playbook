@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three adoption metrics that aren't vanity — Convolving</title>
+<meta name="description" content="Seats activated is not an adoption metric. Queries run is not an adoption metric. Here are three numbers that are, and how to baseline them before you start.">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-accent="blue">
+
+<!-- ── Header (shared) ── -->
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="header-logo" aria-label="Convolving home">
+      <img src="../assets/convolving-logo-white.svg" alt="Convolving" height="28">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="../strategy.html">Strategy</a>
+      <a href="../infrastructure.html">Infrastructure</a>
+      <a href="../partnerships.html">Partnerships</a>
+      <a href="../insights.html" class="active">Insights</a>
+      <a href="../team.html">Team</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Article hero ── -->
+<section class="page-hero article-hero">
+  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
+  <div class="page-hero-gradient"></div>
+  <div class="container-wide">
+    <div class="page-hero-inner article-hero-inner">
+      <div class="article-hero-lead">
+        <div class="crumb">
+          <a href="../insights.html">Insights</a>
+          <span class="sep">/</span>
+          <span class="cur">Field note</span>
+        </div>
+        <span class="eyebrow"><span class="eyebrow-num">01</span>Field note</span>
+        <h1>Three adoption metrics that aren't <span class="hl">vanity.</span></h1>
+        <p class="lede">"Seats activated" is not an adoption metric. "Queries run" is not an adoption metric. Here are three numbers that are, and how to baseline them before you start.</p>
+        <div class="article-meta">
+          <span class="author">Convolving Editors</span>
+          <span class="sep"></span>
+          <span>March 2025</span>
+          <span class="sep"></span>
+          <span>5 min read</span>
+          <span class="insight-tag">Strategy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Article body ── -->
+<section class="section">
+  <div class="container">
+    <article class="article-body">
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">02</span>Why the standard metrics fail</span>
+        <h2>Measuring activity is not measuring change.</h2>
+        <p>Every AI rollout generates the same dashboard. Seats licensed. Seats activated. Monthly active users. Queries run. Average session length. These numbers multiply without effort because the enterprise software vendor produces them automatically, and because they look like traction — columns growing to the right, percentages trending upward, screenshots that make it into board updates.</p>
+        <p>They measure almost nothing useful.</p>
+        <p>Seat activation measures whether IT did its job provisioning accounts. Query count measures whether curious people clicked around during the first week after launch. Neither tells you whether the team has changed how it works. A firm can have 100% seat activation and zero behavioural change. We have seen it. The model is open in one tab; the old process is running in another. The queries are exploratory. Nobody has changed what they produce or how long it takes to produce it.</p>
+        <p>The metric you want is behavioural, not usage-based. It should be impossible to achieve by clicking around. It should require someone to have actually changed a workflow — to have replaced a step in their process with an AI-assisted version that they are still using sixty days later, not as an experiment but as the default.</p>
+        <p>The three metrics below are ugly to measure compared to seat counts. They require you to name specific workflows, track time, and ask people honest questions about whether they have reverted to old habits. That friction is the point. If a metric is easy to inflate, it will be inflated.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">03</span>Metric one</span>
+        <h2>Time-to-first-output.</h2>
+        <p>Pick one specific workflow. Not "research" — CIM first pass. Not "reporting" — sector research summary. Not "prep" — partner meeting prep from the last three board packs. Name it precisely, because the precision is what makes the measurement possible.</p>
+        <p>Measure how long it takes a team member to produce a usable output from that workflow today, before AI is introduced. This is your baseline. "Usable" needs a definition: not polished, not final, but good enough that a senior would not send it back immediately. Document what that looks like — a page of notes, a structured memo draft, a two-paragraph summary with sources. Establish the standard before you measure against it.</p>
+        <p>Measure again at 30 days and 90 days. The 30-day number typically improves significantly, because novelty and effort are both high. The 90-day number is the one that tells you whether the improvement is structural or merely enthusiastic. If time-to-first-output has dropped by 40% at 30 days and held at 90 days, the workflow has changed. If it has crept back toward baseline, something is wrong with the workflow design — most likely the prompt, the output format, or the human step that sits after it.</p>
+        <p>This is the only metric that forces you to name a workflow and a standard of usable. Everything else is abstract. Time-to-first-output makes vagueness impossible. Either you measured it or you didn't; either it changed or it didn't.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">04</span>Metric two</span>
+        <h2>Reversion rate.</h2>
+        <p>At 60 days, ask: for the workflows where AI was introduced, are people still using it? Not occasionally. As their default method.</p>
+        <p>Reversion — going back to the old method — is the most diagnostic signal in adoption work. It is also the most consistently underreported one, because nobody wants to admit to their manager or their sponsor that they quietly stopped using the tool. You have to ask the question directly, and you have to make it safe to answer honestly. "We went back to the old way for this one because..." is not a failure; it is data. "Everything is going great" is a failure, because it means you are no longer learning.</p>
+        <p>When reversion happens, there are three common causes. The first is that the AI output is not good enough to be worth the change in habit — the model produces a draft that requires so much editing that the analyst concludes they are faster starting from scratch. The second is that the prompt was designed for a slightly different version of the task than the one the team actually runs day to day. The third is that the surrounding workflow was not redesigned: the model produces a good output, but it lands in the wrong format, in the wrong place, and nobody is sure what to do with it.</p>
+        <p>Reversion rate forces you to identify which cause applies, and to fix it. Most AI programmes treat reversion as a disappointment and quietly move on. The ones that compound treat it as the most valuable signal in the entire programme.</p>
+      </section>
+
+      <aside class="compare-note">
+        "If you measure seats and queries, you will optimise for seats and queries. You will have a lot of activated accounts and a team that works exactly like it did before."
+      </aside>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">05</span>Metric three</span>
+        <h2>Senior-to-junior usage ratio.</h2>
+        <p>In most firms, AI adoption starts with analysts and associates. This is sensible: they have more time for experimentation, less to lose from a flawed output, and often more comfort with new tools. The problem is that it stays there.</p>
+        <p>Track whether VPs and principals are using AI outputs — not just receiving them, but running the workflows themselves. There is a meaningful difference between a principal who reads an AI-assisted sector summary that an associate produced, and a principal who runs the sector summary workflow before a Monday meeting because it takes seven minutes instead of forty. The first is delegation. The second is adoption.</p>
+        <p>If the senior-to-junior usage ratio never changes over the first six months, AI adoption is not happening at the level that changes how the firm thinks. It is happening at the level that changes how junior team members produce documents — which is valuable, but limited. The partners are still doing strategy on the same information diet they always had. The AI is making the formatting faster, not the decisions better.</p>
+        <p>This metric is uncomfortable to track because it implies that senior people need to change their behaviour, not just commission others to. That is exactly why it is worth tracking. A firm where partners use AI directly — even for fifteen minutes before a board meeting, even imperfectly — is a firm where AI is integrated into how investment decisions get made. A firm where only analysts use it is a firm with a faster document pipeline and the same judgment process it always had.</p>
+        <p>The baseline for this metric is almost always zero. Set it at day one, and set a target for month six. Even a modest shift — three or four senior people running workflows themselves, weekly — is meaningful. Track it honestly and it will tell you more about your programme's real impact than any usage dashboard your vendor provides.</p>
+      </section>
+
+      <!-- Byline card -->
+      <div class="article-byline">
+        <div class="avatar" aria-hidden="true">C</div>
+        <div>
+          <div class="byline-name">Convolving Editors</div>
+          <div class="byline-role">Field notes · Zurich / Oberrieden</div>
+          <div class="byline-bio">Pattern reports from the engagements we run with European PE, VC and family offices. Written for partners and operators, not general audiences.</div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<!-- ── Related insights ── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="article-related">
+      <div class="section-head-inline reveal">
+        <div class="section-badge">Keep reading</div>
+        <h2>Related field notes.</h2>
+      </div>
+      <div class="insights-list">
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Feb</span>
+          <div class="insight-body">
+            <h3>Your first AI workflow: what to build, what to skip.</h3>
+            <p>The first workflow you build sets the template for everything that follows. Here is how to choose it correctly.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Jan</span>
+          <div class="insight-body">
+            <h3>The IC briefing problem.</h3>
+            <p>Investment committee prep is one of the highest-cost, lowest-leverage tasks in most firms. It is also one of the most tractable.</p>
+          </div>
+          <span class="insight-tag">Strategy</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2024 · Dec</span>
+          <div class="insight-body">
+            <h3>The two-hour AI audit.</h3>
+            <p>A structured process for mapping where AI fits in an investment firm's workflow — run in two hours, without a consultant in the room.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA + footer (shared) ── -->
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>We baseline these metrics at the start of every adoption programme.</h2>
+    <p>Book a coffee and we'll show you how.</p>
+    <div class="cta-actions">
+      <a href="mailto:team@convolving.com" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="../insights.html" class="btn btn-ghost">
+        More field notes
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Work</div>
+        <ul class="footer-list">
+          <li><a href="../strategy.html">Strategy &amp; Adoption →</a></li>
+          <li><a href="../infrastructure.html">Infrastructure →</a></li>
+          <li><a href="../partnerships.html">Partners →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="../team.html">Team</a></li>
+          <li><a href="../insights.html">Insights</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../cookie-consent.js" defer></script>
+<script src="../assets/subpage.js?v=1776505475"></script>
+</body>
+</html>

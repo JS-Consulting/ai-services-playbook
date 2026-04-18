@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What a knowledge base looks like one year in — Convolving</title>
+<meta name="description" content="Year zero looks like a folder. Year one, with intentional architecture, looks like something you can actually ask questions of. The gap is three structural decisions, not a bigger budget.">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-accent="blue">
+
+<!-- ── Header (shared) ── -->
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="header-logo" aria-label="Convolving home">
+      <img src="../assets/convolving-logo-white.svg" alt="Convolving" height="28">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="../strategy.html">Strategy</a>
+      <a href="../infrastructure.html">Infrastructure</a>
+      <a href="../partnerships.html">Partnerships</a>
+      <a href="../insights.html" class="active">Insights</a>
+      <a href="../team.html">Team</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Article hero ── -->
+<section class="page-hero article-hero">
+  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
+  <div class="page-hero-gradient"></div>
+  <div class="container-wide">
+    <div class="page-hero-inner article-hero-inner">
+      <div class="article-hero-lead">
+        <div class="crumb">
+          <a href="../insights.html">Insights</a>
+          <span class="sep">/</span>
+          <span class="cur">Infrastructure</span>
+        </div>
+        <span class="eyebrow"><span class="eyebrow-num">01</span>Infrastructure</span>
+        <h1>What a knowledge base looks like <span class="hl">one year in</span>.</h1>
+        <p class="lede">Year zero looks like a folder. Year one, with intentional architecture, looks like something you can actually ask questions of. The gap between them is three structural decisions, not a bigger budget.</p>
+        <div class="article-meta">
+          <span class="author">Convolving Editors</span>
+          <span class="sep"></span>
+          <span>June 2025</span>
+          <span class="sep"></span>
+          <span>5 min read</span>
+          <span class="insight-tag">Infrastructure</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Article body ── -->
+<section class="section">
+  <div class="container">
+    <article class="article-body">
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">02</span>Year zero: the file dump</span>
+        <h2>Every firm has one. Nobody uses it.</h2>
+        <p>It is usually on SharePoint. Occasionally on Google Drive. Sometimes in a folder on a server that was last touched in 2019. It contains deal memos going back seven years, IC presentation decks in seventeen slightly different templates, board packs for portfolio companies, market studies, management presentations, a surprising number of Excel files with no apparent relationship to anything else, and — if the firm has been around long enough — PDFs that were scanned from paper at some point in the mid-2010s.</p>
+        <p>Search returns either nothing or seventeen versions of the same document, differentiated only by modification date and whether someone appended "FINAL" or "FINAL_v2" to the filename. Nobody trusts the search. Nobody uses it. When someone needs to find the risk analysis from the last healthcare deal, they send a message in a chat channel asking if anyone remembers where it is. Usually someone does. Sometimes nobody does.</p>
+        <p>This is not a failure of discipline or organisational hygiene. It is a structural consequence of treating document storage as archiving rather than as memory. The folder is designed to hold files. It was never designed to answer questions. Adding AI to a file dump does not change that. What you get is a model that can search seventeen versions of the same document slightly faster than a human can — which is not the return on investment anyone had in mind.</p>
+        <p>The firms that have useful knowledge infrastructure a year in did not get there by adding more storage or better tagging conventions. They got there by making three decisions about structure before they started ingesting documents.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">03</span>The three structural decisions</span>
+        <h2>Not more budget. Three decisions made before ingestion starts.</h2>
+
+        <h3>1. What is the unit of retrieval?</h3>
+        <p>The default answer is "the document." It is the wrong answer. A document is a container. What the team actually needs to retrieve is a section, a specific data point, a named decision, a flagged risk. When the unit of retrieval is the document, a query about healthcare deal risks returns thirty-page PDFs. When the unit of retrieval is the named-risk entry from section four of a deal memo, the same query returns a structured list that can be read in ninety seconds.</p>
+        <p>Deciding on the unit of retrieval means deciding how documents get chunked before they enter the corpus. It means deciding which sections of a deal memo are worth indexing separately, which are navigational boilerplate that can be stripped, and which represent genuinely distinct pieces of knowledge. This is editorial work. It requires someone with domain knowledge — someone who understands what an analyst will actually ask — to make decisions about structure. It cannot be delegated to a chunking algorithm.</p>
+
+        <h3>2. What metadata does each unit carry?</h3>
+        <p>Retrieval without metadata is guessing. A corpus of two hundred deal memos, each chunked into sections, is still nearly useless if none of the sections carry information about which deal they came from, when the deal was active, what stage it was at, who authored the analysis, and what type of document it originated in.</p>
+        <p>The minimum metadata set for an investment firm's deal corpus is: deal name, deal date (or vintage), document type (IC memo, management presentation, board pack), document date, section type (risk analysis, market sizing, management assessment), and author or team. With these six fields attached to every chunk, a query like "risks flagged in healthcare deals from 2022 to 2024" becomes answerable in seconds. Without them, it is a three-day archaeology project that ends with someone printing things out.</p>
+        <p>Most firms underestimate how much of this metadata already exists in their systems — in file names, folder structures, email threads, and deal management tools. The extraction is not trivial, but it is not a clean-sheet problem either. The hard part is deciding on the schema before ingestion, not retrofitting it later.</p>
+
+        <h3>3. Who is responsible for ingestion?</h3>
+        <p>This is the decision that kills the most knowledge base projects. If ingestion is nobody's job, nothing current ever gets added. The corpus reflects the firm as it was at the moment of initial build, not the firm as it is now. Within six months, the gap between "what is in the knowledge base" and "what the team actually knows" has grown wide enough to make the tool unreliable. Analysts learn not to trust it. Partners stop asking for it. The infrastructure atrophies.</p>
+        <p>Ingestion needs a named owner, a defined cadence (after each IC meeting, after each deal is closed, after each quarterly board pack), and a process that is simple enough to follow without reminders. In most firms, this means building the ingestion step into an existing workflow — the same process that files the IC deck in the shared drive also runs the extraction and tagging that adds it to the knowledge corpus. The marginal effort needs to be close to zero, or compliance will drift toward zero over time.</p>
+      </section>
+
+      <aside class="compare-note">
+        The most common mistake: treating knowledge architecture as an IT project. It is an editorial project. The question is not "where do files live." It is "what does the team need to remember, and in what form."
+      </aside>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">04</span>What changes</span>
+        <h2>Queries replace archaeology. New hires get institutional memory in hours.</h2>
+        <p>When the three decisions are made well, the shift in day-to-day experience is significant enough that the team notices within weeks, not months. "What were the three main risks flagged on the last three healthcare deals" becomes a query that takes forty seconds, not a three-day archaeology project that requires tracking down whoever wrote the memos and hoping they remember the context.</p>
+        <p>The onboarding case is the starkest. A new principal who joins a firm with a well-structured knowledge corpus can, within a few hours of focused query work, develop a working understanding of the firm's deal history, the patterns in how it evaluates risk, the sectors where it has the deepest institutional view, and the specific decisions where it has changed its mind over time. That same information, in a file dump, is essentially inaccessible — not because it does not exist, but because the structure required to surface it does not exist.</p>
+        <p>Deal team efficiency on second-look processes compounds over time. When a sector comes back around, the analyst is not starting from scratch. The previous analysis is retrievable at the level of specific claims, specific risk assessments, specific market numbers — not at the level of "here is a seventy-page PDF from 2021."</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">05</span>What does not change</span>
+        <h2>The knowledge base does not think. It remembers.</h2>
+        <p>This distinction is worth being direct about, because the hype around retrieval-augmented systems tends to obscure it. The knowledge base does not write memos. It does not generate investment theses. It does not replace the judgment that comes from pattern recognition across deals, from reading a management team across multiple interactions, from understanding what a market actually feels like to operate in.</p>
+        <p>What it does is surface the right context at the right time. When an analyst is building a view on a new opportunity in a sector the firm has looked at twice before, the knowledge base gets them to the relevant precedent in minutes rather than days. The analyst still thinks. The model found the relevant materials — it did not interpret them, it did not weigh them against the current opportunity, and it did not decide what to do with them.</p>
+        <p>Firms that get the most from knowledge infrastructure are the ones that are clear about this internally. They position the tool as memory, not intelligence. The team uses it more, trusts it more, and maintains it more carefully when they understand what it actually is. The firms that oversell it internally — where the tool is positioned as "AI that knows everything we know" — tend to run into credibility problems the first time it surfaces something incomplete or dated, and adoption collapses.</p>
+        <p>Year one looks different from year zero not because the system is smarter. It looks different because the structure is right, the metadata is clean, and someone is responsible for keeping it current. That is, ultimately, an organisational decision before it is a technical one.</p>
+      </section>
+
+      <!-- Byline card -->
+      <div class="article-byline">
+        <div class="avatar" aria-hidden="true">C</div>
+        <div>
+          <div class="byline-name">Convolving Editors</div>
+          <div class="byline-role">Field notes · Zurich / Oberrieden</div>
+          <div class="byline-bio">Pattern reports from the engagements we run with European PE, VC and family offices. Written for partners and operators, not general audiences.</div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<!-- ── Related insights ── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="article-related">
+      <div class="section-head-inline reveal">
+        <div class="section-badge">Keep reading</div>
+        <h2>Related field notes.</h2>
+      </div>
+      <div class="insights-list">
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Jul</span>
+          <div class="insight-body">
+            <h3>Why most AI workshops leave nothing behind.</h3>
+            <p>Most AI workshops produce a slide deck and a lingering sense of possibility. Neither survives contact with Monday morning. Here is what the ones that actually work leave behind instead.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · May</span>
+          <div class="insight-body">
+            <h3>The memo that almost writes itself.</h3>
+            <p>The CIM synthesis workflow is the one we've run most often, in the most variations, for the most sceptical rooms. Here is what it actually does — and what it doesn't.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Mar</span>
+          <div class="insight-body">
+            <h3>MCP explained for deal teams.</h3>
+            <p>What the Model Context Protocol actually is, why it matters for investment workflows, and the one integration pattern worth thinking about in 2025.</p>
+          </div>
+          <span class="insight-tag">Infrastructure</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA + footer (shared) ── -->
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>We design and build knowledge architecture for investment teams.</h2>
+    <p>Book a coffee — we'll show you what a well-structured deal corpus looks like.</p>
+    <div class="cta-actions">
+      <a href="mailto:team@convolving.com" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="../insights.html" class="btn btn-ghost">
+        More field notes
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Work</div>
+        <ul class="footer-list">
+          <li><a href="../strategy.html">Strategy &amp; Adoption →</a></li>
+          <li><a href="../infrastructure.html">Infrastructure →</a></li>
+          <li><a href="../partnerships.html">Partners →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="../team.html">Team</a></li>
+          <li><a href="../insights.html">Insights</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../cookie-consent.js" defer></script>
+<script src="../assets/subpage.js?v=1776505475"></script>
+</body>
+</html>

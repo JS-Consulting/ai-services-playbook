@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why most AI workshops leave nothing behind — Convolving</title>
+<meta name="description" content="Most AI workshops produce a slide deck and a lingering sense of possibility. Neither survives contact with Monday morning. Here is what the ones that actually work leave behind instead.">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-accent="blue">
+
+<!-- ── Header (shared) ── -->
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="header-logo" aria-label="Convolving home">
+      <img src="../assets/convolving-logo-white.svg" alt="Convolving" height="28">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="../strategy.html">Strategy</a>
+      <a href="../infrastructure.html">Infrastructure</a>
+      <a href="../partnerships.html">Partnerships</a>
+      <a href="../insights.html" class="active">Insights</a>
+      <a href="../team.html">Team</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Article hero ── -->
+<section class="page-hero article-hero">
+  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
+  <div class="page-hero-gradient"></div>
+  <div class="container-wide">
+    <div class="page-hero-inner article-hero-inner">
+      <div class="article-hero-lead">
+        <div class="crumb">
+          <a href="../insights.html">Insights</a>
+          <span class="sep">/</span>
+          <span class="cur">Field note</span>
+        </div>
+        <span class="eyebrow"><span class="eyebrow-num">01</span>Field note</span>
+        <h1>Why most AI workshops leave <span class="hl">nothing</span> behind.</h1>
+        <p class="lede">Most AI workshops produce a slide deck and a lingering sense of possibility. Neither survives contact with Monday morning. Here is what the ones that actually work leave behind instead.</p>
+        <div class="article-meta">
+          <span class="author">Convolving Editors</span>
+          <span class="sep"></span>
+          <span>July 2025</span>
+          <span class="sep"></span>
+          <span>5 min read</span>
+          <span class="insight-tag">Field notes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Article body ── -->
+<section class="section">
+  <div class="container">
+    <article class="article-body">
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">02</span>The slide deck problem</span>
+        <h2>Demos impress. Frameworks excite. Then Monday arrives.</h2>
+        <p>There is a specific kind of workshop that investment firms are currently running a lot of. A consultant arrives with a laptop. There is a demonstration of something impressive — a model reads a CIM, a chatbot answers questions about a portfolio company, a summary appears in seconds where a junior analyst would have taken two hours. The room is engaged. People nod. Someone takes a photo of a slide.</p>
+        <p>Then the workshop ends. The consultant leaves. The team opens their real inbox, which contains a real IC memo that needs to go out by Thursday, a portfolio company with a CFO problem, and seven unread messages from an LP. The impressive demonstration is now a memory attached to a PDF that nobody will open again.</p>
+        <p>Nothing has changed because nothing was built. Not built for this firm, not built on this firm's data, not owned by anyone who will be at their desk next week. The workshop produced an experience, and experiences are not infrastructure.</p>
+        <p>This is not an indictment of workshops as a format. It is an indictment of the way most of them are designed. The goal of a useful workshop is not to inform the team. It is to leave something behind that the team uses. That distinction sounds obvious. The industry's track record suggests it is not.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">03</span>The artifact test</span>
+        <h2>Name what the team uses next Monday, or the workshop failed.</h2>
+        <p>The simplest diagnostic for a workshop's design is the artifact test: can you name, before the day ends, a specific thing that will exist in this firm's systems and that a named team member will use next week?</p>
+        <p>Not a slide deck. Not a list of possibilities. Not a "framework for thinking about AI in the investment process." A thing — a prompt template the analyst runs on every CIM, a workflow that pulls together the data sources for deal screening, a shared document in the firm's actual systems with the five prompts that survived contact with real work.</p>
+        <p>The artifacts do not need to be sophisticated. The most durable output from a one-day session we ran with a mid-market PE firm in Frankfurt was a two-page document: fifteen prompts, annotated with what they were for and when not to use them, saved to the firm's shared drive. Four months later, nine of those prompts were still in active use. The remaining six had been replaced by better versions that the team developed themselves. That is exactly what good infrastructure looks like.</p>
+        <p>A kill list is also an artifact. A written record of the ideas that were tested and didn't work — and why — is more valuable than most firms realise. It prevents the same bad idea from being re-proposed at the next planning cycle. It teaches the organisation what the triage criteria are. It closes zombie projects before they start.</p>
+        <p>If you cannot name the artifact before the workshop ends, the design is wrong. Go back to the agenda and cut something until there is time to build.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">04</span>What gets cut and why</span>
+        <h2>The agenda items that reliably eat the time that should go to building.</h2>
+        <p>Most workshops are too full. The agenda reflects what the consultant is comfortable delivering, not what the client actually needs to leave with. These are the items we cut, and why.</p>
+        <p><strong>Opportunity maps.</strong> A 2×2 with "transformative" in one quadrant and "quick wins" in another. These are not useless in the abstract — triage is necessary. But an opportunity map produced in a workshop setting, without firm-specific data and without a decision process attached to it, is a decoration. It creates the feeling of prioritisation without the substance. Cut it. Run a real triage separately, with real data, and make it someone's job to own the output.</p>
+        <p><strong>Live demos of products nobody in the room will buy.</strong> Demonstrating a third-party AI tool that the firm has no relationship with and no path to procuring is time spent on someone else's commercial interest. It creates reference points for things the team cannot access. If a demo is going to be run, it should run on the firm's own data, in the firm's actual environment, with a tool the firm could credibly deploy. Everything else is a trade show.</p>
+        <p><strong>"What AI means for investing" slides.</strong> These are the most expensive items on most workshop agendas, measured in time-to-useful-output. Everyone in the room has already read the think-pieces. The partners have seen the McKinsey report. Spending forty-five minutes on landscape-setting is a way of deferring the uncomfortable part — the part where the team has to make specific decisions about specific processes and be held accountable for the results. Cut the landscape. Start with the process.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">05</span>What replaces them</span>
+        <h2>Two hours of hands-on build time, minimum. One workflow before the day ends.</h2>
+        <p>The time freed by cutting the above goes into three things.</p>
+        <p><strong>Hands-on build time, at least two hours per session.</strong> Not watching a demonstration of someone else building. Participants at keyboards, running prompts against real documents, iterating, failing, adjusting. This is uncomfortable for rooms that are not used to it. It is also the only part of the day that produces lasting muscle memory. The analyst who has run a structured extraction prompt on a live CIM and seen it produce something usable will reach for that tool again. The analyst who watched someone else do it will not.</p>
+        <p><strong>One workflow that a named team member runs before the day ends.</strong> Not "we discussed a workflow." Not "here is a workflow template." A workflow that exists, that has been run once on real data, that has a named owner, and that that owner has committed to running again. The first run is the hardest. Getting it done inside the session is the difference between a proof of concept and a discussion topic.</p>
+        <p><strong>One shared document that lives in the firm's systems, not the consultant's laptop.</strong> Everything produced in the session — prompts that worked, prompts that didn't, the rationale behind each decision, the kill list — goes into a document that is owned by the firm, accessible to the team, and editable by anyone. If the consultant leaves and takes the outputs with them, the engagement failed on the most basic measure. The firm should be more capable on day two than it was on day one. That requires the outputs to be in the firm's custody.</p>
+      </section>
+
+      <aside class="compare-note">
+        The benchmark is not "did everyone feel inspired." It is "is anyone doing anything differently next week." Those rarely correlate.
+      </aside>
+
+      <!-- Byline card -->
+      <div class="article-byline">
+        <div class="avatar" aria-hidden="true">C</div>
+        <div>
+          <div class="byline-name">Convolving Editors</div>
+          <div class="byline-role">Field notes · Zurich / Oberrieden</div>
+          <div class="byline-bio">Pattern reports from the engagements we run with European PE, VC and family offices. Written for partners and operators, not general audiences.</div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<!-- ── Related insights ── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="article-related">
+      <div class="section-head-inline reveal">
+        <div class="section-badge">Keep reading</div>
+        <h2>Related field notes.</h2>
+      </div>
+      <div class="insights-list">
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Jun</span>
+          <div class="insight-body">
+            <h3>What a knowledge base looks like one year in.</h3>
+            <p>Year zero looks like a folder. Year one, with intentional architecture, looks like something you can actually ask questions of. The gap is three structural decisions.</p>
+          </div>
+          <span class="insight-tag">Infrastructure</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · May</span>
+          <div class="insight-body">
+            <h3>The memo that almost writes itself.</h3>
+            <p>The CIM synthesis workflow is the one we've run most often, in the most variations, for the most sceptical rooms. Here is what it actually does — and what it doesn't.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Apr</span>
+          <div class="insight-body">
+            <h3>Prompts are policy.</h3>
+            <p>The moment a prompt is shared across a team, it stops being a personal shortcut and starts being a process. Most firms haven't reckoned with what that means.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA + footer (shared) ── -->
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Every Convolving engagement ends with working artifacts, not slides.</h2>
+    <p>Book a coffee and we'll tell you what that looks like for a team like yours.</p>
+    <div class="cta-actions">
+      <a href="mailto:team@convolving.com" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="../insights.html" class="btn btn-ghost">
+        More field notes
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Work</div>
+        <ul class="footer-list">
+          <li><a href="../strategy.html">Strategy &amp; Adoption →</a></li>
+          <li><a href="../infrastructure.html">Infrastructure →</a></li>
+          <li><a href="../partnerships.html">Partners →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="../team.html">Team</a></li>
+          <li><a href="../insights.html">Insights</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../cookie-consent.js" defer></script>
+<script src="../assets/subpage.js?v=1776505475"></script>
+</body>
+</html>

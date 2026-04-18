@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The memo that almost writes itself — Convolving</title>
+<meta name="description" content="The CIM synthesis workflow is the one we've run most often, in the most variations, for the most sceptical rooms. Here is what it actually does — and what it doesn't.">
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body data-accent="blue">
+
+<!-- ── Header (shared) ── -->
+<header class="header">
+  <div class="header-inner">
+    <a href="../index.html" class="header-logo" aria-label="Convolving home">
+      <img src="../assets/convolving-logo-white.svg" alt="Convolving" height="28">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="../strategy.html">Strategy</a>
+      <a href="../infrastructure.html">Infrastructure</a>
+      <a href="../partnerships.html">Partnerships</a>
+      <a href="../insights.html" class="active">Insights</a>
+      <a href="../team.html">Team</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── Article hero ── -->
+<section class="page-hero article-hero">
+  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
+  <div class="page-hero-gradient"></div>
+  <div class="container-wide">
+    <div class="page-hero-inner article-hero-inner">
+      <div class="article-hero-lead">
+        <div class="crumb">
+          <a href="../insights.html">Insights</a>
+          <span class="sep">/</span>
+          <span class="cur">Field note</span>
+        </div>
+        <span class="eyebrow"><span class="eyebrow-num">01</span>Field note</span>
+        <h1>The memo that <span class="hl">almost</span> writes itself.</h1>
+        <p class="lede">The CIM synthesis workflow is the one we've run most often, in the most variations, for the most sceptical rooms. Here is what it actually does — and what it doesn't.</p>
+        <div class="article-meta">
+          <span class="author">Convolving Editors</span>
+          <span class="sep"></span>
+          <span>May 2025</span>
+          <span class="sep"></span>
+          <span>5 min read</span>
+          <span class="insight-tag">Field notes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Article body ── -->
+<section class="section">
+  <div class="container">
+    <article class="article-body">
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">02</span>What "AI writes the memo" actually means</span>
+        <h2>The analyst is not removed. The analyst's job changes.</h2>
+        <p>The phrase "AI can write the memo" has been doing the rounds long enough that most investment professionals have formed a strong opinion about it before they have seen it run. The sceptics are wrong in one direction: it genuinely does produce something usable in a fraction of the previous time. The enthusiasts are wrong in the other: the analyst is nowhere close to being removed from the process.</p>
+        <p>What the workflow actually does is compress the extraction and structuring phase — the part where an analyst reads a hundred-and-forty-page CIM and pulls out the numbers, the market position claims, the management biography, and the stated risk factors — from roughly four hours to roughly twenty minutes. That is the compression. It is real, it is significant, and it compounds across a deal team that is looking at thirty or forty CIMs a quarter.</p>
+        <p>What it does not do is interpret. It does not decide whether the market size claim is credible given what you know about the sector. It does not flag that the management team's previous exit was a distressed sale, even though that context is not in the document. It does not notice that the revenue growth story relies on an assumption buried in footnote twelve that contradicts the headline narrative. Those observations still require an analyst. They require an analyst who has read the document carefully, not one who has outsourced the reading.</p>
+        <p>The shift is from transcription to editing. From passive reading to active interrogation. That is a better use of a good analyst's time. It is also, not incidentally, better work — which matters for retention as much as it matters for output quality.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">03</span>The workflow, concretely</span>
+        <h2>Five steps. Twenty minutes for the first pass. The analyst starts on something real.</h2>
+        <p>The workflow as we have standardised it across six engagements runs as follows.</p>
+        <p><strong>Step one: structured excerpt preparation.</strong> The analyst extracts four sections from the CIM — the financials summary, the market position narrative, the management section, and the stated risk factors. This is not the full document; it is the four sections that carry the most weight in a first-cut assessment. The extraction takes fifteen to twenty minutes for a competent analyst who knows the document's structure. It is also the step that forces the analyst to read the document before the model does, which matters for what comes next.</p>
+        <p><strong>Step two: structured first-cut prompt.</strong> The excerpts go into a prompt that asks for a memo skeleton: a summary of the investment thesis as the document presents it, a structured set of questions and uncertainties flagged by section, and a list of claims that require external validation before they can be treated as assumptions. The prompt specifies format — section headers, explicit gap-flagging, source references tied to specific excerpts. Output is typically eight hundred to twelve hundred words.</p>
+        <p><strong>Step three: analyst review and gap-filling.</strong> The analyst reads the output against the original document. Claims are verified. Gaps are filled where the analyst has context. New gaps are added where the model missed something or where the analyst's domain knowledge surfaces a question the document doesn't raise. The memo skeleton becomes a memo draft.</p>
+        <p><strong>Step four: partner review of a draft, not a blank page.</strong> The draft goes to the partner with explicit flags on what has been verified and what has not. The partner engages with a structured document, not a blank page, which changes the quality of the conversation. Partners who have worked with this format consistently report that they catch things they would not have caught in a verbal discussion — because the structure surfaces the assumptions explicitly.</p>
+        <p><strong>Step five: iteration.** The draft is not the output. It is the beginning of a document that will go through multiple passes before it is an IC memo. But the distance from step two output to IC-ready document is shorter than the distance from blank page to IC-ready document, and the analyst's effort is spent on the parts of that distance that are worth the effort.</p>
+      </section>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">04</span>What it always misses</span>
+        <h2>Three categories that still require an analyst. They are also the parts worth paying one for.</h2>
+        <p>This is the section that the enthusiasts skip over, and it is the most important one for anyone considering whether this workflow is right for their team.</p>
+        <p><strong>Management quality.</strong> The CIM describes the management team. It does not reveal them. Whether the CEO deflects hard questions, whether the CFO knows the numbers without prompting, whether the team has a coherent disagreement about strategy or a suppressed one — none of this is in the document, and none of it can be inferred from the document. The model will produce a summary of the management section that is accurate to the document. Whether the document is accurate to the management team is a question that requires a room, not a prompt.</p>
+        <p><strong>Competitive dynamics that require external context.</strong> The CIM describes the market from the company's perspective. A model working only from the document will reproduce that perspective, with appropriate hedges where the document hedges. What it cannot do is cross-reference the claims against what the firm already knows about the sector, what competitors have reported publicly, or what the firm's deal team observed when they looked at a comparable business eighteen months ago. That contextualisation is the work — and it is the work where having a well-structured knowledge corpus makes the biggest difference to how quickly the analyst can get there.</p>
+        <p><strong>What the document does not say.</strong> This is the hardest category to describe, and the most important. Every CIM has a shape — a set of emphases and a set of silences. The financials are presented with a particular level of granularity. The market section makes particular claims with particular levels of specificity. The management section spends particular amounts of time on particular people. These choices are not random, and an experienced analyst reads them as signals. A model reads the text. It does not read the silences.</p>
+      </section>
+
+      <aside class="compare-note">
+        The goal is not to remove the analyst from CIM analysis. It is to move the analyst's effort from extraction to interpretation. That is a better use of thirty thousand euros a year.
+      </aside>
+
+      <section class="reveal">
+        <span class="eyebrow"><span class="eyebrow-num">05</span>Why we call it "almost"</span>
+        <h2>The difference between a rigorous first reader and a ghostwriter is significant.</h2>
+        <p>The word "almost" in the title is doing real work. It is not a hedge for legal reasons or a concession to sceptics. It is a description of where the boundary is, and why the boundary is in that specific place.</p>
+        <p>The firms that get the most from this workflow treat the model as a rigorous first reader: something that processes the document systematically, surfaces the structure, and flags the gaps, in a format that the analyst can interrogate. The model found the claims. The analyst evaluates them. The model identified the gaps. The analyst decides which ones matter.</p>
+        <p>The firms that get the least — and we have seen this pattern clearly enough across engagements to characterise it — treat the model as a ghostwriter. They feed the CIM in, read the output, make minor edits, and send it to the partner. The output looks like a memo. It reads like a memo. It has the shape of an investment thesis. What it does not have is the analyst's judgment about what the document is not saying, and the partner's first encounter with the deal is with a document that has been laundered through a system that cannot read silences.</p>
+        <p>The difference in output quality between these two modes is significant. It shows up in the questions the partner asks — or doesn't ask. It shows up in the IC discussion. It sometimes shows up later, in a post-mortem, when the team is trying to understand why a particular risk was not flagged at the entry point.</p>
+        <p>The workflow works. It saves real time and produces better first drafts than most analysts produce from scratch. The returns are highest when the analyst understands that the model is not doing the analysis — it is doing the extraction, so that the analyst can do the analysis with more time and better starting material. That distinction is worth being direct about, internally, before the workflow goes live.</p>
+      </section>
+
+      <!-- Byline card -->
+      <div class="article-byline">
+        <div class="avatar" aria-hidden="true">C</div>
+        <div>
+          <div class="byline-name">Convolving Editors</div>
+          <div class="byline-role">Field notes · Zurich / Oberrieden</div>
+          <div class="byline-bio">Pattern reports from the engagements we run with European PE, VC and family offices. Written for partners and operators, not general audiences.</div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<!-- ── Related insights ── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="article-related">
+      <div class="section-head-inline reveal">
+        <div class="section-badge">Keep reading</div>
+        <h2>Related field notes.</h2>
+      </div>
+      <div class="insights-list">
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Jul</span>
+          <div class="insight-body">
+            <h3>Why most AI workshops leave nothing behind.</h3>
+            <p>Most AI workshops produce a slide deck and a lingering sense of possibility. Neither survives contact with Monday morning. Here is what the ones that actually work leave behind instead.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Jun</span>
+          <div class="insight-body">
+            <h3>Your first AI workflow.</h3>
+            <p>The five criteria we use to select a team's first workflow — and why the most valuable one is almost never the most impressive one.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+        <a href="../insights.html" class="insight reveal">
+          <span class="insight-date">2025 · Apr</span>
+          <div class="insight-body">
+            <h3>The IC briefing problem.</h3>
+            <p>IC partners are reading more, not less. The briefing format has not changed in twenty years. Here is what happens when you redesign it around what the model is actually good at.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA + footer (shared) ── -->
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>We've built this workflow for six firms in the last eighteen months.</h2>
+    <p>Book a coffee if you want to see what it looks like on your deal flow.</p>
+    <div class="cta-actions">
+      <a href="mailto:team@convolving.com" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="../insights.html" class="btn btn-ghost">
+        More field notes
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Work</div>
+        <ul class="footer-list">
+          <li><a href="../strategy.html">Strategy &amp; Adoption →</a></li>
+          <li><a href="../infrastructure.html">Infrastructure →</a></li>
+          <li><a href="../partnerships.html">Partners →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="../team.html">Team</a></li>
+          <li><a href="../insights.html">Insights</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../cookie-consent.js" defer></script>
+<script src="../assets/subpage.js?v=1776505475"></script>
+</body>
+</html>
