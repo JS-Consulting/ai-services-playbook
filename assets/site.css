@@ -928,7 +928,7 @@ body.no-motion .rail-track{animation:none}
   background:var(--bg);
 }
 .page-hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
-.page-hero .container-wide{max-width:none;margin:0;padding:0 var(--gutter) 0 clamp(3rem,8vw,8rem);position:relative;z-index:1}
+.page-hero .container-wide{max-width:1200px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem);position:relative;z-index:1}
 .page-hero-gradient{
   position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:
@@ -937,7 +937,7 @@ body.no-motion .rail-track{animation:none}
     linear-gradient(180deg, rgba(11,12,17,0) 40%, var(--bg) 100%);
 }
 .page-hero-inner{
-  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;
+  display:grid;grid-template-columns:1fr;gap:4rem;align-items:end;
 }
 .page-hero-inner > div:first-child{max-width:1000px}
 .page-hero-meta{
