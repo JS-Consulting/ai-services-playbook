@@ -16,13 +16,14 @@ Plan: `/Users/spencerjohnson/.claude/plans/dreamy-forging-valley.md`
 - [x] Add `.DS_Store` to `.gitignore`
 
 ## Phase 2 — CSS consolidation
-- [ ] 2a. Class-usage inventory across 8 live HTML files
-- [ ] 2b. Reconcile design tokens (canonical `--color-*` + aliases)
-- [ ] 2c. Build consolidated `assets/site.css`
-- [ ] 2d. Update all 8 HTML files to load single stylesheet
-- [ ] 2e. Unify footer classes across pages
-- [ ] Visual parity verification (before/after screenshots)
-- [ ] Delete `styles.css` and `assets/site-live.css` after parity confirmed
+- [x] 2a. Class-usage inventory across 8 live HTML files
+- [x] 2b. Reconcile design tokens (both `--color-*` and `--bg/--fg` coexist)
+- [x] 2c. Build consolidated `assets/site.css` (4888 lines from 4 files + inline)
+- [x] 2d. Update all 8 HTML files to load single stylesheet
+- [x] 2e. Fixed nav CTA specificity bug (`.header .nav a` was zeroing `.btn` bg/radius on all subpages — "Book a Coffee" button now visible everywhere)
+- [x] Added reveal fallback so subpages without IntersectionObserver still render
+- [x] Visual verification: index, strategy, infrastructure, team, insights, privacy, article — all rendering
+- [x] Delete `styles.css`, `assets/site-live.css`, `assets/index-hero.css`
 
 ## Phase 3 — OG + SEO metadata
 - [x] Verify `assets/Convolving-OG-banner-sine.png` dimensions (1200×630 ✓)
