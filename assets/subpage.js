@@ -67,14 +67,12 @@ function initHeroCanvas(id){
     sm.x += ((mouse.a?mouse.x:.5) - sm.x) * .04;
     sm.y += ((mouse.a?mouse.y:.5) - sm.y) * .04;
 
-    // Sub-page hero: left-origin singularity (matches home), but waves
-    // carry a bit further across the width and peak lower so they fill
-    // the empty right half without obscuring the left-column headline.
+    // Right-edge singularity — waves flow left→right and converge on the right.
     const waves = [
-      {amp:.11, freq:.009, spd:.006, y:.55, op:.75, lw:1.8},
-      {amp:.08, freq:.013, spd:.005, y:.42, op:.55, lw:1.4},
-      {amp:.14, freq:.007, spd:.004, y:.68, op:.5,  lw:2.2},
-      {amp:.06, freq:.018, spd:.008, y:.32, op:.4,  lw:1.1},
+      {amp:.11, freq:.009, spd:.003, y:.55, op:.75, lw:1.8},
+      {amp:.08, freq:.013, spd:.0025, y:.42, op:.55, lw:1.4},
+      {amp:.14, freq:.007, spd:.002, y:.68, op:.5,  lw:2.2},
+      {amp:.06, freq:.018, spd:.004, y:.32, op:.4,  lw:1.1},
     ];
     const phaseO = (sm.x - .5) * 3;
     const ampM = 1 + (sm.y - .5) * 1.2;
@@ -83,22 +81,34 @@ function initHeroCanvas(id){
       const tt = Math.min(1, Math.max(0, (x-a)/(b-a)));
       return tt*tt*(3-2*tt);
     };
-    const ox = w * 0.02, oy = h * 0.5;
+    const ox = w * 0.985, oy = h * 0.5;
 
     waves.forEach(wv => {
       ctx.beginPath();
       let started = false;
       for(let x=0; x<=w; x+=2){
         const nx = x / w;
-        const env = smoothstep(0.02, 0.45, nx);
+        // Envelope: 1 across most of the width, smoothly collapses to 0 at the right edge
+        const env = 1 - smoothstep(0.55, 0.985, nx);
         const homeY = oy + (h*wv.y - oy) * env;
         const y = homeY +
-          (Math.sin(nx*Math.PI*2*(wv.freq*w/100) + t*wv.spd + phaseO) * h*wv.amp * ampM +
-           Math.sin(nx*Math.PI*2*(wv.freq*w/50) + t*wv.spd*1.7) * h*wv.amp*.4 * ampM
+          (Math.sin(nx*Math.PI*2*(wv.freq*w/100) - t*wv.spd + phaseO) * h*wv.amp * ampM +
+           Math.sin(nx*Math.PI*2*(wv.freq*w/50) - t*wv.spd*1.7) * h*wv.amp*.4 * ampM
           ) * env;
         if(!started){ ctx.moveTo(x,y); started = true; }
         else ctx.lineTo(x,y);
       }
+      // Bloom pass underneath
+      ctx.save();
+      ctx.shadowColor = 'rgba('+rR+','+rG+','+rB+',0.9)';
+      ctx.shadowBlur = 14 * dpr;
+      ctx.strokeStyle = 'rgba('+rR+','+rG+','+rB+','+(wv.op*0.45)+')';
+      ctx.lineWidth = (wv.lw + 2.5) * dpr;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      ctx.restore();
+      // Crisp line on top
       ctx.strokeStyle = 'rgba('+rR+','+rG+','+rB+','+wv.op+')';
       ctx.lineWidth = wv.lw * dpr;
       ctx.lineJoin = 'round';
@@ -107,19 +117,19 @@ function initHeroCanvas(id){
     });
 
     // Singularity glow
-    const pulse = 0.5 + 0.5*Math.sin(t*0.05);
-    const glow = ctx.createRadialGradient(ox,oy,0, ox,oy, 60*dpr);
-    glow.addColorStop(0, 'rgba('+rR+','+rG+','+rB+','+(0.55 + pulse*0.2)+')');
-    glow.addColorStop(0.4, 'rgba('+rR+','+rG+','+rB+',0.15)');
+    const pulse = 0.5 + 0.5*Math.sin(t*0.03);
+    const glow = ctx.createRadialGradient(ox,oy,0, ox,oy, 70*dpr);
+    glow.addColorStop(0, 'rgba('+rR+','+rG+','+rB+','+(0.55 + pulse*0.25)+')');
+    glow.addColorStop(0.35, 'rgba('+rR+','+rG+','+rB+',0.22)');
     glow.addColorStop(1, 'rgba('+rR+','+rG+','+rB+',0)');
     ctx.fillStyle = glow;
     ctx.beginPath();
-    ctx.arc(ox, oy, 60*dpr, 0, Math.PI*2);
+    ctx.arc(ox, oy, 70*dpr, 0, Math.PI*2);
     ctx.fill();
 
     ctx.beginPath();
-    ctx.arc(ox, oy, (2.4 + pulse*0.6)*dpr, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba('+rR+','+rG+','+rB+',0.95)';
+    ctx.arc(ox, oy, (2.8 + pulse*0.8)*dpr, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(200,225,255,'+(0.85 + pulse*0.15)+')';
     ctx.fill();
 
     // Particles
