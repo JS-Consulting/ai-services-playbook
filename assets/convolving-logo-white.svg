@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 48" width="340" height="48" role="img" aria-label="convolving">
+  <defs>
+    
+  </defs>
+  <g transform="scale(1.0909)">
+    <circle cx="12" cy="12" r="1.808" fill="#ffffff" fill-opacity="0.32"></circle>
+    <circle cx="22" cy="12" r="2.245" fill="#ffffff" fill-opacity="0.55"></circle>
+    <circle cx="32" cy="12" r="1.808" fill="#ffffff" fill-opacity="0.32"></circle>
+    <circle cx="12" cy="22" r="2.245" fill="#ffffff" fill-opacity="0.55"></circle>
+    <circle cx="22" cy="22" r="3.1" fill="#ffffff" fill-opacity="1"></circle>
+    <circle cx="32" cy="22" r="2.245" fill="#ffffff" fill-opacity="0.55"></circle>
+    <circle cx="12" cy="32" r="1.808" fill="#ffffff" fill-opacity="0.32"></circle>
+    <circle cx="22" cy="32" r="2.245" fill="#ffffff" fill-opacity="0.55"></circle>
+    <circle cx="32" cy="32" r="1.808" fill="#ffffff" fill-opacity="0.32"></circle>
+  </g>
+  <line x1="56" y1="6.72" x2="56" y2="41.28" stroke="#ffffff" stroke-opacity="0.28" stroke-width="1"></line>
+  <text x="72" y="24" font-family="Spectral, Georgia, serif" font-weight="400" font-size="30" letter-spacing="0.8" fill="#ffffff" dominant-baseline="central" text-anchor="start">CONVOLVING</text>
+</svg>

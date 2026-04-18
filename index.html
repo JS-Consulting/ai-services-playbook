@@ -11,15 +11,108 @@
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:ital,wght@0,400;0,450;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,450;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/site-live.css">
+  <style>
+    /* Local hero + header overrides (keep current local hero look) */
+    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15, 17, 23, 0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border); }
+    .header-inner { max-width: var(--max-width); margin: 0 auto;
+      padding: 1rem var(--section-px); display: flex; align-items: center; justify-content: space-between; gap: 0; }
+    .header-logo { display: inline-flex; align-items: center; text-decoration: none; color: var(--color-text); }
+    .header-logo img { height: 28px; width: auto; display: block; }
+    .header .nav { display: flex; gap: 2rem; align-items: center; }
+    .header .nav a { font-size: 0.875rem; font-weight: 450; color: var(--color-text-secondary); transition: color .2s ease; }
+    .header .nav a:hover { color: var(--color-text); }
+    .header .nav-cta .btn { padding: 0.5rem 0.75rem 0.5rem 1.25rem; font-size: 0.8125rem; color: var(--color-btn-text); }
+    .header .nav-cta .btn:hover { color: var(--color-btn-text); }
+    .header .nav-cta .btn .arrow { width: 26px; height: 26px; }
+
+    .hero { min-height: 80vh; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 6rem 0 4rem; position: relative; overflow: hidden;
+      background: var(--color-bg); }
+    @media (max-width: 820px) {
+      .hero { min-height: 0; padding: 8rem 0 3rem; justify-content: flex-start; }
+      .hero h1 { font-size: clamp(2.25rem, 9vw, 3.25rem); margin-bottom: 1.5rem; }
+      .hero-eyebrow { margin-bottom: 1rem; }
+    }
+    .hero-waves { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .hero .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--section-px); }
+    .hero .hero-content { max-width: 1000px; position: relative; z-index: 1; }
+    .hero-eyebrow { font-family: var(--font-body); font-size: 0.6875rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent-light);
+      margin-bottom: 1.75rem; line-height: 1; }
+    .hero h1 { margin-bottom: 2rem; font-size: clamp(2.75rem, 6.5vw, 5.25rem);
+      letter-spacing: -0.05em; line-height: 1; font-weight: 400; }
+    .hero .btn { background: var(--color-btn-bg); color: var(--color-btn-text);
+      padding: 0.75rem 1rem 0.75rem 1.5rem; border-radius: var(--radius-pill);
+      font-size: 0.875rem; font-weight: 500; gap: 0.625rem; }
+    .hero .btn .arrow { display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 50%; background: var(--color-bg);
+      transition: transform 0.2s ease; }
+    .hero .btn .arrow svg { width: 14px; height: 14px; fill: none;
+      stroke: var(--color-text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .hero .btn:hover .arrow { transform: translateX(3px); }
+
+    /* Mobile nav toggle (not present on live) */
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .nav-toggle span { display: block; width: 20px; height: 1.5px; background: var(--color-text);
+      margin: 5px 0; transition: transform .2s ease, opacity .2s ease; }
+    @media (max-width: 820px) {
+      .nav-toggle { display: block; }
+      .header .nav { display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(15,17,23,0.96); flex-direction: column; padding: 1.5rem var(--section-px);
+        border-bottom: 1px solid var(--color-border); align-items: stretch; }
+      .header .nav.open { display: flex; }
+    }
+
+    /* Ensure local reveal classes still fade in */
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Link-arrow tightened — no stretched box, no underline */
+    .link-arrow { align-self: center; align-items: center; padding-bottom: 0; border-bottom: none; }
+
+    /* Logo rail — keep the "Experience drawn from" label above the scrolling track */
+    .logo-rail { position: relative; }
+    .rail-inner { position: relative; }
+    .rail-inner { overflow: hidden; align-items: stretch; }
+    .rail-label {
+      position: relative;
+      z-index: 3;
+      background: var(--bg, var(--color-bg));
+      padding-right: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .rail-label::after {
+      content: '';
+      position: absolute;
+      left: 100%;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      background: linear-gradient(to right, var(--bg, var(--color-bg)), transparent);
+      pointer-events: none;
+    }
+    .rail-track { flex-shrink: 0; line-height: 1; align-self: center; }
+    .rail-track span { line-height: 1; }
+    @media (max-width: 820px) {
+      .rail-track span { font-size: 1rem; }
+      .rail-track { gap: 2rem; }
+    }
+  </style>
 </head>
-<body>
+<body data-accent="blue">
 
   <!-- ── Header ── -->
   <header class="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo" aria-label="Convolving home">Convolving</a>
+      <a href="index.html" class="header-logo" aria-label="Convolving home">
+        <img src="assets/convolving-logo-white.svg" alt="Convolving" height="28">
+      </a>
       <nav class="nav" id="nav">
         <a href="strategy.html">Strategy</a>
         <a href="infrastructure.html">Infrastructure</a>
@@ -38,13 +131,13 @@
     </div>
   </header>
 
-  <!-- ── Hero ── -->
+  <!-- ── Hero (local) ── -->
   <section class="hero">
     <canvas class="hero-waves" id="hero-waves"></canvas>
     <div class="container">
       <div class="hero-content">
         <p class="hero-eyebrow">AI Advisory &middot; Switzerland</p>
-        <h1>Turnkey AI advisory, purpose-built for investment teams.</h1>
+        <h1>Purpose-built AI advisory, for investment teams.</h1>
         <a href="mailto:info@hebbian.ch" class="btn">
           Book a Coffee
           <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
@@ -53,295 +146,312 @@
     </div>
   </section>
 
-  <!-- ── Marquee ── -->
-  <section class="marquee-section">
-    <div class="marquee-wrap">
-      <span class="marquee-label">Experience with</span>
-      <div class="marquee-track">
-        <span>Swiss International Air Lines</span>
-        <span>Lufthansa Group</span>
-        <span>PwC</span>
-        <span>IMA USA</span>
-        <span>Family Offices &mdash; Zurich</span>
-        <span>Swiss International Air Lines</span>
-        <span>Lufthansa Group</span>
-        <span>PwC</span>
-        <span>IMA USA</span>
-        <span>Family Offices &mdash; Zurich</span>
-        <span>Swiss International Air Lines</span>
-        <span>Lufthansa Group</span>
-        <span>PwC</span>
-        <span>IMA USA</span>
-        <span>Family Offices &mdash; Zurich</span>
-        <span>Swiss International Air Lines</span>
-        <span>Lufthansa Group</span>
-        <span>PwC</span>
-        <span>IMA USA</span>
-        <span>Family Offices &mdash; Zurich</span>
+  <!-- ── Logo rail ── -->
+  <div class="logo-rail">
+    <div class="rail-inner">
+      <span class="rail-label">Experience drawn from</span>
+      <div class="rail-track" id="railTrack">
+        <!-- Filled by JS for duplication -->
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ── Section 1: Introducing Convolving ── -->
+  <!-- ── About / Intro ── -->
   <section class="section" id="about">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge">
-          <span>Introducing Convolving</span>
+    <div class="container-wide">
+      <div class="section-head reveal">
+        <div class="section-head-left">
+          <span class="eyebrow"><span class="eyebrow-num">01</span>Introducing Convolving</span>
+          <h2>Frontier practice, applied to <em class="serif-italic">your</em> firm.</h2>
+        </div>
+        <div class="section-head-right">
+          <p>We sit at the intersection of frontier AI labs, top-tier strategy houses, and working investment teams — and translate what works there into what works for you.</p>
         </div>
       </div>
-      <div class="intro-layout">
-        <div class="intro-text reveal">
-          <h2>From first conversation to production infrastructure.</h2>
-          <p>We embed alongside investment teams to design, train, and operationalise AI workflows. Every engagement is hands-on, live-built, and anchored in real investment processes.</p>
-          <p>No firm in EMEA occupies the intersection of deep AI implementation capability and investment-workflow fluency. We do. Vendor-agnostic but Claude-native, pairing technical depth with deal-floor credibility.</p>
-          <a href="mailto:info@hebbian.ch" class="btn" style="margin-top: 0.5rem;">
-            Book a Coffee
-            <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-          </a>
-        </div>
-        <div class="intro-credentials reveal">
-          <div class="credentials-stats">
-            <div class="cred-item">
-              <span class="cred-num">30+</span>
-              <span class="cred-label">Deals delivered across PE, VC, and family offices</span>
-            </div>
-            <div class="cred-item">
-              <span class="cred-num">50+</span>
-              <span class="cred-label">AI agents in production</span>
-            </div>
+
+      <div class="intro">
+        <div class="intro-copy reveal">
+          <p>We bring what's actually working at the frontier — patterns from Claude and OpenAI's own deployments, playbooks refined inside MBB and the Big Four, and what leading private equity and venture funds are quietly putting into production.</p>
+          <p>Most AI advisors pull from one of those worlds. We sit at the intersection: deep implementation fluency, investment-workflow literacy, and a live view across the firms setting the pace.</p>
+          <div style="display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:1.5rem;align-items:center">
+            <a href="mailto:info@hebbian.ch" class="btn">
+              Book a coffee
+              <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+            </a>
+            <a href="team.html" class="link-arrow">Explore our Team</a>
           </div>
-          <div class="credentials-footer">
-            Claude-native &middot; ETH-adjacent &middot; Vendor-agnostic
+        </div>
+
+        <div class="prov reveal d2">
+          <div class="prov-head">
+            <span>Drawn from</span>
+            <span class="dot-grid"><i></i><i></i><i></i></span>
+          </div>
+          <div class="prov-list">
+            <div class="prov-row">
+              <span class="prov-k">Frontier AI</span>
+              <span class="prov-v">Claude <b>·</b> OpenAI</span>
+            </div>
+            <div class="prov-row">
+              <span class="prov-k">Strategy</span>
+              <span class="prov-v">McKinsey <b>·</b> BCG <b>·</b> Bain</span>
+            </div>
+            <div class="prov-row">
+              <span class="prov-k">Advisory &amp; Assurance</span>
+              <span class="prov-v">Deloitte <b>·</b> PwC <b>·</b> KPMG <b>·</b> EY</span>
+            </div>
+            <div class="prov-row">
+              <span class="prov-k">Investment</span>
+              <span class="prov-v">Leading PE &amp; VC <b>·</b> Mid-market funds</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Section 2: What We're Hearing ── -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge">
-          <span>From the Market</span>
+  <!-- ── Services ── -->
+  <section class="section section-alt" id="services">
+    <div class="container-wide">
+      <div class="section-head reveal">
+        <div class="section-head-left">
+          <span class="eyebrow"><span class="eyebrow-num">02</span>What we do</span>
+          <h2>Three ways we build capability that compounds.</h2>
         </div>
-        <div class="section-heading">
+        <div class="section-head-right">
+          <p>Every engagement blends these three tracks. Most firms start with Strategy, graduate into Infrastructure, and continue with an ongoing Partnership.</p>
+        </div>
+      </div>
+
+      <div class="services">
+        <a href="strategy.html" class="svc reveal" data-svc="strategy">
+          <span class="svc-cta"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          <span class="svc-num">Track 01</span>
+          <div class="svc-glyph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2" color="var(--accent)">
+              <circle cx="8" cy="8" r="3"/><circle cx="20" cy="8" r="3"/><circle cx="8" cy="20" r="3"/><circle cx="20" cy="20" r="3"/>
+              <path d="M8 11v6M20 11v6M11 8h6M11 20h6" opacity=".5"/>
+            </svg>
+          </div>
+          <h3>Strategy &amp; Adoption</h3>
+          <p class="svc-desc">Workshops and programmes that take investment teams from zero to running AI workflows on their own.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">State of the Union</span>
+            <span class="svc-tag">Use Case Lab</span>
+            <span class="svc-tag">Adoption Programme</span>
+            <span class="svc-tag">Cohort</span>
+          </div>
+        </a>
+
+        <a href="infrastructure.html" class="svc reveal d1" data-svc="infra">
+          <span class="svc-cta"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          <span class="svc-num">Track 02</span>
+          <div class="svc-glyph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2" color="var(--accent)">
+              <rect x="4" y="5" width="20" height="5" rx="1"/>
+              <rect x="4" y="12" width="20" height="5" rx="1"/>
+              <rect x="4" y="19" width="20" height="5" rx="1"/>
+              <circle cx="7.5" cy="7.5" r=".8" fill="currentColor"/>
+              <circle cx="7.5" cy="14.5" r=".8" fill="currentColor"/>
+              <circle cx="7.5" cy="21.5" r=".8" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Infrastructure</h3>
+          <p class="svc-desc">Bespoke technical foundations — your firm's data, workflows and team needs, custom-built for durability.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">Knowledge Architecture</span>
+            <span class="svc-tag">Claude Enterprise</span>
+            <span class="svc-tag">Custom Workflows</span>
+          </div>
+        </a>
+
+        <a href="partnerships.html" class="svc reveal d2" data-svc="partnerships">
+          <span class="svc-cta"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          <span class="svc-num">Track 03</span>
+          <div class="svc-glyph">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2" color="var(--accent)">
+              <path d="M14 4v20M4 14h20" opacity=".4"/>
+              <circle cx="14" cy="14" r="8"/>
+              <circle cx="14" cy="14" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Partnerships</h3>
+          <p class="svc-desc">Ongoing engagements that keep AI capability current and compounding — long after the pilot ends.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">Fractional CAIO</span>
+            <span class="svc-tag">AI Toolkit</span>
+            <span class="svc-tag">Peer Circle</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Journey ── -->
+  <section class="section journey" id="journey">
+    <canvas class="journey-canvas" id="journeyCanvas"></canvas>
+    <div class="container-wide">
+      <div class="section-head reveal">
+        <div class="section-head-left">
+          <span class="eyebrow"><span class="eyebrow-num">03</span>Our Engagement</span>
+          <h2>How we partner with you.</h2>
+        </div>
+        <div class="section-head-right">
+          <p>We don't scale an engagement until a real workflow is landing. Every step has to earn the next.</p>
+        </div>
+      </div>
+
+      <div class="journey-rail">
+        <div class="journey-progress"><i id="journeyProgress"></i></div>
+        <div class="journey-steps">
+          <div class="jstep reveal" data-step="0">
+            <div class="jstep-marker"></div>
+            <div class="jstep-num">Step 01 / Discovery</div>
+            <div class="jstep-sub">Coffee-first conversation</div>
+            <h3>Start with a conversation</h3>
+            <p>We meet to understand how your firm uses AI today and benchmark against what we see across mid-market investment firms — survey data plus experts embedded inside your peers.</p>
+          </div>
+          <div class="jstep reveal d1" data-step="1">
+            <div class="jstep-marker"></div>
+            <div class="jstep-num">Step 02 / Pilot</div>
+            <div class="jstep-sub">Targeted first workshop</div>
+            <h3>Prove value before we scale</h3>
+            <p>We identify low-hanging fruit and run a hands-on workshop on your team's real workflows. The first use case has to land — that defines whether AI feels like a tool or a tax.</p>
+          </div>
+          <div class="jstep reveal d2" data-step="2">
+            <div class="jstep-marker"></div>
+            <div class="jstep-num">Step 03 / Install</div>
+            <div class="jstep-sub">Sustainable adoption</div>
+            <h3>Build for longevity</h3>
+            <p>We install the systems, rituals and reinforcement loops that keep adoption alive — nurturing capability over months and years, not weeks. AI fatigue is real; novelty alone doesn't drive returns.</p>
+          </div>
+          <div class="jstep reveal d3" data-step="3">
+            <div class="jstep-marker"></div>
+            <div class="jstep-num">Step 04 / Network</div>
+            <div class="jstep-sub">A network of top-tier firms</div>
+            <h3>Join the peer circle</h3>
+            <p>As your practice matures, we connect you into a trusted circle of mid-market firms working at the frontier — a place to trade what's working, what's not and what's next.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Voices / Testimonials ── -->
+  <section class="section section-alt voices" id="voices">
+    <div class="container-wide">
+      <div class="section-head reveal">
+        <div class="section-head-left">
+          <span class="eyebrow"><span class="eyebrow-num">04</span>From the market</span>
           <h2>What fund managers are telling us.</h2>
         </div>
-      </div>
-    </div>
-    <div class="quotes-breakout">
-      <div class="quotes-grid reveal">
-        <div class="quote-card">
-          <blockquote>&ldquo;We know AI is going to change how we source and diligence deals. We just don't know where to start without wasting six months on the wrong tools.&rdquo;</blockquote>
-          <cite>Managing Partner, Zurich value fund</cite>
-        </div>
-        <div class="quote-card">
-          <blockquote>&ldquo;Our analysts are using ChatGPT on their own already. We need to get ahead of it, structure it, make it secure, and actually useful for our process.&rdquo;</blockquote>
-          <cite>CIO, European mid-market PE firm</cite>
-        </div>
-        <div class="quote-card">
-          <blockquote>&ldquo;Every vendor wants to sell us their platform. We need someone independent who can just tell us what actually works for a team our size.&rdquo;</blockquote>
-          <cite>Partner, Family office, Zurich</cite>
+        <div class="section-head-right">
+          <p>Anonymised quotes from conversations with partners, CIOs and family-office principals across Europe.</p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ── Section 3: Advisory Network ── -->
-  <section class="section" id="advisors" style="display: none;">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge">
-          <span>Advisory Network</span>
+      <div class="voice-stage reveal" id="voiceStage">
+        <div class="voice-img-wrap" id="voiceImages">
+          <img src="assets/zurich-placeholder.jpg" class="voice-img active" alt="">
+          <img src="assets/brussels-placeholder.jpg" class="voice-img" alt="">
+          <img src="assets/zurich.jpg" class="voice-img" alt="Zurich">
         </div>
-        <div class="section-heading">
-          <h2>Backed by deep institutional expertise.</h2>
-        </div>
-      </div>
-    </div>
-    <div class="quotes-breakout">
-      <div class="quotes-grid reveal">
-        <div class="quote-card">
-          <blockquote>Deep expertise in AI systems design, enterprise deployment, and the intersection of machine learning research with real-world implementation at scale.</blockquote>
-          <cite>[Advisor Name] &middot; ETH Z&uuml;rich</cite>
-        </div>
-        <div class="quote-card">
-          <blockquote>Strategic perspective on AI adoption within financial services, regulatory frameworks, and institutional change management.</blockquote>
-          <cite>[Advisor Name] &middot; [Institution]</cite>
-        </div>
-        <div class="quote-card">
-          <blockquote>Domain expertise in investment process design, fund operations, and the operational requirements of modern asset management teams.</blockquote>
-          <cite>[Advisor Name] &middot; [Institution]</cite>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Section 4: Our Services ── -->
-  <section class="section section-alt" id="services">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge">
-          <span>Our Services</span>
-        </div>
-        <div class="section-heading">
-          <h2>What we do.</h2>
-          <p>End-to-end AI advisory that meets investment teams exactly where they are in their adoption journey.</p>
-        </div>
-      </div>
-      <div class="services-grid reveal">
-        <a href="strategy.html" class="service-cell">
-          <h3>Strategy &amp; Adoption</h3>
-          <div class="service-tags">
-            <span class="service-tag">State of the Union</span>
-            <span class="service-tag">Use Case Lab</span>
-            <span class="service-tag">AI Adoption Programme</span>
+        <div class="voice-content">
+          <div class="voice-index" id="voiceIndex">01 / 03</div>
+          <div class="voice-quote-mark">"</div>
+          <div class="voice-quote">
+            <div class="voice-slide active">
+              <p class="voice-text">We know AI is going to change how we source and diligence deals. We just don't know where to start without wasting six months on the wrong tools.</p>
+              <div class="voice-cite">Managing Partner, Zurich value fund</div>
+            </div>
+            <div class="voice-slide">
+              <p class="voice-text">Our analysts are using ChatGPT on their own already. We need to get ahead of it, structure it, make it secure and actually useful for our process.</p>
+              <div class="voice-cite">CIO, European mid-market PE firm</div>
+            </div>
+            <div class="voice-slide">
+              <p class="voice-text">Every vendor wants to sell us their platform. We need someone independent who can just tell us what actually works for a team our size.</p>
+              <div class="voice-cite">Partner, Family office, Zurich</div>
+            </div>
           </div>
-        </a>
-        <a href="infrastructure.html" class="service-cell">
-          <h3>Infrastructure &amp; Tooling</h3>
-          <div class="service-tags">
-            <span class="service-tag">Knowledge Architecture</span>
-            <span class="service-tag">Claude Enterprise</span>
-            <span class="service-tag">Custom Workflows</span>
-          </div>
-        </a>
-        <a href="partnerships.html" class="service-cell">
-          <h3>Partnerships</h3>
-          <div class="service-tags">
-            <span class="service-tag">Fractional CAIO</span>
-            <span class="service-tag">AI Toolkit</span>
-          </div>
-        </a>
-        <div class="service-cell">
-          <h3>Turnkey Delivery</h3>
-          <div class="service-tags">
-            <span class="service-tag">Hardware Provided</span>
-            <span class="service-tag">Public Data Only</span>
-            <span class="service-tag">Zero IT Approval</span>
-          </div>
-        </div>
-        <div class="service-cell">
-          <h3>Cohort Programmes</h3>
-          <div class="service-tags">
-            <span class="service-tag">Peer-Group Format</span>
-            <span class="service-tag">AI Champion Model</span>
-          </div>
-        </div>
-        <div class="service-cell">
-          <h3>Content &amp; Credentialisation</h3>
-          <div class="service-tags">
-            <span class="service-tag">Executive Roundtables</span>
-            <span class="service-tag">Workshop Documentation</span>
+          <div class="voice-controls">
+            <span class="voice-dot active" data-i="0"></span>
+            <span class="voice-dot" data-i="1"></span>
+            <span class="voice-dot" data-i="2"></span>
+            <div class="voice-nav">
+              <button id="voicePrev" aria-label="Previous">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 4L6 8l4 4"/></svg>
+              </button>
+              <button id="voiceNext" aria-label="Next">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 4l4 4-4 4"/></svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Section 5: How We Work ── -->
-  <section class="section" id="process" aria-labelledby="process-heading">
-    <canvas class="process-waves" id="process-waves" aria-hidden="true"></canvas>
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge">
-          <span>How We Work</span>
+  <!-- ── CTA ── -->
+  <section class="cta" id="cta">
+    <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+    <div class="container-wide">
+      <div class="cta-inner reveal">
+        <span class="eyebrow" style="justify-content:center;margin-bottom:1.5rem">Ready when you are</span>
+        <h2>Start with a coffee.<br>No pitch, no pressure.</h2>
+        <p>Thirty minutes. We'll walk through where AI fits in your process and where it doesn't. If there's a reason to keep going, we'll talk about next steps.</p>
+        <div class="cta-actions">
+          <a href="mailto:info@hebbian.ch" class="btn">
+            Book a coffee
+            <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+          <a href="#services" class="btn btn-ghost">
+            Learn more first
+            <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
         </div>
-        <div class="section-heading">
-          <h2 id="process-heading">From first coffee to embedded AI.</h2>
-        </div>
-      </div>
-      <div class="steps-grid">
-        <div class="step-card reveal">
-          <div class="step-num">Step 01</div>
-          <div class="step-connector" aria-hidden="true"></div>
-          <h3>State of the Union</h3>
-          <p>A free 60-minute executive briefing. No pitch. Practitioner-level overview of what's working, what's hype, and what the best firms are doing.</p>
-        </div>
-        <div class="step-card reveal reveal-delay-1">
-          <div class="step-num">Step 02</div>
-          <div class="step-connector" aria-hidden="true"></div>
-          <h3>Use Case Lab</h3>
-          <p>Hands-on half-day. We bring laptops with Claude Enterprise. Your team builds working prototypes using public data. Zero IT approval needed.</p>
-        </div>
-        <div class="step-card reveal reveal-delay-2">
-          <div class="step-num">Step 03</div>
-          <div class="step-connector" aria-hidden="true"></div>
-          <h3>Adoption Programme</h3>
-          <p>Revolving 6-week sprints. Two use cases per sprint. Two senior consultants every session. No artificial end point.</p>
-        </div>
-        <div class="step-card reveal reveal-delay-3">
-          <div class="step-num">Step 04</div>
-          <h3>Ongoing Partnership</h3>
-          <p>Fractional CAIO embedded in your firm or AI Toolkit subscription. Your AI capability compounds quarter after quarter.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA Section ── -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="reveal">
-        <h2>Ready to explore?</h2>
-        <p>Book a coffee. We'll talk through where AI fits in your process. No pitch, no pressure.</p>
-        <a href="mailto:info@hebbian.ch" class="btn">
-          Book a Coffee
-          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </a>
       </div>
     </div>
   </section>
 
   <!-- ── Footer ── -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-layout">
-        <div class="footer-left">
-          <h3>Work with us</h3>
-          <p>Start with a coffee.<br>No pitch, no pressure.</p>
+    <div class="container-wide">
+      <div class="footer-grid">
+        <div class="footer-lead">
+          <h3>Work with us.</h3>
+          <p>Start with a coffee. No pitch, no pressure. We'll talk through where AI fits in your process.</p>
           <a href="mailto:info@hebbian.ch" class="btn">
-            Book a Coffee
-            <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+            info@hebbian.ch
+            <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
           </a>
         </div>
         <div>
-          <div class="footer-col-title">Services</div>
-          <ul class="footer-nav">
-            <li><a href="strategy.html">Strategy &amp; Adoption</a></li>
-            <li><a href="infrastructure.html">Infrastructure &amp; Tooling</a></li>
-            <li><a href="partnerships.html">Partnerships</a></li>
+          <div class="footer-col-title">Work</div>
+          <ul class="footer-list">
+            <li><a href="strategy.html">Strategy &amp; Adoption →</a></li>
+            <li><a href="infrastructure.html">Infrastructure →</a></li>
+            <li><a href="partnerships.html">Partners →</a></li>
           </ul>
         </div>
         <div>
           <div class="footer-col-title">Company</div>
-          <ul class="footer-nav">
-            <li><a href="#about">About</a></li>
+          <ul class="footer-list">
             <li><a href="team.html">Team</a></li>
-            <li><a href="mailto:info@hebbian.ch">Book a Coffee</a></li>
+            <li><a href="mailto:info@hebbian.ch">Book a coffee</a></li>
           </ul>
         </div>
         <div>
-          <div class="footer-col-title">Get in touch</div>
-          <ul class="footer-nav">
+          <div class="footer-col-title">Elsewhere</div>
+          <ul class="footer-list">
+            <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
             <li><a href="mailto:info@hebbian.ch">info@hebbian.ch</a></li>
-            <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron on LinkedIn</a></li>
-            <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer on LinkedIn</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-bottom-logo">Convolving</span>
-        <span class="footer-bottom-meta">Convolving GmbH &middot; Oberrieden, Switzerland &middot; &copy; 2026</span>
-        <span class="footer-legal-links">
-          <a href="privacy.html">Privacy</a>
-          <span class="sep">&middot;</span>
-          <a href="terms.html">Terms</a>
-          <span class="sep">&middot;</span>
-          <a href="#" data-cookie-prefs>Cookie Preferences</a>
-        </span>
+        <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+        <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
       </div>
     </div>
   </footer>
@@ -354,8 +464,6 @@
       toggle.classList.toggle('open');
       nav.classList.toggle('open');
     });
-
-    // Close nav on link click
     nav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         toggle.classList.remove('open');
@@ -363,18 +471,18 @@
       });
     });
 
-    // Scroll reveal
+    // Scroll reveal — add both `.visible` (local CSS) and `.show` (live CSS)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add('visible', 'show');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Sine wave canvases (hero + process section)
+    // Hero sine-wave canvas (local)
     function initWaves(canvasId) {
       const canvas = document.getElementById(canvasId);
       if (!canvas) return;
@@ -398,12 +506,18 @@
       canvas.parentElement.addEventListener('mouseleave', () => { mouse.active = false; });
 
       const waves = [
-        { amp: 40, freq: 0.008, spd: 0.02, y: 0.6, col: [50,120,190,0.5], lw: 2 },
-        { amp: 30, freq: 0.012, spd: 0.015, y: 0.5, col: [70,150,220,0.35], lw: 1.5 },
-        { amp: 50, freq: 0.006, spd: 0.01, y: 0.7, col: [40,100,170,0.3], lw: 2.5 },
-        { amp: 25, freq: 0.015, spd: 0.025, y: 0.4, col: [60,130,200,0.25], lw: 1 },
-        { amp: 35, freq: 0.01, spd: 0.018, y: 0.55, col: [30,80,140,0.4], lw: 2 },
+        { amp: 40, freq: 0.008, spd: 0.009, y: 0.6, col: [50,120,190,0.5], lw: 2 },
+        { amp: 30, freq: 0.012, spd: 0.007, y: 0.5, col: [70,150,220,0.35], lw: 1.5 },
+        { amp: 50, freq: 0.006, spd: 0.005, y: 0.7, col: [40,100,170,0.3], lw: 2.5 },
+        { amp: 25, freq: 0.015, spd: 0.011, y: 0.4, col: [60,130,200,0.25], lw: 1 },
+        { amp: 35, freq: 0.01, spd: 0.008, y: 0.55, col: [30,80,140,0.4], lw: 2 },
       ];
+
+      // Smoothstep easing: 0→1 with continuous first derivative
+      const smoothstep = (a, b, x) => {
+        const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
+        return t * t * (3 - 2 * t);
+      };
 
       function draw() {
         ctx.clearRect(0, 0, w, h);
@@ -421,19 +535,56 @@
           ctx.fillRect(0, 0, w, h);
         }
 
+        // Singularity point — all waves converge here on the right
+        const ox = w * 0.985;
+        const oy = h * 0.57;
+
         waves.forEach(wv => {
           ctx.beginPath();
-          ctx.moveTo(0, h * wv.y);
+          let started = false;
           for (let x = 0; x <= w; x += 2) {
-            const y = h * wv.y +
-              Math.sin(x * wv.freq + time * wv.spd + phaseO) * wv.amp * ampM +
-              Math.sin(x * wv.freq * 0.5 + time * wv.spd * 1.5) * wv.amp * 0.5 * ampM;
-            ctx.lineTo(x, y);
+            const nx = x / w;
+            // Envelope: 1 far from singularity, smoothly collapses to 0 at the right edge
+            const env = 1 - smoothstep(0.55, 0.985, nx);
+            const homeY = oy + (h * wv.y - oy) * env;
+            const y = homeY +
+              (Math.sin(x * wv.freq - time * wv.spd + phaseO) * wv.amp * ampM +
+               Math.sin(x * wv.freq * 0.5 - time * wv.spd * 1.5) * wv.amp * 0.5 * ampM) * env;
+            if (!started) { ctx.moveTo(x, y); started = true; }
+            else ctx.lineTo(x, y);
           }
+          // Bloom pass: wider, softened stroke underneath
+          ctx.save();
+          ctx.shadowColor = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},0.9)`;
+          ctx.shadowBlur = 14;
+          ctx.strokeStyle = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},${wv.col[3] * 0.45})`;
+          ctx.lineWidth = wv.lw + 2.5;
+          ctx.lineJoin = 'round';
+          ctx.lineCap = 'round';
+          ctx.stroke();
+          ctx.restore();
+          // Crisp line on top
+          ctx.shadowBlur = 0;
           ctx.strokeStyle = `rgba(${wv.col})`;
           ctx.lineWidth = wv.lw;
           ctx.stroke();
         });
+
+        // Singularity node glow + solid core
+        const pulse = 0.5 + 0.5 * Math.sin(time * 0.03);
+        const glow = ctx.createRadialGradient(ox, oy, 0, ox, oy, 70);
+        glow.addColorStop(0, `rgba(120,180,240,${0.55 + pulse * 0.25})`);
+        glow.addColorStop(0.35, 'rgba(90,150,220,0.22)');
+        glow.addColorStop(1, 'rgba(90,150,220,0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(ox, oy, 70, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(ox, oy, 2.8 + pulse * 0.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(200,225,255,${0.85 + pulse * 0.15})`;
+        ctx.fill();
 
         requestAnimationFrame(draw);
       }
@@ -442,9 +593,133 @@
       resize();
       draw();
     }
-
     initWaves('hero-waves');
-    initWaves('process-waves');
+
+    /* ── Logo rail (duplicated for seamless loop) ── */
+    const railItems = [
+      'Swiss International Air Lines','Lufthansa Group','PwC','IMA USA','Family Offices — Zurich','McKinsey alumni','Benelux PE funds','Claude Enterprise'
+    ];
+    const railTrack = document.getElementById('railTrack');
+    if (railTrack) {
+      const html = [...railItems, ...railItems].map((x,i)=>`<span>${x}</span>${i<railItems.length*2-1?'<span class="dot">◆</span>':''}`).join('');
+      railTrack.innerHTML = html;
+    }
+
+    /* ── Ambient canvas for journey + CTA ── */
+    function initAmbientCanvas(id, opts={}) {
+      const canvas = document.getElementById(id);
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = Math.min(window.devicePixelRatio||1,2);
+      let w,h,t=0;
+      function resize(){
+        const r = canvas.getBoundingClientRect();
+        w=canvas.width=r.width*dpr; h=canvas.height=r.height*dpr;
+        canvas.style.width=r.width+'px'; canvas.style.height=r.height+'px';
+      }
+      window.addEventListener('resize',resize); resize();
+      function rgb(){
+        const v = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+        const m = v.match(/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
+        return m?[parseInt(m[1],16),parseInt(m[2],16),parseInt(m[3],16)]:[106,166,255];
+      }
+      function draw(){
+        if(document.body.classList.contains('no-motion')){ ctx.clearRect(0,0,w,h); requestAnimationFrame(draw); return; }
+        t++;
+        ctx.clearRect(0,0,w,h);
+        const [rR,rG,rB]=rgb();
+        const rows = opts.rows || 3;
+        for(let i=0;i<rows;i++){
+          ctx.beginPath();
+          const yBase = (i+.5)/rows;
+          const amp = .04 + i*.01;
+          const freq = .003 + i*.001;
+          const spd = .002 + i*.0008;
+          const op = .18 - i*.03;
+          for(let x=0;x<=w;x+=5){
+            const y = h*yBase + Math.sin(x*freq + t*spd)*h*amp + Math.sin(x*freq*.5+t*spd*1.5)*h*amp*.4;
+            if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+          }
+          ctx.strokeStyle=`rgba(${rR},${rG},${rB},${op})`;
+          ctx.lineWidth=1.2*dpr;
+          ctx.stroke();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    initAmbientCanvas('journeyCanvas',{rows:4});
+    initAmbientCanvas('ctaCanvas',{rows:5});
+
+    /* ── Journey progress + active step ── */
+    const jsteps = document.querySelectorAll('.jstep');
+    const jprog = document.getElementById('journeyProgress');
+    function updateJourney(){
+      const rail = document.querySelector('.journey-rail');
+      if(!rail || !jprog) return;
+      const r = rail.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const p = Math.max(0, Math.min(1, (vh*.7 - r.top) / r.height));
+      jprog.style.width = (p*100)+'%';
+      jsteps.forEach((s,i)=>{
+        const threshold = (i+.5)/jsteps.length;
+        s.classList.toggle('active', p>threshold*.7);
+      });
+    }
+    window.addEventListener('scroll', updateJourney, {passive:true});
+    window.addEventListener('resize', updateJourney);
+    updateJourney();
+    jsteps.forEach((s,i)=>{
+      s.addEventListener('mouseenter',()=>{
+        jsteps.forEach(x=>x.classList.remove('active'));
+        for(let k=0;k<=i;k++) jsteps[k].classList.add('active');
+        if (jprog) jprog.style.width = (((i+1)/jsteps.length)*100)+'%';
+      });
+    });
+
+    /* ── Voices carousel ── */
+    const vSlides = document.querySelectorAll('.voice-slide');
+    const vDots = document.querySelectorAll('.voice-dot');
+    const vImgs = document.querySelectorAll('.voice-img');
+    const vIdx = document.getElementById('voiceIndex');
+    let vCur = 0, vTimer;
+    function setVoice(i){
+      if(!vSlides.length) return;
+      vCur = (i + vSlides.length) % vSlides.length;
+      vSlides.forEach((s,k)=>s.classList.toggle('active', k===vCur));
+      vDots.forEach((d,k)=>d.classList.toggle('active', k===vCur));
+      vImgs.forEach((im,k)=>im.classList.toggle('active', k===vCur));
+      if(vIdx) vIdx.textContent = `0${vCur+1} / 0${vSlides.length}`;
+    }
+    function resetVoiceTimer(){
+      clearInterval(vTimer);
+      vTimer = setInterval(()=>setVoice(vCur+1), 7000);
+    }
+    if (vSlides.length) {
+      vDots.forEach(d=>d.addEventListener('click',()=>{setVoice(+d.dataset.i); resetVoiceTimer();}));
+      const vp = document.getElementById('voicePrev');
+      const vn = document.getElementById('voiceNext');
+      if (vp) vp.addEventListener('click',()=>{setVoice(vCur-1); resetVoiceTimer();});
+      if (vn) vn.addEventListener('click',()=>{setVoice(vCur+1); resetVoiceTimer();});
+      resetVoiceTimer();
+    }
+
+    /* ── Service card mouse-follow glow ── */
+    document.querySelectorAll('.svc').forEach(card=>{
+      card.addEventListener('mousemove', e=>{
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX-r.left)/r.width)*100 + '%');
+        card.style.setProperty('--my', ((e.clientY-r.top)/r.height)*100 + '%');
+      });
+    });
+
+    /* ── Cookie preferences re-open ── */
+    document.querySelectorAll('[data-cookie-prefs]').forEach(el=>{
+      el.addEventListener('click', e=>{
+        e.preventDefault();
+        if (window.CookieConsent && typeof window.CookieConsent.show === 'function') window.CookieConsent.show();
+      });
+    });
   </script>
   <script src="cookie-consent.js" defer></script>
 </body>
