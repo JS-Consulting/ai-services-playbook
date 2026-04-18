@@ -20,8 +20,8 @@
   <!-- ── Header ── -->
 <header class="header">
   <div class="header-inner">
-    <a href="index.html" class="logo" aria-label="Convolving home">
-      <img src="assets/convolving-logo-white.svg" alt="Convolving" height="26">
+    <a href="index.html" class="header-logo" aria-label="Convolving home">
+      <img src="assets/convolving-logo-white.svg" alt="Convolving" height="28">
     </a>
     <nav class="nav" id="nav">
       <a href="strategy.html">Strategy</a>
@@ -29,13 +29,16 @@
       <a href="partnerships.html">Partnerships</a>
       <a href="insights.html">Insights</a>
       <a href="team.html">Team</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
     </nav>
-    <div class="nav-right">
-      <a href="mailto:team@convolving.com" class="btn header-cta">
-        Book a coffee
-        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-      </a>
-    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 

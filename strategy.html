@@ -16,8 +16,8 @@
 <!-- ── Header ── -->
 <header class="header">
   <div class="header-inner">
-    <a href="index.html" class="logo" aria-label="Convolving home">
-      <img src="assets/convolving-logo-white.svg" alt="Convolving" height="26">
+    <a href="index.html" class="header-logo" aria-label="Convolving home">
+      <img src="assets/convolving-logo-white.svg" alt="Convolving" height="28">
     </a>
     <nav class="nav" id="nav">
       <a href="strategy.html" class="active">Strategy</a>
@@ -25,33 +25,30 @@
       <a href="partnerships.html">Partnerships</a>
       <a href="insights.html">Insights</a>
       <a href="team.html">Team</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
     </nav>
-    <div class="nav-right">
-      <a href="mailto:team@convolving.com" class="btn header-cta">
-        Book a coffee
-        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-      </a>
-    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
-<!-- ── Page Hero ── -->
+<!-- ── Hero ── -->
 <section class="page-hero">
-  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
-  <div class="page-hero-gradient"></div>
-  <div class="container-wide">
-    <div class="page-hero-inner">
-      <div>
-        <div class="page-hero-meta">
-          <span>Track 01</span><span class="sep"></span>
-          <span>Workshops &amp; programmes</span>
-        </div>
-        <h1>Strategy &amp; <span class="hl">adoption.</span></h1>
-        <a href="mailto:team@convolving.com" class="btn">
-          Book a coffee
-          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </a>
-      </div>
+  <canvas class="hero-waves" id="heroCanvas"></canvas>
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Track 01 &middot; Workshops &amp; programmes</p>
+      <h1>Strategy &amp; <span class="hl">adoption.</span></h1>
+      <a href="mailto:team@convolving.com" class="btn">
+        Book a Coffee
+        <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
