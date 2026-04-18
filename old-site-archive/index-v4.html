@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convolving — AI Advisory for Investment Teams</title>
+  <meta name="description" content="Turnkey AI advisory purpose-built for investment teams. From first conversation to production infrastructure. Based in Switzerland.">
+  <meta property="og:title" content="Convolving — AI Advisory for Investment Teams">
+  <meta property="og:description" content="Turnkey AI advisory purpose-built for investment teams. From first conversation to production infrastructure. Based in Switzerland.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ════════════════════════════════════════════
+       DESIGN TOKENS
+    ════════════════════════════════════════════ */
+    :root {
+      /* Surfaces */
+      --bg:           #070A13;
+      --bg-alt:       #090D18;
+      --surface:      #111828;
+      --surface-hi:   #16202E;
+
+      /* Text */
+      --text:         #EDF0F8;
+      --text-2:       rgba(237, 240, 248, 0.56);
+      --text-3:       rgba(237, 240, 248, 0.30);
+
+      /* Borders */
+      --rule:         rgba(237, 240, 248, 0.07);
+      --rule-strong:  rgba(237, 240, 248, 0.13);
+
+      /* Accent — electric cobalt */
+      --accent:       #2058D8;
+      --accent-hi:    #4A7AF5;
+      --accent-dim:   rgba(32, 88, 216, 0.12);
+
+      /* Type */
+      --f-head: 'Plus Jakarta Sans', -apple-system, 'Helvetica Neue', sans-serif;
+      --f-body: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+
+      /* Layout */
+      --max-w:   1280px;
+      --px:      clamp(1.5rem, 5vw, 4rem);
+      --py:      clamp(5rem, 9vw, 9rem);
+      --r:       3px;
+    }
+
+    /* ════════════════════════════════════════════
+       RESET & BASE
+    ════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--f-body);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle film-grain texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      mix-blend-mode: overlay;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    p { color: var(--text-2); line-height: 1.75; }
+
+    /* ════════════════════════════════════════════
+       LAYOUT
+    ════════════════════════════════════════════ */
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--px);
+    }
+
+    /* ════════════════════════════════════════════
+       TYPOGRAPHY
+    ════════════════════════════════════════════ */
+    h1, h2, h3 {
+      font-family: var(--f-head);
+      color: var(--text);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+    }
+
+    h1 { font-size: clamp(3rem, 7.5vw, 8rem); font-weight: 800; }
+    h2 { font-size: clamp(2.25rem, 4.5vw, 4rem); font-weight: 700; }
+    h3 { font-size: clamp(1.125rem, 1.8vw, 1.5rem); font-weight: 700; letter-spacing: -0.025em; }
+
+    /* ════════════════════════════════════════════
+       SECTION LABEL (McKinsey chapter markers)
+    ════════════════════════════════════════════ */
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .label-num {
+      font-family: var(--f-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--accent-hi);
+    }
+
+    .label-rule {
+      width: 28px;
+      height: 1px;
+      background: var(--rule-strong);
+      flex-shrink: 0;
+    }
+
+    .label-text {
+      font-family: var(--f-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ════════════════════════════════════════════
+       BUTTONS
+    ════════════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--r);
+      font-family: var(--f-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: background 0.18s, transform 0.15s, opacity 0.18s;
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .btn svg { width: 13px; height: 13px; flex-shrink: 0; transition: transform 0.18s ease; }
+    .btn:hover { background: #fff; }
+    .btn:hover svg { transform: translateX(3px); }
+    .btn:active { transform: scale(0.97); transition-duration: 0.07s; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--rule-strong);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.22); }
+    .btn-outline:hover svg { transform: translateX(3px); }
+
+    .btn-text {
+      background: transparent;
+      color: var(--text-2);
+      padding: 0;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      gap: 0.625rem;
+      letter-spacing: 0;
+    }
+    .btn-text:hover { color: var(--text); background: transparent; }
+    .btn-text:hover svg { transform: translateX(3px); }
+
+    /* ════════════════════════════════════════════
+       SCROLL REVEAL
+    ════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ════════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════════ */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .header.scrolled {
+      background: rgba(7, 10, 19, 0.90);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .header-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 1.25rem var(--px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      font-family: var(--f-head);
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+
+    .nav { display: flex; gap: 2.25rem; align-items: center; }
+
+    .nav > a {
+      font-family: var(--f-body);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: color 0.18s;
+      position: relative;
+    }
+
+    .nav > a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 1px;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease;
+    }
+
+    .nav > a:hover { color: var(--text); }
+    .nav > a:hover::after { transform: scaleX(1); }
+
+    .nav-cta { margin-left: 0.25rem; }
+
+    .nav-cta .btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.8125rem;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 200;
+      position: relative;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--text);
+      margin: 4.5px 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ════════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle radial glow from top-right — leftclick.ai influence */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 60vw;
+      height: 70vh;
+      background: radial-gradient(ellipse at top right, rgba(32, 88, 216, 0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .hero-eyebrow-num {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--accent-hi);
+    }
+
+    .hero-eyebrow-rule {
+      width: 28px;
+      height: 1px;
+      background: var(--rule-strong);
+    }
+
+    .hero-eyebrow-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .hero h1 {
+      margin-bottom: 2rem;
+      max-width: 14ch;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      color: var(--text-2);
+      max-width: 48ch;
+      line-height: 1.7;
+      margin-bottom: 2.75rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* ════════════════════════════════════════════
+       MARQUEE
+    ════════════════════════════════════════════ */
+    .marquee-section {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 1.25rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-section::before,
+    .marquee-section::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .marquee-section::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+    .marquee-section::after  { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+
+    .marquee-inner {
+      display: flex;
+      align-items: center;
+    }
+
+    .marquee-label {
+      font-family: var(--f-body);
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      padding-left: var(--px);
+      padding-right: 2rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      animation: marquee 35s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-track span {
+      font-family: var(--f-body);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-3);
+      padding: 0 2.5rem;
+      border-left: 1px solid var(--rule);
+      letter-spacing: 0.02em;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ════════════════════════════════════════════
+       SECTION SHARED
+    ════════════════════════════════════════════ */
+    .section {
+      padding: var(--py) 0;
+    }
+
+    .section-alt {
+      background: var(--bg-alt);
+    }
+
+    .section-top-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: var(--py);
+    }
+
+    /* ════════════════════════════════════════════
+       ABOUT / INTRO  (01)
+    ════════════════════════════════════════════ */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .intro-text h2 {
+      margin-bottom: 2rem;
+    }
+
+    .intro-text p {
+      margin-bottom: 1.125rem;
+      max-width: 52ch;
+    }
+
+    .intro-text .btn-text {
+      margin-top: 1.5rem;
+    }
+
+    /* Stats block — McKinsey callout numbers */
+    .stats-stack {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-row {
+      padding: 2.25rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .stat-row:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .stat-num {
+      font-family: var(--f-head);
+      font-size: clamp(3rem, 5vw, 5.25rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-family: var(--f-body);
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--text-3);
+      max-width: 28ch;
+      line-height: 1.5;
+    }
+
+    .intro-credentials {
+      padding-top: 2rem;
+      font-family: var(--f-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    /* ════════════════════════════════════════════
+       QUOTES  (02)
+    ════════════════════════════════════════════ */
+    .section-heading {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-heading h2 {
+      max-width: 20ch;
+    }
+
+    /* Pull-quote grid — McKinsey column layout */
+    .quotes-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .quote-col {
+      padding: 0 2.75rem 0 0;
+      border-right: 1px solid var(--rule);
+    }
+
+    .quote-col:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .quote-col:not(:first-child) {
+      padding-left: 2.75rem;
+    }
+
+    .quote-col blockquote {
+      font-family: var(--f-head);
+      font-size: clamp(1rem, 1.4vw, 1.1875rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.48;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Thin left-border pull-quote accent */
+    .quote-col blockquote::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--accent-hi);
+      margin-bottom: 1.5rem;
+    }
+
+    .quote-col cite {
+      font-family: var(--f-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      font-style: normal;
+    }
+
+    /* ════════════════════════════════════════════
+       TEAM  (03)
+    ════════════════════════════════════════════ */
+    .team-cols {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-col {
+      padding: 3rem 3.5rem 3rem 0;
+      border-right: 1px solid var(--rule);
+    }
+
+    .team-col:last-child {
+      border-right: none;
+      padding-left: 3.5rem;
+      padding-right: 0;
+    }
+
+    .team-photo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--rule-strong);
+      background: var(--surface);
+    }
+
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .team-col h3 { margin-bottom: 0.375rem; }
+
+    .team-role {
+      font-family: var(--f-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-hi);
+      margin-bottom: 1.25rem;
+    }
+
+    .team-col p {
+      font-size: 0.9375rem;
+      max-width: 46ch;
+    }
+
+    /* ════════════════════════════════════════════
+       SERVICES  (04) — McKinsey tabular rows
+    ════════════════════════════════════════════ */
+    .services-rows {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.625rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+
+    a.service-row { cursor: pointer; }
+
+    .service-row:first-child { border-top: 1px solid var(--rule); }
+
+    a.service-row:hover .service-row-name { color: var(--text); }
+    a.service-row:hover .service-row-arrow { opacity: 1; transform: translateX(3px); }
+
+    .service-row-idx {
+      font-family: var(--f-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+    }
+
+    .service-row-name {
+      font-family: var(--f-head);
+      font-size: clamp(1rem, 1.8vw, 1.375rem);
+      font-weight: 700;
+      color: var(--text-2);
+      letter-spacing: -0.025em;
+      transition: color 0.18s;
+    }
+
+    .service-row-right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .service-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .service-tag {
+      font-family: var(--f-body);
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+
+    .service-row-arrow {
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.18s, transform 0.18s;
+      color: var(--text-3);
+    }
+
+    .service-row-arrow svg { width: 14px; height: 14px; display: block; }
+
+    /* ════════════════════════════════════════════
+       PROCESS  (05) — McKinsey numbered chapter rows
+    ════════════════════════════════════════════ */
+    .steps-rows {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-row {
+      display: grid;
+      grid-template-columns: 5rem 1fr 1.25fr;
+      gap: 2.5rem;
+      align-items: start;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .step-row:first-child { border-top: 1px solid var(--rule); }
+
+    .step-idx {
+      font-family: var(--f-head);
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--rule-strong);
+      padding-top: 0.125rem;
+    }
+
+    .step-title {
+      font-family: var(--f-head);
+      font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      padding-top: 0.2rem;
+    }
+
+    .step-body {
+      font-family: var(--f-body);
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    /* ════════════════════════════════════════════
+       CTA SECTION
+    ════════════════════════════════════════════ */
+    .cta-section {
+      padding: var(--py) 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .cta-text h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-text p {
+      font-size: 1.0625rem;
+      max-width: 48ch;
+    }
+
+    .cta-action { flex-shrink: 0; }
+
+    /* ════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════ */
+    .footer {
+      padding: 5rem 0 2.5rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-brand-name {
+      font-family: var(--f-head);
+      font-size: 1.375rem;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.9375rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .footer-col-title {
+      font-family: var(--f-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      font-family: var(--f-body);
+      font-size: 0.875rem;
+      color: var(--text-2);
+      transition: color 0.18s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom-logo {
+      font-family: var(--f-head);
+      font-size: 0.875rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+
+    .footer-bottom-meta {
+      font-family: var(--f-body);
+      font-size: 0.75rem;
+      color: var(--text-3);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal a {
+      font-family: var(--f-body);
+      font-size: 0.75rem;
+      color: var(--text-3);
+      transition: color 0.18s;
+    }
+
+    .footer-legal a:hover { color: var(--text-2); }
+
+    /* ════════════════════════════════════════════
+       SVG HELPER
+    ════════════════════════════════════════════ */
+    .ic {
+      width: 14px; height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: block;
+    }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .step-row {
+        grid-template-columns: 3.5rem 1fr;
+        gap: 2rem;
+      }
+
+      .step-body {
+        grid-column: 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        padding: 5rem 2rem 2rem;
+        gap: 1.5rem;
+      }
+
+      .nav.open { display: flex; }
+      .nav > a { font-size: 1.125rem; }
+      .nav-cta { width: 100%; }
+      .nav-cta .btn { width: 100%; justify-content: center; }
+      .nav-toggle { display: block; }
+
+      .quotes-cols { grid-template-columns: 1fr; }
+      .quote-col {
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding: 2rem 0;
+      }
+      .quote-col:last-child { border-bottom: none; }
+      .quote-col:not(:first-child) { padding-left: 0; }
+
+      .team-cols { grid-template-columns: 1fr; }
+      .team-col {
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding: 2.5rem 0;
+      }
+      .team-col:last-child { border-bottom: none; padding-left: 0; }
+
+      .service-row { grid-template-columns: 2rem 1fr; }
+      .service-row-right { display: none; }
+
+      .step-row { grid-template-columns: 1fr; gap: 0.75rem; }
+      .step-idx { font-size: 1.5rem; }
+      .step-body { grid-column: 1; }
+
+      .cta-inner { flex-direction: column; align-items: flex-start; }
+
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo" aria-label="Convolving home">Convolving</a>
+      <nav class="nav" id="nav" role="navigation">
+        <a href="strategy.html">Strategy</a>
+        <a href="infrastructure.html">Infrastructure</a>
+        <a href="partnerships.html">Partnerships</a>
+        <a href="#team">Team</a>
+        <span class="nav-cta">
+          <a href="mailto:info@hebbian.ch" class="btn">
+            Book a Coffee
+            <svg class="ic" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </span>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero-content reveal">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-num">01</span>
+          <span class="hero-eyebrow-rule"></span>
+          <span class="hero-eyebrow-label">AI Advisory &middot; Switzerland</span>
+        </div>
+        <h1>Turnkey AI advisory, purpose-built for investment teams.</h1>
+        <p class="hero-sub">From first conversation to production infrastructure. Vendor-agnostic, Claude-native, and anchored in real investment processes.</p>
+        <div class="hero-actions">
+          <a href="mailto:info@hebbian.ch" class="btn">
+            Book a Coffee
+            <svg class="ic" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a href="#about" class="btn-text btn">
+            Explore our approach
+            <svg class="ic" viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Marquee ── -->
+  <section class="marquee-section" aria-label="Experience with">
+    <div class="marquee-inner">
+      <span class="marquee-label">Experience with</span>
+      <div class="marquee-track" aria-hidden="true">
+        <span>Swiss International Air Lines</span>
+        <span>Lufthansa Group</span>
+        <span>PwC</span>
+        <span>IMA USA</span>
+        <span>Family Offices &mdash; Zurich</span>
+        <span>Swiss International Air Lines</span>
+        <span>Lufthansa Group</span>
+        <span>PwC</span>
+        <span>IMA USA</span>
+        <span>Family Offices &mdash; Zurich</span>
+        <span>Swiss International Air Lines</span>
+        <span>Lufthansa Group</span>
+        <span>PwC</span>
+        <span>IMA USA</span>
+        <span>Family Offices &mdash; Zurich</span>
+        <span>Swiss International Air Lines</span>
+        <span>Lufthansa Group</span>
+        <span>PwC</span>
+        <span>IMA USA</span>
+        <span>Family Offices &mdash; Zurich</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       01 — Introducing Convolving
+  ════════════════════════════════════════ -->
+  <section class="section" id="about">
+    <div class="wrap">
+
+      <div class="reveal">
+        <div class="label">
+          <span class="label-num">01</span>
+          <span class="label-rule"></span>
+          <span class="label-text">Introducing Convolving</span>
+        </div>
+      </div>
+
+      <div class="intro-grid reveal">
+        <div class="intro-text">
+          <h2>From first conversation to production infrastructure.</h2>
+          <p>We embed alongside investment teams to design, train, and operationalise AI workflows. Every engagement is hands-on, live-built, and anchored in real investment processes.</p>
+          <p>No firm in EMEA occupies the intersection of deep AI implementation capability and investment-workflow fluency. We do. Vendor-agnostic but Claude-native, pairing technical depth with deal-floor credibility.</p>
+          <a href="mailto:info@hebbian.ch" class="btn-text btn" style="margin-top:1.5rem">
+            Book a Coffee
+            <svg class="ic" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+
+        <div class="stats-stack">
+          <div class="stat-row">
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Deals delivered across PE, VC, and family offices</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-num">2 yrs</div>
+            <div class="stat-label">Building enterprise AI at Lufthansa Group</div>
+          </div>
+          <div class="intro-credentials">
+            Claude-native &middot; ETH-adjacent &middot; Vendor-agnostic
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       02 — From the Market
+  ════════════════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="wrap">
+
+      <div class="reveal">
+        <div class="label">
+          <span class="label-num">02</span>
+          <span class="label-rule"></span>
+          <span class="label-text">From the Market</span>
+        </div>
+        <div class="section-heading">
+          <h2>What fund managers are telling us.</h2>
+        </div>
+      </div>
+
+      <div class="quotes-cols reveal">
+        <div class="quote-col">
+          <blockquote>&ldquo;We know AI is going to change how we source and diligence deals. We just don&rsquo;t know where to start without wasting six months on the wrong tools.&rdquo;</blockquote>
+          <cite>Managing Partner, Zurich value fund</cite>
+        </div>
+        <div class="quote-col">
+          <blockquote>&ldquo;Our analysts are using ChatGPT on their own already. We need to get ahead of it, structure it, make it secure, and actually useful for our process.&rdquo;</blockquote>
+          <cite>CIO, European mid-market PE firm</cite>
+        </div>
+        <div class="quote-col">
+          <blockquote>&ldquo;Every vendor wants to sell us their platform. We need someone independent who can just tell us what actually works for a team our size.&rdquo;</blockquote>
+          <cite>Partner, Family office, Zurich</cite>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       03 — About Us / Team
+  ════════════════════════════════════════ -->
+  <section class="section" id="team">
+    <div class="wrap">
+
+      <div class="reveal">
+        <div class="label">
+          <span class="label-num">03</span>
+          <span class="label-rule"></span>
+          <span class="label-text">About Us</span>
+        </div>
+        <div class="section-heading">
+          <h2>Comprehensive AI depth. Real deal experience.</h2>
+        </div>
+      </div>
+
+      <div class="team-cols reveal">
+        <div class="team-col">
+          <div class="team-photo">
+            <img src="assets/cameron-weibel.png" alt="Cameron Weibel, Co-Founder">
+          </div>
+          <h3>Cameron Weibel</h3>
+          <div class="team-role">Co-Founder &middot; Manager of AI, SWISS</div>
+          <p>AI architecture, model orchestration, MCP infrastructure, and agentic system design. Built and deployed enterprise AI infrastructure across Lufthansa Group. ETH-adjacent. Domain authority on applied AI.</p>
+        </div>
+        <div class="team-col">
+          <div class="team-photo">
+            <img src="assets/spencer-johnson.png" alt="Spencer Johnson, Co-Founder">
+          </div>
+          <h3>Spencer Johnson</h3>
+          <div class="team-role">Co-Founder &middot; Deals Strategy &amp; Value Creation, PwC CH</div>
+          <p>30+ deals experience. Led PwC Switzerland&rsquo;s AI adoption strategy. Ex-Tesla. Deal environments, investment process reality, and bridging AI capability with business workflows.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       04 — Our Services
+  ════════════════════════════════════════ -->
+  <section class="section section-alt" id="services">
+    <div class="wrap">
+
+      <div class="reveal">
+        <div class="label">
+          <span class="label-num">04</span>
+          <span class="label-rule"></span>
+          <span class="label-text">Our Services</span>
+        </div>
+        <div class="section-heading">
+          <h2>What we do.</h2>
+        </div>
+      </div>
+
+      <div class="services-rows reveal">
+
+        <a href="strategy.html" class="service-row">
+          <span class="service-row-idx">01</span>
+          <span class="service-row-name">Strategy &amp; Adoption</span>
+          <div class="service-row-right">
+            <div class="service-tags">
+              <span class="service-tag">State of the Union</span>
+              <span class="service-tag">Use Case Lab</span>
+              <span class="service-tag">AI Adoption Programme</span>
+            </div>
+            <span class="service-row-arrow" aria-hidden="true">
+              <svg class="ic" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="infrastructure.html" class="service-row">
+          <span class="service-row-idx">02</span>
+          <span class="service-row-name">Infrastructure &amp; Tooling</span>
+          <div class="service-row-right">
+            <div class="service-tags">
+              <span class="service-tag">Knowledge Architecture</span>
+              <span class="service-tag">Claude Enterprise</span>
+              <span class="service-tag">Custom Workflows</span>
+            </div>
+            <span class="service-row-arrow" aria-hidden="true">
+              <svg class="ic" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="partnerships.html" class="service-row">
+          <span class="service-row-idx">03</span>
+          <span class="service-row-name">Partnerships</span>
+          <div class="service-row-right">
+            <div class="service-tags">
+              <span class="service-tag">Fractional CAIO</span>
+              <span class="service-tag">AI Toolkit</span>
+            </div>
+            <span class="service-row-arrow" aria-hidden="true">
+              <svg class="ic" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <div class="service-row">
+          <span class="service-row-idx">04</span>
+          <span class="service-row-name">Turnkey Delivery</span>
+          <div class="service-row-right">
+            <div class="service-tags">
+              <span class="service-tag">Hardware Provided</span>
+              <span class="service-tag">Public Data Only</span>
+              <span class="service-tag">Zero IT Approval</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <span class="service-row-idx">05</span>
+          <span class="service-row-name">Cohort Programmes</span>
+          <div class="service-row-right">
+            <div class="service-tags">
+              <span class="service-tag">Peer-Group Format</span>
+              <span class="service-tag">AI Champion Model</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <span class="service-row-idx">06</span>
+          <span class="service-row-name">Content &amp; Credentialisation</span>
+          <div class="service-row-right">
+            <div class="service-tags">
+              <span class="service-tag">Executive Roundtables</span>
+              <span class="service-tag">Workshop Documentation</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       05 — How We Work
+  ════════════════════════════════════════ -->
+  <section class="section" id="process">
+    <div class="wrap">
+
+      <div class="reveal">
+        <div class="label">
+          <span class="label-num">05</span>
+          <span class="label-rule"></span>
+          <span class="label-text">How We Work</span>
+        </div>
+        <div class="section-heading">
+          <h2>From first coffee to embedded AI.</h2>
+        </div>
+      </div>
+
+      <div class="steps-rows reveal">
+
+        <div class="step-row">
+          <div class="step-idx">01</div>
+          <div class="step-title">State of the Union</div>
+          <p class="step-body">A free 60-minute executive briefing. No pitch. Practitioner-level overview of what&rsquo;s working, what&rsquo;s hype, and what the best firms are doing.</p>
+        </div>
+
+        <div class="step-row">
+          <div class="step-idx">02</div>
+          <div class="step-title">Use Case Lab</div>
+          <p class="step-body">Hands-on half-day. We bring laptops with Claude Enterprise. Your team builds working prototypes using public data. Zero IT approval needed.</p>
+        </div>
+
+        <div class="step-row">
+          <div class="step-idx">03</div>
+          <div class="step-title">Adoption Programme</div>
+          <p class="step-body">Revolving 6-week sprints. Two use cases per sprint. Two senior consultants every session. No artificial end point.</p>
+        </div>
+
+        <div class="step-row">
+          <div class="step-idx">04</div>
+          <div class="step-title">Ongoing Partnership</div>
+          <p class="step-body">Fractional CAIO embedded in your firm or AI Toolkit subscription. Your AI capability compounds quarter after quarter.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CTA
+  ════════════════════════════════════════ -->
+  <section class="cta-section">
+    <div class="wrap">
+      <div class="cta-inner reveal">
+        <div class="cta-text">
+          <h2>Ready to explore?</h2>
+          <p>Book a coffee. We&rsquo;ll talk through where AI fits in your process. No pitch, no pressure.</p>
+        </div>
+        <div class="cta-action">
+          <a href="mailto:info@hebbian.ch" class="btn">
+            Book a Coffee
+            <svg class="ic" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="footer-brand-name">Work with us</div>
+          <p>Start with a coffee.<br>No pitch, no pressure.</p>
+          <a href="mailto:info@hebbian.ch" class="btn btn-outline">
+            Book a Coffee
+            <svg class="ic" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="strategy.html">Strategy &amp; Adoption</a></li>
+            <li><a href="infrastructure.html">Infrastructure &amp; Tooling</a></li>
+            <li><a href="partnerships.html">Partnerships</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="mailto:info@hebbian.ch">Book a Coffee</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Get in touch</div>
+          <ul class="footer-links">
+            <li><a href="mailto:info@hebbian.ch">info@hebbian.ch</a></li>
+            <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron on LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer on LinkedIn</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-bottom-logo">Convolving</span>
+        <span class="footer-bottom-meta">Convolving GmbH &middot; Oberrieden, Switzerland &middot; &copy; 2026</span>
+        <div class="footer-legal">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="#" data-cookie-prefs>Cookie Preferences</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // ── Mobile nav ──
+    const toggle = document.getElementById('nav-toggle');
+    const nav    = document.getElementById('nav');
+    toggle.addEventListener('click', () => {
+      const open = toggle.classList.toggle('open');
+      nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    nav.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+      toggle.classList.remove('open');
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    // ── Header scroll state ──
+    const header = document.getElementById('header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ── Scroll reveal ──
+    const revealObs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // ── Hero canvas waves ──
+    // Subtle — amplitude and opacity reduced for McKinsey's restrained aesthetic
+    (function () {
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, t = 0;
+      let mx = 0.5, my = 0.5, smx = 0.5, smy = 0.5, mOn = false;
+
+      function resize() {
+        const r = canvas.parentElement.getBoundingClientRect();
+        W = canvas.width  = r.width;
+        H = canvas.height = r.height;
+      }
+
+      canvas.parentElement.addEventListener('mousemove', e => {
+        const r = canvas.parentElement.getBoundingClientRect();
+        mx = (e.clientX - r.left) / r.width;
+        my = (e.clientY - r.top)  / r.height;
+        mOn = true;
+      });
+      canvas.parentElement.addEventListener('mouseleave', () => { mOn = false; });
+
+      // Waves: lower opacity than original — editorial restraint
+      const waves = [
+        { a: 32, f: 0.007, s: 0.011, y: 0.62, c: [61, 110, 235, 0.16], lw: 1.5 },
+        { a: 22, f: 0.011, s: 0.009, y: 0.52, c: [80, 130, 255, 0.10], lw: 1   },
+        { a: 42, f: 0.005, s: 0.007, y: 0.72, c: [40,  90, 210, 0.12], lw: 2   },
+        { a: 18, f: 0.014, s: 0.015, y: 0.42, c: [70, 120, 240, 0.08], lw: 1   },
+        { a: 28, f: 0.009, s: 0.010, y: 0.57, c: [50, 100, 220, 0.14], lw: 1.5 },
+      ];
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        t++;
+        smx += ((mOn ? mx : 0.5) - smx) * 0.04;
+        smy += ((mOn ? my : 0.5) - smy) * 0.04;
+        const am = 1 + (smy - 0.5) * 1.1;
+        const po = (smx - 0.5) * 3.5;
+
+        waves.forEach(wv => {
+          ctx.beginPath();
+          ctx.moveTo(0, H * wv.y);
+          for (let x = 0; x <= W; x += 3) {
+            const y = H * wv.y
+              + Math.sin(x * wv.f + t * wv.s + po)       * wv.a * am
+              + Math.sin(x * wv.f * 0.5 + t * wv.s * 1.4) * wv.a * 0.38 * am;
+            ctx.lineTo(x, y);
+          }
+          ctx.strokeStyle = `rgba(${wv.c})`;
+          ctx.lineWidth   = wv.lw;
+          ctx.stroke();
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+      draw();
+    })();
+  </script>
+
+  <script src="cookie-consent.js" defer></script>
+</body>
+</html>

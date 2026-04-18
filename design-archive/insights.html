@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights — Convolving</title>
+<meta name="description" content="Notes, briefings and field reports on AI in investment work.">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-accent="blue">
+
+<header class="header">
+  <div class="header-inner">
+    <a href="Convolving.html" class="logo" aria-label="Convolving home">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="8" cy="12" r="4" stroke="currentColor" stroke-width="1.3" opacity=".55"/>
+          <circle cx="16" cy="12" r="4" stroke="currentColor" stroke-width="1.3" opacity=".9"/>
+          <circle cx="12" cy="12" r="1.3" fill="currentColor"/>
+        </svg>
+      </span>
+      Convolving
+    </a>
+    <nav class="nav" id="nav">
+      <a href="strategy.html">Strategy</a>
+      <a href="infrastructure.html">Infrastructure</a>
+      <a href="partners.html">Partners</a>
+      <a href="insights.html" class="active">Insights</a>
+      <a href="team.html">Team</a>
+    </nav>
+    <div class="nav-right">
+      <a href="mailto:info@hebbian.ch" class="btn header-cta">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <canvas class="page-hero-canvas" id="heroCanvas"></canvas>
+  <div class="page-hero-gradient"></div>
+  <div class="container-wide">
+    <div class="page-hero-inner">
+      <div>
+        <div class="page-hero-meta">
+          <span>Field notes</span><span class="sep"></span>
+          <span>Updated regularly</span>
+        </div>
+        <h1>Notes from<br>the <span class="hl">deal floor.</span></h1>
+        <p class="page-hero-sub">Briefings, field reports and opinionated takes on how AI is — and isn't — changing investment work. Written for partners and operators, not general audiences.</p>
+      </div>
+      <aside class="page-hero-aside">
+        <p class="q">"We publish when we have something to say. No cadence, no SEO, no newsletter churn — just what we're seeing on the ground."</p>
+        <p class="a">— Editorial principle</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ── Featured ── -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow reveal">Featured</div>
+    <div class="insight-featured reveal" style="margin-top:1.5rem">
+      <div class="insight-featured-img">
+        <canvas id="featureViz"></canvas>
+      </div>
+      <div>
+        <span class="insight-tag">State of the Union</span>
+        <h2>The adoption gap is operational, not technical.</h2>
+        <p>Six months of workshops across European PE, VC and family offices — a pattern report on why most firms have bought the tools but not the habit, and the three structural moves that actually close the gap.</p>
+        <a href="#" class="link-arrow">Read the briefing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Recent ── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Recent</div>
+      <h2>Field notes.</h2>
+      <p>Short pieces on what we're learning from engagements, tooling shifts, and the hard parts of adoption.</p>
+    </div>
+    <div class="insights-list">
+
+      <a href="#" class="insight reveal">
+        <span class="insight-date">2026 · Apr</span>
+        <div class="insight-body">
+          <h3>What "MCP-native" actually means for a deal team.</h3>
+          <p>The Model Context Protocol isn't infrastructure trivia — it's the thing that decides whether AI sits alongside your workflow or inside it.</p>
+        </div>
+        <span class="insight-tag">Infrastructure</span>
+        <span class="insight-arrow">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </span>
+      </a>
+
+      <a href="#" class="insight reveal">
+        <span class="insight-date">2026 · Mar</span>
+        <div class="insight-body">
+          <h3>Top-down and bottom-up, at the same time.</h3>
+          <p>Why the Adoption Programme insists on running IC-level briefings and analyst-level builds concurrently — and what happens when you don't.</p>
+        </div>
+        <span class="insight-tag">Strategy</span>
+        <span class="insight-arrow">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </span>
+      </a>
+
+      <a href="#" class="insight reveal">
+        <span class="insight-date">2026 · Feb</span>
+        <div class="insight-body">
+          <h3>The CIM-analysis demo that keeps working.</h3>
+          <p>A small, repeatable live build we've run twelve times now — and why it converts sceptics faster than any deck we've written.</p>
+        </div>
+        <span class="insight-tag">Field notes</span>
+        <span class="insight-arrow">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </span>
+      </a>
+
+      <a href="#" class="insight reveal">
+        <span class="insight-date">2026 · Jan</span>
+        <div class="insight-body">
+          <h3>Institutional memory is an AI problem.</h3>
+          <p>Every firm we've met has the same data problem: the last twenty deal memos, sitting in four different places, nobody reads them. Knowledge architecture is the fix.</p>
+        </div>
+        <span class="insight-tag">Infrastructure</span>
+        <span class="insight-arrow">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </span>
+      </a>
+
+      <a href="#" class="insight reveal">
+        <span class="insight-date">2025 · Dec</span>
+        <div class="insight-body">
+          <h3>On refusing retainers without deliverables.</h3>
+          <p>A short note on why every Convolving engagement is scoped to a defined artifact — and why the industry's drift toward vague retainers has produced so little useful work.</p>
+        </div>
+        <span class="insight-tag">Method</span>
+        <span class="insight-arrow">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </span>
+      </a>
+
+      <a href="#" class="insight reveal">
+        <span class="insight-date">2025 · Nov</span>
+        <div class="insight-body">
+          <h3>What we stopped putting in workshops.</h3>
+          <p>The five slides, demos and "opportunity maps" we cut from every engagement in the last twelve months — and what replaced them.</p>
+        </div>
+        <span class="insight-tag">Field notes</span>
+        <span class="insight-arrow">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Want the briefings direct?</h2>
+    <p>We don't run a newsletter. But if we've already met, we're happy to send pieces as they're published.</p>
+    <div class="cta-actions">
+      <a href="mailto:info@hebbian.ch" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:info@hebbian.ch" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Work</div>
+        <ul class="footer-list">
+          <li><a href="strategy.html">Strategy &amp; Adoption →</a></li>
+          <li><a href="infrastructure.html">Infrastructure →</a></li>
+          <li><a href="partners.html">Partners →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="team.html">Team</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="mailto:info@hebbian.ch">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:info@hebbian.ch">info@hebbian.ch</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/subpage.js?v=1776456030485"></script>
+<script>
+// Featured viz - simple animated convolution
+(function(){
+  const c = document.getElementById('featureViz');
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  let w, h, t = 0;
+  function resize(){
+    const r = c.parentElement.getBoundingClientRect();
+    c.width = w = r.width * devicePixelRatio;
+    c.height = h = r.height * devicePixelRatio;
+    c.style.width = r.width + 'px';
+    c.style.height = r.height + 'px';
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const accent = 'rgba(106,166,255,';
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    t += 0.008;
+    ctx.lineWidth = 1.2 * devicePixelRatio;
+    // grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    for(let x=0;x<w;x+=28*devicePixelRatio){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+    for(let y=0;y<h;y+=28*devicePixelRatio){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    // two signals + convolution
+    for(let i=0;i<3;i++){
+      ctx.beginPath();
+      for(let x=0;x<=w;x+=2){
+        const nx = x/w;
+        const y1 = Math.sin(nx*6 + t*1.2) * 0.12;
+        const y2 = Math.sin(nx*9 - t*0.8 + i) * 0.08;
+        const conv = (y1+y2) * (1 - Math.abs(nx-0.5)*1.6);
+        const yy = h*0.5 + conv*h * (1 + i*0.3);
+        if(x===0) ctx.moveTo(x,yy); else ctx.lineTo(x,yy);
+      }
+      ctx.strokeStyle = accent + (0.5 - i*0.14) + ')';
+      ctx.lineWidth = (2 - i*0.5) * devicePixelRatio;
+      ctx.stroke();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
