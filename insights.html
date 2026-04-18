@@ -1,317 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insights — Convolving</title>
-<meta name="description" content="Notes, briefings and field reports on AI in investment work.">
-<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights — Convolving</title>
+  <meta name="description" content="Notes, briefings and field reports on AI in investment work.">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
+
 <body data-accent="blue">
 
-<!-- ── Header ── -->
-<header class="header">
-  <div class="header-inner">
-    <a href="index.html" class="header-logo" aria-label="Convolving home">
-      <img src="assets/convolving-logo-white.svg" alt="Convolving" height="28">
-    </a>
-    <nav class="nav" id="nav">
-      <a href="strategy.html">Strategy</a>
-      <a href="infrastructure.html">Infrastructure</a>
-      <a href="partnerships.html">Partnerships</a>
-      <a href="insights.html" class="active">Insights</a>
-      <a href="team.html">Team</a>
-      <span class="nav-cta">
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo" aria-label="Convolving home">
+        <img src="assets/convolving-logo-white.svg" alt="Convolving" height="28">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="strategy.html">Strategy</a>
+        <a href="infrastructure.html">Infrastructure</a>
+        <a href="partnerships.html">Partnerships</a>
+        <a href="insights.html" class="active">Insights</a>
+        <a href="team.html">Team</a>
+        <span class="nav-cta">
+          <a href="mailto:team@convolving.com" class="btn">
+            Book a Coffee
+            <span class="arrow"><svg viewBox="0 0 16 16">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg></span>
+          </a>
+        </span>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="page-hero">
+    <canvas class="hero-waves" id="heroCanvas"></canvas>
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Field notes &middot; Updated regularly</p>
+        <h1>Notes from the <span class="hl">deal floor.</span></h1>
         <a href="mailto:team@convolving.com" class="btn">
           Book a Coffee
-          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          <span class="arrow"><svg viewBox="0 0 16 16">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg></span>
         </a>
-      </span>
-    </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<!-- ── Hero ── -->
-<section class="page-hero">
-  <canvas class="hero-waves" id="heroCanvas"></canvas>
-  <div class="container">
-    <div class="hero-content">
-      <p class="hero-eyebrow">Field notes &middot; Updated regularly</p>
-      <h1>Notes from the <span class="hl">deal floor.</span></h1>
-      <a href="mailto:team@convolving.com" class="btn">
-        Book a Coffee
-        <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ── Featured ── -->
-<section class="section">
-  <div class="container">
-    <div class="eyebrow reveal">Featured</div>
-    <div class="insight-featured reveal" style="margin-top:1.5rem">
-      <div class="insight-featured-img">
-        <canvas id="featureViz"></canvas>
-      </div>
-      <div>
-        <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem">
-          <span class="insight-tag" style="margin-bottom:0">State of the Union</span>
-          <span class="insight-tag" style="margin-bottom:0">FY26 Q2</span>
-        </div>
-        <h2>Everyone's doing pre-deal AI. The edge has moved.</h2>
-        <p>Five expert interviews and eight fund observations on where mid-market PE is actually winning with AI right now — not what they announced, what they did. What the big three aren't telling the middle market.</p>
-        <a href="state-of-the-union/index.html" class="link-arrow">Read the briefing</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── Recent ── -->
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="section-head-inline reveal">
-      <div class="section-badge">Recent</div>
-      <h2>Field notes.</h2>
-      <p>Short pieces on what we're learning from engagements, tooling shifts, and the hard parts of adoption.</p>
+  <!-- ── Featured ── -->
+  <section class="section">
+    <div class="container">
+      <div class="eyebrow reveal">Featured</div>
+      <div class="insight-featured reveal" style="margin-top:1.5rem">
+        <div class="insight-featured-img">
+          <canvas id="featureViz"></canvas>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem">
+            <span class="insight-tag" style="margin-bottom:0">State of the Union</span>
+            <span class="insight-tag" style="margin-bottom:0">FY26 Q1</span>
+          </div>
+          <h2>Everyone's doing pre-deal AI. The edge has moved.</h2>
+          <p>Five expert interviews and eight fund observations on where mid-market PE is actually winning with AI right
+            now — not what they announced, what they did. What the big three aren't telling the middle market.</p>
+          <a href="state-of-the-union/index.html" class="link-arrow">Read the briefing</a>
+        </div>
+      </div>
     </div>
-    <!-- Articles live at insights/<slug>.html — see identifying-practical-ai-usecases.html for the template. -->
-    <div class="insights-list">
+  </section>
 
-      <a href="insights/identifying-practical-ai-usecases.html" class="insight reveal">
-        <span class="insight-date">2026 · Apr</span>
-        <div class="insight-body">
-          <h3>Finding the usecases worth building.</h3>
-          <p>Most AI opportunity lists fail not because the ideas are bad, but because the triage is missing. The three questions we use to cut 120 usecases down to four.</p>
-        </div>
-        <span class="insight-tag">Method</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+  <!-- ── Recent ── -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head-inline reveal">
+        <div class="section-badge">Recent</div>
+        <h2>Field notes.</h2>
+        <p>Short pieces on what we're learning from engagements, tooling shifts, and the hard parts of adoption.</p>
+      </div>
+      <!-- Articles live at insights/<slug>.html — see identifying-practical-ai-usecases.html for the template. -->
+      <div class="insights-list">
 
-      <a href="insights/two-hour-ai-audit.html" class="insight reveal">
-        <span class="insight-date">2025 · Oct</span>
-        <div class="insight-body">
-          <h3>The two-hour AI audit.</h3>
-          <p>A practical exercise any deal team can run before committing to anything. Not a strategy, not a roadmap. Two hours and a whiteboard.</p>
-        </div>
-        <span class="insight-tag">Method</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/identifying-practical-ai-usecases.html" class="insight reveal">
+          <span class="insight-date">2026 · Apr</span>
+          <div class="insight-body">
+            <h3>Finding the usecases worth building.</h3>
+            <p>Most AI opportunity lists fail not because the ideas are bad, but because the triage is missing. The
+              three questions we use to cut 120 usecases down to four.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
-      <a href="insights/prompts-are-policy.html" class="insight reveal">
-        <span class="insight-date">2025 · Sep</span>
-        <div class="insight-body">
-          <h3>Prompts are policy.</h3>
-          <p>When you write a shared prompt for your team, you are encoding your firm's analytical standards into language. That is worth doing carefully.</p>
-        </div>
-        <span class="insight-tag">Method</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/two-hour-ai-audit.html" class="insight reveal">
+          <span class="insight-date">2025 · Oct</span>
+          <div class="insight-body">
+            <h3>The two-hour AI audit.</h3>
+            <p>A practical exercise any deal team can run before committing to anything. Not a strategy, not a roadmap.
+              Two hours and a whiteboard.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
-      <a href="insights/ic-briefing-problem.html" class="insight reveal">
-        <span class="insight-date">2025 · Aug</span>
-        <div class="insight-body">
-          <h3>The IC briefing problem.</h3>
-          <p>Senior partners do not adopt AI through demos. They adopt when something solves a problem they have this week. The firms that understand this get traction.</p>
-        </div>
-        <span class="insight-tag">Strategy</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/prompts-are-policy.html" class="insight reveal">
+          <span class="insight-date">2025 · Sep</span>
+          <div class="insight-body">
+            <h3>Prompts are policy.</h3>
+            <p>When you write a shared prompt for your team, you are encoding your firm's analytical standards into
+              language. That is worth doing carefully.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
-      <a href="insights/why-ai-workshops-leave-nothing.html" class="insight reveal">
-        <span class="insight-date">2025 · Jul</span>
-        <div class="insight-body">
-          <h3>Why most AI workshops leave nothing behind.</h3>
-          <p>Most workshops produce a slide deck and a lingering sense of possibility. Neither survives contact with Monday morning.</p>
-        </div>
-        <span class="insight-tag">Field notes</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/ic-briefing-problem.html" class="insight reveal">
+          <span class="insight-date">2025 · Aug</span>
+          <div class="insight-body">
+            <h3>The IC briefing problem.</h3>
+            <p>Senior partners do not adopt AI through demos. They adopt when something solves a problem they have this
+              week. The firms that understand this get traction.</p>
+          </div>
+          <span class="insight-tag">Strategy</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
-      <a href="insights/knowledge-base-one-year-in.html" class="insight reveal">
-        <span class="insight-date">2025 · Jun</span>
-        <div class="insight-body">
-          <h3>What a knowledge base looks like one year in.</h3>
-          <p>Year zero looks like a folder. Year one, with intentional architecture, looks like something you can actually ask questions of.</p>
-        </div>
-        <span class="insight-tag">Infrastructure</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/why-ai-workshops-leave-nothing.html" class="insight reveal">
+          <span class="insight-date">2025 · Jul</span>
+          <div class="insight-body">
+            <h3>Why most AI workshops leave nothing behind.</h3>
+            <p>Most workshops produce a slide deck and a lingering sense of possibility. Neither survives contact with
+              Monday morning.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
-      <a href="insights/memo-that-almost-writes-itself.html" class="insight reveal">
-        <span class="insight-date">2025 · May</span>
-        <div class="insight-body">
-          <h3>The memo that almost writes itself.</h3>
-          <p>The CIM synthesis workflow is the one we've run most often, for the most sceptical rooms. Here is what it actually does — and what it doesn't.</p>
-        </div>
-        <span class="insight-tag">Field notes</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/knowledge-base-one-year-in.html" class="insight reveal">
+          <span class="insight-date">2025 · Jun</span>
+          <div class="insight-body">
+            <h3>What a knowledge base looks like one year in.</h3>
+            <p>Year zero looks like a folder. Year one, with intentional architecture, looks like something you can
+              actually ask questions of.</p>
+          </div>
+          <span class="insight-tag">Infrastructure</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
-      <a href="insights/mcp-explained-for-deal-teams.html" class="insight reveal">
-        <span class="insight-date">2025 · Apr</span>
-        <div class="insight-body">
-          <h3>MCP explained for deal teams.</h3>
-          <p>The architectural decision that determines whether your AI tools sit beside your workflow or inside it — without the engineering.</p>
-        </div>
-        <span class="insight-tag">Infrastructure</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/memo-that-almost-writes-itself.html" class="insight reveal">
+          <span class="insight-date">2025 · May</span>
+          <div class="insight-body">
+            <h3>The memo that almost writes itself.</h3>
+            <p>The CIM synthesis workflow is the one we've run most often, for the most sceptical rooms. Here is what it
+              actually does — and what it doesn't.</p>
+          </div>
+          <span class="insight-tag">Field notes</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
-      <a href="insights/three-adoption-metrics.html" class="insight reveal">
-        <span class="insight-date">2025 · Mar</span>
-        <div class="insight-body">
-          <h3>Three adoption metrics that aren't vanity.</h3>
-          <p>"Seats activated" is not an adoption metric. Here are three numbers that are, and how to baseline them before you start.</p>
-        </div>
-        <span class="insight-tag">Strategy</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/mcp-explained-for-deal-teams.html" class="insight reveal">
+          <span class="insight-date">2025 · Apr</span>
+          <div class="insight-body">
+            <h3>MCP explained for deal teams.</h3>
+            <p>The architectural decision that determines whether your AI tools sit beside your workflow or inside it —
+              without the engineering.</p>
+          </div>
+          <span class="insight-tag">Infrastructure</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
-      <a href="insights/first-ai-workflow.html" class="insight reveal">
-        <span class="insight-date">2025 · Feb</span>
-        <div class="insight-body">
-          <h3>Your first AI workflow: what to build, what to skip.</h3>
-          <p>The first workflow sets the template for everything that follows. Get it right and you have a pattern. Get it wrong and you have a cautionary tale.</p>
-        </div>
-        <span class="insight-tag">Method</span>
-        <span class="insight-arrow">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </a>
+        <a href="insights/three-adoption-metrics.html" class="insight reveal">
+          <span class="insight-date">2025 · Mar</span>
+          <div class="insight-body">
+            <h3>Three adoption metrics that aren't vanity.</h3>
+            <p>"Seats activated" is not an adoption metric. Here are three numbers that are, and how to baseline them
+              before you start.</p>
+          </div>
+          <span class="insight-tag">Strategy</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
 
+        <a href="insights/first-ai-workflow.html" class="insight reveal">
+          <span class="insight-date">2025 · Feb</span>
+          <div class="insight-body">
+            <h3>Your first AI workflow: what to build, what to skip.</h3>
+            <p>The first workflow sets the template for everything that follows. Get it right and you have a pattern.
+              Get it wrong and you have a cautionary tale.</p>
+          </div>
+          <span class="insight-tag">Method</span>
+          <span class="insight-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </span>
+        </a>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="cta">
-  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
-  <div class="container cta-inner">
-    <h2>Want the briefings direct?</h2>
-    <p>We don't run a newsletter. But if we've already met, we're happy to send pieces as they're published.</p>
-    <div class="cta-actions">
-      <a href="mailto:team@convolving.com" class="btn">
-        Book a coffee
-        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-lead">
-        <h3>Work with us.<br>Start with a coffee.</h3>
-        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+  <section class="cta">
+    <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+    <div class="container cta-inner">
+      <h2>Want the briefings direct?</h2>
+      <p>We don't run a newsletter. But if we've already met, we're happy to send pieces as they're published.</p>
+      <div class="cta-actions">
         <a href="mailto:team@convolving.com" class="btn">
           Book a coffee
-          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          <span class="dot"><svg viewBox="0 0 16 16">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg></span>
         </a>
       </div>
-      <div>
-        <div class="footer-col-title">Work</div>
-        <ul class="footer-list">
-          <li><a href="strategy.html">Strategy &amp; Adoption →</a></li>
-          <li><a href="infrastructure.html">Infrastructure →</a></li>
-          <li><a href="partnerships.html">Partners →</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Company</div>
-        <ul class="footer-list">
-          <li><a href="team.html">Team</a></li>
-          <li><a href="insights.html">Insights</a></li>
-          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Elsewhere</div>
-        <ul class="footer-list">
-          <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
-          <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
-          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
-        </ul>
-      </div>
     </div>
-    <div class="footer-bottom">
-      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
-      <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
-    </div>
-  </div>
-</footer>
+  </section>
 
-<script src="cookie-consent.js" defer></script>
-<script src="assets/subpage.js?v=1776505475"></script>
-<script>
-// Featured viz - simple animated convolution
-(function(){
-  const c = document.getElementById('featureViz');
-  if(!c) return;
-  const ctx = c.getContext('2d');
-  let w, h, t = 0;
-  function resize(){
-    const r = c.parentElement.getBoundingClientRect();
-    c.width = w = r.width * devicePixelRatio;
-    c.height = h = r.height * devicePixelRatio;
-    c.style.width = r.width + 'px';
-    c.style.height = r.height + 'px';
-  }
-  resize();
-  window.addEventListener('resize', resize);
-  const accent = 'rgba(106,166,255,';
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    t += 0.008;
-    ctx.lineWidth = 1.2 * devicePixelRatio;
-    // grid
-    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-    for(let x=0;x<w;x+=28*devicePixelRatio){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
-    for(let y=0;y<h;y+=28*devicePixelRatio){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
-    // two signals + convolution
-    for(let i=0;i<3;i++){
-      ctx.beginPath();
-      for(let x=0;x<=w;x+=2){
-        const nx = x/w;
-        const y1 = Math.sin(nx*6 + t*1.2) * 0.12;
-        const y2 = Math.sin(nx*9 - t*0.8 + i) * 0.08;
-        const conv = (y1+y2) * (1 - Math.abs(nx-0.5)*1.6);
-        const yy = h*0.5 + conv*h * (1 + i*0.3);
-        if(x===0) ctx.moveTo(x,yy); else ctx.lineTo(x,yy);
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-lead">
+          <h3>Work with us.<br>Start with a coffee.</h3>
+          <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+          <a href="mailto:team@convolving.com" class="btn">
+            Book a coffee
+            <span class="dot"><svg viewBox="0 0 16 16">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg></span>
+          </a>
+        </div>
+        <div>
+          <div class="footer-col-title">Work</div>
+          <ul class="footer-list">
+            <li><a href="strategy.html">Strategy &amp; Adoption →</a></li>
+            <li><a href="infrastructure.html">Infrastructure →</a></li>
+            <li><a href="partnerships.html">Partners →</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-list">
+            <li><a href="team.html">Team</a></li>
+            <li><a href="insights.html">Insights</a></li>
+            <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Elsewhere</div>
+          <ul class="footer-list">
+            <li><a href="https://www.linkedin.com/in/cameronweibel/" target="_blank" rel="noopener">Cameron ·
+                LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/in/spencerjohnson/" target="_blank" rel="noopener">Spencer ·
+                LinkedIn</a></li>
+            <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+        <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="#" data-cookie-prefs>Cookie
+            preferences</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="cookie-consent.js" defer></script>
+  <script src="assets/subpage.js?v=1776505475"></script>
+  <script>
+    // Featured viz - simple animated convolution
+    (function () {
+      const c = document.getElementById('featureViz');
+      if (!c) return;
+      const ctx = c.getContext('2d');
+      let w, h, t = 0;
+      function resize() {
+        const r = c.parentElement.getBoundingClientRect();
+        c.width = w = r.width * devicePixelRatio;
+        c.height = h = r.height * devicePixelRatio;
+        c.style.width = r.width + 'px';
+        c.style.height = r.height + 'px';
       }
-      ctx.strokeStyle = accent + (0.5 - i*0.14) + ')';
-      ctx.lineWidth = (2 - i*0.5) * devicePixelRatio;
-      ctx.stroke();
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
+      resize();
+      window.addEventListener('resize', resize);
+      const accent = 'rgba(106,166,255,';
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        t += 0.008;
+        ctx.lineWidth = 1.2 * devicePixelRatio;
+        // grid
+        ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+        for (let x = 0; x < w; x += 28 * devicePixelRatio) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+        for (let y = 0; y < h; y += 28 * devicePixelRatio) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+        // two signals + convolution
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath();
+          for (let x = 0; x <= w; x += 2) {
+            const nx = x / w;
+            const y1 = Math.sin(nx * 6 + t * 1.2) * 0.12;
+            const y2 = Math.sin(nx * 9 - t * 0.8 + i) * 0.08;
+            const conv = (y1 + y2) * (1 - Math.abs(nx - 0.5) * 1.6);
+            const yy = h * 0.5 + conv * h * (1 + i * 0.3);
+            if (x === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+          }
+          ctx.strokeStyle = accent + (0.5 - i * 0.14) + ')';
+          ctx.lineWidth = (2 - i * 0.5) * devicePixelRatio;
+          ctx.stroke();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
 </body>
+
 </html>
