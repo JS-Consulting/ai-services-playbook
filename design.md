@@ -1,4 +1,4 @@
-# Convolving — Marketing Design Guide
+# Convolving – Marketing Design Guide
 
 A practical reference for the marketing team. Use this when producing any externally-visible artifact: web pages, decks, social posts, ads, partner materials, event collateral, PDFs.
 
@@ -8,9 +8,9 @@ The goal: any new piece of marketing should feel like it came from the same stud
 
 ## 1. The brand in one paragraph
 
-Convolving sits at the intersection of *applied AI* and *senior strategic counsel*. We are not a vendor, not an agency, not a fund. Our visual language reflects that — closer to a research institute or a long-form publication than a SaaS company. Restraint is the dominant note. Every element earns its place.
+Convolving sits at the intersection of *applied AI* and *senior strategic counsel*. We are not a vendor, not an agency, not a fund. Our visual language reflects that – closer to a research institute or a long-form publication than a SaaS company. Restraint is the dominant note. Every element earns its place.
 
-> **Voice cue:** if it would feel at home in *The Economist*, the *MIT Technology Review*, or a McKinsey insight piece — it's on-brand. If it would feel at home on a generic startup landing page, it's not.
+> **Voice cue:** if it would feel at home in *The Economist*, the *MIT Technology Review*, or a McKinsey insight piece – it's on-brand. If it would feel at home on a generic startup landing page, it's not.
 
 ---
 
@@ -49,9 +49,9 @@ We work in a **dark-first** palette. Light backgrounds are reserved for print an
 ### Accents
 | Token | Hex | Use |
 |---|---|---|
-| `--accent` | `#6AA6FF` | Primary highlight — eyebrows, links, focus |
-| `--accent-2` | `#A8C7FF` | Lighter highlight — inside gradients, role labels |
-| `--accent-warm` | `#F2C58A` | Warm counterpoint — used sparingly inside gradients only |
+| `--accent` | `#6AA6FF` | Primary highlight – eyebrows, links, focus |
+| `--accent-2` | `#A8C7FF` | Lighter highlight – inside gradients, role labels |
+| `--accent-warm` | `#F2C58A` | Warm counterpoint – used sparingly inside gradients only |
 
 ### Category dots (only in network/data viz)
 - AI: `#4F7FFF`
@@ -79,13 +79,13 @@ Three families. No others.
 | **JetBrains Mono** (mono) | `'JetBrains Mono', ui-monospace, monospace` | Eyebrows, labels, captions, data, status |
 
 ### The scale
-- **H1** — Fraunces 300, ~6.75rem desktop, letter-spacing −0.045em, line-height 1.02. One per page.
-- **H2** — Fraunces 300, ~3.75rem desktop, letter-spacing −0.035em.
-- **H3** — Fraunces 400, ~1.75rem.
-- **H4** — DM Sans 600, 1rem, normal tracking. *Note: H4 is the only sans heading.*
-- **Body** — DM Sans 400, 16px, line-height 1.65.
-- **Eyebrow** — JetBrains Mono, 0.7rem, **uppercase**, tracking 0.14em, color `--accent`. Always paired with a leading 18px hairline.
-- **Caption / data** — JetBrains Mono, 0.66–0.72rem, uppercase, tracking 0.1–0.14em, color `--fg-3`.
+- **H1** – Fraunces 300, ~6.75rem desktop, letter-spacing −0.045em, line-height 1.02. One per page.
+- **H2** – Fraunces 300, ~3.75rem desktop, letter-spacing −0.035em.
+- **H3** – Fraunces 400, ~1.75rem.
+- **H4** – DM Sans 600, 1rem, normal tracking. *Note: H4 is the only sans heading.*
+- **Body** – DM Sans 400, 16px, line-height 1.65.
+- **Eyebrow** – JetBrains Mono, 0.7rem, **uppercase**, tracking 0.14em, color `--accent`. Always paired with a leading 18px hairline.
+- **Caption / data** – JetBrains Mono, 0.66–0.72rem, uppercase, tracking 0.1–0.14em, color `--fg-3`.
 
 ### Italics
 Italics in Fraunces are our signature. Use them for:
@@ -105,7 +105,7 @@ Big stat numerals use Fraunces 300, e.g. `4.25rem` with letter-spacing −0.045e
 ### Grid
 - Max content width: **1280 px** (`--container`). Wide variants: **1440 px** (`--container-wide`).
 - Page gutters: `clamp(1.25rem, 4vw, 3rem)`.
-- Hero and page-hero shift content right with extra left padding (`clamp(3rem, 8vw, 8rem)`) — this asymmetric weight is intentional. Keep it.
+- Hero and page-hero shift content right with extra left padding (`clamp(3rem, 8vw, 8rem)`) – this asymmetric weight is intentional. Keep it.
 - Section vertical padding: `clamp(5rem, 9vw, 9rem)`.
 - Card internal padding: 1.75–2.25rem.
 - Card-to-card gap inside grids: 1rem (tight, intentional).
@@ -129,9 +129,9 @@ The 1px hairline before an eyebrow (18px wide, current color) is a recurring mot
 These five patterns are the *Convolving look*. Reach for them in any new artifact.
 
 1. **The italic highlight.** Inside an otherwise upright headline, one word or phrase is italicized **and** filled with a left-to-right gradient `--accent-2 → --accent → --accent-warm`. Maximum one per headline.
-2. **Eyebrow + hairline.** Every section opens with a mono uppercase eyebrow preceded by an 18px hairline in `--accent`. Numbered eyebrows (`01 — INFRASTRUCTURE`) are encouraged.
+2. **Eyebrow + hairline.** Every section opens with a mono uppercase eyebrow preceded by an 18px hairline in `--accent`. Numbered eyebrows (`01 – INFRASTRUCTURE`) are encouraged.
 3. **Provenance / data panels.** Mono-typeset key/value rows with 1px dashed dividers, tucked inside a `--surface` card. Use for credibility data: tenure, cohort numbers, partner counts.
-4. **Live/status pulse.** A 7px green dot with an animated halo, paired with a mono uppercase label. Use sparingly — only when something is genuinely live.
+4. **Live/status pulse.** A 7px green dot with an animated halo, paired with a mono uppercase label. Use sparingly – only when something is genuinely live.
 5. **Decorative oversized italic.** A massive Fraunces italic word at the bottom of long pages, set in a near-transparent gradient `rgba(238,240,244,.16) → .02`. It's wallpaper, not content. Use once per long-form artifact, max.
 
 ---
@@ -179,7 +179,7 @@ Motion is *editorial*, not playful.
 - **Hover:** 1–2px lifts only. No scale > 1.08.
 - **Pulse:** 2s loop on live indicators only.
 - **Marquee:** 50s linear infinite for the logo rail.
-- Provide a `no-motion` variant (we already do on the site) — respect `prefers-reduced-motion`.
+- Provide a `no-motion` variant (we already do on the site) – respect `prefers-reduced-motion`.
 
 ---
 
@@ -209,13 +209,18 @@ Motion is *editorial*, not playful.
 - **No exclamation marks.** None.
 - **Numerals as numerals**, not spelled out, when they are data ("17 partners", "4 quarters"). Spelled-out numerals only inside narrative prose.
 
+### Dashes
+- **Never use em dashes (`—`).** Always use en dashes (`–`) with a space on either side: `word – word`.
+- Applies to all copy: body, headlines, eyebrows, meta titles, meta descriptions, UI labels. No exceptions.
+- Rationale: the en dash reads calmer at our type sizes and holds the rhythm of short sentences better than the em dash.
+
 ### Headline shape
 A typical Convolving headline is **5–9 words**, ends with a noun, contains exactly one italicized highlight phrase. Example shape:
 > "Backed by the institutions *setting the pace*."
 > "The infrastructure for *applied* intelligence."
 
 ### Eyebrow shape
-`NN — TWO TO FIVE WORDS` — e.g. `04 — OPERATING PRINCIPLES`. Always uppercase, mono.
+`NN – TWO TO FIVE WORDS` – e.g. `04 – OPERATING PRINCIPLES`. Always uppercase, mono.
 
 ### Body copy
 - 14–22 words per sentence, on average.
@@ -254,7 +259,7 @@ For decks and PDFs the dark palette inverts:
 
 Run through this for any new piece:
 
-- [ ] Only Fraunces, DM Sans, JetBrains Mono — no system fallbacks visible.
+- [ ] Only Fraunces, DM Sans, JetBrains Mono – no system fallbacks visible.
 - [ ] At most **one** italic-highlight headline per view.
 - [ ] Every section has an eyebrow with a leading hairline.
 - [ ] Cards: 1px borders, 14px radius, hover lifts 2px max.
