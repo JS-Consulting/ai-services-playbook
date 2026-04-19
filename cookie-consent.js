@@ -30,7 +30,7 @@
       '<div class="cookie-banner-inner">' +
         '<p class="cookie-banner-text">' +
           'We use cookies to understand how visitors use our site. ' +
-          'See our <a href="privacy.html">Privacy Policy</a> for details.' +
+          'See our <a href="privacy">Privacy Policy</a> for details.' +
         '</p>' +
         '<div class="cookie-banner-actions">' +
           '<button type="button" class="btn btn-outline cookie-btn-reject">Reject</button>' +
