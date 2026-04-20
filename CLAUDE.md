@@ -20,7 +20,7 @@ For devtools-driven verification (screenshots, computed styles), use `file:///` 
 ## Site structure
 
 - **8 top-level pages** (root): `index.html`, `strategy.html`, `infrastructure.html`, `partnerships.html`, `team.html`, `insights.html`, `privacy.html`, `terms.html`.
-- **`insights/*.html`** — 10 article pages. Reference `../assets/site.css`.
+- **`insights/*.html`** – 10 article pages. Reference `../assets/site.css`. **Before editing any file in `insights/` or writing a new article, read `insights/STYLE.md`** – it defines the structural template, voice, word-choice allow/avoid list, and pre-ship checklist specific to the publication. It extends `design.md` and does not replace it.
 - **`state-of-the-union/*.html`** — standalone briefing editions with their **own** design system (DM Serif Display + Inter, no site.css). Treat as out-of-scope for the main design system; em-dash/en-dash rules still apply.
 
 Nav across all main pages and articles is structurally identical, including the `.nav-cta` "Book a Coffee" pill. If it stops rendering on a page, the bug is almost always CSS specificity — see **Gotchas** below.
@@ -64,6 +64,21 @@ State-of-the-union pages don't follow this pattern — intentional.
 ## Design guide
 
 `design.md` is the authoritative reference for brand, type, color, components, voice. Consult it before inventing new patterns. Numbered sections; anything visible externally should align with them.
+
+For insights articles specifically, `insights/STYLE.md` is the authoritative publication guide – structural template, editorial voice, banned vocabulary, and pre-ship checklist. Read it before touching any file under `insights/`.
+
+## Editorial voice (quick reference)
+
+Full guidance lives in `design.md` §11 and `insights/STYLE.md` §3. Short version for any copy you generate:
+
+- **Reference tone:** a McKinsey insight piece or an Economist long-read, rendered in our dark editorial palette. Considered, quiet, specific, senior, plainspoken.
+- **Lead with the sharp observation, not the context.** No "In today's AI landscape…" openers.
+- **Anchor every claim** to a concrete count, period, or sector. No "studies show", no "many firms", no unsourced statistics.
+- **Prefer verbs over adjectives**, concrete over abstract, short sentences over long.
+- **Headlines and H2s are declarative** and end in a period – never a question mark, exclamation, or colon-subtitle.
+- **Avoid** the following without a sourced anchor: `transform, empower, scale, streamline, leverage, unlock, supercharge, disrupt, seamless, robust, world-class, cutting-edge, journey (as metaphor), harness the power of`. Marketing adjectives without a number are deleted.
+- **Use `<strong>` bold lead-ins** for parallel sub-points inside a paragraph instead of bulleted lists.
+- **Close long-form pieces with a 1–2 sentence coda** that restates the thesis broadly. No inline call-to-action – CTAs live in the shared `.cta` section.
 
 ## Gotchas
 
