@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Static marketing site for Convolving (convolving.com), a Swiss AI advisory firm for investment teams. Plain HTML + CSS + vanilla JS, no build step, deployed via GitHub Pages (`.nojekyll` present at root).
+Static marketing site for Convolving (convolving.com), a Swiss AI advisory firm for investment teams. Plain HTML + CSS + vanilla JS, no build step, deployed on Vercel (`vercel.json` at root configures clean URLs and asset cache headers).
 
 ## Running locally
 
@@ -36,6 +36,21 @@ Two token systems coexist in the `:root` block by design, because historical rul
 Don't collapse these — rules throughout the file reference each set. If you add new rules, prefer the shorter `--bg` / `--fg` / `--accent` tokens (that's what the active layout sections use).
 
 Index.html's original inline `<style>` block was appended last in the merged file so its rules win on conflict — **index is the design source of truth**, subpages inherit from it.
+
+## Asset caching and the `?v=` convention
+
+`vercel.json` ships `Cache-Control: public, max-age=31536000, immutable` for everything under `/assets/*`. That means returning visitors get the cached file for up to a year and never revalidate. Filenames are not content-hashed, so when you change a file under `/assets/` you must bust the cache by bumping the query string in every HTML reference.
+
+Convention: `?v=YYYYMMDD` (the date the asset was edited). For example, after editing `assets/site.css` on 2026-04-29:
+
+```html
+<link rel="stylesheet" href="assets/site.css?v=20260429">
+<script src="assets/index.js?v=20260429" defer></script>
+```
+
+Find every reference with `grep -rn "assets/<filename>" *.html insights/*.html` and bump them all in the same commit. Forgetting this means returning visitors keep the stale asset until the cache expires.
+
+HTML pages are not in `/assets/` and use the platform default (revalidate each load), so content changes ship instantly without a bump.
 
 ## JavaScript
 
