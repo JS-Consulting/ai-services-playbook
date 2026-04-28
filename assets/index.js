@@ -1,3 +1,22 @@
+// Cached accent color, refreshed only when body's data-accent changes.
+// Reading getComputedStyle inside a per-frame draw loop forces a style
+// recalc each call (~3 forced layouts/frame across all canvases on this page),
+// so we cache and update only on demand instead.
+const accentCache = (() => {
+  // Lazy: parseAccent only runs on first get(), which we always call from inside
+  // a requestAnimationFrame draw tick (i.e. after layout). Doing the read at
+  // script-eval time would force the browser's first layout synchronously.
+  let cached = null;
+  function parseAccent() {
+    const v = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+    const m = v.match(/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
+    return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [106, 166, 255];
+  }
+  new MutationObserver(() => { cached = parseAccent(); })
+    .observe(document.body, { attributes: true, attributeFilter: ['data-accent', 'class'] });
+  return { get: () => (cached || (cached = parseAccent())) };
+})();
+
 // Mobile nav toggle
 (() => {
   const toggle = document.getElementById('nav-toggle');
@@ -28,7 +47,15 @@
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 })();
 
-// Hero sine-wave canvas
+// Visibility tracker: returns a getter that's true only when target is in viewport.
+function visibility(target, rootMargin = '100px') {
+  let visible = true;
+  const io = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }, { rootMargin });
+  io.observe(target);
+  return () => visible;
+}
+
+// Hero sine-wave canvas (home page)
 function initWaves(canvasId) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
@@ -38,8 +65,6 @@ function initWaves(canvasId) {
   let mouse = { x: 0.5, y: 0.5, active: false };
   let sm = { x: 0.5, y: 0.5 };
 
-  // ResizeObserver fires after layout, so reading the rect here does not force
-  // a synchronous reflow the way a window 'resize' listener + getBoundingClientRect would.
   const ro = new ResizeObserver(entries => {
     const { width, height } = entries[0].contentRect;
     w = canvas.width = width;
@@ -55,6 +80,8 @@ function initWaves(canvasId) {
   });
   parent.addEventListener('mouseleave', () => { mouse.active = false; });
 
+  const isVisible = visibility(canvas);
+
   const waves = [
     { amp: 40, freq: 0.008, spd: 0.009, y: 0.6, col: [50,120,190,0.5], lw: 2 },
     { amp: 30, freq: 0.012, spd: 0.007, y: 0.5, col: [70,150,220,0.35], lw: 1.5 },
@@ -69,7 +96,11 @@ function initWaves(canvasId) {
   };
 
   function draw() {
-    if (!w || !h) { requestAnimationFrame(draw); return; }
+    // Skip work entirely when offscreen; reschedule lazily so we resume on scroll back.
+    if (!isVisible() || !w || !h) {
+      setTimeout(() => requestAnimationFrame(draw), 250);
+      return;
+    }
     ctx.clearRect(0, 0, w, h);
     time++;
     sm.x += ((mouse.active ? mouse.x : 0.5) - sm.x) * 0.05;
@@ -166,19 +197,19 @@ function initAmbientCanvas(id, opts = {}) {
   });
   ro.observe(canvas);
 
-  function rgb() {
-    const v = getComputedStyle(document.body).getPropertyValue('--accent').trim();
-    const m = v.match(/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
-    return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [106, 166, 255];
-  }
+  const isVisible = visibility(canvas);
+
   function draw() {
-    if (!w || !h) { requestAnimationFrame(draw); return; }
+    if (!isVisible() || !w || !h) {
+      setTimeout(() => requestAnimationFrame(draw), 250);
+      return;
+    }
     if (document.body.classList.contains('no-motion')) {
       ctx.clearRect(0, 0, w, h); requestAnimationFrame(draw); return;
     }
     t++;
     ctx.clearRect(0, 0, w, h);
-    const [rR, rG, rB] = rgb();
+    const [rR, rG, rB] = accentCache.get();
     const rows = opts.rows || 3;
     for (let i = 0; i < rows; i++) {
       ctx.beginPath();
@@ -209,17 +240,31 @@ initAmbientCanvas('ctaCanvas', { rows: 5 });
   const rail = document.querySelector('.journey-rail');
   if (!rail || !jprog) return;
 
-  // rAF-coalesce scroll/resize so multiple events collapse into one layout read per frame.
+  const setProgress = (p) => { jprog.style.transform = 'scaleX(' + p + ')'; };
+
+  // Cache layout once via ResizeObserver (which fires after layout, no synchronous
+  // recalc). The scroll handler then never touches getBoundingClientRect, so it
+  // can't force a reflow per-frame.
+  let railTop = 0, railHeight = 0;
+  const measure = () => {
+    const r = rail.getBoundingClientRect();
+    railTop = r.top + window.scrollY;
+    railHeight = r.height;
+  };
+  // ResizeObserver fires once after observe() once layout is ready, so we don't
+  // need a synchronous getBoundingClientRect call (which would force a reflow
+  // before the browser has done its first layout pass).
+  new ResizeObserver(measure).observe(rail);
+
   let pending = false;
   function schedule() {
     if (pending) return;
     pending = true;
     requestAnimationFrame(() => {
       pending = false;
-      const r = rail.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const p = Math.max(0, Math.min(1, (vh * .7 - r.top) / r.height));
-      jprog.style.width = (p * 100) + '%';
+      const top = railTop - window.scrollY;
+      const p = Math.max(0, Math.min(1, (window.innerHeight * .7 - top) / railHeight));
+      setProgress(p);
       jsteps.forEach((s, i) => {
         const threshold = (i + .5) / jsteps.length;
         s.classList.toggle('active', p > threshold * .7);
@@ -227,13 +272,14 @@ initAmbientCanvas('ctaCanvas', { rows: 5 });
     });
   }
   window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
-  schedule();
+  // CSS sets transform:scaleX(0) on init; no need to schedule a rAF measurement
+  // before the user actually scrolls. Skipping this avoids reading layout in
+  // the same frame as the canvas ResizeObservers' initial style writes.
   jsteps.forEach((s, i) => {
     s.addEventListener('mouseenter', () => {
       jsteps.forEach(x => x.classList.remove('active'));
       for (let k = 0; k <= i; k++) jsteps[k].classList.add('active');
-      jprog.style.width = (((i + 1) / jsteps.length) * 100) + '%';
+      setProgress((i + 1) / jsteps.length);
     });
   });
 })();

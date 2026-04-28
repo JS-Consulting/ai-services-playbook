@@ -4,6 +4,33 @@
    + reveal-on-scroll + hover glow
    ═══════════════════════════════════════════ */
 
+// Cached accent color (refreshed only when body's data-accent or class changes).
+// Reading getComputedStyle inside per-frame draw loops forces style recalc on every
+// call. We resolve it once and re-resolve via MutationObserver when the body actually changes.
+const accentCache = (() => {
+  // Lazy: parseAccent only runs on first get(), which is always inside a rAF
+  // draw tick (after layout). Doing it at script-eval would force the first
+  // layout synchronously and show up as a forced-reflow warning.
+  let cached = null;
+  function parseAccent(){
+    const v = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+    const m = v.match(/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
+    return m ? [parseInt(m[1],16), parseInt(m[2],16), parseInt(m[3],16)] : [106,166,255];
+  }
+  new MutationObserver(() => { cached = parseAccent(); })
+    .observe(document.body, { attributes: true, attributeFilter: ['data-accent','class'] });
+  return { get: () => (cached || (cached = parseAccent())) };
+})();
+
+// Returns a getter that's true when target is in (or near) viewport. Lets us pause
+// per-frame canvas work when the canvas is offscreen.
+function visibility(target, rootMargin = '100px'){
+  let visible = true;
+  const io = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; }, { rootMargin });
+  io.observe(target);
+  return () => visible;
+}
+
 /* Full hero convolution field — matches the home page */
 function initHeroCanvas(id){
   const canvas = document.getElementById(id);
@@ -21,16 +48,14 @@ function initHeroCanvas(id){
     canvas.style.width = r.width + 'px';
     canvas.style.height = r.height + 'px';
   }
-  window.addEventListener('resize', resize);
-  window.addEventListener('load', resize);
-  resize();
-  requestAnimationFrame(resize);
-  // Aggressive polling — flex + min-height heroes sometimes measure tiny
-  // on first frames in scaled preview iframes.
-  [30, 100, 300, 600, 1200, 2400].forEach(d => setTimeout(resize, d));
+  // Single observer is enough (no window resize spam, no setTimeout polling cascade).
   if(window.ResizeObserver){
     new ResizeObserver(resize).observe(canvas.parentElement);
+  } else {
+    window.addEventListener('resize', resize);
+    resize();
   }
+  resize();
 
   const host = canvas.parentElement;
   host.addEventListener('mousemove', e => {
@@ -41,11 +66,7 @@ function initHeroCanvas(id){
   });
   host.addEventListener('mouseleave', () => mouse.a = false);
 
-  function accentRGB(){
-    const v = getComputedStyle(document.body).getPropertyValue('--accent').trim();
-    const m = v.match(/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
-    return m ? [parseInt(m[1],16),parseInt(m[2],16),parseInt(m[3],16)] : [106,166,255];
-  }
+  const isVisible = visibility(canvas);
 
   const N = 24;
   const pts = Array.from({length:N}, () => ({
@@ -55,19 +76,22 @@ function initHeroCanvas(id){
   }));
 
   function draw(){
+    if(!isVisible() || !w || !h){
+      setTimeout(() => requestAnimationFrame(draw), 250);
+      return;
+    }
     if(document.body.classList.contains('no-motion')){
       ctx.clearRect(0,0,w,h);
       requestAnimationFrame(draw);
       return;
     }
     t++;
-    const [rR,rG,rB] = accentRGB();
+    const [rR,rG,rB] = accentCache.get();
     ctx.clearRect(0,0,w,h);
 
     sm.x += ((mouse.a?mouse.x:.5) - sm.x) * .04;
     sm.y += ((mouse.a?mouse.y:.5) - sm.y) * .04;
 
-    // Right-edge singularity — waves flow left→right and converge on the right.
     const waves = [
       {amp:.11, freq:.009, spd:.003, y:.55, op:.75, lw:1.8},
       {amp:.08, freq:.013, spd:.0025, y:.42, op:.55, lw:1.4},
@@ -88,7 +112,6 @@ function initHeroCanvas(id){
       let started = false;
       for(let x=0; x<=w; x+=2){
         const nx = x / w;
-        // Envelope: 1 across most of the width, smoothly collapses to 0 at the right edge
         const env = 1 - smoothstep(0.55, 0.985, nx);
         const homeY = oy + (h*wv.y - oy) * env;
         const y = homeY +
@@ -98,7 +121,6 @@ function initHeroCanvas(id){
         if(!started){ ctx.moveTo(x,y); started = true; }
         else ctx.lineTo(x,y);
       }
-      // Bloom pass underneath
       ctx.save();
       ctx.shadowColor = 'rgba('+rR+','+rG+','+rB+',0.9)';
       ctx.shadowBlur = 14 * dpr;
@@ -108,7 +130,6 @@ function initHeroCanvas(id){
       ctx.lineCap = 'round';
       ctx.stroke();
       ctx.restore();
-      // Crisp line on top
       ctx.strokeStyle = 'rgba('+rR+','+rG+','+rB+','+wv.op+')';
       ctx.lineWidth = wv.lw * dpr;
       ctx.lineJoin = 'round';
@@ -116,7 +137,6 @@ function initHeroCanvas(id){
       ctx.stroke();
     });
 
-    // Singularity glow
     const pulse = 0.5 + 0.5*Math.sin(t*0.03);
     const glow = ctx.createRadialGradient(ox,oy,0, ox,oy, 70*dpr);
     glow.addColorStop(0, 'rgba('+rR+','+rG+','+rB+','+(0.55 + pulse*0.25)+')');
@@ -132,7 +152,6 @@ function initHeroCanvas(id){
     ctx.fillStyle = 'rgba(200,225,255,'+(0.85 + pulse*0.15)+')';
     ctx.fill();
 
-    // Particles
     const pxs = pts.map(p => {
       p.x += p.vx; p.y += p.vy;
       if(p.x<0 || p.x>1) p.vx *= -1;
@@ -190,20 +209,20 @@ function initAmbientCanvas(id, opts){
     canvas.style.width = r.width + 'px';
     canvas.style.height = r.height + 'px';
   }
-  window.addEventListener('resize', resize);
-  resize();
-  requestAnimationFrame(resize);
   if(window.ResizeObserver){
     new ResizeObserver(resize).observe(canvas);
+  } else {
+    window.addEventListener('resize', resize);
   }
+  resize();
 
-  function accentRGB(){
-    const v = getComputedStyle(document.body).getPropertyValue('--accent').trim();
-    const m = v.match(/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
-    return m ? [parseInt(m[1],16),parseInt(m[2],16),parseInt(m[3],16)] : [106,166,255];
-  }
+  const isVisible = visibility(canvas);
 
   function draw(){
+    if(!isVisible() || !w || !h){
+      setTimeout(() => requestAnimationFrame(draw), 250);
+      return;
+    }
     if(document.body.classList.contains('no-motion')){
       ctx.clearRect(0,0,w,h);
       requestAnimationFrame(draw);
@@ -211,7 +230,7 @@ function initAmbientCanvas(id, opts){
     }
     t++;
     ctx.clearRect(0,0,w,h);
-    const [rR,rG,rB] = accentRGB();
+    const [rR,rG,rB] = accentCache.get();
     const rows = opts.rows || 4;
     const baseAmp = opts.amp || 0.04;
     const baseFreq = opts.freq || 0.0035;
