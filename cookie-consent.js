@@ -2,7 +2,7 @@
   'use strict';
 
   var STORAGE_KEY = 'convolving_cookie_consent';
-  var GA_ID = 'G-KXNVJ3D6MT';
+  var GA_ID = 'G-256KPBPDQ1';
 
   function loadGA4() {
     if (window.__ga4Loaded) return;
