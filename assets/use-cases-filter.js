@@ -52,7 +52,7 @@
     });
     if (summary) {
       summary.textContent = visible === cards.length
-        ? `Showing all ${cards.length} use cases.`
+        ? `Showing a select ${cards.length} use cases.`
         : `Showing ${visible} of ${cards.length} use cases.`;
     }
     if (clearBtn) {

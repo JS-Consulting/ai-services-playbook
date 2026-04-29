@@ -171,7 +171,7 @@ initWaves('hero-waves');
 // Logo rail (duplicated for seamless loop)
 (() => {
   const railItems = [
-    'Swiss International Air Lines','LHG','PwC','IMA USA','Family Offices – Zurich','McKinsey alumni','Benelux PE funds','Claude Enterprise'
+    'Swiss International Air Lines','LHG','PwC','IMA USA','Zurich Family Offices','McKinsey alumni','Benelux PE funds','Claude Enterprise'
   ];
   const railTrack = document.getElementById('railTrack');
   if (!railTrack) return;
@@ -240,7 +240,10 @@ initAmbientCanvas('ctaCanvas', { rows: 5 });
   const rail = document.querySelector('.journey-rail');
   if (!rail || !jprog) return;
 
-  const setProgress = (p) => { jprog.style.transform = 'scaleX(' + p + ')'; };
+  const mq = window.matchMedia('(max-width: 820px)');
+  const setProgress = (p) => {
+    jprog.style.transform = (mq.matches ? 'scaleY(' : 'scaleX(') + p + ')';
+  };
 
   // Cache layout once via ResizeObserver (which fires after layout, no synchronous
   // recalc). The scroll handler then never touches getBoundingClientRect, so it
