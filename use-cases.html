@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Use Cases – Convolving</title>
+<meta name="description" content="A filterable catalogue of AI use cases by industry, function, and role. Workflows we have seen redesigned, with the data, risk, and delivery shape that goes into each.">
+  <meta property="og:title" content="Use Cases – Convolving">
+  <meta property="og:description" content="A filterable catalogue of AI use cases by industry, function, and role. Workflows we have seen redesigned, with the data, risk, and delivery shape that goes into each.">
+  <meta property="og:url" content="https://convolving.com/use-cases">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Convolving">
+  <meta property="og:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Convolving – Use Cases">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Use Cases – Convolving">
+  <meta name="twitter:description" content="A filterable catalogue of AI use cases by industry, function, and role.">
+  <meta name="twitter:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://convolving.com/use-cases#webpage",
+        "url": "https://convolving.com/use-cases",
+        "name": "Use Cases – Convolving",
+        "description": "A filterable catalogue of AI use cases by industry, function, and role.",
+        "isPartOf": { "@id": "https://convolving.com/#website" },
+        "publisher": { "@id": "https://convolving.com/#organization" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://convolving.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Use Cases", "item": "https://convolving.com/use-cases" }
+        ]
+      }
+    ]
+  }
+  </script>
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style data-critical>@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url('/assets/fonts/dmsans.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Fraunces';font-style:normal;font-weight:300 700;font-display:swap;src:url('/assets/fonts/fraunces.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Fraunces';font-style:italic;font-weight:300 700;font-display:swap;src:url('/assets/fonts/fraunces-italic.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/jetbrains-mono.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--bg:#0b0c11;--surface:#171a26;--line:rgba(255,255,255,.07);--fg:#eef0f4;--fg-2:rgba(238,240,244,.66);--fg-3:rgba(238,240,244,.42);--accent:#6aa6ff;--accent-2:#a8c7ff;--accent-warm:#f2c58a;--f-serif:'Fraunces',Georgia,serif;--f-sans:'DM Sans',-apple-system,'Helvetica Neue',Arial,sans-serif;--container:1280px;--gutter:clamp(1.25rem,4vw,3rem);--radius-pill:100px;--ease:cubic-bezier(.2,.7,.2,1);--color-bg:#0d0e13;--color-text:#eef0f4;--color-text-secondary:rgba(238,240,244,.58);--color-accent:#3b82f6;--color-accent-light:#93c5fd;--color-btn-bg:#eef0f4;--color-btn-text:#0d0e13;--font-heading:var(--f-serif);--font-body:var(--f-sans)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--f-sans);font-size:16px;line-height:1.6;color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}img{max-width:100%;display:block;height:auto}h1,h2,h3,h4{font-family:var(--f-serif);font-weight:300;letter-spacing:-.035em;line-height:1.02;color:var(--fg)}h1{font-size:clamp(3rem,7.4vw,6.75rem);letter-spacing:-.045em;text-wrap:balance}.container{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}.header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%);background:rgba(11,12,17,.72);border-bottom:1px solid var(--line)}.header-inner{max-width:1440px;margin:0 auto;padding:.9rem var(--gutter);display:flex;align-items:center;gap:2rem}.header-logo img{display:block}.nav{display:flex;gap:.25rem;align-items:center;margin-left:auto}.nav a{font-size:.875rem;font-weight:450;color:var(--fg-2);padding:.55rem .9rem;border-radius:999px}.nav-cta .btn{background:var(--fg);color:#0b0c11;border-radius:999px;padding:.5rem 1.1rem;display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:500}.nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:.5rem;margin-left:auto}.nav-toggle span{width:22px;height:1.5px;background:var(--fg);display:block}@media(max-width:820px){.nav{display:none}.nav-toggle{display:flex}}.btn{display:inline-flex;align-items:center;gap:.7rem;padding:.75rem 1rem .75rem 1.35rem;border-radius:999px;font-family:var(--f-sans);font-size:.9rem;font-weight:500;background:var(--fg);color:#0b0c11}.idx-hero{min-height:80vh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 0 4rem;position:relative;overflow:hidden;background:#0d0e13;isolation:isolate}.idx-hero-waves{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.idx-hero .idx-hero-container{max-width:1200px;margin:0 auto;padding:0 var(--gutter);position:relative;z-index:1;width:100%}.idx-hero-content{max-width:1000px;position:relative;z-index:1}.idx-hero-eyebrow{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#93c5fd;margin:0 0 1.75rem;line-height:1}.idx-hero h1{margin:0 0 2rem;font-family:var(--f-serif);font-size:clamp(2.75rem,6.5vw,5.25rem);letter-spacing:-.05em;line-height:1;font-weight:400;color:#eef0f4}.idx-hero .idx-hero-btn{display:inline-flex;align-items:center;gap:.625rem;padding:.75rem 1rem .75rem 1.5rem;border-radius:100px;background:#eef0f4;color:#0d0e13;font-family:var(--f-sans);font-size:.875rem;font-weight:500;text-decoration:none}.serif-italic{font-family:var(--f-serif);font-style:italic;font-weight:300}.reveal{opacity:0;transform:translateY(15px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.reveal.show,.reveal.visible{opacity:1;transform:none}@media(max-width:820px){.idx-hero{min-height:0;padding:8rem 0 3rem;justify-content:flex-start}.idx-hero h1{font-size:clamp(2.25rem,9vw,3.25rem);margin-bottom:1.5rem}.idx-hero-eyebrow{margin-bottom:1rem}}
+.uc-filters{display:flex;flex-direction:column;gap:1.25rem;margin:2rem 0 2.5rem}
+.uc-filter-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem}
+.uc-filter-label{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);min-width:6.5rem}
+.uc-pill{display:inline-flex;align-items:center;padding:.45rem .85rem;border-radius:999px;font-size:.8rem;color:var(--fg-2);background:rgba(255,255,255,.04);border:1px solid var(--line);cursor:pointer;font-family:var(--f-sans);transition:background .2s,color .2s,border-color .2s}
+.uc-pill:hover{color:var(--fg);border-color:rgba(255,255,255,.18)}
+.uc-pill.active{background:var(--fg);color:#0b0c11;border-color:var(--fg)}
+.uc-summary{font-size:.85rem;color:var(--fg-2);margin-bottom:1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.uc-clear{font-size:.8rem;color:var(--fg-2);text-decoration:underline;cursor:pointer;background:none;border:none;padding:0;font-family:var(--f-sans)}
+.uc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.uc-card{display:flex;flex-direction:column;gap:.75rem;padding:1.5rem;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);transition:background .2s,border-color .2s,transform .2s}
+.uc-card:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);transform:translateY(-2px)}
+.uc-card h3{font-size:1.25rem;line-height:1.15;color:var(--fg);font-family:var(--f-serif);font-weight:300}
+.uc-card p{font-size:.9rem;color:var(--fg-2);line-height:1.5}
+.uc-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto}
+.uc-tag{font-size:.7rem;font-weight:500;letter-spacing:.04em;color:var(--fg-3);padding:.25rem .55rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.uc-tag.industry{color:var(--accent-2)}
+</style>
+  <link rel="preload" href="/assets/site.css?v=20260429" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/site.css?v=20260429"></noscript>
+</head>
+<body data-accent="blue">
+
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="header-logo" aria-label="Convolving home">
+      <img src="/assets/convolving-logo-white.svg" alt="Convolving" width="198" height="28">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="/ai-transformation">AI Transformation</a>
+      <a href="/ai-engineering">AI Engineering</a>
+      <a href="/who-we-are">Who We Are</a>
+      <a href="/use-cases" class="active">Use Cases</a>
+      <span class="nav-cta">
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a Coffee
+          <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </span>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="idx-hero">
+  <canvas class="idx-hero-waves"></canvas>
+  <div class="idx-hero-container">
+    <div class="idx-hero-content">
+      <p class="idx-hero-eyebrow">Use Cases &middot; Filter by industry, function, role</p>
+      <h1>Workflows we have seen redesigned.</h1>
+      <a href="mailto:team@convolving.com" class="idx-hero-btn">
+        Book a Coffee
+        <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+<script src="/assets/index-hero-waves.js"></script>
+
+<section class="section">
+  <div class="container">
+    <div class="eyebrow reveal">Catalogue</div>
+    <p class="lede reveal" style="margin-top:1.5rem;max-width:780px">
+      Each card describes a workflow we have seen redesigned, with the data, risk, and delivery shape behind it. Outcomes are illustrative until backed by client-permissioned data – we do not fabricate metrics.
+    </p>
+
+    <div class="uc-filters reveal" role="region" aria-label="Filter use cases">
+      <div class="uc-filter-row" data-filter-group="industry">
+        <span class="uc-filter-label">Industry</span>
+        <button type="button" class="uc-pill" data-value="financial-services">Financial Services</button>
+        <button type="button" class="uc-pill" data-value="retail">Retail</button>
+        <button type="button" class="uc-pill" data-value="industrial-products">Industrial Products</button>
+        <button type="button" class="uc-pill" data-value="healthcare">Healthcare</button>
+        <button type="button" class="uc-pill" data-value="legal">Legal</button>
+      </div>
+      <div class="uc-filter-row" data-filter-group="function">
+        <span class="uc-filter-label">Function</span>
+        <button type="button" class="uc-pill" data-value="operations">Operations</button>
+        <button type="button" class="uc-pill" data-value="strategy">Strategy</button>
+        <button type="button" class="uc-pill" data-value="risk-and-compliance">Risk &amp; Compliance</button>
+        <button type="button" class="uc-pill" data-value="sales-and-marketing">Sales &amp; Marketing</button>
+        <button type="button" class="uc-pill" data-value="engineering">Engineering</button>
+        <button type="button" class="uc-pill" data-value="legal">Legal</button>
+      </div>
+      <div class="uc-filter-row" data-filter-group="role">
+        <span class="uc-filter-label">Role</span>
+        <button type="button" class="uc-pill" data-value="executive">Executive</button>
+        <button type="button" class="uc-pill" data-value="manager">Manager</button>
+        <button type="button" class="uc-pill" data-value="individual-contributor">Individual contributor</button>
+      </div>
+    </div>
+
+    <div class="uc-summary">
+      <span id="useCasesSummary">Showing all 15 use cases.</span>
+      <button type="button" id="useCasesClear" class="uc-clear" style="display:none">Clear filters</button>
+    </div>
+
+    <div class="uc-grid">
+      <a class="uc-card" href="/use-cases/ic-briefing-redesign" data-usecase data-industry="financial-services" data-function="strategy operations" data-role="executive">
+        <h3>IC briefing redesign.</h3>
+        <p>Senior partners read 30+ memos a week. The redesigned workflow surfaces the right three first, with structured comparables and a confidence-graded recommendation.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Financial Services</span><span class="uc-tag">Strategy</span><span class="uc-tag">Executive</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/diligence-research-pack" data-usecase data-industry="financial-services" data-function="strategy operations" data-role="manager">
+        <h3>Diligence research pack.</h3>
+        <p>Initial research, document synthesis, and red-flag flagging on a new opportunity. The week-one work compressed into a day.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Financial Services</span><span class="uc-tag">Operations</span><span class="uc-tag">Manager</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/portfolio-monitoring-loop" data-usecase data-industry="financial-services" data-function="operations risk-and-compliance" data-role="manager">
+        <h3>Portfolio monitoring loop.</h3>
+        <p>Continuous data ingestion across portfolio companies, with model-routed analysis and exception alerting. The quarterly review becomes the daily check-in.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Financial Services</span><span class="uc-tag">Risk &amp; Compliance</span><span class="uc-tag">Manager</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/merchandising-decision-loop" data-usecase data-industry="retail" data-function="operations sales-and-marketing" data-role="manager">
+        <h3>Merchandising decision loop.</h3>
+        <p>Buyer-side AI that pulls sell-through, returns, and external signals into a daily assortment recommendation, with the buyer staying in the loop on every commit.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Retail</span><span class="uc-tag">Sales &amp; Marketing</span><span class="uc-tag">Manager</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/customer-service-knowledge-base" data-usecase data-industry="retail" data-function="operations" data-role="individual-contributor">
+        <h3>Customer service knowledge base.</h3>
+        <p>Frontline agents ask one interface and get the right answer from the right policy, with citations. Resolution time falls; consistency rises.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Retail</span><span class="uc-tag">Operations</span><span class="uc-tag">Individual contributor</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/demand-planning-copilot" data-usecase data-industry="retail" data-function="operations strategy" data-role="manager">
+        <h3>Demand planning copilot.</h3>
+        <p>Forecasting agent that reconciles signals across channels, surfaces anomalies, and drafts a buyer-ready plan against the constraints the planner already cares about.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Retail</span><span class="uc-tag">Strategy</span><span class="uc-tag">Manager</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/field-service-knowledge-base" data-usecase data-industry="industrial-products" data-function="operations" data-role="individual-contributor">
+        <h3>Field service knowledge base.</h3>
+        <p>On-prem retrieval across decades of service manuals, engineering specs, and tribal knowledge. Field engineers ask in natural language and get cited answers.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Industrial Products</span><span class="uc-tag">Operations</span><span class="uc-tag">Individual contributor</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/supplier-rfp-redesign" data-usecase data-industry="industrial-products" data-function="operations" data-role="manager">
+        <h3>Supplier RFP redesign.</h3>
+        <p>Specification capture, vendor outreach, and response evaluation in a fraction of the cycle time. Fewer rounds, better-matched suppliers.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Industrial Products</span><span class="uc-tag">Operations</span><span class="uc-tag">Manager</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/engineering-spec-search" data-usecase data-industry="industrial-products" data-function="engineering operations" data-role="individual-contributor">
+        <h3>Engineering spec search.</h3>
+        <p>Semantic search across the engineering corpus with privilege-aware access controls. Engineers find the right precedent in minutes, not days.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Industrial Products</span><span class="uc-tag">Engineering</span><span class="uc-tag">Individual contributor</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/clinical-documentation-redesign" data-usecase data-industry="healthcare" data-function="operations" data-role="individual-contributor">
+        <h3>Clinical documentation redesign.</h3>
+        <p>Two hours a day per clinician on documentation. The redesigned workflow produces structured notes from the actual clinical encounter, with the clinician reviewing rather than typing.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Healthcare</span><span class="uc-tag">Operations</span><span class="uc-tag">Individual contributor</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/prior-auth-workflow" data-usecase data-industry="healthcare" data-function="operations risk-and-compliance" data-role="manager">
+        <h3>Prior authorisation workflow.</h3>
+        <p>The administrative tax that consumes clinical capacity. Redesigned end to end, with audit-grade trails and a measurable approval-rate baseline.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Healthcare</span><span class="uc-tag">Risk &amp; Compliance</span><span class="uc-tag">Manager</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/patient-intake-triage" data-usecase data-industry="healthcare" data-function="operations" data-role="individual-contributor">
+        <h3>Patient intake triage.</h3>
+        <p>Intake forms become a structured conversation, with the triage logic captured as policy and reviewable by clinicians.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Healthcare</span><span class="uc-tag">Operations</span><span class="uc-tag">Individual contributor</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/contract-review-loop" data-usecase data-industry="legal" data-function="operations legal" data-role="individual-contributor">
+        <h3>Contract review loop.</h3>
+        <p>First-pass review and clause comparison against the firm's clause library. Privilege-aware data handling. The associate reviews; the AI does not decide.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Legal</span><span class="uc-tag">Legal</span><span class="uc-tag">Individual contributor</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/discovery-redesign" data-usecase data-industry="legal" data-function="operations" data-role="manager">
+        <h3>Discovery redesign.</h3>
+        <p>Document review on a redesigned workflow, with reviewer attention focused on the documents the model is least confident about.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Legal</span><span class="uc-tag">Operations</span><span class="uc-tag">Manager</span></div>
+      </a>
+      <a class="uc-card" href="/use-cases/matter-intake-triage" data-usecase data-industry="legal" data-function="operations" data-role="manager">
+        <h3>Matter intake triage.</h3>
+        <p>Intake form, conflict checks, and routing logic in one workflow. Privilege-aware throughout.</p>
+        <div class="uc-tags"><span class="uc-tag industry">Legal</span><span class="uc-tag">Operations</span><span class="uc-tag">Manager</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Recognise a workflow?</h2>
+    <p>Book a coffee. Thirty minutes on your version of one of these and where the leverage is. No pitch, no pressure.</p>
+    <div class="cta-actions">
+      <a href="mailto:team@convolving.com" class="btn">
+        Book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="/ai-transformation" class="btn btn-ghost">
+        See AI Transformation
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-list">
+          <li><a href="/ai-transformation">AI Transformation →</a></li>
+          <li><a href="/ai-engineering">AI Engineering →</a></li>
+          <li><a href="/use-cases">Use Cases →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="/who-we-are">Who We Are</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/srj523/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/cookie-consent.js" defer></script>
+<script src="/assets/subpage.js?v=20260429"></script>
+<script src="/assets/use-cases-filter.js?v=20260429" defer></script>
+</body>
+</html>

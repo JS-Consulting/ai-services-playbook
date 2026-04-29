@@ -8,5 +8,15 @@
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/strategy", "destination": "/ai-transformation", "permanent": true },
+    { "source": "/infrastructure", "destination": "/ai-transformation/workflow-redesign", "permanent": true },
+    { "source": "/partnerships", "destination": "/ai-engineering", "permanent": true },
+    { "source": "/insights", "destination": "/use-cases", "permanent": true },
+    { "source": "/insights/:slug*", "destination": "/use-cases", "permanent": true },
+    { "source": "/state-of-the-union", "destination": "/use-cases/ic-briefing-redesign", "permanent": true },
+    { "source": "/state-of-the-union/:slug*", "destination": "/use-cases/ic-briefing-redesign", "permanent": true },
+    { "source": "/team", "destination": "/who-we-are", "permanent": true }
   ]
 }

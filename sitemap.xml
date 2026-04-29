@@ -6,78 +6,143 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://convolving.com/strategy</loc>
+    <loc>https://convolving.com/ai-transformation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-transformation/use-case-lab</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-transformation/workflow-redesign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-transformation/upskilling</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-transformation/ai-tooling</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-engineering</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-engineering/application-development</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-engineering/agentic-solutions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-engineering/model-fine-tuning</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-engineering/data-engineering</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/ai-engineering/code-migration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/who-we-are</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://convolving.com/infrastructure</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://convolving.com/partnerships</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://convolving.com/team</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://convolving.com/insights</loc>
+    <loc>https://convolving.com/use-cases</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/two-hour-ai-audit</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/ic-briefing-redesign</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/memo-that-almost-writes-itself</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/diligence-research-pack</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/three-adoption-metrics</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/portfolio-monitoring-loop</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/why-ai-workshops-leave-nothing</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/merchandising-decision-loop</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/first-ai-workflow</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/customer-service-knowledge-base</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/ic-briefing-problem</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/demand-planning-copilot</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/mcp-explained-for-deal-teams</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/field-service-knowledge-base</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/prompts-are-policy</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/supplier-rfp-redesign</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/knowledge-base-one-year-in</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/engineering-spec-search</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convolving.com/insights/identifying-practical-ai-usecases</loc>
-    <changefreq>yearly</changefreq>
+    <loc>https://convolving.com/use-cases/clinical-documentation-redesign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/prior-auth-workflow</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/patient-intake-triage</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/contract-review-loop</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/discovery-redesign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/matter-intake-triage</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
