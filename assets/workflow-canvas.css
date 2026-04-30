@@ -582,9 +582,9 @@
 .wf:-webkit-full-screen {
   border-radius: 0;
   border: 0;
-  background:
-    radial-gradient(circle at 1px 1px, rgba(255,255,255,.07) 1px, transparent 0) 0 0 / 22px 22px,
-    var(--bg);
+  background-color: #1a1d2a;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.10) 1px, transparent 0);
+  background-size: 22px 22px;
   display: flex;
   align-items: center;
   justify-content: center;
