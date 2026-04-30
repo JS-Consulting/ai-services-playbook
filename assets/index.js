@@ -65,10 +65,16 @@ function initWaves(canvasId) {
   let mouse = { x: 0.5, y: 0.5, active: false };
   let sm = { x: 0.5, y: 0.5 };
 
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const ro = new ResizeObserver(entries => {
     const { width, height } = entries[0].contentRect;
-    w = canvas.width = width;
-    h = canvas.height = height;
+    w = width;
+    h = height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   });
   ro.observe(parent);
 
