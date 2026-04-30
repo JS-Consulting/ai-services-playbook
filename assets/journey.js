@@ -4,12 +4,29 @@
 (function () {
   const rail = document.querySelector('.journey-rail');
   if (!rail) return;
+  const track = rail.querySelector('.journey-progress');
   const prog = rail.querySelector('.journey-progress i');
   const steps = rail.querySelectorAll('.jstep');
   if (!steps.length) return;
 
   const mq = window.matchMedia('(max-width: 820px)');
   const verticalAlways = rail.dataset.orientation === 'vertical';
+
+  // In vertical mode, clamp the track so it spans first-marker-center to last-marker-center.
+  function clampTrackToMarkers() {
+    if (!verticalAlways || !track) return;
+    const firstMarker = steps[0].querySelector('.jstep-marker');
+    const lastMarker = steps[steps.length - 1].querySelector('.jstep-marker');
+    if (!firstMarker || !lastMarker) return;
+    const railRect = rail.getBoundingClientRect();
+    const firstRect = firstMarker.getBoundingClientRect();
+    const lastRect = lastMarker.getBoundingClientRect();
+    const topPx = (firstRect.top + firstRect.height / 2) - railRect.top;
+    const bottomPx = railRect.bottom - (lastRect.top + lastRect.height / 2);
+    track.style.top = topPx + 'px';
+    track.style.bottom = bottomPx + 'px';
+    track.style.height = 'auto';
+  }
   function setProgress(pct) {
     if (!prog) return;
     if (verticalAlways || mq.matches) {
@@ -33,9 +50,14 @@
   }
 
   window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  if (mq.addEventListener) mq.addEventListener('change', update);
+  window.addEventListener('resize', () => { clampTrackToMarkers(); update(); });
+  if (mq.addEventListener) mq.addEventListener('change', () => { clampTrackToMarkers(); update(); });
+  clampTrackToMarkers();
   update();
+  // Re-clamp after fonts load (line metrics shift once Fraunces resolves).
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => { clampTrackToMarkers(); update(); });
+  }
 
   steps.forEach((s, i) => {
     s.addEventListener('mouseenter', () => {
