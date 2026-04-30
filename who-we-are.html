@@ -187,6 +187,58 @@
   </div>
 </section>
 
+<style>
+.why-us .why-row{display:grid;grid-template-columns:80px 1fr;column-gap:clamp(1.5rem,4vw,3rem);row-gap:.75rem;align-items:start;padding:2.25rem 0;border-top:1px solid var(--line)}
+.why-us .why-row:last-of-type{border-bottom:1px solid var(--line)}
+.why-us .why-label{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);padding-top:.4rem}
+.why-us .why-marks{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem 2.4rem;min-height:34px}
+.why-us .wm{font-family:var(--f-sans);font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--fg-3);white-space:nowrap}
+.why-us .why-marks-us img{height:24px;width:auto;display:block}
+.why-us .why-claim{grid-column:2;font-family:var(--f-serif);font-weight:300;font-size:clamp(1.05rem,1.4vw,1.25rem);line-height:1.45;color:var(--fg-2);max-width:62ch;margin-top:.25rem}
+.why-us .why-claim-us{color:var(--fg)}
+.why-us .why-claim-us strong{font-weight:500;color:var(--fg);font-style:italic;font-family:var(--f-serif)}
+@media(max-width:640px){
+  .why-us .why-row{grid-template-columns:1fr;row-gap:.9rem;padding:1.75rem 0}
+  .why-us .why-claim{grid-column:1}
+  .why-us .why-marks{gap:1rem 1.6rem}
+}
+</style>
+
+<section class="section why-us" id="why-us">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-head-left">
+        <span class="eyebrow"><span class="eyebrow-num">03</span>Why us</span>
+        <h2>The commercial model is the message.</h2>
+      </div>
+      <div class="section-head-right">
+        <p>Legacy consulting bills by the hour. The longer the engagement, the better the margin. We bill one flat fee per sprint, and the work closes when the artifact ships.</p>
+      </div>
+    </div>
+
+    <div class="why-row reveal">
+      <div class="why-label">Them</div>
+      <div class="why-marks why-marks-others">
+        <span class="wm">McKinsey &amp; Company</span>
+        <span class="wm">BCG</span>
+        <span class="wm">Deloitte</span>
+        <span class="wm">PwC</span>
+        <span class="wm">KPMG</span>
+        <span class="wm">Tenex.co</span>
+      </div>
+      <p class="why-claim">Day rates. Time and materials. Multi-year retainers. Junior teams billed at partner-adjacent rates. The economics reward duration, not delivery.</p>
+    </div>
+
+    <div class="why-row reveal d1">
+      <div class="why-label">Us</div>
+      <div class="why-marks why-marks-us">
+        <img src="/assets/convolving-logo-white.svg" alt="Convolving" height="24">
+      </div>
+      <p class="why-claim why-claim-us"><strong>One flat fee per sprint.</strong> Development, training, and reporting included. No change orders, no team expansions, no retainer creep. When the artifact is shipped, the engagement is closed.</p>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <div class="section-head-inline reveal">
@@ -273,6 +325,6 @@
 </footer>
 
 <script src="/cookie-consent.js" defer></script>
-<script src="/assets/subpage.js?v=20260430a"></script>
+<script src="/assets/subpage.js?v=20260430b"></script>
 </body>
 </html>
