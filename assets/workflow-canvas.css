@@ -66,25 +66,40 @@
   z-index: 1;
   flex: 0 0 auto;
   width: 200px;
-  background: #232639;
-  border: 1px solid rgba(255,255,255,.10);
+  background: #0f1119;
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 14px;
   padding: 1rem 1.05rem;
   cursor: pointer;
-  transition: transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+  transition: transform .25s var(--ease), border-color .25s var(--ease);
   font-family: var(--f-sans);
   text-align: left;
   color: inherit;
   display: flex;
   flex-direction: column;
   gap: .65rem;
+  overflow: hidden;
 }
 
-.wf-node:hover {
-  border-color: rgba(255,255,255,.22);
-  transform: translateY(-2px);
-  background: rgba(28,32,46,.95);
+.wf-node::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(106,166,255,.18), transparent 55%);
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+  pointer-events: none;
+  z-index: 0;
 }
+
+.wf-node > * { position: relative; z-index: 1 }
+
+.wf-node:hover {
+  border-color: rgba(106,166,255,.32);
+  transform: translateY(-2px);
+}
+
+.wf-node:hover::before { opacity: 1 }
 
 .wf-node.is-active {
   border-color: var(--accent);

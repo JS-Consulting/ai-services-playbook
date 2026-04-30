@@ -197,6 +197,14 @@
       ${buildDetail()}
     `;
 
+    canvas.querySelectorAll('.wf-node').forEach(node => {
+      node.addEventListener('mousemove', e => {
+        const r = node.getBoundingClientRect();
+        node.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
+        node.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      });
+    });
+
     canvas.addEventListener('click', e => {
       const node = e.target.closest('.wf-node');
       if (node) {
