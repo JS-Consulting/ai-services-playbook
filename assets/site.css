@@ -88,7 +88,7 @@
 .reasons-head{padding:0 0 1.25rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
 .reasons-counter{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;color:var(--fg-3);font-variant-numeric:tabular-nums}
 .reasons-stage{position:relative;min-height:340px}
-.reason-slide{position:absolute;inset:0;padding:1.75rem 0 1.5rem;opacity:0;transform:translateY(8px);transition:opacity .35s var(--ease),transform .35s var(--ease);pointer-events:none}
+.reason-slide{position:absolute;inset:0;padding:0 0 1.5rem;opacity:0;transform:translateY(8px);transition:opacity .35s var(--ease),transform .35s var(--ease);pointer-events:none}
 .reason-slide.active{opacity:1;transform:none;pointer-events:auto}
 .reason-tag{display:inline-block;font-family:var(--f-mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
 .reason-slide p{font-family:var(--f-serif);font-weight:300;font-size:clamp(1.4rem,2.3vw,2rem);line-height:1.25;letter-spacing:-.018em;color:var(--fg);margin:0;text-wrap:balance;quotes:"\201C" "\201D" "\2018" "\2019"}
