@@ -63,6 +63,7 @@
 .uc-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto}
 .uc-tag{font-size:.7rem;font-weight:500;letter-spacing:.04em;color:var(--fg-3);padding:.25rem .55rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
 .uc-tag.industry{color:var(--accent-2)}
+.uc-tag.process{color:var(--accent-warm)}
 </style>
   <link rel="preload" href="/assets/site.css?v=20260430h" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/assets/site.css?v=20260430h"></noscript>
@@ -130,6 +131,7 @@
         <button type="button" class="uc-pill" data-value="sales-and-marketing">Sales &amp; Marketing</button>
         <button type="button" class="uc-pill" data-value="engineering">Engineering</button>
         <button type="button" class="uc-pill" data-value="legal">Legal</button>
+        <button type="button" class="uc-pill" data-value="finance">Finance</button>
       </div>
       <div class="uc-filter-row" data-filter-group="role">
         <span class="uc-filter-label">Role</span>
@@ -140,11 +142,16 @@
     </div>
 
     <div class="uc-summary">
-      <span id="useCasesSummary">Showing a select 15 use cases.</span>
+      <span id="useCasesSummary">Showing a select 16 use cases.</span>
       <button type="button" id="useCasesClear" class="uc-clear" style="display:none">Clear filters</button>
     </div>
 
     <div class="uc-grid">
+      <a class="uc-card" href="/use-cases/fpa-variance-pack" data-usecase data-process="monthly-close" data-function="finance" data-role="manager">
+        <h3>Monthly variance pack.</h3>
+        <p>FP&amp;A's five-day rush from close to board-ready, compressed into one. The analyst spends the freed time interrogating numbers rather than producing them.</p>
+        <div class="uc-tags"><span class="uc-tag process">Monthly close</span><span class="uc-tag">Finance</span><span class="uc-tag">Manager</span></div>
+      </a>
       <a class="uc-card" href="/use-cases/ic-briefing-redesign" data-usecase data-industry="financial-services" data-function="strategy operations" data-role="executive">
         <h3>IC briefing redesign.</h3>
         <p>Senior partners read 30+ memos a week. The redesigned workflow surfaces the right three first, with structured comparables and a confidence-graded recommendation.</p>
@@ -284,7 +291,7 @@
 </footer>
 
 <script src="/cookie-consent.js" defer></script>
-<script src="/assets/subpage.js?v=20260430a"></script>
+<script src="/assets/subpage.js?v=20260430b"></script>
 <script src="/assets/use-cases-filter.js?v=20260429c" defer></script>
 </body>
 </html>

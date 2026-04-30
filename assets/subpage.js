@@ -1,8 +1,25 @@
 /* ═══════════════════════════════════════════
    Shared sub-page JS
    Full convolution hero (matches home) + ambient CTA
-   + reveal-on-scroll + hover glow
+   + reveal-on-scroll + hover glow + mobile nav toggle
    ═══════════════════════════════════════════ */
+
+// Mobile nav toggle (mirrors homepage behavior, applied globally to every sub-page)
+(() => {
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('nav');
+  if (!toggle || !nav) return;
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle.classList.remove('open');
+      nav.classList.remove('open');
+    });
+  });
+})();
 
 // Cached accent color (refreshed only when body's data-accent or class changes).
 // Reading getComputedStyle inside per-frame draw loops forces style recalc on every
