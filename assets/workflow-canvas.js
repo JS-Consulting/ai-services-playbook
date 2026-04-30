@@ -81,10 +81,12 @@
 
   const TYPE_LABEL = {
     manual: 'Manual',
-    auto: 'Automated',
-    human: 'Human',
+    'semi-auto': 'Semi-auto',
+    automated: 'Automated',
     ai: 'AI',
-    'ai-human': 'AI + Human',
+    auto: 'Automated',
+    'ai-human': 'Semi-auto',
+    human: 'Manual',
   };
 
   function icon(name) {
@@ -103,9 +105,9 @@
     const num = String(idx + 1).padStart(2, '0');
     return `
       <button class="wf-node" data-node-id="${node.id}" data-type="${node.type}" type="button">
+        <span class="wf-led" aria-label="${TYPE_LABEL[node.type] || node.type}" title="${TYPE_LABEL[node.type] || node.type}"></span>
         <span class="wf-node-head">
           <span class="wf-node-icon"><span class="wf-node-num">${num}</span></span>
-          <span class="wf-node-badge">${TYPE_LABEL[node.type] || node.type}</span>
         </span>
         <span class="wf-node-title">${node.label}</span>
         ${tiles ? `<span class="wf-node-tools">${tiles}${moreTile}</span>` : ''}
@@ -135,9 +137,10 @@
   function legend() {
     return `
       <div class="wf-legend" aria-hidden="true">
-        <span><i></i>Manual</span>
-        <span><i class="is-auto"></i>Automated</span>
-        <span><i class="is-ai-human"></i>AI</span>
+        <span><i data-led="manual"></i>Manual</span>
+        <span><i data-led="semi-auto"></i>Semi-auto</span>
+        <span><i data-led="automated"></i>Automated</span>
+        <span><i data-led="ai"></i>AI</span>
       </div>
     `;
   }

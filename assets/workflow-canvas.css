@@ -134,24 +134,40 @@
 }
 
 
-.wf-node-badge {
-  margin-left: auto;
-  font-size: .62rem;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--fg-3);
-  padding: .2rem .5rem;
-  border-radius: 999px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--line);
-  white-space: nowrap;
+.wf-led {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(238,240,244,.45);
+  box-shadow: 0 0 8px rgba(238,240,244,.18);
+  z-index: 2;
 }
 
-.wf-node[data-type="auto"] .wf-node-badge,
-.wf-node[data-type="ai"] .wf-node-badge { color: var(--accent-2); border-color: rgba(106,166,255,.28); background: rgba(106,166,255,.08) }
-.wf-node[data-type="ai-human"] .wf-node-badge { color: var(--accent-warm); border-color: rgba(242,197,138,.28); background: rgba(242,197,138,.08) }
-.wf-node[data-type="human"] .wf-node-badge { color: var(--accent-warm); border-color: rgba(242,197,138,.20); background: rgba(242,197,138,.06) }
+.wf-node[data-type="manual"] .wf-led,
+.wf-node[data-type="human"] .wf-led {
+  background: rgba(238,240,244,.45);
+  box-shadow: 0 0 8px rgba(238,240,244,.18);
+}
+
+.wf-node[data-type="semi-auto"] .wf-led,
+.wf-node[data-type="ai-human"] .wf-led {
+  background: #f2c58a;
+  box-shadow: 0 0 10px rgba(242,197,138,.55);
+}
+
+.wf-node[data-type="automated"] .wf-led,
+.wf-node[data-type="auto"] .wf-led {
+  background: #6cd99a;
+  box-shadow: 0 0 10px rgba(108,217,154,.55);
+}
+
+.wf-node[data-type="ai"] .wf-led {
+  background: #c4b5fd;
+  box-shadow: 0 0 10px rgba(196,181,253,.6);
+}
 
 .wf-node-title {
   font-family: var(--f-serif);
@@ -265,15 +281,17 @@
 }
 
 .wf-legend i {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: var(--fg-3);
+  background: rgba(238,240,244,.45);
+  box-shadow: 0 0 6px rgba(238,240,244,.2);
   display: inline-block;
 }
 
-.wf-legend i.is-auto { background: var(--accent-2) }
-.wf-legend i.is-ai-human { background: var(--accent-warm) }
+.wf-legend i[data-led="semi-auto"] { background: #f2c58a; box-shadow: 0 0 6px rgba(242,197,138,.55) }
+.wf-legend i[data-led="automated"] { background: #6cd99a; box-shadow: 0 0 6px rgba(108,217,154,.55) }
+.wf-legend i[data-led="ai"] { background: #c4b5fd; box-shadow: 0 0 6px rgba(196,181,253,.6) }
 
 /* Detail panel */
 .wf-detail {
