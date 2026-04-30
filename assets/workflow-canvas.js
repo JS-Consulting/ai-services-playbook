@@ -185,8 +185,8 @@
     canvas._wfData = data;
 
     const graphHTML = `
-      <svg class="wf-edges" preserveAspectRatio="none"></svg>
       <div class="wf-graph">
+        <svg class="wf-edges" preserveAspectRatio="none"></svg>
         ${data.nodes.map((n, i) => buildNode(n, i)).join('')}
       </div>
     `;
