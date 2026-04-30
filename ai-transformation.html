@@ -83,6 +83,11 @@
       .journey-rail--vertical .jstep{padding-left:2.75rem}
       .journey-rail--vertical .journey-progress{left:11px}
     }
+    .section-head--stacked{display:block;margin-bottom:4rem}
+    .section-head--stacked .eyebrow{display:inline-flex;margin-bottom:1.5rem}
+    .section-head--stacked h2{max-width:880px;margin-top:0;margin-bottom:1.5rem}
+    .section-head--stacked p{max-width:720px;font-size:1.05rem;color:var(--fg-2)}
+    @media (max-width:640px){.head-break{display:none}}
     .deliverables-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
     .deliverable{position:relative;padding:1.85rem 1.65rem;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .3s var(--ease),transform .3s var(--ease),background .3s var(--ease)}
     .deliverable::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(106,166,255,.10),transparent 55%);opacity:0;transition:opacity .3s var(--ease)}
@@ -173,14 +178,10 @@
 
 <section class="section" id="what-we-do">
   <div class="container-wide">
-    <div class="section-head reveal">
-      <div class="section-head-left">
-        <span class="eyebrow"><span class="eyebrow-num">02</span>How we help</span>
-        <h2>A turnkey partner to ensure your team is AI native.</h2>
-      </div>
-      <div class="section-head-right">
-        <p>Eight steps from coffee to capability, then the loop repeats. From sprint two onward, upskilling runs in parallel with the next workflow's discovery and redesign.</p>
-      </div>
+    <div class="section-head section-head--stacked reveal">
+      <span class="eyebrow"><span class="eyebrow-num">02</span>How we help</span>
+      <h2>A turnkey partner to ensure<br class="head-break">your team is AI native.</h2>
+      <p>Eight steps from coffee to capability, then the loop repeats. From sprint two onward, upskilling runs in parallel with the next workflow's discovery and redesign.</p>
     </div>
 
     <div class="journey-rail journey-rail--vertical" data-orientation="vertical">
@@ -254,14 +255,10 @@
 
 <section class="section section-alt" id="what-you-receive">
   <div class="container-wide">
-    <div class="section-head reveal">
-      <div class="section-head-left">
-        <span class="eyebrow"><span class="eyebrow-num">03</span>What you receive</span>
-        <h2>Six deliverables the team keeps and runs.</h2>
-      </div>
-      <div class="section-head-right">
-        <p>Each is handed to the team and continues to compound the work long after we leave.</p>
-      </div>
+    <div class="section-head section-head--stacked reveal">
+      <span class="eyebrow"><span class="eyebrow-num">03</span>What you receive</span>
+      <h2>Six deliverables<br class="head-break">the team keeps and runs.</h2>
+      <p>Each is handed to the team and continues to compound the work long after we leave.</p>
     </div>
 
     <div class="deliverables-grid">
