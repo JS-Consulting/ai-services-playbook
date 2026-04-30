@@ -219,6 +219,8 @@ function initAmbientCanvas(id, opts){
   let w, h, t = 0;
 
   function resize(){
+    canvas.style.width = '';
+    canvas.style.height = '';
     const r = canvas.getBoundingClientRect();
     if(!r.width) return;
     w = canvas.width = r.width * dpr;
@@ -227,10 +229,11 @@ function initAmbientCanvas(id, opts){
     canvas.style.height = r.height + 'px';
   }
   if(window.ResizeObserver){
-    new ResizeObserver(resize).observe(canvas);
+    new ResizeObserver(resize).observe(canvas.parentElement || canvas);
   } else {
     window.addEventListener('resize', resize);
   }
+  window.addEventListener('load', resize);
   resize();
 
   const isVisible = visibility(canvas);
