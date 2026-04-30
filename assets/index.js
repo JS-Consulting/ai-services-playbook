@@ -186,6 +186,19 @@ initWaves('hero-waves');
     .join('');
 })();
 
+// Integrations marquee ("Experience building with") — duplicate tile set for seamless loop
+(() => {
+  const track = document.getElementById('integrationsTrack');
+  if (!track) return;
+  const total = 26;
+  const tiles = [];
+  for (let i = 1; i <= total; i++) {
+    tiles.push(`<span class="integrations-tile"><img src="assets/integrations/integration_${i}.svg" alt="" loading="lazy"></span>`);
+  }
+  // Duplicate the set so the CSS keyframe (translateX -50%) yields a seamless loop.
+  track.innerHTML = tiles.join('') + tiles.join('');
+})();
+
 // Ambient canvas for journey + CTA
 function initAmbientCanvas(id, opts = {}) {
   const canvas = document.getElementById(id);
@@ -291,6 +304,33 @@ initAmbientCanvas('ctaCanvas', { rows: 5 });
       setProgress((i + 1) / jsteps.length);
     });
   });
+})();
+
+// Reasons (about-section quote) carousel
+(() => {
+  const slides = document.querySelectorAll('.reason-slide');
+  const dots = document.querySelectorAll('.reason-dot');
+  const counter = document.getElementById('reasonsIndex');
+  const prev = document.getElementById('reasonsPrev');
+  const next = document.getElementById('reasonsNext');
+  if (!slides.length) return;
+
+  let cur = 0, timer;
+  const pad = n => String(n).padStart(2, '0');
+  function set(i) {
+    cur = (i + slides.length) % slides.length;
+    slides.forEach((s, k) => s.classList.toggle('active', k === cur));
+    dots.forEach((d, k) => d.classList.toggle('active', k === cur));
+    if (counter) counter.textContent = `${pad(cur + 1)} / ${pad(slides.length)}`;
+  }
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => set(cur + 1), 7000);
+  }
+  dots.forEach(d => d.addEventListener('click', () => { set(+d.dataset.i); resetTimer(); }));
+  if (prev) prev.addEventListener('click', () => { set(cur - 1); resetTimer(); });
+  if (next) next.addEventListener('click', () => { set(cur + 1); resetTimer(); });
+  resetTimer();
 })();
 
 // Voices carousel
