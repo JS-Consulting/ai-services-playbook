@@ -87,11 +87,13 @@
 .reasons{position:sticky;top:7rem;display:flex;flex-direction:column;background:transparent;border:none;border-radius:0}
 .reasons-head{padding:0 0 1.25rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
 .reasons-counter{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;color:var(--fg-3);font-variant-numeric:tabular-nums}
-.reasons-stage{position:relative;min-height:240px}
+.reasons-stage{position:relative;min-height:340px}
 .reason-slide{position:absolute;inset:0;padding:1.75rem 0 1.5rem;opacity:0;transform:translateY(8px);transition:opacity .35s var(--ease),transform .35s var(--ease);pointer-events:none}
 .reason-slide.active{opacity:1;transform:none;pointer-events:auto}
-.reason-tag{display:inline-block;font-family:var(--f-mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.85rem}
-.reason-slide p{font-size:.95rem;color:var(--fg-2);line-height:1.65;margin:0}
+.reason-tag{display:inline-block;font-family:var(--f-mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
+.reason-slide p{font-family:var(--f-serif);font-weight:300;font-size:clamp(1.4rem,2.3vw,2rem);line-height:1.25;letter-spacing:-.018em;color:var(--fg);margin:0;text-wrap:balance;quotes:"\201C" "\201D" "\2018" "\2019"}
+.reason-slide p::before{content:open-quote;color:var(--accent);margin-right:.08em}
+.reason-slide p::after{content:close-quote;color:var(--accent);margin-left:.04em}
 .reasons-controls{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0 0;border-top:1px solid var(--line);background:transparent}
 .reasons-arrow{background:none;border:1px solid var(--line);width:34px;height:34px;border-radius:50%;color:var(--fg-2);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:color .2s var(--ease),border-color .2s var(--ease),background .2s var(--ease)}
 .reasons-arrow:hover{color:var(--fg);border-color:var(--accent);background:rgba(106,166,255,.08)}
@@ -100,9 +102,14 @@
 .reason-dot:hover{opacity:.7}
 .reason-dot.active{opacity:1;background:var(--accent);transform:scale(1.15)}
 @media (max-width: 820px){
-  .reasons-stage{min-height:280px}
+  .reasons-stage{min-height:360px}
   .reason-slide{padding:1.25rem 1.25rem 1rem}
+  .reason-slide p{font-size:clamp(1.2rem,4.6vw,1.5rem)}
 }
+
+/* Tighten gap between #about and the integrations marquee */
+#about{padding-bottom:clamp(2.5rem,4vw,4rem)}
+.integrations-band{padding-top:clamp(1.5rem,3vw,2.5rem)}
 
 /* Logo-grid variant of the carousel slide (Experience building with) */
 .reason-slide-logos{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:.65rem;padding:1.25rem}
