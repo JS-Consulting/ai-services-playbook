@@ -100,11 +100,11 @@
     const moreTile = overflow > 0
       ? `<span class="wf-tool is-more" title="${allTools.slice(max).join(', ')}">+${overflow}</span>`
       : '';
+    const num = String(idx + 1).padStart(2, '0');
     return `
       <button class="wf-node" data-node-id="${node.id}" data-type="${node.type}" type="button">
-        <span class="wf-node-step">${String(idx + 1).padStart(2, '0')}</span>
         <span class="wf-node-head">
-          <span class="wf-node-icon">${icon(node.icon)}</span>
+          <span class="wf-node-icon"><span class="wf-node-num">${num}</span></span>
           <span class="wf-node-badge">${TYPE_LABEL[node.type] || node.type}</span>
         </span>
         <span class="wf-node-title">${node.label}</span>
