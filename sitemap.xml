@@ -46,6 +46,36 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://convolving.com/use-cases/rfp-vendor-evaluation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/contract-review-renewals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/purchase-requisitions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/supplier-onboarding-risk</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/invoice-matching-ap</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://convolving.com/use-cases/spend-classification</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- WORKFLOW_USE_CASES:END -->
   <url>
     <loc>https://convolving.com/use-cases/ic-briefing-redesign</loc>

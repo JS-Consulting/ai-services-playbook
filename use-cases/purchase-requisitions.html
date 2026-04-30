@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purchase requisitions and PO processing – Use Cases – Convolving</title>
+<meta name="description" content="High-volume rules-based requisition routing turns into AI-driven policy checks and preferred-supplier matching, with humans only on exceptions.">
+  <meta property="og:title" content="Purchase requisitions and PO processing – Use Cases – Convolving">
+  <meta property="og:description" content="High-volume rules-based requisition routing turns into AI-driven policy checks and preferred-supplier matching, with humans only on exceptions.">
+  <meta property="og:url" content="https://convolving.com/use-cases/purchase-requisitions">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Convolving">
+  <meta property="og:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Convolving – AI Transformation">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Purchase requisitions and PO processing – Use Cases – Convolving">
+  <meta name="twitter:description" content="High-volume rules-based requisition routing turns into AI-driven policy checks and preferred-supplier matching, with humans only on exceptions.">
+  <meta name="twitter:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://convolving.com/use-cases/purchase-requisitions#article",
+      "headline": "Purchase requisitions and PO processing.",
+      "description": "High-volume rules-based requisition routing turns into AI-driven policy checks and preferred-supplier matching, with humans only on exceptions.",
+      "url": "https://convolving.com/use-cases/purchase-requisitions",
+      "publisher": {
+        "@id": "https://convolving.com/#organization"
+      },
+      "author": {
+        "@id": "https://convolving.com/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://convolving.com/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://convolving.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Use Cases",
+          "item": "https://convolving.com/use-cases"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Purchase requisitions and PO processing.",
+          "item": "https://convolving.com/use-cases/purchase-requisitions"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style data-critical>@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url('/assets/fonts/dmsans.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Fraunces';font-style:normal;font-weight:300 700;font-display:swap;src:url('/assets/fonts/fraunces.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Fraunces';font-style:italic;font-weight:300 700;font-display:swap;src:url('/assets/fonts/fraunces-italic.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/jetbrains-mono.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--bg:#0b0c11;--surface:#171a26;--line:rgba(255,255,255,.07);--fg:#eef0f4;--fg-2:rgba(238,240,244,.66);--fg-3:rgba(238,240,244,.42);--accent:#6aa6ff;--accent-2:#a8c7ff;--accent-warm:#f2c58a;--f-serif:'Fraunces',Georgia,serif;--f-sans:'DM Sans',-apple-system,'Helvetica Neue',Arial,sans-serif;--container:1280px;--gutter:clamp(1.25rem,4vw,3rem);--radius-pill:100px;--ease:cubic-bezier(.2,.7,.2,1);--color-bg:#0d0e13;--color-text:#eef0f4;--color-text-secondary:rgba(238,240,244,.58);--color-accent:#3b82f6;--color-accent-light:#93c5fd;--color-btn-bg:#eef0f4;--color-btn-text:#0d0e13;--font-heading:var(--f-serif);--font-body:var(--f-sans)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--f-sans);font-size:16px;line-height:1.6;color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}img{max-width:100%;display:block;height:auto}h1,h2,h3,h4{font-family:var(--f-serif);font-weight:300;letter-spacing:-.035em;line-height:1.02;color:var(--fg)}h1{font-size:clamp(3rem,7.4vw,6.75rem);letter-spacing:-.045em;text-wrap:balance}.container{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}.header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%);background:rgba(11,12,17,.72);border-bottom:1px solid var(--line)}.header-inner{max-width:1440px;margin:0 auto;padding:.9rem var(--gutter);display:flex;align-items:center;gap:2rem}.header-logo img{display:block}.nav{display:flex;gap:.25rem;align-items:center;margin-left:auto}.nav a{font-size:.875rem;font-weight:450;color:var(--fg-2);padding:.55rem .9rem;border-radius:999px}.nav-cta .btn{background:var(--fg);color:#0b0c11;border-radius:999px;padding:.5rem 1.1rem;display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:500}.nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:.5rem;margin-left:auto}.nav-toggle span{width:22px;height:1.5px;background:var(--fg);display:block}@media(max-width:820px){.nav{display:none}.nav-toggle{display:flex}}.btn{display:inline-flex;align-items:center;gap:.7rem;padding:.75rem 1rem .75rem 1.35rem;border-radius:999px;font-family:var(--f-sans);font-size:.9rem;font-weight:500;background:var(--fg);color:#0b0c11}.idx-hero{min-height:80vh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 0 4rem;position:relative;overflow:hidden;background:#0d0e13;isolation:isolate}.idx-hero-waves{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.idx-hero .idx-hero-container{max-width:1200px;margin:0 auto;padding:0 var(--gutter);position:relative;z-index:1;width:100%}.idx-hero-content{max-width:1000px;position:relative;z-index:1}.idx-hero-eyebrow{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#93c5fd;margin:0 0 1.75rem;line-height:1}.idx-hero h1{margin:0 0 2rem;font-family:var(--f-serif);font-size:clamp(2.75rem,6.5vw,5.25rem);letter-spacing:-.05em;line-height:1;font-weight:400;color:#eef0f4}.idx-hero .idx-hero-btn{display:inline-flex;align-items:center;gap:.625rem;padding:.75rem 1rem .75rem 1.5rem;border-radius:100px;background:#eef0f4;color:#0d0e13;font-family:var(--f-sans);font-size:.875rem;font-weight:500;text-decoration:none}.serif-italic{font-family:var(--f-serif);font-style:italic;font-weight:300}.reveal{opacity:0;transform:translateY(15px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.reveal.show,.reveal.visible{opacity:1;transform:none}@media(max-width:820px){.idx-hero{min-height:0;padding:8rem 0 3rem;justify-content:flex-start}.idx-hero h1{font-size:clamp(2.25rem,9vw,3.25rem);margin-bottom:1.5rem}.idx-hero-eyebrow{margin-bottom:1rem}}.idx-hero-eyebrow{margin:0 0 1.25rem}.idx-hero h1{margin:0 0 1.75rem}@media(max-width:820px){.idx-hero h1{margin-bottom:1.25rem}.idx-hero-eyebrow{margin-bottom:.85rem}}.hero-tagline{font-family:var(--f-sans);font-size:clamp(1rem,1.5vw,1.15rem);color:var(--fg-2);max-width:64ch;margin:0 0 2.25rem;line-height:1.5}body .section{padding:clamp(2.75rem,5vw,5rem) 0}body .section.section-tight{padding:clamp(1.25rem,2.5vw,2.25rem) 0}.expertise-copy{max-width:68ch;color:var(--fg-2);font-family:var(--f-serif);font-weight:300;font-style:italic;font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.55}.expertise-copy strong{font-weight:500;color:var(--fg);font-style:normal;font-family:var(--f-serif)}.sit-grid{display:grid;grid-template-columns:280px 1fr;gap:clamp(2rem,5vw,4.5rem);margin-top:1.5rem;align-items:start}.sit-main{max-width:62ch}.sit-aside{display:flex;flex-direction:column;gap:1.5rem;padding:1.75rem;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);position:sticky;top:6rem}.sit-meta{display:flex;flex-direction:column;gap:.5rem}.sit-label{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}.sit-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .9rem;border-radius:999px;border:1px solid rgba(238,240,244,.18);background:rgba(238,240,244,.04);font-family:var(--f-sans);font-size:.85rem;color:var(--fg);letter-spacing:.01em;align-self:flex-start;width:fit-content}.sit-pill svg{width:14px;height:14px;stroke:var(--accent-2);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}@media(max-width:820px){.sit-grid{grid-template-columns:1fr}.sit-aside{position:static;flex-direction:row;flex-wrap:wrap;gap:1rem 2rem}}.changes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem 3rem;margin-top:1.75rem}.change-theme h3{font-family:var(--f-sans);font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);margin:0 0 .85rem;padding-bottom:.65rem;border-bottom:1px solid var(--line)}.change-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;padding:0;margin:0}.change-list li{font-size:.92rem;color:var(--fg-2);line-height:1.5;padding-left:1rem;position:relative}.change-list li::before{content:"";position:absolute;left:0;top:.7rem;width:6px;height:1px;background:var(--accent-2)}</style>
+  <link rel="preload" href="/assets/site.css?v=20260430h" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/site.css?v=20260430h"></noscript>
+  <link rel="preload" href="/assets/workflow-canvas.css?v=20260501f" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/workflow-canvas.css?v=20260501f"></noscript>
+</head>
+<body data-accent="blue">
+
+<header class="header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="Convolving home">
+        <img src="/assets/convolving-logo-white.svg" alt="Convolving" width="198" height="28">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="/ai-transformation">AI Transformation</a>
+<a href="/who-we-are">Who We Are</a>
+<a href="/use-cases" class="active">Use Cases</a>
+        <span class="nav-cta">
+          <a href="mailto:team@convolving.com" class="btn">
+            Book a Coffee
+            <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+        </span>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+<section class="idx-hero">
+  <canvas class="idx-hero-waves"></canvas>
+  <div class="idx-hero-container">
+    <div class="idx-hero-content">
+      <p class="idx-hero-eyebrow">Use case</p>
+      <h1>Purchase requisitions and PO processing.</h1>
+      <p class="hero-tagline">From the field, AI native workflow redesign of purchase order processing process within Procure-to-pay Procurement function.</p>
+      <a href="#playbook" class="idx-hero-btn">
+        Get the playbook
+        <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+<script src="/assets/index-hero-waves.js"></script>
+
+<section class="section section-tight">
+  <div class="container">
+    <div class="eyebrow reveal">Convolving expertise</div>
+    <p class="expertise-copy reveal" style="margin-top:1rem"><strong>A senior Convolving delivery team partnered with the procure-to-pay function for one sprint.</strong> Operators from our expert network – with forty combined years inside enterprise procurement organisations – scored the redesign at each checkpoint. Forward-deployed engineers built on top of Coupa's guided buying capability and the team's internal procurement platform. One flat fee, artifact out, no retainer creep.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sit-grid reveal">
+      <aside class="sit-aside" aria-label="Workflow metadata">
+        <div class="sit-meta">
+          <span class="sit-label">Function</span>
+          <span class="sit-pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Procurement
+          </span>
+        </div>
+        <div class="sit-meta">
+          <span class="sit-label">Sub-function</span>
+          <span class="sit-pill">Procure-to-pay</span>
+        </div>
+        <div class="sit-meta">
+          <span class="sit-label">Workflow</span>
+          <span class="sit-pill">Purchase order processing</span>
+        </div>
+      </aside>
+      <div class="sit-main">
+        <div class="eyebrow" style="margin-bottom:1rem">Situation</div>
+        <p class="lede">Today every requisition is touched by procurement. Standard requests, exceptions, and edge cases all enter the same queue.</p>
+        <p style="margin-top:1.25rem;color:var(--fg-2)">Employees submit purchase requests through Coupa or the internal procurement platform. Procurement reviews each request for policy compliance, preferred-supplier alignment, and budget availability. Approved requests are converted to POs and routed to suppliers. The volume is rules-based but the touchpoints are manual – a procurement specialist reviews the same request shape thousands of times.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="wf-kpis reveal">
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Touchpoints</span>
+        <span class="wf-kpi-value">100%</span>
+        <span class="wf-kpi-sub">Of requests reviewed manually</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Cycle time</span>
+        <span class="wf-kpi-value">2–5 days</span>
+        <span class="wf-kpi-sub">Request to PO sent to supplier</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Maverick spend</span>
+        <span class="wf-kpi-value">12–18%</span>
+        <span class="wf-kpi-sub">Of indirect spend, off-catalogue</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Exception ratio</span>
+        <span class="wf-kpi-value">Unknown</span>
+        <span class="wf-kpi-sub">Standard vs exception not separated</span>
+      </div>
+    </div>
+
+    <div class="wf reveal" data-workflow-id="asis" data-title="Legacy workflow"></div>
+    <script type="application/json" data-workflow="asis">
+    {
+      "nodes": [
+        {
+          "id": "submit",
+          "label": "Submit request",
+          "type": "manual",
+          "tools": [
+            "Coupa"
+          ],
+          "activities": [
+            "Employee submits a request through the catalogue or free-text form.",
+            "Attaches budget code and requesting team.",
+            "Selects supplier from drop-down or types a name."
+          ]
+        },
+        {
+          "id": "policy",
+          "label": "Check policy",
+          "type": "manual",
+          "tools": [
+            "Coupa",
+            "Style guide"
+          ],
+          "activities": [
+            "Procurement specialist verifies policy compliance.",
+            "Confirms preferred-supplier alignment by hand.",
+            "Notes deviations for approver context."
+          ]
+        },
+        {
+          "id": "budget",
+          "label": "Check budget",
+          "type": "manual",
+          "tools": [
+            "Coupa",
+            "Excel"
+          ],
+          "activities": [
+            "Looks up budget availability for the cost centre.",
+            "Confirms approval threshold matches the request.",
+            "Routes to the next approver in the chain."
+          ]
+        },
+        {
+          "id": "approve",
+          "label": "Route for approval",
+          "type": "manual",
+          "tools": [
+            "Email"
+          ],
+          "activities": [
+            "Forwards approval requests to managers in sequence.",
+            "Chases approvers when the request stalls.",
+            "Aggregates approvals before PO creation."
+          ]
+        },
+        {
+          "id": "create",
+          "label": "Create and send PO",
+          "type": "manual",
+          "tools": [
+            "Coupa",
+            "Email"
+          ],
+          "activities": [
+            "Generates the PO from the approved request.",
+            "Sends to the supplier via Coupa or email.",
+            "Updates the requester with the PO number."
+          ]
+        }
+      ]
+    }
+    </script>
+    <p class="reveal" style="max-width:62ch;color:var(--fg-3);font-size:.85rem;margin-top:1.25rem">Click any node to see the activities and tools behind it. Open the canvas in fullscreen for the horizontal view.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Complication</div>
+      <h2 style="white-space:nowrap;text-wrap:nowrap">Largest obstacles and inefficiencies.</h2>
+    </div>
+    <div class="cmp-grid reveal">
+      <div class="cmp-node">
+        <span class="cmp-node-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        </span>
+        <h3 class="cmp-node-title">Every request is touched by procurement.</h3>
+        <p class="cmp-node-body">Specialists review the same standard shape thousands of times. The judgement on edge cases gets crowded out.</p>
+      </div>
+      <div class="cmp-node">
+        <span class="cmp-node-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <h3 class="cmp-node-title">Two to five days from request to PO.</h3>
+        <p class="cmp-node-body">Business partners learn to submit early – or work around procurement entirely on time-sensitive buys.</p>
+      </div>
+      <div class="cmp-node">
+        <span class="cmp-node-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3v18M16 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H8"/></svg>
+        </span>
+        <h3 class="cmp-node-title">Twelve to eighteen percent of spend goes off-catalogue.</h3>
+        <p class="cmp-node-body">Maverick spend is structural when the path of least resistance for business partners is the one that bypasses the system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Resolution</div>
+      <h2>The AI-native cycle.</h2>
+      <p style="max-width:62ch">Same six steps. Click any node to see what the redesign does in that step.</p>
+    </div>
+
+    <div class="wf-kpis reveal">
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Touchpoints</span>
+        <span class="wf-kpi-value">30–40%</span>
+        <span class="wf-kpi-delta">▼ 60–70% vs today</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Cycle time</span>
+        <span class="wf-kpi-value">Same day</span>
+        <span class="wf-kpi-delta">▼ 80% vs today</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Maverick spend</span>
+        <span class="wf-kpi-value">5–8%</span>
+        <span class="wf-kpi-delta">▼ 50% vs today</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Exception ratio</span>
+        <span class="wf-kpi-value">Surfaced</span>
+        <span class="wf-kpi-delta">Standard vs exception split</span>
+      </div>
+    </div>
+
+    <div class="wf reveal" data-workflow-id="tobe" data-title="AI-native workflow"></div>
+    <script type="application/json" data-workflow="tobe">
+    {
+      "nodes": [
+        {
+          "id": "submit",
+          "label": "Guided intake",
+          "type": "semi-auto",
+          "tools": [
+            "Coupa",
+            "Claude"
+          ],
+          "activities": [
+            "Conversational intake captures the request and infers the catalogue match.",
+            "Suggests preferred suppliers and pricing in line.",
+            "Surfaces missing fields before submission."
+          ]
+        },
+        {
+          "id": "policy",
+          "label": "Auto policy check",
+          "type": "automated",
+          "tools": [
+            "Coupa",
+            "Style guide"
+          ],
+          "activities": [
+            "Runs policy and preferred-supplier rules in real time.",
+            "Approves standard requests against the policy library.",
+            "Tags non-compliant requests for review."
+          ]
+        },
+        {
+          "id": "budget",
+          "label": "Auto budget check",
+          "type": "automated",
+          "tools": [
+            "Coupa"
+          ],
+          "activities": [
+            "Verifies budget availability against live cost-centre data.",
+            "Routes the request along the approval chain by amount.",
+            "Flags over-threshold requests for senior review."
+          ]
+        },
+        {
+          "id": "exceptions",
+          "label": "AI exception flagging",
+          "type": "ai",
+          "tools": [
+            "Claude",
+            "Retrieval"
+          ],
+          "activities": [
+            "Detects non-catalogue items, new vendors, and anomalous spend.",
+            "Generates a structured recommendation for the human reviewer.",
+            "Maintains a living taxonomy of exception patterns."
+          ]
+        },
+        {
+          "id": "review",
+          "label": "Human exception review",
+          "type": "human",
+          "tools": [
+            "Review queue"
+          ],
+          "activities": [
+            "Reviews flagged requests with full context.",
+            "Approves, redirects, or escalates each item.",
+            "Edits flow back into the policy library."
+          ]
+        },
+        {
+          "id": "send",
+          "label": "Auto PO send",
+          "type": "automated",
+          "tools": [
+            "Coupa"
+          ],
+          "activities": [
+            "Generates and sends the PO from the approved request.",
+            "Notifies the requester with the PO number.",
+            "Closes the loop in the audit log."
+          ]
+        }
+      ]
+    }
+    </script>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Key changes</div>
+      <h2 style="white-space:nowrap;text-wrap:nowrap">What the redesign actually shifts.</h2>
+    </div>
+    <div class="changes-grid reveal">
+      <div class="change-theme">
+        <h3>Touchpoint reduction</h3>
+        <ul class="change-list">
+          <li>Sixty to seventy percent of standard requests pass through without procurement touch.</li>
+          <li>Specialists work the exception queue rather than the standard queue.</li>
+          <li>PO creation is automatic for compliant, in-policy requests.</li>
+        </ul>
+      </div>
+      <div class="change-theme">
+        <h3>Cycle time</h3>
+        <ul class="change-list">
+          <li>Two to five days drops to same-day for standard requisitions.</li>
+          <li>Approval chain runs in parallel where policy permits.</li>
+          <li>Business partners stop padding their timelines around procurement.</li>
+        </ul>
+      </div>
+      <div class="change-theme">
+        <h3>Maverick spend</h3>
+        <ul class="change-list">
+          <li>Off-catalogue spend halves as the path of least resistance becomes the in-system one.</li>
+          <li>Preferred suppliers surface automatically at intake.</li>
+          <li>Anomaly detection flags new-vendor patterns before they normalise.</li>
+        </ul>
+      </div>
+      <div class="change-theme">
+        <h3>Exception discipline</h3>
+        <ul class="change-list">
+          <li>Standard versus exception is now visible as a metric, not a feeling.</li>
+          <li>Every exception carries a structured recommendation.</li>
+          <li>Reviewer edits feed the policy library and improve auto-handling.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta cta-playbook" id="playbook">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Deploy this in your team.</h2>
+    <p>The redesign above ships as a step-by-step playbook. Intake conversation flow, policy rule schema, exception taxonomy, and the rollout cadence we use on engagements.</p>
+    <div class="cta-actions">
+      <a href="#playbook" class="btn" data-playbook-download>
+        Get the playbook
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="mailto:team@convolving.com" class="btn btn-ghost">
+        Or book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-list">
+          <li><a href="/ai-transformation">AI Transformation →</a></li>
+          <li><a href="/use-cases">Use Cases →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="/who-we-are">Who We Are</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/srj523/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/cookie-consent.js" defer></script>
+<script src="/assets/subpage.js?v=20260501a"></script>
+<script src="/assets/workflow-canvas.js?v=20260501c" defer></script>
+</body>
+</html>

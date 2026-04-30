@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contract review and renewals – Use Cases – Convolving</title>
+<meta name="description" content="Hours of manual contract review become minutes; renewal tracking becomes a calendar agent; clause compliance becomes a default rather than a prayer.">
+  <meta property="og:title" content="Contract review and renewals – Use Cases – Convolving">
+  <meta property="og:description" content="Hours of manual contract review become minutes; renewal tracking becomes a calendar agent; clause compliance becomes a default rather than a prayer.">
+  <meta property="og:url" content="https://convolving.com/use-cases/contract-review-renewals">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Convolving">
+  <meta property="og:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Convolving – AI Transformation">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contract review and renewals – Use Cases – Convolving">
+  <meta name="twitter:description" content="Hours of manual contract review become minutes; renewal tracking becomes a calendar agent; clause compliance becomes a default rather than a prayer.">
+  <meta name="twitter:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://convolving.com/use-cases/contract-review-renewals#article",
+      "headline": "Contract review and renewals.",
+      "description": "Hours of manual contract review become minutes; renewal tracking becomes a calendar agent; clause compliance becomes a default rather than a prayer.",
+      "url": "https://convolving.com/use-cases/contract-review-renewals",
+      "publisher": {
+        "@id": "https://convolving.com/#organization"
+      },
+      "author": {
+        "@id": "https://convolving.com/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://convolving.com/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://convolving.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Use Cases",
+          "item": "https://convolving.com/use-cases"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Contract review and renewals.",
+          "item": "https://convolving.com/use-cases/contract-review-renewals"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style data-critical>@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url('/assets/fonts/dmsans.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Fraunces';font-style:normal;font-weight:300 700;font-display:swap;src:url('/assets/fonts/fraunces.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Fraunces';font-style:italic;font-weight:300 700;font-display:swap;src:url('/assets/fonts/fraunces-italic.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/jetbrains-mono.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--bg:#0b0c11;--surface:#171a26;--line:rgba(255,255,255,.07);--fg:#eef0f4;--fg-2:rgba(238,240,244,.66);--fg-3:rgba(238,240,244,.42);--accent:#6aa6ff;--accent-2:#a8c7ff;--accent-warm:#f2c58a;--f-serif:'Fraunces',Georgia,serif;--f-sans:'DM Sans',-apple-system,'Helvetica Neue',Arial,sans-serif;--container:1280px;--gutter:clamp(1.25rem,4vw,3rem);--radius-pill:100px;--ease:cubic-bezier(.2,.7,.2,1);--color-bg:#0d0e13;--color-text:#eef0f4;--color-text-secondary:rgba(238,240,244,.58);--color-accent:#3b82f6;--color-accent-light:#93c5fd;--color-btn-bg:#eef0f4;--color-btn-text:#0d0e13;--font-heading:var(--f-serif);--font-body:var(--f-sans)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--f-sans);font-size:16px;line-height:1.6;color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}img{max-width:100%;display:block;height:auto}h1,h2,h3,h4{font-family:var(--f-serif);font-weight:300;letter-spacing:-.035em;line-height:1.02;color:var(--fg)}h1{font-size:clamp(3rem,7.4vw,6.75rem);letter-spacing:-.045em;text-wrap:balance}.container{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}.header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%);background:rgba(11,12,17,.72);border-bottom:1px solid var(--line)}.header-inner{max-width:1440px;margin:0 auto;padding:.9rem var(--gutter);display:flex;align-items:center;gap:2rem}.header-logo img{display:block}.nav{display:flex;gap:.25rem;align-items:center;margin-left:auto}.nav a{font-size:.875rem;font-weight:450;color:var(--fg-2);padding:.55rem .9rem;border-radius:999px}.nav-cta .btn{background:var(--fg);color:#0b0c11;border-radius:999px;padding:.5rem 1.1rem;display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:500}.nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:.5rem;margin-left:auto}.nav-toggle span{width:22px;height:1.5px;background:var(--fg);display:block}@media(max-width:820px){.nav{display:none}.nav-toggle{display:flex}}.btn{display:inline-flex;align-items:center;gap:.7rem;padding:.75rem 1rem .75rem 1.35rem;border-radius:999px;font-family:var(--f-sans);font-size:.9rem;font-weight:500;background:var(--fg);color:#0b0c11}.idx-hero{min-height:80vh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 0 4rem;position:relative;overflow:hidden;background:#0d0e13;isolation:isolate}.idx-hero-waves{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.idx-hero .idx-hero-container{max-width:1200px;margin:0 auto;padding:0 var(--gutter);position:relative;z-index:1;width:100%}.idx-hero-content{max-width:1000px;position:relative;z-index:1}.idx-hero-eyebrow{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#93c5fd;margin:0 0 1.75rem;line-height:1}.idx-hero h1{margin:0 0 2rem;font-family:var(--f-serif);font-size:clamp(2.75rem,6.5vw,5.25rem);letter-spacing:-.05em;line-height:1;font-weight:400;color:#eef0f4}.idx-hero .idx-hero-btn{display:inline-flex;align-items:center;gap:.625rem;padding:.75rem 1rem .75rem 1.5rem;border-radius:100px;background:#eef0f4;color:#0d0e13;font-family:var(--f-sans);font-size:.875rem;font-weight:500;text-decoration:none}.serif-italic{font-family:var(--f-serif);font-style:italic;font-weight:300}.reveal{opacity:0;transform:translateY(15px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.reveal.show,.reveal.visible{opacity:1;transform:none}@media(max-width:820px){.idx-hero{min-height:0;padding:8rem 0 3rem;justify-content:flex-start}.idx-hero h1{font-size:clamp(2.25rem,9vw,3.25rem);margin-bottom:1.5rem}.idx-hero-eyebrow{margin-bottom:1rem}}.idx-hero-eyebrow{margin:0 0 1.25rem}.idx-hero h1{margin:0 0 1.75rem}@media(max-width:820px){.idx-hero h1{margin-bottom:1.25rem}.idx-hero-eyebrow{margin-bottom:.85rem}}.hero-tagline{font-family:var(--f-sans);font-size:clamp(1rem,1.5vw,1.15rem);color:var(--fg-2);max-width:64ch;margin:0 0 2.25rem;line-height:1.5}body .section{padding:clamp(2.75rem,5vw,5rem) 0}body .section.section-tight{padding:clamp(1.25rem,2.5vw,2.25rem) 0}.expertise-copy{max-width:68ch;color:var(--fg-2);font-family:var(--f-serif);font-weight:300;font-style:italic;font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.55}.expertise-copy strong{font-weight:500;color:var(--fg);font-style:normal;font-family:var(--f-serif)}.sit-grid{display:grid;grid-template-columns:280px 1fr;gap:clamp(2rem,5vw,4.5rem);margin-top:1.5rem;align-items:start}.sit-main{max-width:62ch}.sit-aside{display:flex;flex-direction:column;gap:1.5rem;padding:1.75rem;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);position:sticky;top:6rem}.sit-meta{display:flex;flex-direction:column;gap:.5rem}.sit-label{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}.sit-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .9rem;border-radius:999px;border:1px solid rgba(238,240,244,.18);background:rgba(238,240,244,.04);font-family:var(--f-sans);font-size:.85rem;color:var(--fg);letter-spacing:.01em;align-self:flex-start;width:fit-content}.sit-pill svg{width:14px;height:14px;stroke:var(--accent-2);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}@media(max-width:820px){.sit-grid{grid-template-columns:1fr}.sit-aside{position:static;flex-direction:row;flex-wrap:wrap;gap:1rem 2rem}}.changes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem 3rem;margin-top:1.75rem}.change-theme h3{font-family:var(--f-sans);font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);margin:0 0 .85rem;padding-bottom:.65rem;border-bottom:1px solid var(--line)}.change-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;padding:0;margin:0}.change-list li{font-size:.92rem;color:var(--fg-2);line-height:1.5;padding-left:1rem;position:relative}.change-list li::before{content:"";position:absolute;left:0;top:.7rem;width:6px;height:1px;background:var(--accent-2)}</style>
+  <link rel="preload" href="/assets/site.css?v=20260430h" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/site.css?v=20260430h"></noscript>
+  <link rel="preload" href="/assets/workflow-canvas.css?v=20260501f" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/workflow-canvas.css?v=20260501f"></noscript>
+</head>
+<body data-accent="blue">
+
+<header class="header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="Convolving home">
+        <img src="/assets/convolving-logo-white.svg" alt="Convolving" width="198" height="28">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="/ai-transformation">AI Transformation</a>
+<a href="/who-we-are">Who We Are</a>
+<a href="/use-cases" class="active">Use Cases</a>
+        <span class="nav-cta">
+          <a href="mailto:team@convolving.com" class="btn">
+            Book a Coffee
+            <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+        </span>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+<section class="idx-hero">
+  <canvas class="idx-hero-waves"></canvas>
+  <div class="idx-hero-container">
+    <div class="idx-hero-content">
+      <p class="idx-hero-eyebrow">Use case</p>
+      <h1>Contract review and renewals.</h1>
+      <p class="hero-tagline">From the field, AI native workflow redesign of contract review process within Contracts Procurement function.</p>
+      <a href="#playbook" class="idx-hero-btn">
+        Get the playbook
+        <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+<script src="/assets/index-hero-waves.js"></script>
+
+<section class="section section-tight">
+  <div class="container">
+    <div class="eyebrow reveal">Convolving expertise</div>
+    <p class="expertise-copy reveal" style="margin-top:1rem"><strong>A senior Convolving delivery team partnered with the contracts function for one sprint.</strong> Operators from our expert network – with forty combined years inside enterprise procurement and legal operations – scored the redesign at each checkpoint. Forward-deployed engineers built inside the team's Coupa contract module and clause library. One flat fee, artifact out, no retainer creep.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sit-grid reveal">
+      <aside class="sit-aside" aria-label="Workflow metadata">
+        <div class="sit-meta">
+          <span class="sit-label">Function</span>
+          <span class="sit-pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Procurement
+          </span>
+        </div>
+        <div class="sit-meta">
+          <span class="sit-label">Sub-function</span>
+          <span class="sit-pill">Contracts</span>
+        </div>
+        <div class="sit-meta">
+          <span class="sit-label">Workflow</span>
+          <span class="sit-pill">Contract review</span>
+        </div>
+      </aside>
+      <div class="sit-main">
+        <div class="eyebrow" style="margin-bottom:1rem">Situation</div>
+        <p class="lede">Today a contract takes two to four hours of read-and-flag review. Renewal dates live in spreadsheets and calendar reminders.</p>
+        <p style="margin-top:1.25rem;color:var(--fg-2)">Each incoming contract is read in full against the clause library. Non-standard terms are flagged manually and routed to legal. Renewal tracking is a parallel system of cells and reminders maintained by the contract owner. At scale across a fragmented supplier base, obligations and renewals slip through the cracks – the team learns about a missed renewal when the supplier sends an invoice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="wf-kpis reveal">
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Review time</span>
+        <span class="wf-kpi-value">2–4 hrs</span>
+        <span class="wf-kpi-sub">Per contract, end to end</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Missed renewals</span>
+        <span class="wf-kpi-value">3–5%</span>
+        <span class="wf-kpi-sub">Of contracts annually</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Clause coverage</span>
+        <span class="wf-kpi-value">Variable</span>
+        <span class="wf-kpi-sub">Depends on reviewer attention</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Backlog</span>
+        <span class="wf-kpi-value">30+</span>
+        <span class="wf-kpi-sub">Contracts queued for review</span>
+      </div>
+    </div>
+
+    <div class="wf reveal" data-workflow-id="asis" data-title="Legacy workflow"></div>
+    <script type="application/json" data-workflow="asis">
+    {
+      "nodes": [
+        {
+          "id": "ingest",
+          "label": "Receive contract",
+          "type": "manual",
+          "tools": [
+            "Email",
+            "Coupa"
+          ],
+          "activities": [
+            "Receive the executed or draft contract.",
+            "Save to the contracts folder with a naming convention.",
+            "Add to the review queue spreadsheet."
+          ]
+        },
+        {
+          "id": "read",
+          "label": "Read and extract",
+          "type": "manual",
+          "tools": [
+            "Word"
+          ],
+          "activities": [
+            "Read the contract end to end.",
+            "Extract key terms, obligations, and effective dates.",
+            "Note non-standard or risky clauses for follow-up."
+          ]
+        },
+        {
+          "id": "compare",
+          "label": "Compare to clause library",
+          "type": "manual",
+          "tools": [
+            "Word",
+            "Style guide"
+          ],
+          "activities": [
+            "Compare each clause against the standard library.",
+            "Flag deviations for legal review.",
+            "Negotiate fallbacks with the supplier."
+          ]
+        },
+        {
+          "id": "track",
+          "label": "Log renewal date",
+          "type": "manual",
+          "tools": [
+            "Excel",
+            "Email"
+          ],
+          "activities": [
+            "Add the renewal date to the tracker spreadsheet.",
+            "Set calendar reminders 90, 60, and 30 days out.",
+            "Update the supplier file with key obligations."
+          ]
+        },
+        {
+          "id": "renewal",
+          "label": "Manual renewal trigger",
+          "type": "manual",
+          "tools": [
+            "Email"
+          ],
+          "activities": [
+            "Email the contract owner near the renewal window.",
+            "Wait for the owner to respond and decide.",
+            "Initiate renewal or termination process."
+          ]
+        }
+      ]
+    }
+    </script>
+    <p class="reveal" style="max-width:62ch;color:var(--fg-3);font-size:.85rem;margin-top:1.25rem">Click any node to see the activities and tools behind it. Open the canvas in fullscreen for the horizontal view.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Complication</div>
+      <h2 style="white-space:nowrap;text-wrap:nowrap">Largest obstacles and inefficiencies.</h2>
+    </div>
+    <div class="cmp-grid reveal">
+      <div class="cmp-node">
+        <span class="cmp-node-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <h3 class="cmp-node-title">Two to four hours per contract is the practical ceiling.</h3>
+        <p class="cmp-node-body">Even with experienced reviewers, the read-and-flag step does not compress without redesign.</p>
+      </div>
+      <div class="cmp-node">
+        <span class="cmp-node-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3 2 21h20zM12 10v5M12 18.5v.01"/></svg>
+        </span>
+        <h3 class="cmp-node-title">Three to five percent of renewals slip every year.</h3>
+        <p class="cmp-node-body">A spreadsheet plus a calendar reminder is not a system at scale across a fragmented supplier base.</p>
+      </div>
+      <div class="cmp-node">
+        <span class="cmp-node-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg>
+        </span>
+        <h3 class="cmp-node-title">Clause coverage varies by reviewer.</h3>
+        <p class="cmp-node-body">Two reviewers reading the same contract surface different risks. The clause library is invoked unevenly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Resolution</div>
+      <h2>The AI-native cycle.</h2>
+      <p style="max-width:62ch">Same five steps. Click any node to see what the redesign does in that step.</p>
+    </div>
+
+    <div class="wf-kpis reveal">
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Review time</span>
+        <span class="wf-kpi-value">15–30 min</span>
+        <span class="wf-kpi-delta">▼ 80% vs today</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Missed renewals</span>
+        <span class="wf-kpi-value">0%</span>
+        <span class="wf-kpi-delta">▼ 100% vs today</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Clause coverage</span>
+        <span class="wf-kpi-value">Uniform</span>
+        <span class="wf-kpi-delta">Every clause, every contract</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Backlog</span>
+        <span class="wf-kpi-value">0</span>
+        <span class="wf-kpi-delta">Cleared at intake speed</span>
+      </div>
+    </div>
+
+    <div class="wf reveal" data-workflow-id="tobe" data-title="AI-native workflow"></div>
+    <script type="application/json" data-workflow="tobe">
+    {
+      "nodes": [
+        {
+          "id": "ingest",
+          "label": "Auto contract intake",
+          "type": "automated",
+          "tools": [
+            "Coupa",
+            "Scheduler"
+          ],
+          "activities": [
+            "Picks up incoming contracts from Coupa and email channels.",
+            "Hashes and files each version with provenance.",
+            "Routes to the AI extraction pipeline."
+          ]
+        },
+        {
+          "id": "extract",
+          "label": "AI extract terms",
+          "type": "ai",
+          "tools": [
+            "Claude",
+            "Retrieval"
+          ],
+          "activities": [
+            "Parses the full contract and extracts key terms and obligations.",
+            "Cites the source clause for every extracted field.",
+            "Surfaces ambiguity for the contract owner to confirm."
+          ]
+        },
+        {
+          "id": "compare",
+          "label": "AI clause comparison",
+          "type": "ai",
+          "tools": [
+            "Claude",
+            "Style guide"
+          ],
+          "activities": [
+            "Compares each clause against the standard library.",
+            "Flags deviations with a recommended fallback.",
+            "Tags risk severity to drive routing."
+          ]
+        },
+        {
+          "id": "calendar",
+          "label": "Renewal calendar agent",
+          "type": "automated",
+          "tools": [
+            "Coupa",
+            "Scheduler"
+          ],
+          "activities": [
+            "Monitors expiry dates across the active portfolio.",
+            "Auto-triggers stakeholder reminders 90, 60, and 30 days out.",
+            "Escalates if no decision is logged inside the window."
+          ]
+        },
+        {
+          "id": "review",
+          "label": "Human review of flags",
+          "type": "human",
+          "tools": [
+            "Review queue"
+          ],
+          "activities": [
+            "Reviews flagged clauses and extracted obligations in one queue.",
+            "Approves, negotiates, or escalates each item.",
+            "Edits flow back into the clause library."
+          ]
+        }
+      ]
+    }
+    </script>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Key changes</div>
+      <h2 style="white-space:nowrap;text-wrap:nowrap">What the redesign actually shifts.</h2>
+    </div>
+    <div class="changes-grid reveal">
+      <div class="change-theme">
+        <h3>Review compression</h3>
+        <ul class="change-list">
+          <li>Two to four hours per contract drops to fifteen to thirty minutes.</li>
+          <li>Reviewers work the queue; the AI handles intake and extraction.</li>
+          <li>Backlog clears at intake speed rather than accumulating.</li>
+        </ul>
+      </div>
+      <div class="change-theme">
+        <h3>Renewal certainty</h3>
+        <ul class="change-list">
+          <li>Calendar agent monitors every contract; missed renewals go to zero.</li>
+          <li>Stakeholder reminders fire on a fixed cadence with escalation.</li>
+          <li>Decision deadlines surface before the supplier does.</li>
+        </ul>
+      </div>
+      <div class="change-theme">
+        <h3>Clause discipline</h3>
+        <ul class="change-list">
+          <li>Every clause is compared against the library, every contract.</li>
+          <li>Flagged deviations carry recommended fallbacks and risk severity.</li>
+          <li>Reviewer edits feed back into the library and improve future runs.</li>
+        </ul>
+      </div>
+      <div class="change-theme">
+        <h3>Audit trail</h3>
+        <ul class="change-list">
+          <li>Every extracted field cites the source clause.</li>
+          <li>Every renewal action is logged with the deciding reviewer.</li>
+          <li>Contract history is reconstructable from the queue.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta cta-playbook" id="playbook">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Deploy this in your team.</h2>
+    <p>The redesign above ships as a step-by-step playbook. Extraction prompts, clause-library schema, renewal cadence rules, and the rollout cadence we use on engagements.</p>
+    <div class="cta-actions">
+      <a href="#playbook" class="btn" data-playbook-download>
+        Get the playbook
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="mailto:team@convolving.com" class="btn btn-ghost">
+        Or book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-list">
+          <li><a href="/ai-transformation">AI Transformation →</a></li>
+          <li><a href="/use-cases">Use Cases →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="/who-we-are">Who We Are</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/srj523/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/cookie-consent.js" defer></script>
+<script src="/assets/subpage.js?v=20260501a"></script>
+<script src="/assets/workflow-canvas.js?v=20260501c" defer></script>
+</body>
+</html>
