@@ -22,6 +22,8 @@
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: thin;
+  display: flex;
+  align-items: center;
 }
 
 .wf-stage::-webkit-scrollbar { height: 8px }
