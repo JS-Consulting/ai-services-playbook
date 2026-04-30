@@ -271,7 +271,7 @@ const io = new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* Hover glow on cards */
-document.querySelectorAll('.offering, .principle, .partner, .compare, .advisor').forEach(el=>{
+document.querySelectorAll('.offering, .principle, .partner, .compare, .advisor, .deliverable').forEach(el=>{
   el.addEventListener('mousemove', e=>{
     const r = el.getBoundingClientRect();
     el.style.setProperty('--mx', ((e.clientX - r.left)/r.width*100) + '%');

@@ -82,6 +82,17 @@
       .journey-rail--vertical .jstep{padding-left:2.75rem}
       .journey-rail--vertical .journey-progress{left:11px}
     }
+    .deliverables-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+    .deliverable{position:relative;padding:1.85rem 1.65rem;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .3s var(--ease),transform .3s var(--ease),background .3s var(--ease)}
+    .deliverable::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(106,166,255,.10),transparent 55%);opacity:0;transition:opacity .3s var(--ease)}
+    .deliverable:hover{border-color:rgba(106,166,255,.28);transform:translateY(-2px);background:rgba(255,255,255,.04)}
+    .deliverable:hover::before{opacity:1}
+    .deliverable>*{position:relative;z-index:1}
+    .deliverable-num{display:inline-block;font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:1.1rem;line-height:1}
+    .deliverable h4{font-family:var(--f-serif);font-weight:300;font-style:italic;font-size:1.3rem;line-height:1.2;letter-spacing:-.02em;margin-bottom:.75rem;color:var(--fg)}
+    .deliverable p{font-size:.88rem;color:var(--fg-2);line-height:1.6}
+    @media (max-width:900px){.deliverables-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.deliverables-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body data-accent="blue">
@@ -236,6 +247,53 @@
   </div>
 </section>
 
+<section class="section section-alt" id="what-you-receive">
+  <div class="container-wide">
+    <div class="section-head reveal">
+      <div class="section-head-left">
+        <span class="eyebrow"><span class="eyebrow-num">03</span>What you receive</span>
+        <h2>Six deliverables the team keeps and runs.</h2>
+      </div>
+      <div class="section-head-right">
+        <p>Each is handed to the team and continues to compound the work long after we leave.</p>
+      </div>
+    </div>
+
+    <div class="deliverables-grid">
+      <div class="deliverable reveal">
+        <span class="deliverable-num">Deliverable 01</span>
+        <h4>AI use case inventory</h4>
+        <p>A scored register of every candidate workflow surfaced during discovery. Each entry rated against impact, data readiness, and risk, with a sponsor and an owner attached. Maintained as a living document the team can re-rank as conditions change.</p>
+      </div>
+      <div class="deliverable reveal d1">
+        <span class="deliverable-num">Deliverable 02</span>
+        <h4>Legacy process maps</h4>
+        <p>Activity-level documentation of the as-is for every workflow we analyse. Decisions, handoffs, data flows, and exceptions captured at task granularity. The reference the team uses to validate the redesign and onboard new owners.</p>
+      </div>
+      <div class="deliverable reveal d2">
+        <span class="deliverable-num">Deliverable 03</span>
+        <h4>New workflows in production</h4>
+        <p>The redesigned, AI-native version of each prioritised workflow, running with the team that owns it. Tooling assembled around the workflow – off-the-shelf, our IP, or bespoke – delivered as a custom build or an ongoing managed solution.</p>
+      </div>
+      <div class="deliverable reveal d3">
+        <span class="deliverable-num">Deliverable 04</span>
+        <h4>Monthly adoption reporting</h4>
+        <p>A repeating cadence and reporting workflow that tracks usage, time saved, and the next opportunities to redesign. Owned by the team after handover, run monthly without us.</p>
+      </div>
+      <div class="deliverable reveal d4">
+        <span class="deliverable-num">Deliverable 05</span>
+        <h4>Office hours</h4>
+        <p>A recurring live session where the team brings questions, blockers, and new use cases. Each session recorded and indexed so anyone in the organisation can catch up on their own time.</p>
+      </div>
+      <div class="deliverable reveal d5">
+        <span class="deliverable-num">Deliverable 06</span>
+        <h4>Upskilling assets</h4>
+        <p>Role-based training manuals, prompt libraries, and reference materials packaged for self-service. The team picks up new use cases without us in the room.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta">
   <canvas class="cta-canvas" id="ctaCanvas"></canvas>
   <div class="container cta-inner">
@@ -292,7 +350,7 @@
 </footer>
 
 <script src="/cookie-consent.js" defer></script>
-<script src="/assets/subpage.js?v=20260429c"></script>
+<script src="/assets/subpage.js?v=20260430a"></script>
 <script src="/assets/journey.js?v=20260430" defer></script>
 </body>
 </html>
