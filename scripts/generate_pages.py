@@ -735,6 +735,590 @@ def render_use_case(slug: str, industry: str, functions: list[str], role: str, h
     )
 
 
+# ---------- Workflow use-case template (rich) ------------------------------
+
+import json as _json
+
+WORKFLOW_SITE_CSS = "20260430h"
+WORKFLOW_CSS_VERSION = "20260501f"
+WORKFLOW_JS_VERSION = "20260501c"
+WORKFLOW_SUBPAGE_JS_VERSION = "20260501a"
+WORKFLOW_HEROWAVES_VERSION = ""
+
+# Function pill icon registry. Add a function here when a new use case
+# introduces it. The path content goes inside <svg viewBox="0 0 24 24">.
+FUNCTION_ICONS = {
+    "Finance":             '<path d="M3 17l6-6 4 4 8-8M14 7h7v7"/>',
+    "Operations":          '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+    "Strategy":            '<circle cx="12" cy="12" r="9"/><path d="m16 8-2 6-6 2 2-6z"/>',
+    "Engineering":         '<path d="M14.7 6.3a4 4 0 0 0 5.4 5.4L21 14l-7 7-2.3-1a4 4 0 0 0-5.4-5.4L4 12l7-7z"/>',
+    "Risk and compliance": '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>',
+    "HR":                  '<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15 20a4 4 0 0 1 6-3"/>',
+    "Legal":               '<path d="M12 3v18M5 8h14M7 8l-3 8a4 4 0 0 0 8 0zM17 8l-3 8a4 4 0 0 0 8 0z"/>',
+    "Sales and marketing": '<path d="M3 11v3a2 2 0 0 0 2 2h3l5 4V5L8 9H5a2 2 0 0 0-2 2z"/><path d="M16 8a5 5 0 0 1 0 8"/>',
+    "Product":             '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+}
+
+# Complication card icons. Each card declares which icon to use by name.
+COMP_ICONS = {
+    "clock":  '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    "chat":   '<path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 11h9M8 14h5"/>',
+    "user":   '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+    "dollar": '<path d="M12 3v18M16 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H8"/>',
+    "shield": '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>',
+    "alert":  '<path d="M12 3 2 21h20zM12 10v5M12 18.5v.01"/>',
+    "gauge":  '<path d="M12 14V8M3 14a9 9 0 1 1 18 0"/>',
+    "link":   '<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/>',
+}
+
+# Extra critical CSS appended to CRITICAL_CSS for workflow pages. Overrides the
+# hero margins to a slightly tighter rhythm and adds the bespoke section styles
+# (hero tagline, situation grid, expertise paragraph, key-changes list).
+WORKFLOW_EXTRA_CSS = (
+    ".idx-hero-eyebrow{margin:0 0 1.25rem}"
+    ".idx-hero h1{margin:0 0 1.75rem}"
+    "@media(max-width:820px){.idx-hero h1{margin-bottom:1.25rem}"
+    ".idx-hero-eyebrow{margin-bottom:.85rem}}"
+    ".hero-tagline{font-family:var(--f-sans);font-size:clamp(1rem,1.5vw,1.15rem);"
+    "color:var(--fg-2);max-width:64ch;margin:0 0 2.25rem;line-height:1.5}"
+    "body .section{padding:clamp(2.75rem,5vw,5rem) 0}"
+    "body .section.section-tight{padding:clamp(1.25rem,2.5vw,2.25rem) 0}"
+    ".expertise-copy{max-width:68ch;color:var(--fg-2);font-family:var(--f-serif);"
+    "font-weight:300;font-style:italic;font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.55}"
+    ".expertise-copy strong{font-weight:500;color:var(--fg);font-style:normal;font-family:var(--f-serif)}"
+    ".sit-grid{display:grid;grid-template-columns:280px 1fr;gap:clamp(2rem,5vw,4.5rem);"
+    "margin-top:1.5rem;align-items:start}"
+    ".sit-main{max-width:62ch}"
+    ".sit-aside{display:flex;flex-direction:column;gap:1.5rem;padding:1.75rem;"
+    "border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);"
+    "position:sticky;top:6rem}"
+    ".sit-meta{display:flex;flex-direction:column;gap:.5rem}"
+    ".sit-label{font-size:.65rem;font-weight:600;letter-spacing:.14em;"
+    "text-transform:uppercase;color:var(--fg-3)}"
+    ".sit-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .9rem;"
+    "border-radius:999px;border:1px solid rgba(238,240,244,.18);"
+    "background:rgba(238,240,244,.04);font-family:var(--f-sans);font-size:.85rem;"
+    "color:var(--fg);letter-spacing:.01em;align-self:flex-start;width:fit-content}"
+    ".sit-pill svg{width:14px;height:14px;stroke:var(--accent-2);fill:none;"
+    "stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}"
+    "@media(max-width:820px){.sit-grid{grid-template-columns:1fr}"
+    ".sit-aside{position:static;flex-direction:row;flex-wrap:wrap;gap:1rem 2rem}}"
+    ".changes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));"
+    "gap:2rem 3rem;margin-top:1.75rem}"
+    ".change-theme h3{font-family:var(--f-sans);font-size:.68rem;font-weight:600;"
+    "letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);"
+    "margin:0 0 .85rem;padding-bottom:.65rem;border-bottom:1px solid var(--line)}"
+    ".change-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;padding:0;margin:0}"
+    ".change-list li{font-size:.92rem;color:var(--fg-2);line-height:1.5;"
+    "padding-left:1rem;position:relative}"
+    '.change-list li::before{content:"";position:absolute;left:0;top:.7rem;'
+    "width:6px;height:1px;background:var(--accent-2)}"
+)
+
+
+def _attr(text: str) -> str:
+    """Escape for an HTML attribute (double-quoted). Apostrophes are left raw."""
+    if text is None:
+        return ""
+    return (text.replace("&", "&amp;")
+                .replace('"', "&quot;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;"))
+
+
+def _txt(text: str) -> str:
+    """Escape for HTML text content. Leaves apostrophes and quotes raw."""
+    if text is None:
+        return ""
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _node_payload(node: dict) -> dict:
+    """Strip a workflow node dict down to the fields the canvas JS reads."""
+    return {
+        "id":         node["id"],
+        "label":      node["label"],
+        "type":       node["type"],
+        "tools":      list(node.get("tools", [])),
+        "activities": list(node.get("activities", [])),
+    }
+
+
+def render_kpi_strip(kpis: list, *, improved: bool = False) -> str:
+    cells = []
+    for k in kpis:
+        is_delta = improved and "delta" in k
+        sub_class = "wf-kpi-delta" if is_delta else "wf-kpi-sub"
+        sub_text = k.get("delta") if is_delta else k.get("sub", "")
+        kpi_class = "wf-kpi is-improved" if improved else "wf-kpi"
+        cells.append(
+            f'      <div class="{kpi_class}">\n'
+            f'        <span class="wf-kpi-label">{_txt(k["label"])}</span>\n'
+            f'        <span class="wf-kpi-value">{_txt(k["value"])}</span>\n'
+            f'        <span class="{sub_class}">{_txt(sub_text)}</span>\n'
+            f'      </div>'
+        )
+    return '    <div class="wf-kpis reveal">\n' + "\n".join(cells) + '\n    </div>'
+
+
+def render_canvas_block(workflow_id: str, title: str, nodes: list) -> str:
+    payload = {"nodes": [_node_payload(n) for n in nodes]}
+    json_text = _json.dumps(payload, ensure_ascii=False, indent=2)
+    indented = "\n".join("    " + line for line in json_text.splitlines())
+    return (
+        f'    <div class="wf reveal" data-workflow-id="{workflow_id}" '
+        f'data-title="{_attr(title)}"></div>\n'
+        f'    <script type="application/json" data-workflow="{workflow_id}">\n'
+        f'{indented}\n'
+        f'    </script>'
+    )
+
+
+def render_complications(items: list) -> str:
+    cards = []
+    for it in items:
+        icon = COMP_ICONS.get(it["icon"], COMP_ICONS["alert"])
+        cards.append(
+            '      <div class="cmp-node">\n'
+            '        <span class="cmp-node-icon" aria-hidden="true">\n'
+            f'          <svg viewBox="0 0 24 24">{icon}</svg>\n'
+            '        </span>\n'
+            f'        <h3 class="cmp-node-title">{_txt(it["title"])}</h3>\n'
+            f'        <p class="cmp-node-body">{_txt(it["body"])}</p>\n'
+            '      </div>'
+        )
+    return '    <div class="cmp-grid reveal">\n' + "\n".join(cards) + '\n    </div>'
+
+
+_NUMBER_WORDS = {
+    1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six",
+    7: "seven", 8: "eight", 9: "nine", 10: "ten", 11: "eleven", 12: "twelve",
+}
+
+
+def _spell(n: int) -> str:
+    """Spell out small counts as words; STYLE.md prefers words for narrative cadence."""
+    return _NUMBER_WORDS.get(n, str(n))
+
+
+def render_key_changes(themes: list) -> str:
+    blocks = []
+    for t in themes:
+        bullets = "\n".join(f'          <li>{_txt(b)}</li>' for b in t["bullets"])
+        blocks.append(
+            '      <div class="change-theme">\n'
+            f'        <h3>{_txt(t["theme"])}</h3>\n'
+            '        <ul class="change-list">\n'
+            f'{bullets}\n'
+            '        </ul>\n'
+            '      </div>'
+        )
+    return '    <div class="changes-grid reveal">\n' + "\n".join(blocks) + '\n    </div>'
+
+
+def render_workflow_use_case(case: dict) -> str:
+    """Render the rich workflow-template page for a single use case."""
+    slug         = case["slug"]
+    h1           = case["title"]                      # workflow name without trailing period
+    description  = case["description"]
+    function     = case["function"]
+    sub_function = case["sub_function"]
+    workflow     = case["workflow"]
+    canonical    = f"https://convolving.com/use-cases/{slug}"
+    headline     = f"{h1}."
+
+    fn_icon = FUNCTION_ICONS.get(function, FUNCTION_ICONS["Operations"])
+    tagline = (
+        f"From the field, AI native workflow redesign of {workflow.lower()} process "
+        f"within {sub_function} {function} function."
+    )
+
+    json_ld_obj = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type":       "Article",
+                "@id":         f"{canonical}#article",
+                "headline":    headline,
+                "description": description,
+                "url":         canonical,
+                "publisher":   {"@id": "https://convolving.com/#organization"},
+                "author":      {"@id": "https://convolving.com/#organization"},
+                "isPartOf":    {"@id": "https://convolving.com/#website"},
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home",      "item": "https://convolving.com/"},
+                    {"@type": "ListItem", "position": 2, "name": "Use Cases", "item": "https://convolving.com/use-cases"},
+                    {"@type": "ListItem", "position": 3, "name": headline,    "item": canonical},
+                ],
+            },
+        ],
+    }
+    json_ld = (
+        '<script type="application/ld+json">\n'
+        + _json.dumps(json_ld_obj, ensure_ascii=False, indent=2)
+        + '\n  </script>'
+    )
+
+    page_title = f"{h1} – Use Cases – Convolving"
+
+    # Body sections
+    expertise_html = case["expertise_html"]
+    situation_lede = case["situation_lede"]
+    situation_body = case["situation_body"]
+
+    legacy_kpis      = render_kpi_strip(case["legacy_kpis"], improved=False)
+    legacy_canvas    = render_canvas_block("asis", "Legacy workflow", case["legacy_nodes"])
+    redesigned_kpis  = render_kpi_strip(case["redesigned_kpis"], improved=True)
+    redesigned_canvas = render_canvas_block("tobe", "AI-native workflow", case["redesigned_nodes"])
+    complications    = render_complications(case["complications"])
+    key_changes      = render_key_changes(case["key_changes"])
+
+    playbook_url   = case.get("playbook_url", "#playbook")
+    playbook_body  = case["playbook_body"]
+
+    critical_css = CRITICAL_CSS + WORKFLOW_EXTRA_CSS
+    site_css = f"/assets/site.css?v={WORKFLOW_SITE_CSS}"
+    wf_css   = f"/assets/workflow-canvas.css?v={WORKFLOW_CSS_VERSION}"
+    wf_js    = f"/assets/workflow-canvas.js?v={WORKFLOW_JS_VERSION}"
+    sub_js   = f"/assets/subpage.js?v={WORKFLOW_SUBPAGE_JS_VERSION}"
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{_txt(page_title)}</title>
+<meta name="description" content="{_attr(description)}">
+  <meta property="og:title" content="{_attr(page_title)}">
+  <meta property="og:description" content="{_attr(description)}">
+  <meta property="og:url" content="{canonical}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Convolving">
+  <meta property="og:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Convolving – AI Transformation">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{_attr(page_title)}">
+  <meta name="twitter:description" content="{_attr(description)}">
+  <meta name="twitter:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+
+  {json_ld}
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style data-critical>{critical_css}</style>
+  <link rel="preload" href="{site_css}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{site_css}"></noscript>
+  <link rel="preload" href="{wf_css}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{wf_css}"></noscript>
+</head>
+<body data-accent="blue">
+
+{header('use-cases')}
+
+<section class="idx-hero">
+  <canvas class="idx-hero-waves"></canvas>
+  <div class="idx-hero-container">
+    <div class="idx-hero-content">
+      <p class="idx-hero-eyebrow">Use case</p>
+      <h1>{_txt(headline)}</h1>
+      <p class="hero-tagline">{_txt(tagline)}</p>
+      <a href="#playbook" class="idx-hero-btn">
+        Get the playbook
+        <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+<script src="/assets/index-hero-waves.js"></script>
+
+<section class="section section-tight">
+  <div class="container">
+    <div class="eyebrow reveal">Convolving expertise</div>
+    <p class="expertise-copy reveal" style="margin-top:1rem">{expertise_html}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sit-grid reveal">
+      <aside class="sit-aside" aria-label="Workflow metadata">
+        <div class="sit-meta">
+          <span class="sit-label">Function</span>
+          <span class="sit-pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true">{fn_icon}</svg>
+            {_txt(function)}
+          </span>
+        </div>
+        <div class="sit-meta">
+          <span class="sit-label">Sub-function</span>
+          <span class="sit-pill">{_txt(sub_function)}</span>
+        </div>
+        <div class="sit-meta">
+          <span class="sit-label">Workflow</span>
+          <span class="sit-pill">{_txt(workflow)}</span>
+        </div>
+      </aside>
+      <div class="sit-main">
+        <div class="eyebrow" style="margin-bottom:1rem">Situation</div>
+        <p class="lede">{_txt(situation_lede)}</p>
+        <p style="margin-top:1.25rem;color:var(--fg-2)">{_txt(situation_body)}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+{legacy_kpis}
+
+{legacy_canvas}
+    <p class="reveal" style="max-width:62ch;color:var(--fg-3);font-size:.85rem;margin-top:1.25rem">Click any node to see the activities and tools behind it. Open the canvas in fullscreen for the horizontal view.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Complication</div>
+      <h2 style="white-space:nowrap;text-wrap:nowrap">Largest obstacles and inefficiencies.</h2>
+    </div>
+{complications}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Resolution</div>
+      <h2>The AI-native cycle.</h2>
+      <p style="max-width:62ch">Same {_spell(len(case["redesigned_nodes"]))} steps. Click any node to see what the redesign does in that step.</p>
+    </div>
+
+{redesigned_kpis}
+
+{redesigned_canvas}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Key changes</div>
+      <h2 style="white-space:nowrap;text-wrap:nowrap">What the redesign actually shifts.</h2>
+    </div>
+{key_changes}
+  </div>
+</section>
+
+<section class="cta cta-playbook" id="playbook">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Deploy this in your team.</h2>
+    <p>{_txt(playbook_body)}</p>
+    <div class="cta-actions">
+      <a href="{_attr(playbook_url)}" class="btn" data-playbook-download>
+        Get the playbook
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="mailto:team@convolving.com" class="btn btn-ghost">
+        Or book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-list">
+          <li><a href="/ai-transformation">AI Transformation →</a></li>
+          <li><a href="/use-cases">Use Cases →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="/who-we-are">Who We Are</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/srj523/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/cookie-consent.js" defer></script>
+<script src="{sub_js}"></script>
+<script src="{wf_js}" defer></script>
+</body>
+</html>
+"""
+
+
+def render_workflow_card(case: dict) -> str:
+    """Catalogue card snippet for /use-cases.html (no leading indent)."""
+    return (
+        f'      <a class="uc-card" href="/use-cases/{case["slug"]}" data-usecase '
+        f'data-process="{_attr(case["process_slug"])}" '
+        f'data-function="{_attr(case["function_slug"])}" '
+        f'data-role="{_attr(case["role_slug"])}">\n'
+        f'        <h3>{_txt(case["title"])}.</h3>\n'
+        f'        <p>{_txt(case["card_body"])}</p>\n'
+        f'        <div class="uc-tags"><span class="uc-tag process">{_txt(case["workflow"])}</span>'
+        f'<span class="uc-tag">{_txt(case["function"])}</span>'
+        f'<span class="uc-tag">{_txt(case["role_label"])}</span></div>\n'
+        f'      </a>'
+    )
+
+
+def render_workflow_sitemap_entry(case: dict) -> str:
+    return (
+        f'  <url>\n'
+        f'    <loc>https://convolving.com/use-cases/{case["slug"]}</loc>\n'
+        f'    <changefreq>monthly</changefreq>\n'
+        f'    <priority>0.7</priority>\n'
+        f'  </url>'
+    )
+
+
+def splice_markers(text: str, start_marker: str, end_marker: str, replacement: str) -> str:
+    """Replace whatever sits between two single-line markers, keeping markers in place."""
+    start = text.index(start_marker)
+    end = text.index(end_marker, start)
+    return (
+        text[: start + len(start_marker)]
+        + "\n"
+        + replacement
+        + "\n"
+        + " " * (len(text[: end].rsplit("\n", 1)[-1]))
+        + text[end:]
+    )
+
+
+# ---------- Workflow use case data ----------------------------------------
+
+WORKFLOW_USE_CASES = [
+    {
+        "slug":         "fpa-variance-pack",
+        "title":        "Monthly variance pack",
+        "description":  "FP&A's five-day rush from close to board-ready, compressed into one. The analyst spends the freed time interrogating numbers rather than producing them.",
+        "function":     "Finance",
+        "sub_function": "FP&A",
+        "workflow":     "Monthly close",
+        "process_slug": "monthly-close",
+        "function_slug": "finance",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "FP&A's five-day rush from close to board-ready, compressed into one. The analyst spends the freed time interrogating numbers rather than producing them.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the FP&amp;A function for one sprint.</strong> "
+            "Operators from our expert network – with fifty combined years inside finance functions – reviewed the "
+            "redesign at each checkpoint. Forward-deployed engineers built inside the team's existing ERP and BI stack. "
+            "One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today the cycle runs five days from close to board-ready. Three analysts, one controller, and a CFO who reads the pack on a plane.",
+        "situation_body": "Data lands on day one. Variance commentary trickles in from cost-centre owners through the week. The analyst spends most of the cycle moving numbers between tools – the interrogation work that justifies the role sits in the last hour of a hundred-hour cycle.",
+        "legacy_kpis": [
+            {"label": "Cycle time",        "value": "5 days", "sub": "Close to board-ready"},
+            {"label": "FTE load",          "value": "2.5",    "sub": "Analysts on the cycle each month"},
+            {"label": "Rework rate",       "value": "12%",    "sub": "Slides re-cut after CFO review"},
+            {"label": "Time on data prep", "value": "80%",    "sub": "Of analyst hours, not on analysis"},
+        ],
+        "legacy_nodes": [
+            {"id": "extract",    "label": "Pull GL extract",            "type": "manual", "tools": ["ERP", "Excel"],
+             "activities": ["Open the ERP and run the period-close extract.", "Export the trial balance to a workbook.", "Sense-check totals against the controller's sign-off note."]},
+            {"id": "reconcile",  "label": "Reconcile to actuals",       "type": "manual", "tools": ["Excel", "Journals"],
+             "activities": ["Match GL balances to sub-ledger reports.", "Investigate any unmatched lines line by line.", "Post late journal entries with the controller."]},
+            {"id": "variance",   "label": "Compute variances",          "type": "manual", "tools": ["Excel"],
+             "activities": ["Build the variance grid against budget and prior period.", "Tag exceptions over the materiality threshold.", "Forward the grid to cost-centre owners for commentary."]},
+            {"id": "commentary", "label": "Draft cost-centre commentary","type": "manual", "tools": ["Email", "Word"],
+             "activities": ["Chase cost-centre owners for write-ups.", "Edit the replies for tone and length.", "Reconcile contradictions between owner narratives."]},
+            {"id": "deck",       "label": "Compile board deck",         "type": "manual", "tools": ["PowerPoint"],
+             "activities": ["Hand-paste the variance grid into the template.", "Drop commentary into speaker notes.", "Re-format charts that broke when the data refreshed."]},
+            {"id": "review",     "label": "CFO review",                  "type": "human",  "tools": ["Meeting"],
+             "activities": ["Walk the CFO through the pack.", "Capture edits, send the file back to analysts.", "Iterate until the deck reads cleanly."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Two days to act on a five-day read-out.", "body": "Leadership reads the pack with two days left in the month. Most decisions slip into the next close."},
+            {"icon": "chat",  "title": "Commentary quality varies by cost-centre.", "body": "Some owners explain the driver. Some restate the number. The CFO learns to discount the weak write-ups."},
+            {"icon": "user",  "title": "Four hours producing for every hour analysing.", "body": "Analysts spend the cycle moving data between tools. The work that justifies the role sits at the end."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Cycle time",        "value": "1 day", "delta": "▼ 80% vs today"},
+            {"label": "FTE load",          "value": "0.5",   "delta": "▼ 80% vs today"},
+            {"label": "Rework rate",       "value": "2%",    "delta": "▼ 83% vs today"},
+            {"label": "Time on data prep", "value": "15%",   "delta": "▼ 65 points vs today"},
+        ],
+        "redesigned_nodes": [
+            {"id": "extract",    "label": "Auto GL pull",          "type": "auto",     "tools": ["ERP API", "Scheduler"],
+             "activities": ["Scheduled pull on the close-day calendar.", "Hashes the extract for lineage.", "Flags missing cost centres before reconciliation runs."]},
+            {"id": "reconcile",  "label": "Auto reconciliation",   "type": "auto",     "tools": ["Matching agent"],
+             "activities": ["Rules-first match across sub-ledgers.", "Routes residuals to the controller queue with the suspected journal.", "Logs every match decision for audit."]},
+            {"id": "variance",   "label": "Auto variance compute", "type": "auto",     "tools": ["Rules engine"],
+             "activities": ["Computes variances against budget, forecast, and prior period.", "Applies materiality thresholds set by the controller.", "Surfaces driver decomposition by volume / price / mix."]},
+            {"id": "commentary", "label": "Drafted commentary",    "type": "ai-human", "tools": ["LLM", "Retrieval", "Style guide"],
+             "activities": ["Drafts cost-centre commentary against the variance and prior cycles.", "Cites the source line for every claim.", "Cost-centre owner reviews and edits in place."]},
+            {"id": "deck",       "label": "Drafted board deck",    "type": "ai",       "tools": ["Deck assembler"],
+             "activities": ["Renders the templated pack from the variance and commentary.", "Charts refresh against the live data.", "Outputs a redline against last month's pack for the CFO."]},
+            {"id": "review",     "label": "CFO review and sign-off","type": "human",    "tools": ["Review queue"],
+             "activities": ["Reads the redline, edits inline, sign-off in one pass.", "Edits flow back into the style guide for next cycle.", "Signed pack publishes to the board portal automatically."]},
+        ],
+        "key_changes": [
+            {"theme": "Cycle compression", "bullets": [
+                "Five days to one day, close to board-ready.",
+                "GL pull, reconciliation, and variance compute run unattended overnight.",
+                "Commentary and deck draft surface on day one for the CFO.",
+            ]},
+            {"theme": "Analyst time", "bullets": [
+                "Data prep drops from 80 percent to 15 percent of analyst hours.",
+                "The freed time goes to interrogation, not production.",
+                "FTE load on the cycle falls from 2.5 to 0.5.",
+            ]},
+            {"theme": "Commentary quality", "bullets": [
+                "AI drafts anchor to the variance line and cite the source.",
+                "Cost-centre owners review in place rather than write from blank.",
+                "Style-guide edits feed back into the next cycle.",
+            ]},
+            {"theme": "Audit and control", "bullets": [
+                "Every reconciliation match decision is logged.",
+                "GL extracts are hashed for lineage and replay.",
+                "CFO sign-off captures in one review queue, not an email chain.",
+            ]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Process map, prompt library, controls register, and the rollout cadence we use on engagements.",
+    },
+]
+
+
 # ---------- Main entry -----------------------------------------------------
 
 def main():
@@ -757,6 +1341,45 @@ def main():
         html = render_use_case(slug, industry, functions, role, h1, blurb)
         out.write_text(html, encoding="utf-8")
         print(f"wrote {out.relative_to(REPO)}")
+
+    # Rich workflow use cases
+    for case in WORKFLOW_USE_CASES:
+        out = REPO / "use-cases" / f"{case['slug']}.html"
+        out.write_text(render_workflow_use_case(case), encoding="utf-8")
+        print(f"wrote {out.relative_to(REPO)}")
+
+    if WORKFLOW_USE_CASES:
+        # Splice catalogue cards into /use-cases.html
+        catalogue_path = REPO / "use-cases.html"
+        if catalogue_path.exists():
+            text = catalogue_path.read_text(encoding="utf-8")
+            start = "<!-- WORKFLOW_USE_CASES:START -->"
+            end   = "<!-- WORKFLOW_USE_CASES:END -->"
+            if start in text and end in text:
+                cards = "\n".join(render_workflow_card(c) for c in WORKFLOW_USE_CASES)
+                before, _, rest = text.partition(start)
+                _, _, after = rest.partition(end)
+                catalogue_path.write_text(
+                    f"{before}{start}\n{cards}\n      {end}{after}",
+                    encoding="utf-8",
+                )
+                print(f"spliced workflow cards into {catalogue_path.relative_to(REPO)}")
+
+        # Splice sitemap entries
+        sitemap_path = REPO / "sitemap.xml"
+        if sitemap_path.exists():
+            text = sitemap_path.read_text(encoding="utf-8")
+            start = "<!-- WORKFLOW_USE_CASES:START -->"
+            end   = "<!-- WORKFLOW_USE_CASES:END -->"
+            if start in text and end in text:
+                entries = "\n".join(render_workflow_sitemap_entry(c) for c in WORKFLOW_USE_CASES)
+                before, _, rest = text.partition(start)
+                _, _, after = rest.partition(end)
+                sitemap_path.write_text(
+                    f"{before}{start}\n{entries}\n  {end}{after}",
+                    encoding="utf-8",
+                )
+                print(f"spliced workflow entries into {sitemap_path.relative_to(REPO)}")
 
 
 if __name__ == "__main__":
