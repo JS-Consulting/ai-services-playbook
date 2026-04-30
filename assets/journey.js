@@ -9,9 +9,10 @@
   if (!steps.length) return;
 
   const mq = window.matchMedia('(max-width: 820px)');
+  const verticalAlways = rail.dataset.orientation === 'vertical';
   function setProgress(pct) {
     if (!prog) return;
-    if (mq.matches) {
+    if (verticalAlways || mq.matches) {
       prog.style.height = pct + '%';
       prog.style.width = '';
     } else {
