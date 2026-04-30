@@ -171,19 +171,37 @@
 
 .wf-node-tools {
   display: flex;
-  flex-wrap: wrap;
-  gap: .3rem;
+  gap: .35rem;
 }
 
-.wf-node-tool {
-  font-size: .68rem;
-  letter-spacing: .02em;
-  color: var(--fg-3);
-  padding: .15rem .45rem;
-  border-radius: 4px;
-  background: rgba(255,255,255,.035);
-  border: 1px solid rgba(255,255,255,.06);
+.wf-tool {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  display: grid;
+  place-items: center;
+  color: var(--fg-2);
+  flex: 0 0 auto;
+}
+
+.wf-tool svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wf-tool.is-more {
   font-family: var(--f-sans);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--fg-2);
 }
 
 .wf-node-step {

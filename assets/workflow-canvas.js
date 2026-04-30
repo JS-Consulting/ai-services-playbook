@@ -15,7 +15,37 @@
     sync: '<path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/>',
     check: '<path d="m4 12 5 5L20 6"/>',
     flow: '<rect x="3" y="4" width="6" height="6" rx="1"/><rect x="15" y="4" width="6" height="6" rx="1"/><rect x="9" y="14" width="6" height="6" rx="1"/><path d="M6 10v2h12v-2M12 14v-2"/>',
+    doc: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/>',
+    book: '<path d="M4 4a2 2 0 0 1 2-2h13v17H6a2 2 0 0 0-2 2z"/><path d="M4 19h15"/>',
+    users: '<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15 20a4 4 0 0 1 6-3"/>',
+    calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5M3 18l9 5 9-5"/>',
+    wrench: '<path d="M14.7 6.3a4 4 0 0 0 5.4 5.4L21 14l-7 7-2.3-1a4 4 0 0 0-5.4-5.4L4 12l7-7z"/>',
   };
+
+  const TOOL_ICON = {
+    'erp': 'database',
+    'erp api': 'database',
+    'excel': 'table',
+    'journals': 'book',
+    'email': 'mail',
+    'word': 'doc',
+    'powerpoint': 'deck',
+    'deck assembler': 'layers',
+    'meeting': 'users',
+    'scheduler': 'calendar',
+    'matching agent': 'bolt',
+    'rules engine': 'bolt',
+    'llm': 'bot',
+    'retrieval': 'review',
+    'style guide': 'book',
+    'review queue': 'check',
+  };
+
+  function toolIcon(name) {
+    const key = (name || '').toLowerCase().trim();
+    return ICONS[TOOL_ICON[key]] || ICONS.wrench;
+  }
 
   const TYPE_LABEL = {
     manual: 'Manual',
@@ -30,9 +60,16 @@
   }
 
   function buildNode(node, idx) {
-    const tools = (node.tools || [])
-      .map(t => `<span class="wf-node-tool">${t}</span>`)
+    const allTools = node.tools || [];
+    const max = 3;
+    const visible = allTools.slice(0, max);
+    const overflow = allTools.length - visible.length;
+    const tiles = visible
+      .map(t => `<span class="wf-tool" title="${t}"><svg viewBox="0 0 24 24" aria-hidden="true">${toolIcon(t)}</svg></span>`)
       .join('');
+    const moreTile = overflow > 0
+      ? `<span class="wf-tool is-more" title="${allTools.slice(max).join(', ')}">+${overflow}</span>`
+      : '';
     return `
       <button class="wf-node" data-node-id="${node.id}" data-type="${node.type}" type="button">
         <span class="wf-node-step">${String(idx + 1).padStart(2, '0')}</span>
@@ -41,7 +78,7 @@
           <span class="wf-node-badge">${TYPE_LABEL[node.type] || node.type}</span>
         </span>
         <span class="wf-node-title">${node.label}</span>
-        ${tools ? `<span class="wf-node-tools">${tools}</span>` : ''}
+        ${tiles ? `<span class="wf-node-tools">${tiles}${moreTile}</span>` : ''}
       </button>
     `;
   }
