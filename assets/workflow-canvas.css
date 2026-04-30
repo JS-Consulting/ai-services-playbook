@@ -196,6 +196,14 @@
   stroke-linejoin: round;
 }
 
+.wf-tool img {
+  width: 14px;
+  height: 14px;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: .82;
+}
+
 .wf-tool.is-more {
   font-family: var(--f-sans);
   font-size: .68rem;

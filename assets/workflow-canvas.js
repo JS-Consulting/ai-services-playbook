@@ -47,6 +47,38 @@
     return ICONS[TOOL_ICON[key]] || ICONS.wrench;
   }
 
+  const BRAND_ICON = {
+    'excel': 'excel.svg',
+    'microsoft excel': 'excel.svg',
+    'powerpoint': 'powerpoint.svg',
+    'pptx': 'powerpoint.svg',
+    'microsoft powerpoint': 'powerpoint.svg',
+    'sheets': 'sheets.svg',
+    'google sheets': 'sheets.svg',
+    'docs': 'docs.svg',
+    'google docs': 'docs.svg',
+    'slides': 'slides.svg',
+    'google slides': 'slides.svg',
+    'gemini': 'gemini.svg',
+    'google gemini': 'gemini.svg',
+    'claude': 'claude.svg',
+    'anthropic': 'claude.svg',
+    'chatgpt': 'chatgpt.svg',
+    'openai': 'chatgpt.svg',
+    'copilot': 'copilot.svg',
+    'github copilot': 'copilot.svg',
+    'microsoft copilot': 'copilot.svg',
+  };
+
+  function toolTile(t) {
+    const key = (t || '').toLowerCase().trim();
+    const brand = BRAND_ICON[key];
+    if (brand) {
+      return `<span class="wf-tool" title="${t}"><img src="/assets/tool-icons/${brand}" alt="${t}"></span>`;
+    }
+    return `<span class="wf-tool" title="${t}"><svg viewBox="0 0 24 24" aria-hidden="true">${toolIcon(t)}</svg></span>`;
+  }
+
   const TYPE_LABEL = {
     manual: 'Manual',
     auto: 'Automated',
@@ -64,9 +96,7 @@
     const max = 3;
     const visible = allTools.slice(0, max);
     const overflow = allTools.length - visible.length;
-    const tiles = visible
-      .map(t => `<span class="wf-tool" title="${t}"><svg viewBox="0 0 24 24" aria-hidden="true">${toolIcon(t)}</svg></span>`)
-      .join('');
+    const tiles = visible.map(toolTile).join('');
     const moreTile = overflow > 0
       ? `<span class="wf-tool is-more" title="${allTools.slice(max).join(', ')}">+${overflow}</span>`
       : '';
