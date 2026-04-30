@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly variance pack – Use Cases – Convolving</title>
+<meta name="description" content="FP&A's five-day rush from close to board-ready, compressed into one. The analyst spends the freed time interrogating numbers rather than producing them.">
+  <meta property="og:title" content="Monthly variance pack – Use Cases – Convolving">
+  <meta property="og:description" content="FP&A's five-day rush from close to board-ready, compressed into one. The analyst spends the freed time interrogating numbers rather than producing them.">
+  <meta property="og:url" content="https://convolving.com/use-cases/fpa-variance-pack">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Convolving">
+  <meta property="og:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Convolving – AI Transformation">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Monthly variance pack – Use Cases – Convolving">
+  <meta name="twitter:description" content="FP&A's five-day rush from close to board-ready, compressed into one. The analyst spends the freed time interrogating numbers rather than producing them.">
+  <meta name="twitter:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://convolving.com/use-cases/fpa-variance-pack#article",
+        "headline": "Monthly variance pack.",
+        "description": "FP&A's five-day rush from close to board-ready, compressed into one. The analyst spends the freed time interrogating numbers rather than producing them.",
+        "url": "https://convolving.com/use-cases/fpa-variance-pack",
+        "publisher": { "@id": "https://convolving.com/#organization" },
+        "author": { "@id": "https://convolving.com/#organization" },
+        "isPartOf": { "@id": "https://convolving.com/#website" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://convolving.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Use Cases", "item": "https://convolving.com/use-cases" },
+          { "@type": "ListItem", "position": 3, "name": "Monthly variance pack.", "item": "https://convolving.com/use-cases/fpa-variance-pack" }
+        ]
+      }
+    ]
+  }
+  </script>
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style data-critical>@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url('/assets/fonts/dmsans.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Fraunces';font-style:normal;font-weight:300 700;font-display:swap;src:url('/assets/fonts/fraunces.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Fraunces';font-style:italic;font-weight:300 700;font-display:swap;src:url('/assets/fonts/fraunces-italic.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('/assets/fonts/jetbrains-mono.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--bg:#0b0c11;--surface:#171a26;--line:rgba(255,255,255,.07);--fg:#eef0f4;--fg-2:rgba(238,240,244,.66);--fg-3:rgba(238,240,244,.42);--accent:#6aa6ff;--accent-2:#a8c7ff;--accent-warm:#f2c58a;--f-serif:'Fraunces',Georgia,serif;--f-sans:'DM Sans',-apple-system,'Helvetica Neue',Arial,sans-serif;--container:1280px;--gutter:clamp(1.25rem,4vw,3rem);--radius-pill:100px;--ease:cubic-bezier(.2,.7,.2,1);--color-bg:#0d0e13;--color-text:#eef0f4;--color-text-secondary:rgba(238,240,244,.58);--color-accent:#3b82f6;--color-accent-light:#93c5fd;--color-btn-bg:#eef0f4;--color-btn-text:#0d0e13;--font-heading:var(--f-serif);--font-body:var(--f-sans)}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--f-sans);font-size:16px;line-height:1.6;color:var(--fg);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}img{max-width:100%;display:block;height:auto}h1,h2,h3,h4{font-family:var(--f-serif);font-weight:300;letter-spacing:-.035em;line-height:1.02;color:var(--fg)}h1{font-size:clamp(3rem,7.4vw,6.75rem);letter-spacing:-.045em;text-wrap:balance}.container{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}.header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%);background:rgba(11,12,17,.72);border-bottom:1px solid var(--line)}.header-inner{max-width:1440px;margin:0 auto;padding:.9rem var(--gutter);display:flex;align-items:center;gap:2rem}.header-logo img{display:block}.nav{display:flex;gap:.25rem;align-items:center;margin-left:auto}.nav a{font-size:.875rem;font-weight:450;color:var(--fg-2);padding:.55rem .9rem;border-radius:999px}.nav-cta .btn{background:var(--fg);color:#0b0c11;border-radius:999px;padding:.5rem 1.1rem;display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:500}.nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:.5rem;margin-left:auto}.nav-toggle span{width:22px;height:1.5px;background:var(--fg);display:block}@media(max-width:820px){.nav{display:none}.nav-toggle{display:flex}}.btn{display:inline-flex;align-items:center;gap:.7rem;padding:.75rem 1rem .75rem 1.35rem;border-radius:999px;font-family:var(--f-sans);font-size:.9rem;font-weight:500;background:var(--fg);color:#0b0c11}.idx-hero{min-height:80vh;display:flex;flex-direction:column;justify-content:flex-end;padding:6rem 0 4rem;position:relative;overflow:hidden;background:#0d0e13;isolation:isolate}.idx-hero-waves{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.idx-hero .idx-hero-container{max-width:1200px;margin:0 auto;padding:0 var(--gutter);position:relative;z-index:1;width:100%}.idx-hero-content{max-width:1000px;position:relative;z-index:1}.idx-hero-eyebrow{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#93c5fd;margin:0 0 1.25rem;line-height:1}.idx-hero h1{margin:0 0 1.75rem;font-family:var(--f-serif);font-size:clamp(2.75rem,6.5vw,5.25rem);letter-spacing:-.05em;line-height:1;font-weight:400;color:#eef0f4}.idx-hero .idx-hero-btn{display:inline-flex;align-items:center;gap:.625rem;padding:.75rem 1rem .75rem 1.5rem;border-radius:100px;background:#eef0f4;color:#0d0e13;font-family:var(--f-sans);font-size:.875rem;font-weight:500;text-decoration:none}.serif-italic{font-family:var(--f-serif);font-style:italic;font-weight:300}.reveal{opacity:0;transform:translateY(15px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.reveal.show,.reveal.visible{opacity:1;transform:none}.uc-hero-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 2.25rem}.uc-hero-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .85rem;border-radius:999px;border:1px solid rgba(238,240,244,.18);background:rgba(238,240,244,.04);font-family:var(--f-sans);font-size:.78rem;color:var(--fg-2);letter-spacing:.01em}.uc-hero-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent-2);display:inline-block}.uc-hero-pill.is-fn::before{background:var(--accent-warm)}@media(max-width:820px){.idx-hero{min-height:0;padding:8rem 0 3rem;justify-content:flex-start}.idx-hero h1{font-size:clamp(2.25rem,9vw,3.25rem);margin-bottom:1.25rem}.idx-hero-eyebrow{margin-bottom:.85rem}}</style>
+  <link rel="preload" href="/assets/site.css?v=20260430h" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/site.css?v=20260430h"></noscript>
+  <link rel="preload" href="/assets/workflow-canvas.css?v=20260430" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/workflow-canvas.css?v=20260430"></noscript>
+</head>
+<body data-accent="blue">
+
+<header class="header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="Convolving home">
+        <img src="/assets/convolving-logo-white.svg" alt="Convolving" width="198" height="28">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="/ai-transformation">AI Transformation</a>
+        <a href="/who-we-are">Who We Are</a>
+        <a href="/use-cases" class="active">Use Cases</a>
+        <span class="nav-cta">
+          <a href="mailto:team@convolving.com" class="btn">
+            Book a Coffee
+            <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+          </a>
+        </span>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+<section class="idx-hero">
+  <canvas class="idx-hero-waves"></canvas>
+  <div class="idx-hero-container">
+    <div class="idx-hero-content">
+      <p class="idx-hero-eyebrow">Use case</p>
+      <h1>Monthly variance pack.</h1>
+      <div class="uc-hero-pills">
+        <span class="uc-hero-pill">Monthly close</span>
+        <span class="uc-hero-pill is-fn">Finance</span>
+      </div>
+      <a href="#playbook" class="idx-hero-btn">
+        Get the playbook
+        <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+<script src="/assets/index-hero-waves.js"></script>
+
+<section class="section">
+  <div class="container">
+    <div class="eyebrow reveal">Situation</div>
+    <p class="lede reveal" style="margin-top:1.5rem">FP&amp;A's five-day rush from close to board-ready, compressed into one. The analyst spends the freed time interrogating numbers rather than producing them.</p>
+    <p class="reveal" style="margin-top:1.25rem;color:var(--fg-2);max-width:62ch">Every month the same shape. Data drops on day one, the deck is due day five. Three analysts, one controller, and a CFO who reads the read-out on a plane. The work that matters – why a line moved, what to do about it – sits in the last hour of a hundred-hour cycle.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Workflow today</div>
+      <h2>The cycle as it runs.</h2>
+      <p style="max-width:62ch">Click any node to see the activities and tools behind it. Open the canvas in fullscreen for the horizontal view.</p>
+    </div>
+
+    <div class="wf reveal" data-workflow-id="asis"></div>
+    <script type="application/json" data-workflow="asis">{
+      "nodes": [
+        {
+          "id": "extract",
+          "label": "Pull GL extract",
+          "type": "manual",
+          "icon": "database",
+          "tools": ["ERP", "Excel"],
+          "activities": [
+            "Open the ERP and run the period-close extract.",
+            "Export the trial balance to a workbook.",
+            "Sense-check totals against the controller's sign-off note."
+          ]
+        },
+        {
+          "id": "reconcile",
+          "label": "Reconcile to actuals",
+          "type": "manual",
+          "icon": "table",
+          "tools": ["Excel", "Journals"],
+          "activities": [
+            "Match GL balances to sub-ledger reports.",
+            "Investigate any unmatched lines line by line.",
+            "Post late journal entries with the controller."
+          ]
+        },
+        {
+          "id": "variance",
+          "label": "Compute variances",
+          "type": "manual",
+          "icon": "sigma",
+          "tools": ["Excel"],
+          "activities": [
+            "Build the variance grid against budget and prior period.",
+            "Tag exceptions over the materiality threshold.",
+            "Forward the grid to cost-centre owners for commentary."
+          ]
+        },
+        {
+          "id": "commentary",
+          "label": "Draft cost-centre commentary",
+          "type": "manual",
+          "icon": "mail",
+          "tools": ["Email", "Word"],
+          "activities": [
+            "Chase cost-centre owners for write-ups.",
+            "Edit the replies for tone and length.",
+            "Reconcile contradictions between owner narratives."
+          ]
+        },
+        {
+          "id": "deck",
+          "label": "Compile board deck",
+          "type": "manual",
+          "icon": "deck",
+          "tools": ["PowerPoint"],
+          "activities": [
+            "Hand-paste the variance grid into the template.",
+            "Drop commentary into speaker notes.",
+            "Re-format charts that broke when the data refreshed."
+          ]
+        },
+        {
+          "id": "review",
+          "label": "CFO review",
+          "type": "human",
+          "icon": "review",
+          "tools": ["Meeting"],
+          "activities": [
+            "Walk the CFO through the pack.",
+            "Capture edits, send the file back to analysts.",
+            "Iterate until the deck reads cleanly."
+          ]
+        }
+      ]
+    }</script>
+
+    <div class="wf-kpis reveal">
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Cycle time</span>
+        <span class="wf-kpi-value">5 days</span>
+        <span class="wf-kpi-sub">Close to board-ready</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">FTE load</span>
+        <span class="wf-kpi-value">2.5</span>
+        <span class="wf-kpi-sub">Analysts on the cycle each month</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Rework rate</span>
+        <span class="wf-kpi-value">12%</span>
+        <span class="wf-kpi-sub">Slides re-cut after CFO review</span>
+      </div>
+      <div class="wf-kpi">
+        <span class="wf-kpi-label">Time on data prep</span>
+        <span class="wf-kpi-value">80%</span>
+        <span class="wf-kpi-sub">Of analyst hours, not on analysis</span>
+      </div>
+    </div>
+    <p class="wf-illustrative reveal">Indicative figures from comparable engagements. Replaced with measured baselines once a client permissions the data.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Complication</div>
+      <h2>Where the cycle gives way.</h2>
+    </div>
+    <div class="cmp-grid reveal">
+      <div class="cmp-node">
+        <span class="cmp-node-num">EFFICIENCY</span>
+        <h3 class="cmp-node-title">Two days to act on a five-day read-out.</h3>
+        <p class="cmp-node-body">By the time the pack lands, leadership has the next month's first week to react before the cycle starts again. Decisions slip into the following close.</p>
+      </div>
+      <div class="cmp-node">
+        <span class="cmp-node-num">ENGAGEMENT</span>
+        <h3 class="cmp-node-title">Commentary depth follows whoever replied.</h3>
+        <p class="cmp-node-body">Variance write-ups vary by cost-centre owner. Some explain the driver; some restate the number. The CFO learns to discount the weak ones.</p>
+      </div>
+      <div class="cmp-node">
+        <span class="cmp-node-num">HUMAN COST</span>
+        <h3 class="cmp-node-title">Four hours producing for every hour analysing.</h3>
+        <p class="cmp-node-body">Analysts spend the bulk of the cycle moving data between tools. The interrogation work that justifies the role sits in the last short window.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head-inline reveal">
+      <div class="section-badge">Resolution</div>
+      <h2>The AI-native cycle.</h2>
+      <p style="max-width:62ch">Same six steps. Five executed by software, one by the CFO. Click any node to see what the redesign does in that step.</p>
+    </div>
+
+    <div class="wf reveal" data-workflow-id="tobe"></div>
+    <script type="application/json" data-workflow="tobe">{
+      "nodes": [
+        {
+          "id": "extract",
+          "label": "Auto GL pull",
+          "type": "auto",
+          "icon": "sync",
+          "tools": ["ERP API", "Scheduler"],
+          "activities": [
+            "Scheduled pull on the close-day calendar.",
+            "Hashes the extract for lineage.",
+            "Flags missing cost centres before reconciliation runs."
+          ]
+        },
+        {
+          "id": "reconcile",
+          "label": "Auto reconciliation",
+          "type": "auto",
+          "icon": "bolt",
+          "tools": ["Matching agent"],
+          "activities": [
+            "Rules-first match across sub-ledgers.",
+            "Routes residuals to the controller queue with the suspected journal.",
+            "Logs every match decision for audit."
+          ]
+        },
+        {
+          "id": "variance",
+          "label": "Auto variance compute",
+          "type": "auto",
+          "icon": "sigma",
+          "tools": ["Rules engine"],
+          "activities": [
+            "Computes variances against budget, forecast, and prior period.",
+            "Applies materiality thresholds set by the controller.",
+            "Surfaces driver decomposition by volume / price / mix."
+          ]
+        },
+        {
+          "id": "commentary",
+          "label": "Drafted commentary",
+          "type": "ai-human",
+          "icon": "sparkle",
+          "tools": ["LLM", "Retrieval", "Style guide"],
+          "activities": [
+            "Drafts cost-centre commentary against the variance and prior cycles.",
+            "Cites the source line for every claim.",
+            "Cost-centre owner reviews and edits in place."
+          ]
+        },
+        {
+          "id": "deck",
+          "label": "Drafted board deck",
+          "type": "ai",
+          "icon": "deck",
+          "tools": ["Deck assembler"],
+          "activities": [
+            "Renders the templated pack from the variance and commentary.",
+            "Charts refresh against the live data.",
+            "Outputs a redline against last month's pack for the CFO."
+          ]
+        },
+        {
+          "id": "review",
+          "label": "CFO review and sign-off",
+          "type": "human",
+          "icon": "check",
+          "tools": ["Review queue"],
+          "activities": [
+            "Reads the redline, edits inline, sign-off in one pass.",
+            "Edits flow back into the style guide for next cycle.",
+            "Signed pack publishes to the board portal automatically."
+          ]
+        }
+      ]
+    }</script>
+
+    <div class="wf-kpis reveal">
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Cycle time</span>
+        <span class="wf-kpi-value">1 day</span>
+        <span class="wf-kpi-delta">▼ 80% vs today</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">FTE load</span>
+        <span class="wf-kpi-value">0.5</span>
+        <span class="wf-kpi-delta">▼ 80% vs today</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Rework rate</span>
+        <span class="wf-kpi-value">2%</span>
+        <span class="wf-kpi-delta">▼ 83% vs today</span>
+      </div>
+      <div class="wf-kpi is-improved">
+        <span class="wf-kpi-label">Time on data prep</span>
+        <span class="wf-kpi-value">15%</span>
+        <span class="wf-kpi-delta">▼ 65 points vs today</span>
+      </div>
+    </div>
+    <p class="wf-illustrative reveal">Indicative figures from comparable engagements. Replaced with measured deltas once a client permissions the data.</p>
+  </div>
+</section>
+
+<section class="cta cta-playbook" id="playbook">
+  <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+  <div class="container cta-inner">
+    <h2>Build it inside the team.</h2>
+    <p>The redesign above ships as a step-by-step playbook. Process map, prompt library, controls register, and the rollout cadence we use on engagements.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn" data-playbook-download>
+        Get the playbook
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+      <a href="mailto:team@convolving.com" class="btn btn-ghost">
+        Or book a coffee
+        <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-lead">
+        <h3>Work with us.<br>Start with a coffee.</h3>
+        <p>No pitch, no pressure. Just a conversation about where AI fits in your process.</p>
+        <a href="mailto:team@convolving.com" class="btn">
+          Book a coffee
+          <span class="dot"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-list">
+          <li><a href="/ai-transformation">AI Transformation →</a></li>
+          <li><a href="/use-cases">Use Cases →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-list">
+          <li><a href="/who-we-are">Who We Are</a></li>
+          <li><a href="mailto:team@convolving.com">Book a coffee</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Elsewhere</div>
+        <ul class="footer-list">
+          <li><a href="https://www.linkedin.com/in/cweibel/" target="_blank" rel="noopener">Cameron · LinkedIn</a></li>
+          <li><a href="https://www.linkedin.com/in/srj523/" target="_blank" rel="noopener">Spencer · LinkedIn</a></li>
+          <li><a href="mailto:team@convolving.com">team@convolving.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Convolving GmbH · Oberrieden, Switzerland · © 2026</span>
+      <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="#" data-cookie-prefs>Cookie preferences</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/cookie-consent.js" defer></script>
+<script src="/assets/subpage.js?v=20260430a"></script>
+<script src="/assets/workflow-canvas.js?v=20260430" defer></script>
+</body>
+</html>
