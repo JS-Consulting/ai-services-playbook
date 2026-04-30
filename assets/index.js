@@ -66,17 +66,19 @@ function initWaves(canvasId) {
   let sm = { x: 0.5, y: 0.5 };
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  const ro = new ResizeObserver(entries => {
-    const { width, height } = entries[0].contentRect;
-    w = width;
-    h = height;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
+  function resize() {
+    const r = parent.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    w = r.width;
+    h = r.height;
+    canvas.width = r.width * dpr;
+    canvas.height = r.height * dpr;
+    canvas.style.width = r.width + 'px';
+    canvas.style.height = r.height + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  });
-  ro.observe(parent);
+  }
+  window.addEventListener('resize', resize);
+  resize();
 
   parent.addEventListener('mousemove', (e) => {
     const r = parent.getBoundingClientRect();
