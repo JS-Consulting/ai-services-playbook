@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Static marketing site for Convolving (convolving.com), a Swiss industry-agnostic AI services firm. Two commercial offerings (AI Transformation, AI Engineering), a Who We Are page, and a filterable Use Cases catalogue. Plain HTML + CSS + vanilla JS, no build step, deployed on Vercel (`vercel.json` at root configures clean URLs, asset cache headers, and 301 redirects from retired URLs).
+Static marketing site for Convolving (convolving.com), a Swiss industry-agnostic AI services firm. One commercial offering (AI Transformation), a Who We Are page, and a filterable Use Cases catalogue. Plain HTML + CSS + vanilla JS, no build step, deployed on Vercel (`vercel.json` at root configures clean URLs, asset cache headers, and 301 redirects from retired URLs).
 
 ## Running locally
 
@@ -19,13 +19,12 @@ For devtools-driven verification (screenshots, computed styles), use `file:///` 
 
 ## Site structure
 
-- **Top-level pages** (root): `index.html`, `ai-transformation.html`, `ai-engineering.html`, `who-we-are.html`, `use-cases.html`, `privacy.html`, `terms.html`.
+- **Top-level pages** (root): `index.html`, `ai-transformation.html`, `who-we-are.html`, `use-cases.html`, `privacy.html`, `terms.html`.
 - **`ai-transformation/*.html`** – 4 sub-service pages: `use-case-lab`, `workflow-redesign`, `upskilling`, `ai-tooling`.
-- **`ai-engineering/*.html`** – 5 sub-service pages: `application-development`, `agentic-solutions`, `model-fine-tuning`, `data-engineering`, `code-migration`.
 - **`use-cases/*.html`** – 15 use-case one-pagers (3 per industry × 5 industries: Financial Services, Retail, Industrial Products, Healthcare, Legal). **Before editing any file in `use-cases/` or writing a new one-pager, read `use-cases/STYLE.md`** – it defines the structural template, voice, word-choice allow/avoid list, illustrative-outcomes rule, and pre-ship checklist. It extends `design.md` and does not replace it.
 - **`scripts/generate_pages.py`** – one-shot Python generator that produced the 9 offering sub-pages and the 15 use-case one-pagers. Re-run with `python3 scripts/generate_pages.py` from repo root after editing the spec dictionaries inside it; commit both the script and the regenerated HTML.
 
-Top nav across all pages is structurally identical: `[logo] AI Transformation · AI Engineering · Who We Are · Use Cases · [Book a Coffee]`. The `.nav-cta` "Book a Coffee" pill is included on every page. If it stops rendering on a page, the bug is almost always CSS specificity – see **Gotchas** below.
+Top nav across all pages is structurally identical: `[logo] AI Transformation · Who We Are · Use Cases · [Book a Coffee]`. The `.nav-cta` "Book a Coffee" pill is included on every page. If it stops rendering on a page, the bug is almost always CSS specificity – see **Gotchas** below.
 
 The Use Cases catalogue at `/use-cases` is filterable client-side by Industry / Function / Role. Each card carries `data-industry`, `data-function` (space-separated), and `data-role` attributes that drive the filter. Filter state is mirrored to the URL query string, so `/use-cases?industry=healthcare&role=manager` deep-links pre-applied filters. Filter logic lives in `assets/use-cases-filter.js`; filter pill CSS is inline in `use-cases.html` to avoid a sitewide cache bump.
 
@@ -59,7 +58,7 @@ HTML pages are not in `/assets/` and use the platform default (revalidate each l
 ## Path conventions
 
 - **Top-level pages** (`index.html`, the offering hubs, `who-we-are.html`, `use-cases.html`, `privacy.html`, `terms.html`) use either relative (`assets/...`) or absolute (`/assets/...`) asset paths. Internal links can use either.
-- **Sub-pages** (`ai-transformation/*.html`, `ai-engineering/*.html`, `use-cases/*.html`) MUST use absolute paths (`/assets/...`, `/ai-transformation`, etc.) for both assets and internal links. Relative paths break because the sub-page is one directory deep.
+- **Sub-pages** (`ai-transformation/*.html`, `use-cases/*.html`) MUST use absolute paths (`/assets/...`, `/ai-transformation`, etc.) for both assets and internal links. Relative paths break because the sub-page is one directory deep.
 
 ## Vercel redirects
 
@@ -69,7 +68,8 @@ HTML pages are not in `/assets/` and use the platform default (revalidate each l
 |---|---|
 | `/strategy` | `/ai-transformation` |
 | `/infrastructure` | `/ai-transformation/workflow-redesign` |
-| `/partnerships` | `/ai-engineering` |
+| `/partnerships` | `/ai-transformation` |
+| `/ai-engineering` and `/ai-engineering/*` | `/ai-transformation` |
 | `/insights` and `/insights/*` | `/use-cases` |
 | `/state-of-the-union` and `/state-of-the-union/*` | `/use-cases/ic-briefing-redesign` |
 | `/team` | `/who-we-are` |

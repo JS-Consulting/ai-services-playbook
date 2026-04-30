@@ -2,7 +2,7 @@
 One-shot page generator for the Tenex-shaped IA pivot.
 
 Generates the offering sub-pages and the 15 use-case one-pager placeholders.
-The hubs (ai-transformation, ai-engineering, who-we-are, use-cases) and the
+The hubs (ai-transformation, who-we-are, use-cases) and the
 homepage are written by hand because they have richer, page-unique structures.
 
 Run from repo root:
@@ -96,7 +96,6 @@ def header(active: str) -> str:
     """Top nav. `active` is one of the four nav slugs or empty."""
     items = [
         ("ai-transformation", "AI Transformation"),
-        ("ai-engineering", "AI Engineering"),
         ("who-we-are", "Who We Are"),
         ("use-cases", "Use Cases"),
     ]
@@ -165,7 +164,6 @@ def cta_and_footer(secondary_label: str, secondary_href: str) -> str:
                 <div class="footer-col-title">Services</div>
                 <ul class="footer-list">
                   <li><a href="/ai-transformation">AI Transformation →</a></li>
-                  <li><a href="/ai-engineering">AI Engineering →</a></li>
                   <li><a href="/use-cases">Use Cases →</a></li>
                 </ul>
               </div>
@@ -224,7 +222,7 @@ def page_shell(
   <meta property="og:image" content="https://convolving.com/assets/Convolving-OG-banner-sine.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Convolving – AI Transformation and AI Engineering">
+  <meta property="og:image:alt" content="Convolving – AI Transformation">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{title}">
@@ -510,168 +508,6 @@ TRANSFORMATION_SUBPAGES = [
     },
 ]
 
-ENGINEERING_SUBPAGES = [
-    {
-        "slug": "application-development",
-        "title": "Application Development – AI Engineering – Convolving",
-        "description": "Full-stack AI-powered application development, from backend services to frontend UI, shipped on outcome-based pricing.",
-        "eyebrow": "AI Engineering · Application Development",
-        "h1": "Production-grade applications, shipped fast.",
-        "lede": "End-to-end product engineering on outcome-based pricing. Backend services, data pipelines, and front-end interfaces built by senior engineers with AI acceleration baked into the development loop.",
-        "what_it_is": [
-            "Application Development is the full-stack engineering offering. We take a redesigned workflow or product spec and ship it as a running application – backend services, data layer, integrations, and a front-end interface designed for the people who will actually use it.",
-            "Pricing is outcome-based. The client pays for features delivered to a defined acceptance criteria, not hours logged. That changes the incentive and the speed.",
-            "Stack is selected on a per-project basis. Default lean is TypeScript on Vercel for product surfaces, Python for data and model work, and Postgres for state.",
-        ],
-        "how_it_works": [
-            ("Spec and acceptance.", "Week 0 – what ships, when, and what counts as done"),
-            ("Build sprints.", "2-week cadence – running software at the end of every sprint"),
-            ("Hardening.", "Final sprint – security review, observability, documentation"),
-            ("Hand-over.", "On request – internal team onboarded, or we keep operating it"),
-        ],
-        "deliverables": [
-            "Running application",
-            "Source code in your repository",
-            "Documentation and runbooks",
-            "Test suite",
-            "Observability hooks",
-            "Hand-over session",
-        ],
-        "featured": [
-            ("ic-briefing-redesign", "IC briefing redesign.", "The application backing the redesigned IC briefing workflow."),
-            ("matter-intake-triage", "Matter intake triage.", "Intake form, triage logic, and routing engine."),
-            ("patient-intake-triage", "Patient intake triage.", "Intake interface and triage logic with audit-grade traceability."),
-        ],
-    },
-    {
-        "slug": "agentic-solutions",
-        "title": "Agentic Solutions – AI Engineering – Convolving",
-        "description": "Custom agentic systems that complete multi-step tasks against your workflows, your data, and your tools.",
-        "eyebrow": "AI Engineering · Agentic Solutions",
-        "h1": "Agents that complete the work.",
-        "lede": "Custom agentic systems for multi-step workflows. Tool use, retrieval, evaluation harnesses, and human-in-the-loop checkpoints – built against the workflow you actually run, not a generic pattern.",
-        "what_it_is": [
-            "Agentic Solutions is the engineering offering for workflows where the AI does not just answer a question – it completes a series of steps against your tools, data, and policies.",
-            "We design the agent architecture against a specific workflow, with retrieval over your documents, tool use against your systems, and human checkpoints where the risk demands it. Every agent ships with an evaluation harness so you can tell when it regresses.",
-            "Agents are deployed on infrastructure the client controls. Where the data warrants it, the model itself is run on-prem or in the client's tenancy.",
-        ],
-        "how_it_works": [
-            ("Workflow capture.", "Week 0-1 – the steps, the tools, the decision points, the policies"),
-            ("Architecture and evals.", "Week 2 – the agent design plus the harness that scores it"),
-            ("Build and iterate.", "Week 3-6 – evaluation-driven development against the harness"),
-            ("Deploy and monitor.", "Week 6+ – live in your environment, with regression telemetry"),
-        ],
-        "deliverables": [
-            "Agent system in your environment",
-            "Evaluation harness",
-            "Tool integrations",
-            "Retrieval layer",
-            "Monitoring dashboard",
-            "Update playbook",
-        ],
-        "featured": [
-            ("diligence-research-pack", "Diligence research pack.", "Multi-step research agent that pulls public filings, news, and structured data."),
-            ("portfolio-monitoring-loop", "Portfolio monitoring loop.", "Continuous monitoring agent across the portfolio with alert routing."),
-            ("demand-planning-copilot", "Demand planning copilot.", "Agent that pulls signals, reconciles forecasts, and drafts a buyer-ready plan."),
-        ],
-    },
-    {
-        "slug": "model-fine-tuning",
-        "title": "Model Fine-Tuning – AI Engineering – Convolving",
-        "description": "Fine-tuned models aligned to your business objectives, your terminology, and your data – with evaluation harnesses that prove it.",
-        "eyebrow": "AI Engineering · Model Fine-Tuning",
-        "h1": "Models tuned to your work, not the public internet.",
-        "lede": "Targeted fine-tunes on the tasks where general models fall short. Evaluation harnesses, training data curation, and deployment into your environment – with measurable performance gains over the base model.",
-        "what_it_is": [
-            "Model Fine-Tuning is the engineering offering for tasks where general models reliably underperform – domain terminology, structured output formats, regulated reasoning patterns, niche languages.",
-            "We start with the evaluation harness. No fine-tune ships without a test set the client has reviewed and a measurable gap against the base model. From there we curate the training data, run the fine-tune, and iterate against the harness until the gap closes.",
-            "Open-weight models are the default. The fine-tuned weights belong to the client and run on infrastructure they control.",
-        ],
-        "how_it_works": [
-            ("Task definition.", "Week 0 – what the model needs to do, and how we will know it does it"),
-            ("Eval harness.", "Week 1 – test set built and reviewed by the client"),
-            ("Training data.", "Week 2-3 – curated, labelled, and quality-checked"),
-            ("Fine-tune and ship.", "Week 4-6 – iteration against the harness, then deployment"),
-        ],
-        "deliverables": [
-            "Fine-tuned model weights",
-            "Evaluation harness",
-            "Training data set",
-            "Inference deployment",
-            "Performance report",
-            "Update playbook",
-        ],
-        "featured": [
-            ("clinical-documentation-redesign", "Clinical documentation redesign.", "A model fine-tuned on the organisation's clinical templates and terminology."),
-            ("engineering-spec-search", "Engineering spec search.", "Embedding model fine-tuned on the organisation's engineering vocabulary."),
-            ("contract-review-loop", "Contract review loop.", "A model tuned on the firm's clause library and house style."),
-        ],
-    },
-    {
-        "slug": "data-engineering",
-        "title": "Data Engineering – AI Engineering – Convolving",
-        "description": "Data warehouse migrations, cleaning, and preprocessing pipelines that make AI work possible.",
-        "eyebrow": "AI Engineering · Data Engineering",
-        "h1": "Make the data ready for the work.",
-        "lede": "Warehouse migrations, schema design, data cleaning, and preprocessing pipelines. The unglamorous prerequisite that decides whether the AI work is possible at all.",
-        "what_it_is": [
-            "Most AI projects are gated by data – its location, its quality, its access controls. Data Engineering is the offering that fixes that gate so the rest of the work can land.",
-            "Scope ranges from a single migration (legacy warehouse to a modern stack) through to ongoing pipeline work for production AI systems. Stack default is Postgres, dbt, and a lakehouse pattern – but the right answer depends on what is already in flight.",
-            "Every engagement leaves behind a data dictionary, lineage documentation, and a quality monitoring layer. Without those, the next AI project re-creates the same problems.",
-        ],
-        "how_it_works": [
-            ("Audit.", "Week 0 – what data exists, where it lives, what quality looks like"),
-            ("Target architecture.", "Week 1 – the destination shape, with lineage and access controls"),
-            ("Migration and pipelines.", "Week 2-6 – build, test, cut over"),
-            ("Monitoring.", "Ongoing – quality dashboards and alerting"),
-        ],
-        "deliverables": [
-            "Migrated warehouse",
-            "Data dictionary",
-            "Lineage documentation",
-            "Quality monitoring",
-            "Pipeline source code",
-            "Runbook",
-        ],
-        "featured": [
-            ("portfolio-monitoring-loop", "Portfolio monitoring loop.", "The data spine behind the monitoring agent."),
-            ("demand-planning-copilot", "Demand planning copilot.", "Sales, inventory, and external signal data unified for forecasting."),
-            ("supplier-rfp-redesign", "Supplier RFP redesign.", "Supplier master data and historical RFP outcomes, made queryable."),
-        ],
-    },
-    {
-        "slug": "code-migration",
-        "title": "Code Migration – AI Engineering – Convolving",
-        "description": "Language migrations, framework upgrades, and codebase restructures, accelerated by AI but reviewed by humans.",
-        "eyebrow": "AI Engineering · Code Migration",
-        "h1": "Migrations, refactors, and version upgrades.",
-        "lede": "Language migrations, framework upgrades, and codebase restructures. AI-accelerated where it helps, human-reviewed throughout, with a test suite that proves the new version behaves like the old one.",
-        "what_it_is": [
-            "Code Migration is the engineering offering for the work everyone defers – moving off a deprecated framework, upgrading a major version, or restructuring a codebase that has outgrown its original shape.",
-            "AI acceleration matters here. Mechanical translation of one language to another, large-scale find-and-fix passes, and pattern detection across a codebase are exactly what current models do well. What they do not do is review the result, so we keep humans on every change.",
-            "Every migration ships with a behavioural test suite that proves the new version matches the old one on the workflows that matter.",
-        ],
-        "how_it_works": [
-            ("Inventory.", "Week 0 – what code exists, what depends on what"),
-            ("Behavioural tests.", "Week 1-2 – the test suite that defines done"),
-            ("Migration sprints.", "Week 2-N – module by module, reviewed at every step"),
-            ("Cut over.", "Final week – with rollback plan in hand"),
-        ],
-        "deliverables": [
-            "Migrated codebase",
-            "Behavioural test suite",
-            "Migration changelog",
-            "Rollback plan",
-            "Updated documentation",
-            "Hand-over session",
-        ],
-        "featured": [
-            ("ic-briefing-redesign", "IC briefing redesign.", "The legacy memo system migrated to a modern stack as part of the redesign."),
-            ("field-service-knowledge-base", "Field service knowledge base.", "Decades of service manuals migrated into a queryable knowledge layer."),
-            ("discovery-redesign", "Discovery redesign.", "Document review platform migrated off a deprecated framework."),
-        ],
-    },
-]
 
 
 def render_subpage(spec: dict, *, parent_slug: str, parent_label: str, sibling_label: str, sibling_href: str) -> str:
@@ -909,21 +745,8 @@ def main():
             spec,
             parent_slug="ai-transformation",
             parent_label="AI Transformation",
-            sibling_label="See AI Engineering",
-            sibling_href="/ai-engineering",
-        )
-        out.write_text(html, encoding="utf-8")
-        print(f"wrote {out.relative_to(REPO)}")
-
-    # Engineering sub-pages
-    for spec in ENGINEERING_SUBPAGES:
-        out = REPO / "ai-engineering" / f"{spec['slug']}.html"
-        html = render_subpage(
-            spec,
-            parent_slug="ai-engineering",
-            parent_label="AI Engineering",
-            sibling_label="See AI Transformation",
-            sibling_href="/ai-transformation",
+            sibling_label="See Use Cases",
+            sibling_href="/use-cases",
         )
         out.write_text(html, encoding="utf-8")
         print(f"wrote {out.relative_to(REPO)}")

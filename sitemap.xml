@@ -31,36 +31,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://convolving.com/ai-engineering</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://convolving.com/ai-engineering/application-development</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://convolving.com/ai-engineering/agentic-solutions</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://convolving.com/ai-engineering/model-fine-tuning</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://convolving.com/ai-engineering/data-engineering</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://convolving.com/ai-engineering/code-migration</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://convolving.com/who-we-are</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
