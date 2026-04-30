@@ -215,7 +215,7 @@
     detail.querySelector('.wf-detail-activities').innerHTML =
       (node.activities || []).map(a => `<li>${a}</li>`).join('');
     detail.querySelector('.wf-detail-tools').innerHTML =
-      (node.tools || []).map(t => `<li>${t}</li>`).join('');
+      (node.tools || []).map(t => `<li>${toolTile(t)}<span>${t}</span></li>`).join('');
     detail.classList.add('is-open');
     detail.setAttribute('aria-hidden', 'false');
     canvas.querySelectorAll('.wf-node').forEach(n => n.classList.toggle('is-active', n.dataset.nodeId === nodeId));
@@ -260,7 +260,11 @@
         ${data.nodes.map((n, i) => buildNode(n, i)).join('')}
       </div>
     `;
+    const titleHTML = canvas.dataset.title
+      ? `<div class="wf-title">${canvas.dataset.title}</div>`
+      : '';
     canvas.innerHTML = `
+      ${titleHTML}
       ${legend()}
       <div class="wf-stage">${graphHTML}</div>
       ${controls()}
