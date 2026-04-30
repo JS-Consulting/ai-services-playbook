@@ -21,6 +21,11 @@
     calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
     layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5M3 18l9 5 9-5"/>',
     wrench: '<path d="M14.7 6.3a4 4 0 0 0 5.4 5.4L21 14l-7 7-2.3-1a4 4 0 0 0-5.4-5.4L4 12l7-7z"/>',
+    system: '<rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r=".9" fill="currentColor"/><circle cx="7" cy="17" r=".9" fill="currentColor"/><path d="M11 7h6M11 17h6"/>',
+    warehouse: '<path d="M3 9 12 4l9 5v11H3z"/><path d="M9 20v-7h6v7"/><path d="M3 9h18"/>',
+    feed: '<path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5" fill="currentColor"/>',
+    shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>',
+    cart:   '<circle cx="9" cy="20" r="1.5" fill="currentColor"/><circle cx="17" cy="20" r="1.5" fill="currentColor"/><path d="M3 4h2l2.5 12h12l2-8H7"/>',
   };
 
   const TOOL_ICON = {
@@ -40,6 +45,21 @@
     'retrieval': 'review',
     'style guide': 'book',
     'review queue': 'check',
+    // Enterprise procurement / ERP platforms (no public CC0 SVG → system glyph)
+    'coupa':                   'system',
+    'coupa supplier portal':   'system',
+    'coupa ap module':         'system',
+    'coupa contract module':   'system',
+    'aravo':                   'shield',
+    'swift':                   'system',
+    'bu systems':              'system',
+    // Data sources
+    'vendor database':         'database',
+    'internal vendor database':'database',
+    'internal data warehouse': 'warehouse',
+    'data warehouse':          'warehouse',
+    'external feeds':          'feed',
+    'external risk data feeds':'feed',
   };
 
   function toolIcon(name) {
