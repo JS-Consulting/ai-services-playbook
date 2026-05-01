@@ -253,6 +253,9 @@
 .tm-photo.placeholder{display:flex;align-items:center;justify-content:center}
 .tm-photo.placeholder::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(106,166,255,.08) 0%,transparent 60%)}
 .tm-photo.placeholder svg{position:relative;width:42%;height:42%;opacity:.18;color:var(--fg)}
+.tm-linkedin{position:absolute;top:.55rem;right:.55rem;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(8,10,16,.62);color:#fff;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease),transform .2s var(--ease);z-index:2}
+.tm-linkedin svg{width:14px;height:14px;display:block}
+.tm-linkedin:hover{background:#0a66c2;border-color:#0a66c2;color:#fff;transform:translateY(-1px)}
 .tm-meta{padding:0 .15rem;display:flex;flex-direction:column;gap:.55rem;flex:1;min-height:0}
 .tm-name{font-family:var(--f-sans);font-size:1.0625rem;font-weight:500;letter-spacing:-.005em;color:var(--fg);margin:0;line-height:1.25}
 .tm-role{font-family:var(--f-sans);font-size:.85rem;font-weight:400;color:var(--fg-2);line-height:1.4;margin:0}
@@ -290,7 +293,12 @@
   <div class="tm-marquee">
     <div class="tm-track" data-clone>
       <article class="tm-card">
-        <div class="tm-photo"><img src="/assets/spencer-johnson.jpeg" alt="Spencer Johnson" width="1024" height="1024" decoding="async"></div>
+        <div class="tm-photo">
+          <img src="/assets/spencer-johnson.jpeg" alt="Spencer Johnson" width="1024" height="1024" decoding="async">
+          <a class="tm-linkedin" href="https://www.linkedin.com/in/srj523/" target="_blank" rel="noopener" aria-label="Spencer Johnson on LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v15H.22V8zm7.65 0h4.37v2.05h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.48 3.04 5.48 7v8.31h-4.56v-7.36c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.91-2.83 3.89V23H7.87V8z"/></svg>
+          </a>
+        </div>
         <div class="tm-meta">
           <h3 class="tm-name">Spencer Johnson</h3>
           <p class="tm-role">Partner | Functional Expert</p>
@@ -316,24 +324,6 @@
           <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
         </div>
       </article>
-      <article class="tm-card">
-        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
-        <div class="tm-meta">
-          <h3 class="tm-name">Name forthcoming</h3>
-          <p class="tm-role">Functional Expert</p>
-          <div class="tm-tags"><span class="tm-tag">Industrial Products</span></div>
-          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
-        </div>
-      </article>
-      <article class="tm-card">
-        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
-        <div class="tm-meta">
-          <h3 class="tm-name">Name forthcoming</h3>
-          <p class="tm-role">Functional Expert</p>
-          <div class="tm-tags"><span class="tm-tag">Legal</span></div>
-          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
-        </div>
-      </article>
     </div>
   </div>
 </section>
@@ -349,7 +339,12 @@
   <div class="tm-marquee">
     <div class="tm-track" data-clone>
       <article class="tm-card">
-        <div class="tm-photo"><img src="/assets/cameron-weibel.jpeg" alt="Cameron Weibel" width="1024" height="1024" decoding="async"></div>
+        <div class="tm-photo">
+          <img src="/assets/cameron-weibel.jpeg" alt="Cameron Weibel" width="1024" height="1024" decoding="async">
+          <a class="tm-linkedin" href="https://www.linkedin.com/in/cweibel/" target="_blank" rel="noopener" aria-label="Cameron Weibel on LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v15H.22V8zm7.65 0h4.37v2.05h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.48 3.04 5.48 7v8.31h-4.56v-7.36c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.91-2.83 3.89V23H7.87V8z"/></svg>
+          </a>
+        </div>
         <div class="tm-meta">
           <h3 class="tm-name">Cameron Weibel</h3>
           <p class="tm-role">Partner | AI Process Engineer</p>
@@ -368,22 +363,6 @@
         <div class="tm-photo"><img src="/assets/team/marcus-reinhardt.png" alt="Marcus Reinhardt" width="1024" height="1024" decoding="async"></div>
         <div class="tm-meta">
           <h3 class="tm-name">Marcus Reinhardt</h3>
-          <p class="tm-role">AI Process Engineer</p>
-          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
-        </div>
-      </article>
-      <article class="tm-card">
-        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
-        <div class="tm-meta">
-          <h3 class="tm-name">Name forthcoming</h3>
-          <p class="tm-role">AI Process Engineer</p>
-          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
-        </div>
-      </article>
-      <article class="tm-card">
-        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
-        <div class="tm-meta">
-          <h3 class="tm-name">Name forthcoming</h3>
           <p class="tm-role">AI Process Engineer</p>
           <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
         </div>
@@ -414,30 +393,6 @@
         <div class="tm-photo"><img src="/assets/team/clara-romano.png" alt="Clara Romano" width="1024" height="1024" decoding="async"></div>
         <div class="tm-meta">
           <h3 class="tm-name">Clara Romano</h3>
-          <p class="tm-role">AI Adoption Manager</p>
-          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
-        </div>
-      </article>
-      <article class="tm-card">
-        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
-        <div class="tm-meta">
-          <h3 class="tm-name">Name forthcoming</h3>
-          <p class="tm-role">AI Adoption Manager</p>
-          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
-        </div>
-      </article>
-      <article class="tm-card">
-        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
-        <div class="tm-meta">
-          <h3 class="tm-name">Name forthcoming</h3>
-          <p class="tm-role">AI Adoption Manager</p>
-          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
-        </div>
-      </article>
-      <article class="tm-card">
-        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
-        <div class="tm-meta">
-          <h3 class="tm-name">Name forthcoming</h3>
           <p class="tm-role">AI Adoption Manager</p>
           <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
         </div>
