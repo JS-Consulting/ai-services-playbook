@@ -12,9 +12,19 @@
   const mq = window.matchMedia('(max-width: 820px)');
   const verticalAlways = rail.dataset.orientation === 'vertical';
 
-  // In vertical mode, clamp the track so it spans first-marker-center to last-marker-center.
+  // Clamp the track so it spans first-marker-center to last-marker-center.
+  // Always do this in vertical-locked rails (data-orientation="vertical") and
+  // on mobile-stacked rails (max-width: 820px). On desktop horizontal rails we
+  // clear the inline overrides so the CSS defaults apply.
   function clampTrackToMarkers() {
-    if (!verticalAlways || !track) return;
+    if (!track) return;
+    const isVertical = verticalAlways || mq.matches;
+    if (!isVertical) {
+      track.style.top = '';
+      track.style.bottom = '';
+      track.style.height = '';
+      return;
+    }
     const firstMarker = steps[0].querySelector('.jstep-marker');
     const lastMarker = steps[steps.length - 1].querySelector('.jstep-marker');
     if (!firstMarker || !lastMarker) return;

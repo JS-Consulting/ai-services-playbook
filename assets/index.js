@@ -266,11 +266,32 @@ initAmbientCanvas('ctaCanvas', { rows: 5 });
     jprog.style.transform = (mq.matches ? 'scaleY(' : 'scaleX(') + p + ')';
   };
 
+  // Clamp the progress track to the first/last marker centers on mobile so the
+  // line ends exactly at the last node instead of running past it.
+  const track = rail.querySelector('.journey-progress');
+  const clampTrack = () => {
+    if (!track || !jsteps.length) return;
+    if (!mq.matches) {
+      track.style.top = '';
+      track.style.bottom = '';
+      return;
+    }
+    const first = jsteps[0].querySelector('.jstep-marker');
+    const last = jsteps[jsteps.length - 1].querySelector('.jstep-marker');
+    if (!first || !last) return;
+    const railRect = rail.getBoundingClientRect();
+    const firstRect = first.getBoundingClientRect();
+    const lastRect = last.getBoundingClientRect();
+    track.style.top = ((firstRect.top + firstRect.height / 2) - railRect.top) + 'px';
+    track.style.bottom = (railRect.bottom - (lastRect.top + lastRect.height / 2)) + 'px';
+  };
+
   // Cache layout once via ResizeObserver (which fires after layout, no synchronous
   // recalc). The scroll handler then never touches getBoundingClientRect, so it
   // can't force a reflow per-frame.
   let railTop = 0, railHeight = 0;
   const measure = () => {
+    clampTrack();
     const r = rail.getBoundingClientRect();
     railTop = r.top + window.scrollY;
     railHeight = r.height;
@@ -279,6 +300,7 @@ initAmbientCanvas('ctaCanvas', { rows: 5 });
   // need a synchronous getBoundingClientRect call (which would force a reflow
   // before the browser has done its first layout pass).
   new ResizeObserver(measure).observe(rail);
+  if (mq.addEventListener) mq.addEventListener('change', measure);
 
   let pending = false;
   function schedule() {
