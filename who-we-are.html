@@ -106,6 +106,32 @@
 </section>
 <script src="/assets/index-hero-waves.js"></script>
 
+<div class="logo-rail" id="kpi-rail">
+  <div class="rail-inner">
+    <span class="rail-label">By the numbers</span>
+    <div class="rail-track" id="kpiRailTrack"></div>
+  </div>
+</div>
+<script>
+(() => {
+  const items = [
+    '30+ engagements shipped',
+    '50+ workflows redesigned',
+    '50 years combined experience',
+    '5 industries deep',
+    'ETH · Tesla · PwC · SWISS alumni',
+    '100% partner-led delivery',
+    'Zero retainers, fixed-fee sprints',
+    '4 markets · CH, DE, UK, US'
+  ];
+  const track = document.getElementById('kpiRailTrack');
+  if (!track) return;
+  track.innerHTML = [...items, ...items]
+    .map((x, i, a) => `<span>${x}</span>${i < a.length - 1 ? '<span class="dot">◆</span>' : ''}`)
+    .join('');
+})();
+</script>
+
 <section class="tm-section" id="project-team-model">
   <div class="container">
     <div class="tm-head reveal">
