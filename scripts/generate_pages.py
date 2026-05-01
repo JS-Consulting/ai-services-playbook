@@ -741,7 +741,7 @@ import json as _json
 
 WORKFLOW_SITE_CSS = "20260430h"
 WORKFLOW_CSS_VERSION = "20260501f"
-WORKFLOW_JS_VERSION = "20260501e"
+WORKFLOW_JS_VERSION = "20260501f"
 WORKFLOW_SUBPAGE_JS_VERSION = "20260501a"
 WORKFLOW_HEROWAVES_VERSION = ""
 
@@ -760,6 +760,10 @@ FUNCTION_ICONS = {
     "Sales":               '<path d="M3 17l6-6 4 4 8-8M14 7h7v7"/>',
     "Product":             '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
     "Procurement":         '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+    "IT":                  '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M2 20h20M9 17v3M15 17v3"/>',
+    "Customer Service":    '<path d="M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-1v-6h3M4 13v4a2 2 0 0 0 2 2h1v-6H4"/>',
+    "Supply Chain":        '<path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.5"/><circle cx="17" cy="18" r="1.5"/>',
+    "Software Engineering":'<path d="m9 7-5 5 5 5M15 7l5 5-5 5M14 4l-4 16"/>',
 }
 
 # Complication card icons. Each card declares which icon to use by name.
@@ -3139,6 +3143,1746 @@ WORKFLOW_USE_CASES = [
         ],
         "playbook_url":  "#playbook",
         "playbook_body": "The redesign above ships as a step-by-step playbook. Process map, TAR protocol, privilege-review prompt library, QC controls register, defensibility memo, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Round 2: Finance / Treasury ----
+    {
+        "slug":         "treasury-cash-forecasting",
+        "title":        "Treasury cash forecasting and FX hedging",
+        "description":  "Treasury's weekly hand-built cash view, replaced by a thirteen-week forecast that refreshes overnight. The treasurer hedges from a position, not a guess.",
+        "function":     "Finance",
+        "sub_function": "Treasury",
+        "workflow":     "Cash forecasting and hedging",
+        "process_slug": "treasury-cash-forecasting",
+        "function_slug": "finance",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "A weekly hand-built thirteen-week cash view, replaced by an automated forecast that refreshes overnight. The treasurer hedges from a position, not a guess.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the treasury function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside corporate treasury and FX desks – "
+            "reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's TMS, ERP, "
+            "and bank-API stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today the thirteen-week forecast is a Monday-morning workbook stitched from bank statements, AR and AP aging, and the analyst's read on the next intercompany sweep.",
+        "situation_body": "AFP surveys put forecast accuracy at roughly sixty percent on the legacy stack. Cash sits idle in subsidiary accounts because the parent cannot see it in time. Hedging decisions get made against a stale snapshot, and the treasurer carries a wider buffer than the position warrants.",
+        "legacy_kpis": [
+            {"label": "Forecast accuracy",  "value": "~60%",     "sub": "Thirteen-week, on the legacy stack"},
+            {"label": "Build time",         "value": "1–2 days", "sub": "Per weekly forecast cycle"},
+            {"label": "Idle cash buffer",   "value": "Wide",     "sub": "Held against forecast error"},
+            {"label": "FX exposure latency","value": "Weekly",   "sub": "Position seen on Monday"},
+        ],
+        "legacy_nodes": [
+            {"id": "pull",       "label": "Pull bank balances",     "type": "manual", "tools": ["Bank API", "Excel"],
+             "activities": ["Download statements from each banking portal.", "Stitch into the master cash workbook by entity.", "Reconcile against the prior week's closing position."]},
+            {"id": "ar-ap",      "label": "Layer AR / AP aging",    "type": "manual", "tools": ["ERP", "Excel"],
+             "activities": ["Export aging reports from the ERP.", "Map collections and disbursements to forecast weeks.", "Adjust for known one-offs the analyst has heard about."]},
+            {"id": "intercoy",   "label": "Forecast intercompany",  "type": "manual", "tools": ["Email", "Excel"],
+             "activities": ["Email controllers in each entity for sweeps and dividends.", "Wait for replies in inconsistent formats.", "Manually slot responses into the forecast grid."]},
+            {"id": "fx",         "label": "Compute FX exposure",    "type": "manual", "tools": ["Excel"],
+             "activities": ["Convert position into reporting currency at spot.", "Compare against the standing hedge book.", "Flag exposures that exceed policy thresholds."]},
+            {"id": "hedge",      "label": "Place hedges",           "type": "human",  "tools": ["FX desk", "Email"],
+             "activities": ["Treasurer reviews the workbook and places forwards.", "Confirms trades with banking partners over email.", "Updates the hedge log by hand."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "A weekly snapshot ages out by Tuesday.",
+             "body": "Decisions made on Monday's workbook are working off a position that has already moved by midweek."},
+            {"icon": "gauge", "title": "Forecast error sits in the high single digits.",
+             "body": "AFP 2025 data: ~60 percent thirteen-week accuracy on the legacy stack. The treasurer carries a wider cash buffer than policy requires."},
+            {"icon": "user",  "title": "One analyst reconstructs the forecast each week.",
+             "body": "Roughly a day and a half of analyst time goes to construction, not to interrogation of the position."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Forecast accuracy",  "value": "88–95%", "delta": "▲ ~30 points vs today"},
+            {"label": "Build time",         "value": "Overnight","delta": "▼ 95% vs today"},
+            {"label": "Idle cash buffer",   "value": "Tighter","delta": "Sized to model error, not feel"},
+            {"label": "FX exposure latency","value": "Daily",  "delta": "▼ from weekly to daily"},
+        ],
+        "redesigned_nodes": [
+            {"id": "pull",     "label": "Auto bank ingest",        "type": "automated", "tools": ["Bank APIs", "TMS"],
+             "activities": ["Bank balances pull on a daily schedule across entities.", "Deltas hash against the prior day's position for lineage.", "Failures route to a single ops queue."]},
+            {"id": "ar-ap",    "label": "Auto AR / AP layering",   "type": "automated", "tools": ["ERP", "Forecast model"],
+             "activities": ["Aging extracts feed the model on close of business.", "Collections and disbursements distribute into forecast weeks by historical pattern.", "Known one-offs enter through a structured input form."]},
+            {"id": "intercoy", "label": "Structured intercompany",  "type": "semi-auto", "tools": ["Claude", "TMS"],
+             "activities": ["Agent runs a structured weekly check-in with each controller.", "Captures sweeps and dividends into the standard schema.", "Treasurer reviews and approves before the model runs."]},
+            {"id": "model",    "label": "Cash and FX forecast",    "type": "ai",        "tools": ["Forecast model", "FX feed"],
+             "activities": ["Model produces a thirteen-week cash view by entity and currency.", "FX exposure decomposes into operational, balance-sheet, and net-investment buckets.", "Variance against the prior forecast surfaces with driver attribution."]},
+            {"id": "hedge",    "label": "Hedge proposal",          "type": "semi-auto", "tools": ["Claude", "FX desk"],
+             "activities": ["Drafts hedge instructions against policy thresholds.", "Cites the exposure line for every recommended trade.", "Treasurer reviews, edits, and places the trades."]},
+        ],
+        "key_changes": [
+            {"theme": "Forecast accuracy", "bullets": [
+                "Thirteen-week accuracy moves from roughly sixty percent toward eighty-eight to ninety-five.",
+                "Driver attribution explains every weekly delta.",
+                "Stress tests run on demand, not on quarter-end."]},
+            {"theme": "Cycle compression", "bullets": [
+                "Build time drops from one and a half days to overnight.",
+                "FX exposure refreshes daily, not weekly.",
+                "The treasurer reads the position before the desk opens."]},
+            {"theme": "Capital efficiency", "bullets": [
+                "Idle cash buffer sizes to model error, not analyst caution.",
+                "Sweeps run on the live position rather than the prior week's view.",
+                "Hedges sit closer to policy without breaching it."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every bank pull hashes for lineage.",
+                "Every hedge cites the exposure line and policy threshold.",
+                "Treasurer sign-off captures in one queue, not an email chain."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Forecast model spec, intercompany intake template, hedge policy mapping, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Internal Audit / SOX controls testing ----
+    {
+        "slug":         "internal-audit-sox-controls",
+        "title":        "Internal audit and SOX controls testing",
+        "description":  "Sample-based controls testing replaced by continuous monitoring across one hundred percent of GL transactions. The auditor reviews flagged exceptions, not random samples.",
+        "function":     "Finance",
+        "sub_function": "Internal Audit",
+        "workflow":     "SOX controls testing",
+        "process_slug": "sox-controls-testing",
+        "function_slug": "finance",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Sample-based controls testing replaced by continuous monitoring across one hundred percent of GL transactions. Auditors review flagged exceptions, not random samples.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the internal audit function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside Big Four audit and SOX programmes – "
+            "reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's GRC, ERP, "
+            "and evidence-repository stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today SOX controls testing runs on quarterly samples drawn by hand. A team of three to five works the cycle for six to eight weeks.",
+        "situation_body": "Sample sizes follow AICPA tables, not transaction risk. Evidence collection is a request-and-attach exercise across owners. Findings land late in the quarter, leaving thin remediation windows. Deloitte's Zora benchmark and AuditBoard deployments report roughly thirty percent audit-time reduction once continuous monitoring lands; the legacy stack does not get there.",
+        "legacy_kpis": [
+            {"label": "Cycle time",       "value": "6–8 wks",  "sub": "Per testing wave, per quarter"},
+            {"label": "Coverage",         "value": "Sampled",  "sub": "AICPA-table sample sizes"},
+            {"label": "Evidence chase",   "value": "40–50%",   "sub": "Of auditor hours, not on judgement"},
+            {"label": "Findings lag",     "value": "Late Q",   "sub": "Surface after the period closes"},
+        ],
+        "legacy_nodes": [
+            {"id": "scope",     "label": "Scope controls",        "type": "manual", "tools": ["Excel", "Controls library"],
+             "activities": ["Pull the controls register for the quarter.", "Map each control to ICFR risk and owner.", "Set sample sizes from the standard AICPA tables."]},
+            {"id": "request",   "label": "Request evidence",      "type": "manual", "tools": ["Email", "Excel"],
+             "activities": ["Email each control owner the sample requests.", "Track responses in a status workbook.", "Chase late submissions through the deadline."]},
+            {"id": "test",      "label": "Test samples",          "type": "manual", "tools": ["Excel", "Controls library"],
+             "activities": ["Open each evidence pack and tie to the control.", "Document test of design and operating effectiveness.", "Note exceptions and request remediation evidence."]},
+            {"id": "findings",  "label": "Draft findings",        "type": "manual", "tools": ["Word"],
+             "activities": ["Write up exceptions with severity ratings.", "Cross-reference to control numbers and population.", "Circulate to control owners for response."]},
+            {"id": "report",    "label": "Quarterly report",      "type": "human",  "tools": ["PowerPoint", "Meeting"],
+             "activities": ["Compile the quarterly testing pack.", "Present to the audit committee.", "Track remediation owners and dates."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Six to eight weeks per testing wave is the practical floor.",
+             "body": "Cycle compression on the legacy stack is rounding error; the bottleneck is sample-by-sample evidence chase."},
+            {"icon": "shield","title": "Sampling misses what is not sampled.",
+             "body": "AICPA-table sample sizes give statistical confidence, not transaction-level coverage. Material exceptions outside the sample show up in the next external audit."},
+            {"icon": "user",  "title": "Half the auditor hours are evidence chase.",
+             "body": "Forty to fifty percent of cycle time goes to requests, reminders, and reformatting attachments."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Cycle time",       "value": "1–2 wks", "delta": "▼ 75% vs today"},
+            {"label": "Coverage",         "value": "100%",     "delta": "All GL transactions, every period"},
+            {"label": "Evidence chase",   "value": "<10%",    "delta": "▼ ~35 points vs today"},
+            {"label": "Findings lag",     "value": "Continuous","delta": "Surfaces in week, not quarter"},
+        ],
+        "redesigned_nodes": [
+            {"id": "scope",     "label": "Risk-based scoping",     "type": "semi-auto", "tools": ["AuditBoard", "Claude"],
+             "activities": ["Agent maps controls to risk drivers from the prior cycle.", "Recommends sample sizes weighted by exception history.", "Audit lead approves the testing plan."]},
+            {"id": "ingest",    "label": "Auto evidence ingest",   "type": "automated", "tools": ["ERP", "Evidence repository"],
+             "activities": ["Pulls journal-entry, access, and approval logs on a schedule.", "Hashes evidence for chain of custody.", "Routes missing items to the owner queue automatically."]},
+            {"id": "monitor",   "label": "Continuous monitoring",  "type": "ai",        "tools": ["MindBridge", "Rules engine"],
+             "activities": ["Scores one hundred percent of GL transactions against control rules.", "Flags exceptions with driver attribution and severity.", "Suppresses repeat noise after auditor disposition."]},
+            {"id": "test",      "label": "AI-assisted testing",    "type": "semi-auto", "tools": ["Claude", "Controls library"],
+             "activities": ["Drafts test of design and operating effectiveness against evidence.", "Cites the source line for every conclusion.", "Auditor reviews, edits, and signs off."]},
+            {"id": "report",    "label": "Live audit committee view","type": "human",   "tools": ["AuditBoard", "Review queue"],
+             "activities": ["Findings flow into a live dashboard with remediation owners.", "Audit lead presents trends, not surprises.", "Edits feed back into the controls register for the next cycle."]},
+        ],
+        "key_changes": [
+            {"theme": "Coverage", "bullets": [
+                "Testing moves from sampled to one hundred percent of GL transactions.",
+                "Material exceptions surface in the period, not the next external audit.",
+                "Sample sizes weight to risk, not to AICPA tables."]},
+            {"theme": "Cycle compression", "bullets": [
+                "Six to eight weeks toward one to two per testing wave.",
+                "Evidence ingest runs on a schedule rather than email chase.",
+                "Findings surface continuously, not late in the quarter."]},
+            {"theme": "Audit and explainability", "bullets": [
+                "Every flagged transaction cites the rule and the driver.",
+                "Model versions log on every test conclusion.",
+                "SR 11-7 and EU AI Act documentation generates from the audit trail."]},
+            {"theme": "Auditor capacity", "bullets": [
+                "Evidence chase falls from forty to fifty percent of cycle time toward under ten.",
+                "Auditors review exceptions, not random samples.",
+                "Freed time goes to higher-judgement work and IT general controls."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Risk-based scoping framework, continuous monitoring rule library, evidence ingest spec, model documentation pack, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Customer Success churn & renewal ----
+    {
+        "slug":         "customer-success-churn-renewal",
+        "title":        "Customer success churn and renewal prediction",
+        "description":  "Churn signal stitched across CRM, product telemetry, and email lands in one health score. The CSM intervenes weeks earlier than the legacy renewal queue allows.",
+        "function":     "Sales",
+        "sub_function": "Customer Success",
+        "workflow":     "Churn and renewal prediction",
+        "process_slug": "churn-renewal-prediction",
+        "function_slug": "sales-and-marketing",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Churn signal stitched across CRM, product telemetry, and email lands in one health score. The CSM intervenes weeks earlier than the legacy renewal queue allows.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the customer success function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise SaaS post-sale teams – "
+            "reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's CRM, "
+            "product analytics, and email stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today renewal risk surfaces in the ninety-day window when the CSM opens the renewal queue. Most early signals sit unread in product analytics and email threads.",
+        "situation_body": "Churn drivers fragment across CRM activity, product usage, support tickets, and the buyer's email tone. The CSM cannot read all four for every account, so health scores rely on a manual call once a quarter. Renewal risk arrives late, leaving the conversation to revolve around discounts rather than value.",
+        "legacy_kpis": [
+            {"label": "Risk lead time",   "value": "30–60 days","sub": "Before renewal date"},
+            {"label": "Health score cadence","value": "Quarterly","sub": "Manual, by CSM"},
+            {"label": "Account coverage", "value": "Tiered",   "sub": "Tier 1 reviewed weekly, the rest sampled"},
+            {"label": "Gross retention",  "value": "Baseline", "sub": "Industry median, not differentiated"},
+        ],
+        "legacy_nodes": [
+            {"id": "queue",     "label": "Open renewal queue",     "type": "manual", "tools": ["CRM"],
+             "activities": ["Pull renewals coming due in the next ninety days.", "Sort by ARR and tier.", "Assign to the CSM book of business."]},
+            {"id": "scan",      "label": "Scan accounts",          "type": "manual", "tools": ["CRM", "Product telemetry"],
+             "activities": ["Open each account in the CRM.", "Skim recent activity, tickets, and notes.", "Glance at usage in the product analytics tool."]},
+            {"id": "score",     "label": "Manual health score",    "type": "manual", "tools": ["Excel", "CRM"],
+             "activities": ["Score each account green / yellow / red.", "Note the rationale in a quick CRM update.", "Flag at-risk accounts to the team lead."]},
+            {"id": "outreach",  "label": "Renewal outreach",       "type": "manual", "tools": ["Email", "Meeting"],
+             "activities": ["Draft renewal email from a template.", "Schedule a renewal call with the buyer.", "Walk through usage and pricing on the call."]},
+            {"id": "negotiate", "label": "Negotiate renewal",      "type": "human",  "tools": ["Email", "CRM"],
+             "activities": ["Trade discounts or scope changes to land the renewal.", "Update CRM with terms.", "Hand off any expansion to the AE."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Risk surfaces in the renewal window, not before.",
+             "body": "By the time the CSM sees the account in the queue, the buyer has been quiet for a quarter. The conversation defaults to discount."},
+            {"icon": "link",  "title": "Signal lives in four disconnected tools.",
+             "body": "CRM, product analytics, support, and email each see one slice. No CSM stitches all four for every account, every week."},
+            {"icon": "user",  "title": "Health scores reflect attention, not the account.",
+             "body": "Tier-1 accounts get a weekly read; the long tail gets a quarterly guess. Quiet churners hide in the tail until the renewal date."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Risk lead time",   "value": "120+ days","delta": "▲ 2–4× vs today"},
+            {"label": "Health score cadence","value": "Daily","delta": "From quarterly to daily"},
+            {"label": "Account coverage", "value": "100%",    "delta": "Every account, every day"},
+            {"label": "Gross retention",  "value": "+3–6 pts","delta": "Industry-band lift on early intervention"},
+        ],
+        "redesigned_nodes": [
+            {"id": "ingest",    "label": "Stitch signal",          "type": "automated", "tools": ["CRM", "Product telemetry", "Zendesk"],
+             "activities": ["Pulls CRM activity, product usage, tickets, and email tone daily.", "Resolves account identity across systems.", "Hashes feeds for lineage and replay."]},
+            {"id": "score",     "label": "Health scoring",         "type": "ai",        "tools": ["Sentiment model", "Health score"],
+             "activities": ["Scores every account daily on usage, sentiment, and engagement.", "Decomposes drivers so the CSM sees what changed and when.", "Surfaces silent declines before they reach the renewal queue."]},
+            {"id": "playbook",  "label": "Playbook trigger",       "type": "automated", "tools": ["Renewal queue", "CRM"],
+             "activities": ["Assigns the right playbook by risk band and segment.", "Routes high-risk accounts to the CSM with a draft brief.", "Logs every trigger to the account timeline."]},
+            {"id": "outreach",  "label": "Drafted CSM brief",      "type": "semi-auto", "tools": ["Claude", "Style guide"],
+             "activities": ["Drafts a renewal-context brief on every flagged account.", "Cites the usage and sentiment lines that drove the flag.", "CSM reviews, edits, and runs the conversation."]},
+            {"id": "renewal",   "label": "Renewal conversation",   "type": "human",     "tools": ["Meeting", "Success plan"],
+             "activities": ["CSM walks the buyer through value delivered and risks remaining.", "Edits feed back into playbooks and prompts.", "Expansion paths surface for AE handoff before the renewal closes."]},
+        ],
+        "key_changes": [
+            {"theme": "Lead time", "bullets": [
+                "Risk surfaces 120 days out, not in the ninety-day renewal window.",
+                "Silent decline shows up in week, not quarter.",
+                "The conversation runs on value, not on discount."]},
+            {"theme": "Coverage", "bullets": [
+                "Every account scored every day, not tiered by attention.",
+                "Long-tail churners surface before they vanish.",
+                "CSM book size can grow without coverage falling."]},
+            {"theme": "Signal quality", "bullets": [
+                "CRM, product, support, and email feed one health score.",
+                "Driver attribution explains the score line by line.",
+                "CSM edits feed back into the model on every cycle."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every health change logs source and timestamp.",
+                "Playbook triggers replay against the account timeline.",
+                "Forecast accuracy on renewal moves toward decision-grade."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Health-score model spec, identity-resolution map, playbook library, CSM brief prompts, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Deal Desk pricing & CPQ ----
+    {
+        "slug":         "deal-desk-pricing-cpq",
+        "title":        "Deal desk pricing and CPQ",
+        "description":  "Deal-desk approval cycles compressed from days to hours. AI handles standard pricing reasoning; humans rule on non-standard terms and exceptions.",
+        "function":     "Sales",
+        "sub_function": "Deal Desk",
+        "workflow":     "Pricing and CPQ approvals",
+        "process_slug": "deal-desk-cpq",
+        "function_slug": "sales-and-marketing",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Deal-desk approval cycles compressed from days to hours. AI handles standard pricing reasoning; humans rule on non-standard terms and exceptions.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the deal desk for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise CPQ, finance, and "
+            "legal review – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the "
+            "team's CPQ, CRM, and approval-matrix stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today a non-standard quote takes one to three days to clear deal desk. The AE assembles the package; finance, legal, and product weigh in serially.",
+        "situation_body": "Discount logic lives in a policy document, an approval matrix, and the heads of three reviewers. Non-standard term review is a forwarded email thread. Most quotes wait on a reviewer who is doing other work; the deal slows in the last mile, when the buyer is closest to signing.",
+        "legacy_kpis": [
+            {"label": "Approval time",    "value": "1–3 days","sub": "From submission to approved quote"},
+            {"label": "Reviewer load",    "value": "Heavy",   "sub": "Three to five reviewers per non-standard quote"},
+            {"label": "Quote-to-close",   "value": "Adds days","sub": "Approval is the late-stage drag"},
+            {"label": "Policy adherence", "value": "Variable","sub": "Depends on reviewer attention"},
+        ],
+        "legacy_nodes": [
+            {"id": "configure", "label": "Configure quote",        "type": "manual", "tools": ["CPQ", "CRM"],
+             "activities": ["AE configures the product bundle.", "Sets discount lines from the rep-level guidance.", "Submits the quote for desk review."]},
+            {"id": "route",     "label": "Route for approval",     "type": "manual", "tools": ["CPQ", "Email"],
+             "activities": ["Approval engine matches the quote to a tier.", "Emails go to finance, legal, and product as needed.", "Reviewers triage in their own queues."]},
+            {"id": "review",    "label": "Reviewer triage",        "type": "manual", "tools": ["Email", "CPQ"],
+             "activities": ["Each reviewer opens the deal package.", "Compares discount and terms to policy by hand.", "Asks the AE for context on non-standard items."]},
+            {"id": "decide",    "label": "Decision",               "type": "human",  "tools": ["Email", "Approval matrix"],
+             "activities": ["Reviewer approves, rejects, or counters.", "Counter terms route back to the AE.", "Cycle repeats until clean approval lands."]},
+            {"id": "send",      "label": "Send quote",             "type": "manual", "tools": ["CPQ", "Email"],
+             "activities": ["AE sends the cleared quote to the buyer.", "Logs final terms in CRM.", "Hands off to ops on close."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "One to three days at the last mile.",
+             "body": "The buyer is closest to signing when the deal goes to desk. Every day of delay erodes the close."},
+            {"icon": "user",  "title": "Three to five reviewers, all part-time on this.",
+             "body": "Finance, legal, and product reviewers triage between their day jobs. Quotes wait on attention, not on judgement."},
+            {"icon": "shield","title": "Policy adherence drifts under volume.",
+             "body": "Under quarter-end load, reviewers approve to keep deals moving. The matrix is honoured at the start of the quarter, not at the end."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Approval time",    "value": "Hours",   "delta": "▼ 80–90% vs today"},
+            {"label": "Reviewer load",    "value": "Light",   "delta": "AI clears standard, humans rule on exceptions"},
+            {"label": "Quote-to-close",   "value": "Faster",  "delta": "Last-mile drag removed"},
+            {"label": "Policy adherence", "value": "Uniform", "delta": "Every quote against the same rubric"},
+        ],
+        "redesigned_nodes": [
+            {"id": "configure", "label": "Guided quote",          "type": "semi-auto", "tools": ["CPQ", "Claude"],
+             "activities": ["Agent recommends a configuration from history and segment.", "Pre-checks discount and term lines against policy.", "AE reviews, adjusts, and submits."]},
+            {"id": "score",     "label": "AI policy scoring",     "type": "ai",        "tools": ["Pricing engine", "Discount policy"],
+             "activities": ["Scores the quote against the discount and approval matrix.", "Cites the policy line for every recommended decision.", "Flags non-standard terms for human review."]},
+            {"id": "auto-approve","label": "Auto-clear standard","type": "automated", "tools": ["CPQ", "Approval matrix"],
+             "activities": ["Quotes inside policy clear without a reviewer.", "Decision logs to the audit trail with model version.", "Throughput rises without the reviewer queue growing."]},
+            {"id": "exception", "label": "Exception review",      "type": "human",     "tools": ["Review queue", "Icertis"],
+             "activities": ["Non-standard quotes route to the right reviewer with context.", "Reviewer rules from a single queue, not an inbox.", "Edits feed back into the policy library."]},
+            {"id": "send",      "label": "Auto-send and log",     "type": "automated", "tools": ["CPQ", "CRM"],
+             "activities": ["Cleared quotes send and log automatically.", "Final terms write back to CRM.", "Hand-off to ops triggers on signature."]},
+        ],
+        "key_changes": [
+            {"theme": "Cycle compression", "bullets": [
+                "Standard quotes clear in hours, not days.",
+                "Non-standard quotes route to the right reviewer with full context.",
+                "Last-mile drag on quote-to-close goes away."]},
+            {"theme": "Reviewer capacity", "bullets": [
+                "Reviewers rule on exceptions, not standard discount.",
+                "One review queue replaces the email thread.",
+                "Quarter-end pressure stops eroding policy adherence."]},
+            {"theme": "Policy discipline", "bullets": [
+                "Every quote scored against the same rubric.",
+                "Decisions cite the policy line that drove them.",
+                "Reviewer edits feed back into the library."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every approval logs model version and reviewer override.",
+                "Concession patterns surface to finance in real time.",
+                "Sales leadership reads the desk queue, not anecdote."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Discount-policy mapping, approval-matrix rule library, exception-routing spec, model documentation, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Marketing attribution & MMM ----
+    {
+        "slug":         "marketing-attribution-mmm",
+        "title":        "Marketing attribution and mix measurement",
+        "description":  "Four tools counting the same conversion differently, replaced by a single reconciled view across MTA and MMM. Decisions move from anecdote to attribution.",
+        "function":     "Marketing",
+        "sub_function": "Marketing Operations",
+        "workflow":     "Attribution and mix measurement",
+        "process_slug": "attribution-mmm",
+        "function_slug": "sales-and-marketing",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Four tools counting the same conversion differently, replaced by a single reconciled view across MTA and MMM. Decisions move from anecdote to attribution.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the marketing operations function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside marketing analytics and CFO-grade "
+            "measurement – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the "
+            "team's CDP, ad-platform, and BI stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today four tools each claim credit for the same conversion. The CMO and the CFO read different numbers in the same week.",
+        "situation_body": "MTA platforms over-credit digital touches by thirty percent or more. MMM lives in a quarterly consultancy deliverable, six weeks late. Spend lineage is reconstructed by hand. The team optimises against the model that responds fastest, not the one that explains revenue most reliably.",
+        "legacy_kpis": [
+            {"label": "Reconciled view",  "value": "None",     "sub": "Tools disagree by 20–40%"},
+            {"label": "MMM cadence",      "value": "Quarterly","sub": "Six weeks late, consultancy delivered"},
+            {"label": "Spend lineage",    "value": "Manual",   "sub": "Reconstructed in spreadsheets"},
+            {"label": "Decision latency", "value": "Weeks",    "sub": "Behind the in-flight campaign"},
+        ],
+        "legacy_nodes": [
+            {"id": "ingest",    "label": "Pull tool exports",      "type": "manual", "tools": ["GA4", "Excel"],
+             "activities": ["Export from each ad platform and analytics tool.", "Stitch into a master spreadsheet.", "Reconcile naming conventions across stacks."]},
+            {"id": "mta",       "label": "Run MTA model",          "type": "manual", "tools": ["MTA", "Tableau"],
+             "activities": ["Apply the off-the-shelf attribution rules.", "Note where digital channels look over-credited.", "Adjust by hand for known double-counts."]},
+            {"id": "mmm",       "label": "Wait for MMM deliverable","type": "manual","tools": ["Email", "PowerPoint"],
+             "activities": ["Brief the consultancy on the next cut.", "Wait six weeks for the modelled output.", "Reconcile MTA and MMM in slides."]},
+            {"id": "decide",    "label": "Decide allocation",      "type": "human",  "tools": ["Meeting", "Excel"],
+             "activities": ["CMO and CFO meet on the read.", "Argue over which tool to trust.", "Set next-quarter spend by compromise."]},
+            {"id": "report",    "label": "Report to leadership",   "type": "manual", "tools": ["PowerPoint"],
+             "activities": ["Build the quarterly attribution pack.", "Caveat the model differences.", "File for the next planning cycle."]},
+        ],
+        "complications": [
+            {"icon": "gauge", "title": "Sixty-eight percent of MTA models over-credit digital by more than thirty percent.",
+             "body": "The model that responds fastest is the model the team optimises against. Revenue moves where attribution does not."},
+            {"icon": "clock", "title": "MMM lands six weeks late.",
+             "body": "By the time the consultancy delivers, the campaign in question has finished. The next plan is built on the previous quarter's read."},
+            {"icon": "link",  "title": "Spend lineage is reconstructed by hand.",
+             "body": "Six to ten disconnected platforms, each with its own taxonomy. The reconciliation tax dwarfs the analysis."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Reconciled view",  "value": "Single",  "delta": "MTA and MMM agree to within ~5 points"},
+            {"label": "MMM cadence",      "value": "Weekly",  "delta": "From quarterly to weekly"},
+            {"label": "Spend lineage",    "value": "Auto",    "delta": "Pipeline from platform to model"},
+            {"label": "Decision latency", "value": "Days",    "delta": "▼ from weeks to days"},
+        ],
+        "redesigned_nodes": [
+            {"id": "ingest",    "label": "Auto spend ingest",      "type": "automated", "tools": ["Spend feed", "CDP"],
+             "activities": ["Pulls platform spend and conversion data on a schedule.", "Resolves taxonomy across platforms.", "Hashes inputs for lineage and replay."]},
+            {"id": "mta",       "label": "MTA reconciliation",     "type": "ai",        "tools": ["MTA", "Attribution model"],
+             "activities": ["Runs MTA with deduplication across platforms.", "Decomposes credit into incremental and assisted.", "Surfaces over-credit risk by channel."]},
+            {"id": "mmm",       "label": "Continuous MMM",         "type": "ai",        "tools": ["Meridian", "Robyn"],
+             "activities": ["Refits MMM weekly against the unified spend feed.", "Reports diminishing-returns curves by channel.", "Flags drift from the prior week's parameters."]},
+            {"id": "reconcile", "label": "MTA and MMM reconciliation","type": "ai",      "tools": ["Claude", "BI"],
+             "activities": ["Reconciles MTA and MMM into one view with confidence bands.", "Cites the input lines that drive each gap.", "Surfaces decisions where models disagree."]},
+            {"id": "decide",    "label": "Allocation decision",    "type": "human",     "tools": ["Meeting", "Review queue"],
+             "activities": ["CMO and CFO read one reconciled view.", "Edits feed back into the model and the taxonomy.", "Allocation moves on the live read, not the previous quarter's."]},
+        ],
+        "key_changes": [
+            {"theme": "Reconciled measurement", "bullets": [
+                "MTA and MMM agree to within roughly five points.",
+                "CMO and CFO read the same number in the same week.",
+                "Reallocation lands on incremental, not assisted."]},
+            {"theme": "Cycle compression", "bullets": [
+                "MMM cadence moves from quarterly to weekly.",
+                "Spend lineage runs end-to-end without the spreadsheet middle.",
+                "Decisions land in days, not weeks."]},
+            {"theme": "Data discipline", "bullets": [
+                "Taxonomy resolves at ingest, not in slides.",
+                "Every conversion ties to source, campaign, and creative.",
+                "Reconciliation tax falls toward zero."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every model run logs version and parameter.",
+                "Disagreements between MTA and MMM surface, not hide.",
+                "Finance reads the same provenance the marketer does."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Spend ingestion spec, taxonomy map, MTA and MMM model documentation, reconciliation rubric, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Competitive intelligence & launch ops ----
+    {
+        "slug":         "competitive-intelligence-launch",
+        "title":        "Competitive intelligence and launch operations",
+        "description":  "Battlecards refreshed by hand once a quarter, replaced by a live competitive view that updates as competitors move. Product marketing arms the field in days, not weeks.",
+        "function":     "Marketing",
+        "sub_function": "Product Marketing",
+        "workflow":     "Competitive intelligence",
+        "process_slug": "competitive-intelligence",
+        "function_slug": "sales-and-marketing",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Battlecards refreshed by hand once a quarter, replaced by a live competitive view that updates as competitors move. Product marketing arms the field in days, not weeks.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the product marketing function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise product marketing and "
+            "competitive intelligence – reviewed the redesign at each checkpoint. Forward-deployed engineers built "
+            "inside the team's CMS, CI tooling, and CRM stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today battlecards refresh once a quarter. The PMM team scans competitor sites, win-loss interviews, and analyst reports by hand.",
+        "situation_body": "Competitor pricing pages, product updates, and earnings commentary surface across forty to fifty sources. Most updates miss the field until the next launch cycle. Win-loss insight stays in calls that nobody listens back through. The Crayon 2025 State of CI puts daily AI use among CI teams at sixty percent, up from forty-eight, and the gap between adopters and laggards is the speed at which the field gets armed.",
+        "legacy_kpis": [
+            {"label": "Battlecard refresh","value": "Quarterly","sub": "Manual research, manual write-up"},
+            {"label": "Source coverage",   "value": "10–15",   "sub": "Of 40–50 relevant feeds"},
+            {"label": "Win-loss synthesis","value": "Sampled", "sub": "Few calls reviewed end-to-end"},
+            {"label": "Field arm latency", "value": "Weeks",   "sub": "Behind competitor moves"},
+        ],
+        "legacy_nodes": [
+            {"id": "scan",      "label": "Scan sources",          "type": "manual", "tools": ["Email", "Word"],
+             "activities": ["Open each competitor site weekly.", "Skim recent press, pricing, and product pages.", "Note material changes in a running document."]},
+            {"id": "interview", "label": "Win-loss interviews",   "type": "manual", "tools": ["Meeting", "Notes"],
+             "activities": ["Schedule calls with closed-won and closed-lost buyers.", "Capture themes by hand.", "Update the qualitative section of the battlecard."]},
+            {"id": "synthesise","label": "Synthesise insight",    "type": "manual", "tools": ["Word", "PowerPoint"],
+             "activities": ["Combine source notes and interview themes.", "Refresh battlecard sections.", "Reconcile contradictions with the prior quarter."]},
+            {"id": "publish",   "label": "Publish battlecard",    "type": "manual", "tools": ["CMS", "Email"],
+             "activities": ["Post the updated battlecard to the enablement portal.", "Email the field an update note.", "Schedule a brief on the next sales call."]},
+            {"id": "field",     "label": "Field uses battlecard", "type": "human",  "tools": ["CRM", "Battlecard"],
+             "activities": ["Reps reference the battlecard during deal cycles.", "Submit one-off questions when the card runs short.", "PMM answers each question by hand."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "A quarter between refreshes is too slow.",
+             "body": "Competitors ship pricing changes monthly. Reps walk into deals with a battlecard the buyer has already seen past."},
+            {"icon": "link",  "title": "Forty sources, ten covered.",
+             "body": "PMM cannot read every relevant feed. The CI signal sits in places the team does not have hours to scan."},
+            {"icon": "chat",  "title": "Win-loss insight stays in the calls.",
+             "body": "Even the calls that get scheduled rarely get listened back through. Themes emerge from anecdote, not from the corpus."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Battlecard refresh","value": "Continuous","delta": "From quarterly to as-it-happens"},
+            {"label": "Source coverage",   "value": "40–50",    "delta": "Full relevant coverage"},
+            {"label": "Win-loss synthesis","value": "Every call","delta": "From sampled to corpus-wide"},
+            {"label": "Field arm latency", "value": "Hours",    "delta": "▼ from weeks to hours"},
+        ],
+        "redesigned_nodes": [
+            {"id": "monitor",   "label": "Source monitoring",     "type": "automated", "tools": ["Klue", "Crayon"],
+             "activities": ["Pulls competitor sites, pricing pages, releases, and analyst notes daily.", "Detects material changes against the prior snapshot.", "Suppresses noise after PMM disposition."]},
+            {"id": "calls",     "label": "Win-loss synthesis",    "type": "ai",        "tools": ["Gong", "Claude"],
+             "activities": ["Transcribes and codes every closed-won and closed-lost call.", "Surfaces themes against the prior quarter.", "Cites the call moment for every claim."]},
+            {"id": "draft",     "label": "Drafted battlecard",    "type": "semi-auto", "tools": ["Claude", "Battlecard"],
+             "activities": ["Drafts updated battlecard sections from monitored sources and call insight.", "Cites the source line for every claim.", "PMM reviews, edits, and approves."]},
+            {"id": "publish",   "label": "Live publish",          "type": "automated", "tools": ["CMS", "Slack"],
+             "activities": ["Pushes the updated battlecard to the enablement portal.", "Notifies the field through Slack and CRM cues.", "Logs the version and the trigger that drove the refresh."]},
+            {"id": "field",     "label": "Field self-serve",      "type": "ai",        "tools": ["Claude", "Battlecard"],
+             "activities": ["Reps query the live battlecard in the deal context.", "AI answers from the source corpus, with citations.", "Unanswerable questions route to PMM with the deal attached."]},
+        ],
+        "key_changes": [
+            {"theme": "Cycle compression", "bullets": [
+                "Battlecards refresh as competitors move, not on a calendar.",
+                "Field arm latency drops from weeks to hours.",
+                "Reps walk into deals with the current view, not the last one."]},
+            {"theme": "Coverage", "bullets": [
+                "Source coverage moves from ten to fifteen feeds toward the full forty to fifty.",
+                "Every win-loss call enters the corpus, not just the ones PMM listens to.",
+                "Themes emerge from data, not from anecdote."]},
+            {"theme": "Field enablement", "bullets": [
+                "Reps query the battlecard in the deal context.",
+                "AI answers from the corpus with citations.",
+                "Unanswered questions route to PMM with the deal attached."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every battlecard claim cites the source line.",
+                "Every refresh logs the trigger and the version.",
+                "PMM edits feed back into the prompt library."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Source-monitoring spec, win-loss coding rubric, battlecard prompt library, field-self-serve guardrails, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- HR Performance management & calibration ----
+    {
+        "slug":         "performance-management-calibration",
+        "title":        "Performance management and calibration",
+        "description":  "Manager review-writing time cut by half. Calibration arrives with consistent evidence on every employee, not a memory of the last project.",
+        "function":     "HR",
+        "sub_function": "Performance and L&D",
+        "workflow":     "Performance reviews and calibration",
+        "process_slug": "performance-calibration",
+        "function_slug": "hr",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Manager review-writing time cut by half. Calibration arrives with consistent evidence on every employee, not a memory of the last project.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the performance and L&amp;D function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise HR and people analytics – "
+            "reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's HRIS, "
+            "performance platform, and works-council compliance pipeline. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today managers spend roughly two hundred hours a year on reviews. Forty-nine percent struggle to synthesise a year of feedback under deadline.",
+        "situation_body": "Goals, one-to-one notes, project artefacts, and peer feedback live in five systems. Most managers reconstruct the year from memory in the week before reviews are due. Calibration sessions read uneven write-ups from one peer to the next, and bias creeps in where evidence runs short. Only thirteen percent of employers formally use AI here today, and the next wave is drafting from the corpus, not summarising it after the fact.",
+        "legacy_kpis": [
+            {"label": "Manager hours",     "value": "~200/yr","sub": "On review writing per manager"},
+            {"label": "Synthesis quality", "value": "Uneven", "sub": "49% struggle, last-week reconstruction"},
+            {"label": "Evidence coverage", "value": "Memory","sub": "Recent projects dominate"},
+            {"label": "Calibration prep",  "value": "Hours",  "sub": "Per session, per manager"},
+        ],
+        "legacy_nodes": [
+            {"id": "gather",    "label": "Gather inputs",        "type": "manual", "tools": ["HRIS", "Feedback notes"],
+             "activities": ["Pull goals from the performance platform.", "Open one-to-one notes by hand.", "Request peer feedback in the final two weeks."]},
+            {"id": "draft",     "label": "Draft review",         "type": "manual", "tools": ["Word", "HRIS"],
+             "activities": ["Write each section against goals and 360 themes.", "Cross-reference past reviews for tone.", "Iterate after self-review and peer reads."]},
+            {"id": "submit",    "label": "Submit for calibration","type": "manual", "tools": ["HRIS"],
+             "activities": ["Lock the draft into the platform.", "Add a proposed rating.", "Wait for the calibration session."]},
+            {"id": "calibrate", "label": "Calibration session",  "type": "human",  "tools": ["Meeting", "PowerPoint"],
+             "activities": ["Managers walk through each direct report.", "Skip-levels challenge ratings against the cohort.", "Adjustments take hours; the conversation skews to the loudest voice."]},
+            {"id": "deliver",   "label": "Deliver review",       "type": "human",  "tools": ["Meeting", "HRIS"],
+             "activities": ["Manager runs the conversation with the employee.", "Captures development plan in the platform.", "Logs salary and bonus outcome."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Two hundred hours a year on review writing.",
+             "body": "Managers reconstruct the year from memory in the final week. The work that justifies the time sits in the conversation, not the write-up."},
+            {"icon": "user",  "title": "Uneven synthesis distorts calibration.",
+             "body": "One manager writes ten paragraphs of evidence; another writes three. Calibration reads strength of write-up, not strength of performer."},
+            {"icon": "shield","title": "Bias and audit pressure are rising.",
+             "body": "NYC Local Law 144 and EU AI Act Annex III put performance under formal audit. Works councils flag opaque scoring. The legacy stack does not generate the evidence trail."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Manager hours",     "value": "~100/yr","delta": "▼ 30–50% vs today"},
+            {"label": "Synthesis quality", "value": "Uniform","delta": "Same evidence shape per employee"},
+            {"label": "Evidence coverage", "value": "Full year","delta": "From memory to corpus"},
+            {"label": "Calibration prep",  "value": "Minutes","delta": "▼ from hours to minutes"},
+        ],
+        "redesigned_nodes": [
+            {"id": "gather",    "label": "Auto evidence pack",   "type": "automated", "tools": ["HRIS", "Goal library"],
+             "activities": ["Pulls goals, one-to-one notes, project artefacts, and peer feedback per employee.", "Resolves identity across systems.", "Hashes inputs for chain of custody."]},
+            {"id": "draft",     "label": "Drafted review",       "type": "semi-auto", "tools": ["Claude", "Style guide"],
+             "activities": ["Drafts the review against the evidence pack and the company rubric.", "Cites the source line for every claim.", "Manager reviews, edits, and signs off."]},
+            {"id": "calibrate", "label": "Calibration brief",    "type": "ai",        "tools": ["Claude", "Review platform hr"],
+             "activities": ["Generates a one-page calibration brief per employee.", "Surfaces evidence where the proposed rating sits at the band edge.", "Flags wording inconsistencies across managers."]},
+            {"id": "review",    "label": "Calibration session",  "type": "human",     "tools": ["Meeting", "Review queue hr"],
+             "activities": ["Skip-levels read consistent briefs, not uneven write-ups.", "Adjustments cite evidence rather than memory.", "Edits feed back into the rubric and prompt library."]},
+            {"id": "deliver",   "label": "Deliver and log",      "type": "human",     "tools": ["Meeting", "HRIS"],
+             "activities": ["Manager runs the conversation with full evidence in hand.", "Development plan and outcome log to the platform.", "Bias and audit reports generate from the same trail."]},
+        ],
+        "key_changes": [
+            {"theme": "Manager capacity", "bullets": [
+                "Review-writing hours fall by thirty to fifty percent.",
+                "Time saved goes to the conversation, not the write-up.",
+                "Evidence pack covers the full year, not the last quarter."]},
+            {"theme": "Calibration quality", "bullets": [
+                "Every employee enters the room with the same evidence shape.",
+                "Skip-levels read consistent briefs, not uneven prose.",
+                "Adjustments cite evidence, not memory."]},
+            {"theme": "Bias and explainability", "bullets": [
+                "Every claim cites the source artefact.",
+                "Inconsistencies across managers surface, not hide.",
+                "NYC Local Law 144 and EU AI Act audits generate from the trail."]},
+            {"theme": "Audit and control", "bullets": [
+                "Model versions log on every drafted review.",
+                "Manager edits feed back into the rubric.",
+                "Works-council reviewers read the same evidence as the audit committee."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Evidence ingest spec, review prompt library, calibration brief template, bias-audit pack, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- HR Compensation & total rewards planning ----
+    {
+        "slug":         "compensation-rewards-planning",
+        "title":        "Compensation and total rewards planning",
+        "description":  "Annual comp planning compressed from a quarter to weeks. Pay-equity audits run continuously; managers see the live band before they propose an offer.",
+        "function":     "HR",
+        "sub_function": "Total Rewards",
+        "workflow":     "Compensation planning",
+        "process_slug": "compensation-planning",
+        "function_slug": "hr",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Annual comp planning compressed from a quarter to weeks. Pay-equity audits run continuously; managers see the live band before they propose an offer.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the total rewards function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise compensation, benefits, "
+            "and pay-equity audit – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside "
+            "the team's HRIS, comp tooling, and benchmarking stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today the annual comp cycle runs eight to twelve weeks. Total rewards stitches benchmark data, performance ratings, and budget envelopes for thousands of employees by hand.",
+        "situation_body": "Pay band data ages in spreadsheets. Manager proposals arrive in inconsistent templates. Pay-equity audits land after the cycle closes, when adjustments are politically expensive. Pave's benchmark library covers eight thousand seven hundred companies; HRSoft and beqom ship agentic comp; the legacy stack still runs on spreadsheets and email approvals.",
+        "legacy_kpis": [
+            {"label": "Cycle time",       "value": "8–12 wks","sub": "Annual comp planning"},
+            {"label": "Manager touches",  "value": "Many",    "sub": "Iterations on proposal templates"},
+            {"label": "Equity audit lag", "value": "Post-cycle","sub": "Findings after letters go out"},
+            {"label": "Band freshness",   "value": "Stale",   "sub": "Refreshed annually, not live"},
+        ],
+        "legacy_nodes": [
+            {"id": "benchmark", "label": "Refresh benchmarks",   "type": "manual", "tools": ["Comp benchmark", "Excel"],
+             "activities": ["Buy or refresh benchmark data per role and geography.", "Map roles to benchmark codes.", "Build pay bands by family and level."]},
+            {"id": "budget",    "label": "Set budgets",          "type": "manual", "tools": ["Excel", "HRIS"],
+             "activities": ["Allocate merit, promo, and bonus envelopes per business.", "Iterate with finance against revenue plan.", "Lock budgets before manager planning opens."]},
+            {"id": "propose",   "label": "Manager proposals",    "type": "manual", "tools": ["Comp planning sheet"],
+             "activities": ["Managers propose merit, promo, and bonus per direct report.", "Submit proposals through the planning sheet.", "Iterate after HRBP review."]},
+            {"id": "approve",   "label": "Skip-level review",    "type": "human",  "tools": ["Meeting", "Excel"],
+             "activities": ["Skip-levels review proposals against budget.", "Push back on outliers.", "Cycle continues until budgets balance."]},
+            {"id": "deliver",   "label": "Deliver letters",      "type": "manual", "tools": ["HRIS", "Email"],
+             "activities": ["Generate letters from final proposals.", "Send to employees on the comp date.", "Run pay-equity audit after the cycle closes."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Eight to twelve weeks of compensation cycle.",
+             "body": "Total rewards spends a quarter coordinating spreadsheets and approvals while managers wait on bands and budgets."},
+            {"icon": "shield","title": "Pay-equity audit arrives too late.",
+             "body": "Findings land after the letters go out. Adjustments become political rather than systematic."},
+            {"icon": "gauge", "title": "Benchmark data ages in the workbook.",
+             "body": "Bands refresh annually. Mid-cycle hires get offers against last year's market when the market has moved."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Cycle time",       "value": "2–4 wks", "delta": "▼ ~70% vs today"},
+            {"label": "Manager touches",  "value": "1–2",     "delta": "Single-pass with guardrails"},
+            {"label": "Equity audit lag", "value": "Continuous","delta": "From post-cycle to live"},
+            {"label": "Band freshness",   "value": "Live",    "delta": "Refresh as benchmarks update"},
+        ],
+        "redesigned_nodes": [
+            {"id": "benchmark", "label": "Live band library",    "type": "automated", "tools": ["Pave", "Pay band library"],
+             "activities": ["Pulls benchmark data on a schedule across roles and geographies.", "Refreshes pay bands and posts deltas.", "Logs band changes for audit."]},
+            {"id": "budget",    "label": "Auto budget allocation","type": "ai",       "tools": ["HRSoft", "HRIS"],
+             "activities": ["Distributes merit, promo, and bonus envelopes by guidance and headcount.", "Models the cycle against finance scenarios in minutes.", "Surfaces pay-equity gaps before letters go out."]},
+            {"id": "propose",   "label": "Guided manager proposal","type": "semi-auto","tools": ["HRSoft", "Claude"],
+             "activities": ["Manager opens a guided sheet with live bands and proposed numbers.", "Agent flags outliers against policy and equity.", "Manager approves or edits in place."]},
+            {"id": "audit",     "label": "Continuous equity audit","type": "ai",      "tools": ["Pave", "Comp benchmark"],
+             "activities": ["Runs pay-equity checks continuously across the cycle.", "Cites the role, level, and population that drives every flag.", "Surfaces remediation inside the cycle, not after."]},
+            {"id": "deliver",   "label": "Auto-letter and log",  "type": "automated", "tools": ["HRIS", "Email"],
+             "activities": ["Generates letters from final, equity-audited proposals.", "Logs every adjustment with rationale.", "Delivers on the comp date with a clean audit trail."]},
+        ],
+        "key_changes": [
+            {"theme": "Cycle compression", "bullets": [
+                "Eight to twelve weeks toward two to four.",
+                "Manager touches drop to one or two from five or six.",
+                "Skip-level reviews read live data, not aged spreadsheets."]},
+            {"theme": "Equity discipline", "bullets": [
+                "Pay-equity audit runs continuously across the cycle.",
+                "Remediation lands inside the cycle, not after.",
+                "Findings become systematic, not political."]},
+            {"theme": "Band freshness", "bullets": [
+                "Bands refresh as benchmark data updates.",
+                "Mid-cycle hires get offers against the live market.",
+                "Manager proposals open with the right number, not an aged one."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every band change logs source and timestamp.",
+                "Every proposal cites the band and the equity check.",
+                "Compensation committee reads the same trail as audit."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Band-library spec, guided proposal template, continuous equity audit pack, letter generation pipeline, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Legal regulatory horizon scanning ----
+    {
+        "slug":         "regulatory-horizon-scanning",
+        "title":        "Regulatory horizon scanning and policy mapping",
+        "description":  "Quarterly compliance scans replaced by daily monitoring of regulator feeds, mapped to internal policies and controls. Obligations land before the deadline does.",
+        "function":     "Legal",
+        "sub_function": "Regulatory and Compliance",
+        "workflow":     "Regulatory horizon scanning",
+        "process_slug": "regulatory-horizon-scanning",
+        "function_slug": "legal",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Quarterly compliance scans replaced by daily monitoring of regulator feeds, mapped to internal policies and controls. Obligations land before the deadline does.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the regulatory and compliance function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside financial-services compliance and "
+            "regulator engagement – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside "
+            "the team's GRC, policy library, and obligations register. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today rule changes get caught in a quarterly scan run by two associates against twenty regulator websites and three external feeds.",
+        "situation_body": "Coverage misses material updates between scans. Mapping a new obligation to internal policy is a manual exercise across multiple binders. Sixty-four percent of banking risk respondents flag evolving regulation as a top concern; the EU AI Act and FCA AI Update added obligations layers on top of existing burden. The legacy stack does not scale with the rate of change.",
+        "legacy_kpis": [
+            {"label": "Scan cadence",      "value": "Quarterly","sub": "Two associates, two-week sprint"},
+            {"label": "Source coverage",   "value": "20–30",   "sub": "Of 60+ relevant feeds"},
+            {"label": "Policy mapping",    "value": "Manual",  "sub": "Days per material change"},
+            {"label": "Lead time to action","value": "Weeks",  "sub": "Obligations land late"},
+        ],
+        "legacy_nodes": [
+            {"id": "scan",      "label": "Scan regulator sites",  "type": "manual", "tools": ["Reg feed", "Word"],
+             "activities": ["Open each regulator website in turn.", "Skim updates and consultations.", "Note material changes in a tracking document."]},
+            {"id": "review",    "label": "Review materiality",    "type": "manual", "tools": ["Word", "Email"],
+             "activities": ["Compliance officer reads each update.", "Scores materiality by hand.", "Forwards to subject-matter owners."]},
+            {"id": "map",       "label": "Map to policy",         "type": "manual", "tools": ["Policy library", "Word"],
+             "activities": ["Open the relevant internal policy.", "Compare clause by clause to the new obligation.", "Note gaps and propose updates."]},
+            {"id": "register",  "label": "Update obligations",    "type": "manual", "tools": ["Obligations register"],
+             "activities": ["Log the obligation in the register.", "Assign owner and deadline.", "Track remediation through email."]},
+            {"id": "report",    "label": "Quarterly briefing",    "type": "human",  "tools": ["PowerPoint", "Meeting"],
+             "activities": ["Compile the quarterly compliance pack.", "Brief the audit and risk committee.", "Track open obligations to next quarter."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "A quarter between scans is too long.",
+             "body": "Material updates land between scans and surface only at the next sweep. Remediation windows compress further every cycle."},
+            {"icon": "link",  "title": "Sixty feeds, twenty covered.",
+             "body": "EU AI Act, FCA AI Update, and sector-specific bulletins multiply the relevant set. The team cannot scan every feed by hand."},
+            {"icon": "user",  "title": "Mapping is the hidden cost.",
+             "body": "Once an update is in hand, mapping it across binders to internal policy and controls takes days per material change."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Scan cadence",      "value": "Daily",   "delta": "From quarterly to daily"},
+            {"label": "Source coverage",   "value": "60+",     "delta": "Full relevant coverage"},
+            {"label": "Policy mapping",    "value": "Drafted", "delta": "Hours, not days"},
+            {"label": "Lead time to action","value": "Days",   "delta": "▼ from weeks to days"},
+        ],
+        "redesigned_nodes": [
+            {"id": "scan",      "label": "Auto regulator scan",   "type": "automated", "tools": ["Horizon scanner", "Regulator feed"],
+             "activities": ["Pulls regulator and external feeds daily.", "Detects material changes against the prior snapshot.", "Suppresses noise after compliance disposition."]},
+            {"id": "score",     "label": "AI materiality score",  "type": "ai",        "tools": ["Claude", "Policy library"],
+             "activities": ["Scores each update against entity, sector, and product exposure.", "Cites the rule line for every flag.", "Routes to the right SME with context."]},
+            {"id": "map",       "label": "Drafted policy mapping","type": "semi-auto", "tools": ["Claude", "Obligations register"],
+             "activities": ["Drafts the obligation against existing internal policy.", "Surfaces gaps and proposes language.", "Compliance officer reviews, edits, and approves."]},
+            {"id": "register",  "label": "Live obligations register","type": "automated","tools": ["FinregE", "Obligations register"],
+             "activities": ["Logs the obligation with owner, deadline, and source.", "Tracks remediation in one queue.", "Escalates inside the deadline window."]},
+            {"id": "report",    "label": "Live committee view",  "type": "human",     "tools": ["Meeting", "Review queue"],
+             "activities": ["Audit and risk committee reads a live register.", "Reads trends, not surprises.", "Edits feed back into the materiality model."]},
+        ],
+        "key_changes": [
+            {"theme": "Cycle compression", "bullets": [
+                "Scans move from quarterly to daily.",
+                "Mapping drops from days to hours per material change.",
+                "Lead time to action moves from weeks toward days."]},
+            {"theme": "Coverage", "bullets": [
+                "Source coverage moves from twenty to thirty feeds toward the full sixty plus.",
+                "EU AI Act, FCA AI Update, and sector bulletins all surface.",
+                "Updates land before they are in force."]},
+            {"theme": "Mapping discipline", "bullets": [
+                "Every drafted mapping cites the rule line and the policy clause.",
+                "Compliance officer edits feed back into the prompt library.",
+                "Obligations register stays current, not lagged."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every flagged update logs source and timestamp.",
+                "Every mapping logs model version and reviewer override.",
+                "Regulators read the same trail as the committee."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Source-monitoring spec, materiality rubric, mapping prompt library, obligations register schema, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Privacy DSAR ----
+    {
+        "slug":         "privacy-dsar-fulfilment",
+        "title":        "Privacy and DSAR fulfilment",
+        "description":  "DSAR fulfilment cost falling toward a tenth as PII discovery, redaction, and identity verification run as one pipeline. Statutory deadlines stop being the bottleneck.",
+        "function":     "Legal",
+        "sub_function": "Privacy",
+        "workflow":     "DSAR fulfilment",
+        "process_slug": "dsar-fulfilment",
+        "function_slug": "legal",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "DSAR fulfilment cost falling toward a tenth as PII discovery, redaction, and identity verification run as one pipeline. Statutory deadlines stop being the bottleneck.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the privacy function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise privacy and data-protection "
+            "operations – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's "
+            "DSR platform, identity stack, and SaaS data map. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today a single DSAR can run seventy to a hundred and thirty thousand pounds in external cost. CCPA volume grew two hundred and forty-six percent between 2021 and 2024.",
+        "situation_body": "Discovery sweeps Slack, Teams, email, ticketing, and dozens of SaaS tools by hand. Redaction is a paragraph-by-paragraph exercise. Identity verification is a parallel manual workflow. Statutory deadlines compress harder every year as volume grows; the legacy stack is the bottleneck, not the legal analysis.",
+        "legacy_kpis": [
+            {"label": "Cost per DSAR",     "value": "£70–130k","sub": "External cost on the legacy stack"},
+            {"label": "Cycle time",        "value": "30–45 days","sub": "Statutory deadline pressure"},
+            {"label": "Source coverage",   "value": "Partial","sub": "SaaS sprawl outpaces discovery"},
+            {"label": "Redaction hours",   "value": "Many",   "sub": "Paragraph-by-paragraph review"},
+        ],
+        "legacy_nodes": [
+            {"id": "intake",    "label": "Receive request",      "type": "manual", "tools": ["Email", "Word"],
+             "activities": ["Receive the DSAR over email or web form.", "Verify the requester's identity by hand.", "Open a matter in the case tracker."]},
+            {"id": "discover",  "label": "Discover data",        "type": "manual", "tools": ["Slack", "Outlook"],
+             "activities": ["Email each system owner with the requester's identifiers.", "Search Slack, email, and major SaaS tools by hand.", "Compile responsive items in a folder."]},
+            {"id": "redact",    "label": "Redact and review",    "type": "manual", "tools": ["Word", "Privilege log"],
+             "activities": ["Read each item end-to-end.", "Redact third-party PII paragraph by paragraph.", "Apply privilege and exemption rules."]},
+            {"id": "verify",    "label": "QC and assemble",      "type": "manual", "tools": ["Word", "Excel"],
+             "activities": ["Second reviewer QCs redactions.", "Assemble the response pack.", "Log every action for the audit trail."]},
+            {"id": "respond",   "label": "Respond to requester", "type": "human",  "tools": ["Email", "Privacy log"],
+             "activities": ["Send the response within the statutory window.", "Track follow-up questions.", "Log closure in the privacy register."]},
+        ],
+        "complications": [
+            {"icon": "dollar","title": "Seventy to a hundred and thirty thousand pounds per DSAR.",
+             "body": "External counsel and review labour drive the cost. Volume growth is faster than headcount."},
+            {"icon": "clock", "title": "Statutory deadlines do not move.",
+             "body": "Thirty to forty-five days is fixed. Discovery and redaction labour is the variable, and it is rising."},
+            {"icon": "link",  "title": "Discovery misses what is not searched.",
+             "body": "Slack, Teams, ticketing, and dozens of SaaS tools each hold partial PII. Manual sweeps cover a fraction of the data map."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Cost per DSAR",     "value": "Tenth",   "delta": "▼ ~90% vs today"},
+            {"label": "Cycle time",        "value": "Days",    "delta": "Inside the statutory window with margin"},
+            {"label": "Source coverage",   "value": "Full map","delta": "From partial to full SaaS estate"},
+            {"label": "Redaction hours",   "value": "Hours",   "delta": "AI drafts, human verifies"},
+        ],
+        "redesigned_nodes": [
+            {"id": "intake",    "label": "Auto intake and verify","type": "automated", "tools": ["OneTrust", "Identity verification"],
+             "activities": ["Captures the request through a structured form.", "Runs identity verification automatically.", "Opens the matter with full provenance."]},
+            {"id": "discover",  "label": "AI data discovery",     "type": "ai",        "tools": ["Securiti", "Data map"],
+             "activities": ["Sweeps the live data map across SaaS, file shares, Slack, and Teams.", "Resolves identity across systems.", "Logs every source touched for chain of custody."]},
+            {"id": "classify",  "label": "PII classification",    "type": "ai",        "tools": ["Pii classifier", "Securiti"],
+             "activities": ["Classifies each item for responsiveness, third-party PII, and privilege.", "Cites the rule that drives every classification.", "Surfaces ambiguity for human review."]},
+            {"id": "redact",    "label": "Drafted redactions",    "type": "semi-auto", "tools": ["Redaction agent", "Claude"],
+             "activities": ["Drafts redactions across the corpus.", "Cites the source line for every redaction.", "Privacy reviewer verifies, edits, and signs off."]},
+            {"id": "respond",   "label": "Auto-assemble response","type": "automated", "tools": ["OneTrust", "Email"],
+             "activities": ["Assembles the response pack with provenance.", "Sends to the requester with an audit trail.", "Closes the register entry with chain of custody intact."]},
+        ],
+        "key_changes": [
+            {"theme": "Cost compression", "bullets": [
+                "Cost per DSAR moves from seventy to a hundred and thirty thousand pounds toward roughly a tenth.",
+                "External counsel reliance drops as discovery and redaction become pipeline.",
+                "Headcount stops gating volume growth."]},
+            {"theme": "Coverage", "bullets": [
+                "Discovery sweeps the full data map, not a partial sample.",
+                "Slack, Teams, and SaaS sprawl all enter the pipeline.",
+                "Chain of custody captures every source touched."]},
+            {"theme": "Cycle and deadline discipline", "bullets": [
+                "Cycle time runs inside the statutory window with margin.",
+                "Volume growth absorbs without deadline slip.",
+                "Reviewer time concentrates on judgement, not redaction craft."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every classification cites the rule and the model version.",
+                "Every redaction logs the source line.",
+                "Regulators read the same trail as the privacy committee."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Data-map spec, classification rubric, redaction prompt library, identity-verification flow, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- IT Tier-1 helpdesk ----
+    {
+        "slug":         "it-tier1-helpdesk",
+        "title":        "IT tier-1 help-desk auto-resolution",
+        "description":  "Roughly ninety percent of inbound IT tickets resolved at the point of question. Engineers concentrate on incidents and changes rather than password resets and access asks.",
+        "function":     "IT",
+        "sub_function": "ITSM",
+        "workflow":     "Tier-1 help-desk auto-resolution",
+        "process_slug": "it-tier1-helpdesk",
+        "function_slug": "operations",
+        "role_slug":    "individual-contributor",
+        "role_label":   "Individual Contributor",
+        "card_body":    "Roughly ninety percent of inbound IT tickets resolved at the point of question. Engineers concentrate on incidents and changes rather than password resets and access asks.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the IT operations function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise ITSM, identity, and "
+            "endpoint management – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside "
+            "the team's ServiceNow, identity, and CMDB stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today the IT help desk takes the volume hit on password resets, access requests, and software installs. Tier-1 agents close hundreds of tickets a day on rote work.",
+        "situation_body": "Knowledge bases age in confluence pages. Identity and entitlement plumbing scatters across the SaaS estate. Tier-1 agents bridge the two by hand, ticket by ticket. ServiceNow Now Assist on its own tenant resolves around ninety percent of inbound tickets; Novant Health automated sixty-three percent of incidents and cut MTTR roughly thirty percent across eighty-seven thousand predictions in four months. The legacy chatbot was a glorified search bar.",
+        "legacy_kpis": [
+            {"label": "Auto-resolution",   "value": "<10%",   "sub": "Tier-1 deflection on legacy bots"},
+            {"label": "Time per ticket",   "value": "10–15 min","sub": "Agent-led tier-1 work"},
+            {"label": "Self-serve trust",  "value": "Low",    "sub": "Users escalate to humans by default"},
+            {"label": "Engineer drag",     "value": "High",   "sub": "Senior staff pulled into rote tickets"},
+        ],
+        "legacy_nodes": [
+            {"id": "submit",    "label": "User submits ticket",  "type": "manual", "tools": ["Email", "Servicenow"],
+             "activities": ["User opens a ticket through portal or email.", "Fills a free-text description.", "Waits in queue for assignment."]},
+            {"id": "triage",    "label": "Agent triage",         "type": "manual", "tools": ["Servicenow", "Knowledge base"],
+             "activities": ["Tier-1 agent reads the ticket.", "Searches the KB for a matching article.", "Asks the user for missing detail."]},
+            {"id": "resolve",   "label": "Resolve common issue", "type": "manual", "tools": ["Servicenow", "Identity verification"],
+             "activities": ["Reset password or grant access by hand.", "Walk the user through software install steps.", "Test the resolution and close the ticket."]},
+            {"id": "escalate",  "label": "Escalate when stuck",  "type": "manual", "tools": ["Servicenow", "Email"],
+             "activities": ["Re-categorise the ticket for tier 2.", "Forward context to the right queue.", "Wait for the engineer to pick it up."]},
+            {"id": "log",       "label": "Log and close",        "type": "manual", "tools": ["Servicenow"],
+             "activities": ["Write the resolution note.", "Tag the article that resolved it, if any.", "Close the ticket in the queue."]},
+        ],
+        "complications": [
+            {"icon": "user",  "title": "Engineers drag into rote tier-1 work.",
+             "body": "Senior staff get pulled into password resets and access asks at peak volume. The work that needs them sits in the queue."},
+            {"icon": "link",  "title": "Knowledge fragments across confluence pages.",
+             "body": "KB articles age, tribal knowledge concentrates in senior reps, and turnover destroys it. Tier-1 agents stitch the two by hand."},
+            {"icon": "shield","title": "Identity plumbing slows everything.",
+             "body": "Access requests cross five SaaS tools, three approvers, and an entitlement matrix. The wait time dwarfs the actual change."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Auto-resolution",   "value": "60–90%", "delta": "▲ from <10% on legacy bots"},
+            {"label": "Time per ticket",   "value": "Seconds","delta": "Self-serve at point of question"},
+            {"label": "Self-serve trust",  "value": "High",   "delta": "Users stay with the bot by default"},
+            {"label": "Engineer drag",     "value": "Low",    "delta": "Senior staff back on incidents and changes"},
+        ],
+        "redesigned_nodes": [
+            {"id": "submit",    "label": "Conversational intake","type": "ai",        "tools": ["Moveworks", "Now assist itsm"],
+             "activities": ["User asks a question in chat or portal.", "Agent classifies intent and pulls user context.", "Identifies whether the request is tier-1 self-serve."]},
+            {"id": "answer",    "label": "Knowledge answer",     "type": "ai",        "tools": ["Claude", "Knowledge base"],
+             "activities": ["Answers from the live KB and entitlement model.", "Cites the article and source line.", "Suggests related actions when the question is ambiguous."]},
+            {"id": "execute",   "label": "Auto execute",         "type": "automated", "tools": ["Identity verification", "Servicenow"],
+             "activities": ["Resets passwords, grants entitlements, and provisions software automatically.", "Runs identity verification before any change.", "Logs every action for SOX and audit."]},
+            {"id": "escalate",  "label": "Smart escalation",     "type": "ai",        "tools": ["Servicenow", "Incident queue"],
+             "activities": ["Routes only true tier-2 work to engineers with full context.", "Drafts a structured handoff brief.", "Suppresses repeat noise after engineer disposition."]},
+            {"id": "learn",     "label": "Continuous KB learning","type": "automated","tools": ["Knowledge base", "Claude"],
+             "activities": ["Drafts new KB articles from resolved tickets.", "Surfaces stale articles for retirement.", "Edits feed back into the prompt library."]},
+        ],
+        "key_changes": [
+            {"theme": "Auto-resolution", "bullets": [
+                "Tier-1 deflection moves from under ten percent on legacy bots toward sixty to ninety.",
+                "Self-serve answers in seconds, with citations.",
+                "Common changes execute automatically with identity verification."]},
+            {"theme": "Engineer capacity", "bullets": [
+                "Senior staff stop draining into rote tier-1 work.",
+                "Tier-2 escalations arrive with structured context.",
+                "Engineers concentrate on incidents and changes."]},
+            {"theme": "Knowledge discipline", "bullets": [
+                "KB articles draft from resolved tickets continuously.",
+                "Stale content retires automatically.",
+                "Tribal knowledge stops gating service."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every auto-action logs identity, scope, and rule.",
+                "Approvals route to the right human for non-standard changes.",
+                "Service owners read the same trail as audit."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. KB ingestion spec, identity and entitlement map, deflection rule library, audit-trail schema, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- IT Incident triage RCA ----
+    {
+        "slug":         "it-incident-triage-rca",
+        "title":        "Incident triage, classification, and RCA",
+        "description":  "Sixty-three percent of incidents auto-classified, MTTR cut roughly thirty percent. Engineers pick up tickets with hypothesis and runbook attached, not raw alerts.",
+        "function":     "IT",
+        "sub_function": "ITSM",
+        "workflow":     "Incident triage and RCA",
+        "process_slug": "incident-triage-rca",
+        "function_slug": "operations",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Sixty-three percent of incidents auto-classified, MTTR cut roughly thirty percent. Engineers pick up tickets with hypothesis and runbook attached, not raw alerts.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the IT operations function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise SRE, ITSM, and incident "
+            "response – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's "
+            "observability, ticketing, and CMDB stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today incidents arrive as raw alerts. The on-call engineer triages, classifies, finds the runbook, and starts the RCA from scratch.",
+        "situation_body": "Observability lives in Datadog, Splunk, and CloudWatch. Tickets live in ServiceNow or Jira SM. Runbooks live in Confluence. The engineer stitches all four under deadline pressure. Novant Health automated sixty-three percent of incidents and cut MTTR roughly thirty percent over eighty-seven thousand predictions in four months; the legacy stack does not get there because the signal does not flow.",
+        "legacy_kpis": [
+            {"label": "Auto-classification","value": "<10%",   "sub": "On legacy ITSM stacks"},
+            {"label": "MTTR",               "value": "Baseline","sub": "Engineer-led triage and RCA"},
+            {"label": "Runbook hit rate",   "value": "Variable","sub": "Depends on engineer attention"},
+            {"label": "RCA completeness",   "value": "Sampled","sub": "Major incidents only"},
+        ],
+        "legacy_nodes": [
+            {"id": "alert",     "label": "Alert fires",          "type": "automated","tools": ["Observability", "Datadog"],
+             "activities": ["Monitor fires on threshold breach.", "Pages the on-call engineer.", "Opens an incident in the ticket queue."]},
+            {"id": "triage",    "label": "Engineer triage",      "type": "manual", "tools": ["Servicenow", "Splunk"],
+             "activities": ["Engineer reads the alert and pages context.", "Cross-references CMDB and recent changes by hand.", "Classifies severity and impact."]},
+            {"id": "runbook",   "label": "Find runbook",         "type": "manual", "tools": ["Knowledge base", "Runbook"],
+             "activities": ["Search Confluence for the relevant runbook.", "Cross-check the current state.", "Decide which steps still apply."]},
+            {"id": "resolve",   "label": "Resolve incident",     "type": "human",  "tools": ["Ide", "Runbook"],
+             "activities": ["Engineer executes the resolution path.", "Coordinates with adjacent teams when needed.", "Confirms metrics back to baseline."]},
+            {"id": "rca",       "label": "Write RCA",            "type": "manual", "tools": ["Word", "Rca template"],
+             "activities": ["Engineer writes the RCA the next day.", "Pulls logs and timelines by hand.", "Files the document; few read it again."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Triage eats the first ten minutes.",
+             "body": "Engineers stitch alert, CMDB, and recent changes by hand under page pressure. MTTR pays the tax."},
+            {"icon": "link",  "title": "Runbooks lag the system.",
+             "body": "Confluence runbooks describe last quarter's architecture. Engineers learn that mid-incident."},
+            {"icon": "user",  "title": "RCAs file but rarely teach.",
+             "body": "RCA writeups land late, single-author, and rarely get cross-referenced into runbooks or alerting rules."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Auto-classification","value": "60–90%", "delta": "▲ from <10% vs today"},
+            {"label": "MTTR",               "value": "▼ ~30%","delta": "Novant-equivalent band"},
+            {"label": "Runbook hit rate",   "value": "Uniform","delta": "Right runbook, every page"},
+            {"label": "RCA completeness",   "value": "Every incident","delta": "From sampled to corpus-wide"},
+        ],
+        "redesigned_nodes": [
+            {"id": "alert",     "label": "Enriched alert",       "type": "automated","tools": ["Observability", "Cmdb"],
+             "activities": ["Alert lands with CMDB, recent changes, and similar past incidents attached.", "Auto-classifies severity and likely subsystem.", "Suppresses repeat noise after engineer disposition."]},
+            {"id": "triage",    "label": "AI triage",            "type": "ai",        "tools": ["Aisera", "Now assist itsm"],
+             "activities": ["Drafts a hypothesis from logs, traces, and similar past incidents.", "Cites the log lines that drive the hypothesis.", "Routes to the right on-call with full context."]},
+            {"id": "runbook",   "label": "Live runbook",         "type": "ai",        "tools": ["Claude", "Runbook"],
+             "activities": ["Surfaces the live runbook for the inferred subsystem.", "Highlights steps that no longer apply against current state.", "Suggests next-best actions when the runbook gaps."]},
+            {"id": "resolve",   "label": "Engineer resolves",    "type": "human",     "tools": ["Ide", "Change management"],
+             "activities": ["Engineer executes the path with hypothesis in hand.", "Coordination context auto-shares to adjacent teams.", "Confirms metrics back to baseline."]},
+            {"id": "rca",       "label": "Drafted RCA",          "type": "semi-auto", "tools": ["Claude", "Rca template"],
+             "activities": ["Drafts the RCA from logs, timeline, and engineer notes.", "Cites the source line for every claim.", "Engineer reviews; edits feed back into runbooks and alerts."]},
+        ],
+        "key_changes": [
+            {"theme": "Cycle compression", "bullets": [
+                "Auto-classification moves from under ten percent toward sixty to ninety.",
+                "MTTR drops roughly thirty percent in the Novant Health band.",
+                "Engineers pick up tickets with hypothesis and runbook attached."]},
+            {"theme": "Runbook discipline", "bullets": [
+                "Live runbooks surface against current state, not last quarter's.",
+                "Drafted RCAs feed back into runbooks and alert rules.",
+                "Tribal knowledge stops gating response."]},
+            {"theme": "Engineer capacity", "bullets": [
+                "Triage stops eating the first ten minutes of every page.",
+                "Repeat noise suppresses after disposition.",
+                "Senior engineers concentrate on novel incidents and design."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every classification logs the rule and the data line.",
+                "Every RCA logs the model version and reviewer override.",
+                "Service owners read the same trail as audit."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Alert enrichment spec, classification rule library, runbook ingestion pipeline, RCA prompt library, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- CS conversational resolution ----
+    {
+        "slug":         "cs-conversational-resolution",
+        "title":        "Customer service conversational resolution",
+        "description":  "Resolution time fifteen minutes to two on chat, and roughly two-thirds of contact volume contained. Brand risk and escalation paths designed in, not bolted on.",
+        "function":     "Customer Service",
+        "sub_function": "Contact Center",
+        "workflow":     "Conversational resolution",
+        "process_slug": "cs-resolution",
+        "function_slug": "operations",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Resolution time fifteen minutes to two on chat, and roughly two-thirds of contact volume contained. Brand risk and escalation paths designed in, not bolted on.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the customer service function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside contact-center operations and "
+            "conversational-AI deployment – reviewed the redesign at each checkpoint. Forward-deployed engineers built "
+            "inside the team's CRM, knowledge base, and contact-center stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today contact volume arrives across chat, email, and voice. Tier-1 agents resolve in fifteen minutes on chat, longer on voice. Repeat contacts run high.",
+        "situation_body": "Knowledge bases age. Macros stop tracking the live policy. Edge cases route to senior agents who already carry the worst tickets. Klarna handled two and a third million conversations a year on AI agents – two-thirds of chat volume, the work of seven hundred FTE – with resolution time falling from fifteen to two minutes and repeat contacts down twenty-five percent. Klarna later partially reversed for complex cases; the design lesson is that containment ceiling and escalation matter as much as the bot.",
+        "legacy_kpis": [
+            {"label": "Resolution time",   "value": "~15 min","sub": "Tier-1 chat handle time"},
+            {"label": "Containment",       "value": "Low",    "sub": "Most chats need a human"},
+            {"label": "Repeat contacts",   "value": "High",   "sub": "Same issue, same buyer, twice"},
+            {"label": "Senior agent load", "value": "Heavy",  "sub": "Edge cases land on the few experts"},
+        ],
+        "legacy_nodes": [
+            {"id": "intake",    "label": "Buyer contacts",       "type": "manual", "tools": ["Zendesk", "Voice gateway"],
+             "activities": ["Buyer reaches out via chat, email, or voice.", "Routed to the next available agent.", "Waits in queue for assignment."]},
+            {"id": "diagnose",  "label": "Agent diagnoses",      "type": "manual", "tools": ["Crm", "Knowledge base"],
+             "activities": ["Pulls account context from CRM.", "Searches the KB or macro library.", "Asks the buyer for missing detail."]},
+            {"id": "act",       "label": "Agent acts",           "type": "manual", "tools": ["Crm", "Macros"],
+             "activities": ["Takes the action the policy permits.", "Issues credits, updates orders, or fixes accounts.", "Documents resolution in CRM."]},
+            {"id": "escalate",  "label": "Escalate edge cases",  "type": "manual", "tools": ["Email", "Senior agent"],
+             "activities": ["Forwards complex cases to senior agents.", "Senior agent picks up cold context.", "Resolves and writes a note for the agent who escalated."]},
+            {"id": "qa",        "label": "Sampled QA",           "type": "human",  "tools": ["Qa scorecard"],
+             "activities": ["QA team scores ~2 percent of interactions by hand.", "Coaches based on the small sample.", "Most interactions never get reviewed."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Fifteen minutes per chat at the tier-1 ceiling.",
+             "body": "Even strong agents cannot compress further; the bottleneck is context-pull and macro-find, not the customer's question."},
+            {"icon": "shield","title": "Containment ceiling is design, not magic.",
+             "body": "Klarna later partially reversed for complex cases. Brand risk on hallucinated policy answers is the failure mode without explicit escalation paths."},
+            {"icon": "user",  "title": "Senior agents carry the worst tickets.",
+             "body": "Escalations land on the same five experts. Burnout and turnover destroy tribal knowledge faster than the KB rebuilds."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Resolution time",   "value": "~2 min", "delta": "▼ ~85% on chat"},
+            {"label": "Containment",       "value": "~⅔",     "delta": "Klarna-band on tier-1 volume"},
+            {"label": "Repeat contacts",   "value": "▼ ~25%","delta": "Better first-contact resolution"},
+            {"label": "Senior agent load", "value": "Light",  "delta": "AI handles standard, humans rule on hard cases"},
+        ],
+        "redesigned_nodes": [
+            {"id": "intake",    "label": "Conversational intake","type": "ai",        "tools": ["Sierra", "Decagon"],
+             "activities": ["AI agent picks up chat, email, and voice in one stack.", "Pulls account, policy, and order context.", "Detects intent and policy band."]},
+            {"id": "answer",    "label": "AI resolves",          "type": "ai",        "tools": ["Claude", "Knowledge base"],
+             "activities": ["Answers from the live KB and policy library.", "Cites the article and source line.", "Suggests next-best actions when the request needs human judgement."]},
+            {"id": "act",       "label": "Auto execute",         "type": "automated", "tools": ["Crm", "Macros"],
+             "activities": ["Issues credits, updates orders, and resolves account changes inside policy.", "Logs every action with model version.", "Routes anything outside policy to a human."]},
+            {"id": "escalate",  "label": "Designed escalation",  "type": "human",     "tools": ["Agent assist", "Crm"],
+             "activities": ["Hard cases route to a human with full context and a drafted next step.", "Senior agent rules from one queue, not an inbox.", "Brand-sensitive scenarios route by policy, not by guess."]},
+            {"id": "qa",        "label": "Full-coverage QA",     "type": "ai",        "tools": ["Qa platform", "Sentiment model"],
+             "activities": ["Scores one hundred percent of interactions on adherence, tone, and resolution.", "Cites the conversation moment for every flag.", "Edits feed back into prompts and macros."]},
+        ],
+        "key_changes": [
+            {"theme": "Resolution compression", "bullets": [
+                "Chat resolution moves from fifteen minutes toward two.",
+                "Containment lands in the Klarna band on tier-1 volume.",
+                "Repeat contacts fall roughly twenty-five percent."]},
+            {"theme": "Escalation by design", "bullets": [
+                "Hard cases route to humans with context and drafted next step.",
+                "Brand-sensitive scenarios route by policy, not guess.",
+                "Senior agents stop carrying every escalation."]},
+            {"theme": "Quality discipline", "bullets": [
+                "QA scores one hundred percent of interactions, not two.",
+                "Flags cite the conversation moment.",
+                "Coaching becomes a loop, not a sample."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every action logs identity, policy band, and model version.",
+                "Containment ceiling is a design parameter, not a target.",
+                "Service owners read the same trail as audit."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. KB ingestion spec, policy and escalation map, prompt library, QA rubric, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- CS Agent assist + QA scoring ----
+    {
+        "slug":         "cs-agent-assist-qa",
+        "title":        "Agent assist and AI-driven QA",
+        "description":  "Agent-assist surfaces the right macro and policy in real time. QA scoring runs across one hundred percent of interactions, not the two-percent sample.",
+        "function":     "Customer Service",
+        "sub_function": "Contact Center",
+        "workflow":     "Agent assist and QA",
+        "process_slug": "cs-agent-assist-qa",
+        "function_slug": "operations",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Agent-assist surfaces the right macro and policy in real time. QA scoring runs across one hundred percent of interactions, not the two-percent sample.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the customer service function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside contact-center operations and "
+            "quality programmes – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside "
+            "the team's CRM, KB, and QA-platform stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today QA scores roughly two percent of interactions by hand. Agent-assist is a search bar over the knowledge base.",
+        "situation_body": "Coaches sample a handful of calls per agent per month. Most agents see feedback when they miss a target, not while they handle the call. Cresta, Salesforce Service Cloud Einstein, and Zendesk QA converge on real-time macro suggestion and full-coverage scoring; the legacy stack samples and lags.",
+        "legacy_kpis": [
+            {"label": "QA coverage",       "value": "~2%",    "sub": "Sampled by hand"},
+            {"label": "Coaching latency",  "value": "Weeks",  "sub": "After the call ended"},
+            {"label": "Macro hit rate",    "value": "Variable","sub": "Agent searches by hand"},
+            {"label": "Tone consistency",  "value": "Drifty", "sub": "Brand voice varies by agent"},
+        ],
+        "legacy_nodes": [
+            {"id": "handle",    "label": "Agent handles call",   "type": "manual", "tools": ["Zendesk", "Crm"],
+             "activities": ["Agent takes the call or chat.", "Searches macros and KB by hand.", "Documents resolution in CRM."]},
+            {"id": "sample",    "label": "QA samples interactions","type": "manual","tools": ["Qa scorecard", "Knowledge base"],
+             "activities": ["QA team pulls a small sample per agent.", "Scores on a manual rubric.", "Logs the score in the QA platform."]},
+            {"id": "review",    "label": "Coach review",         "type": "manual", "tools": ["Meeting"],
+             "activities": ["Coach reads the sample with the agent.", "Discusses one or two flags.", "Logs an action plan."]},
+            {"id": "training",  "label": "Periodic training",    "type": "manual", "tools": ["Knowledge base"],
+             "activities": ["Group training runs once a quarter.", "Covers themes from the sampled QA.", "Most agents apply it unevenly."]},
+            {"id": "report",    "label": "Quarterly QA report",  "type": "human",  "tools": ["PowerPoint"],
+             "activities": ["Operations reads sampled trends.", "Prioritises macro fixes after the fact.", "Escalations from missed cases pile up."]},
+        ],
+        "complications": [
+            {"icon": "user",  "title": "Two percent QA coverage misses ninety-eight.",
+             "body": "Coaches read a handful of calls per agent per month. Most interactions never enter the feedback loop."},
+            {"icon": "clock", "title": "Coaching arrives weeks after the call.",
+             "body": "By the time an agent hears feedback, the call is forgotten. Behaviour change happens slowly, if at all."},
+            {"icon": "chat",  "title": "Tone drifts under volume.",
+             "body": "Brand voice varies by agent and by shift. Drift compounds across hundreds of agents and millions of interactions."},
+        ],
+        "redesigned_kpis": [
+            {"label": "QA coverage",       "value": "100%",   "delta": "From sampled to full"},
+            {"label": "Coaching latency",  "value": "Live",   "delta": "In-call assist, post-call review"},
+            {"label": "Macro hit rate",    "value": "Uniform","delta": "Right macro, every interaction"},
+            {"label": "Tone consistency",  "value": "Tight",  "delta": "Brand voice scored continuously"},
+        ],
+        "redesigned_nodes": [
+            {"id": "handle",    "label": "Agent + assist",       "type": "semi-auto", "tools": ["Cresta", "Agent assist"],
+             "activities": ["Agent takes the call or chat with assist alongside.", "Macros, policies, and next-best actions surface in real time.", "Drafts responses for the agent to send or edit."]},
+            {"id": "score",     "label": "Live QA scoring",      "type": "ai",        "tools": ["Qa platform", "Sentiment model"],
+             "activities": ["Scores every interaction on adherence, tone, and resolution.", "Cites the conversation moment for every flag.", "Suppresses repeat noise after coach disposition."]},
+            {"id": "coach",     "label": "Drafted coaching",     "type": "semi-auto", "tools": ["Claude", "Style guide"],
+             "activities": ["Drafts a one-page coaching brief per agent on a weekly cadence.", "Surfaces the conversation moments that drove every flag.", "Coach reviews, edits, and runs the conversation."]},
+            {"id": "macros",    "label": "Continuous macro learning","type": "ai",    "tools": ["Macros", "Claude"],
+             "activities": ["Drafts new macros from resolved interactions.", "Surfaces stale macros for retirement.", "Retires patterns that the policy library has superseded."]},
+            {"id": "report",    "label": "Live ops view",        "type": "human",     "tools": ["Meeting", "Review queue"],
+             "activities": ["Operations reads live trends, not quarterly sample.", "Macros and KB updates feed back into the assist.", "Tone drift and adherence land in the same dashboard."]},
+        ],
+        "key_changes": [
+            {"theme": "Coverage", "bullets": [
+                "QA moves from a two-percent sample to one hundred percent of interactions.",
+                "Tone and adherence score continuously, not quarterly.",
+                "Coaching becomes a loop, not a sample."]},
+            {"theme": "Coaching latency", "bullets": [
+                "Agents see assist in the call, not feedback weeks later.",
+                "Drafted coaching briefs land weekly, not quarterly.",
+                "Behaviour change compounds inside the cycle."]},
+            {"theme": "Macro discipline", "bullets": [
+                "Right macro surfaces in the conversation, not a search bar.",
+                "Stale macros retire automatically.",
+                "Policy updates propagate into assist on push."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every flag cites the conversation moment.",
+                "Every macro logs version and policy alignment.",
+                "Quality leaders read the same trail as ops."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Assist prompt library, QA rubric, macro learning pipeline, coaching brief template, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Supply Chain demand forecasting ----
+    {
+        "slug":         "demand-forecasting-sku",
+        "title":        "Demand forecasting at SKU-location grain",
+        "description":  "Demand forecast error cut twenty to forty percent at the SKU-location grain. Planners stop rebuilding the spreadsheet and start working the exception queue.",
+        "function":     "Supply Chain",
+        "sub_function": "Demand Planning",
+        "workflow":     "Demand forecasting",
+        "process_slug": "demand-forecasting",
+        "function_slug": "operations",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Demand forecast error cut twenty to forty percent at the SKU-location grain. Planners stop rebuilding the spreadsheet and start working the exception queue.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the supply chain planning function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise demand and supply planning – "
+            "reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's planning, "
+            "ERP, and POS-feed stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today the planner runs a weekly forecast at the brand-region level. SKU-location accuracy lives in a separate workbook, refreshed by hand.",
+        "situation_body": "ERP, WMS, and SCM master data drift. POS feeds arrive with delays. The planner spends most of the week stitching inputs and overriding outliers. Walmart's in-house multi-horizon RNN cuts forecast error roughly thirty percent; Unilever's twenty AI-enabled control towers report twenty-five percent fewer stockouts and ten percent efficiency gain. ASCM and IBF report twenty to forty percent accuracy gains; the legacy stack does not get there because the data does not flow.",
+        "legacy_kpis": [
+            {"label": "Forecast accuracy", "value": "Baseline","sub": "Brand-region grain"},
+            {"label": "SKU-location",      "value": "Spreadsheet","sub": "Side workbook, manual refresh"},
+            {"label": "Planner time",      "value": ">50%",   "sub": "On dashboards and rebuild, not exceptions"},
+            {"label": "Stockouts",         "value": "Frequent","sub": "Long tail of small shortages"},
+        ],
+        "legacy_nodes": [
+            {"id": "ingest",    "label": "Pull demand inputs",   "type": "manual", "tools": ["Erp", "Excel"],
+             "activities": ["Export sales, shipments, and POS by hand.", "Stitch into the master forecast workbook.", "Reconcile naming and master data."]},
+            {"id": "model",     "label": "Run baseline forecast","type": "manual", "tools": ["Excel", "Sap ibp"],
+             "activities": ["Apply the planning system's baseline.", "Compare to last week's view.", "Note where the model under-reads recent trend."]},
+            {"id": "override",  "label": "Manual overrides",     "type": "manual", "tools": ["Excel", "Planner workbench"],
+             "activities": ["Override outliers by hand based on commercial knowledge.", "Adjust for known promotions and seasonality.", "Iterate with sales planners by email."]},
+            {"id": "publish",   "label": "Publish forecast",     "type": "manual", "tools": ["Sap ibp", "Email"],
+             "activities": ["Lock the forecast for the cycle.", "Email the supply planner the outputs.", "Wait for replan responses."]},
+            {"id": "review",    "label": "S&OP review",          "type": "human",  "tools": ["Meeting", "PowerPoint"],
+             "activities": ["Brand-region forecast presented in S&OP.", "SKU-location issues surface as anecdote.", "Adjustments slip into the next cycle."]},
+        ],
+        "complications": [
+            {"icon": "gauge", "title": "SKU-location accuracy stays in a side workbook.",
+             "body": "Planning runs at brand-region; the operational truth lives one grain finer. Stockouts and overstock both hide there."},
+            {"icon": "user",  "title": "Planners spend most of the week stitching inputs.",
+             "body": "Over fifty percent of planner time goes to dashboards and rebuild, not to exceptions and judgement."},
+            {"icon": "alert", "title": "Demand shocks break historical models.",
+             "body": "Regime changes – pandemic, tariff shifts, channel mix – outpace the baseline. The planner overrides by hand or watches the model drift."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Forecast accuracy", "value": "▲ 20–40%","delta": "ASCM/IBF band on AI-redesigned"},
+            {"label": "SKU-location",      "value": "Native", "delta": "From side workbook to first class"},
+            {"label": "Planner time",      "value": "On exceptions","delta": "From >50% rebuild to <20%"},
+            {"label": "Stockouts",         "value": "▼ ~25%", "delta": "Unilever-band on AI-enabled"},
+        ],
+        "redesigned_nodes": [
+            {"id": "ingest",    "label": "Auto data ingest",     "type": "automated", "tools": ["Scm data lake", "Pos feed"],
+             "activities": ["Pulls sales, shipments, POS, and external signal on a daily schedule.", "Resolves master data across ERP, WMS, and SCM.", "Hashes inputs for lineage and replay."]},
+            {"id": "model",     "label": "AI demand model",      "type": "ai",        "tools": ["Demand model", "Kinaxis maestro"],
+             "activities": ["Models demand at the SKU-location grain.", "Decomposes signal into trend, season, promo, and external drivers.", "Surfaces drift from the prior week's parameters."]},
+            {"id": "exceptions","label": "Exception queue",      "type": "ai",        "tools": ["Exception queue", "Planner workbench"],
+             "activities": ["Routes outliers to the planner with context.", "Drafts override recommendations with rationale.", "Cites the data line for every flag."]},
+            {"id": "override",  "label": "Planner judgement",    "type": "human",     "tools": ["Planner workbench", "Claude"],
+             "activities": ["Planner reviews the exception queue, not the whole forecast.", "Approves or edits AI overrides in place.", "Edits feed back into the model."]},
+            {"id": "publish",   "label": "Live publish",         "type": "automated", "tools": ["Sap ibp", "Control tower"],
+             "activities": ["Forecast publishes at SKU-location grain to ERP and control tower.", "Variance against actuals refreshes daily.", "S&OP review reads the live grain, not anecdote."]},
+        ],
+        "key_changes": [
+            {"theme": "Accuracy gain", "bullets": [
+                "Forecast error drops twenty to forty percent at the SKU-location grain.",
+                "Stockouts fall toward twenty-five percent in the Unilever band.",
+                "Driver decomposition explains every weekly delta."]},
+            {"theme": "Planner capacity", "bullets": [
+                "Planner time on rebuild drops from over half toward under twenty percent.",
+                "Exceptions land in a queue with context and recommendation.",
+                "Judgement work concentrates where it matters."]},
+            {"theme": "Master data discipline", "bullets": [
+                "Master data resolves at ingest, not in the spreadsheet.",
+                "Lineage holds across ERP, WMS, and SCM.",
+                "Stale records surface for retirement."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every override logs rationale and model version.",
+                "Variance reports refresh daily, not monthly.",
+                "S&OP reads the same trail as planning."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Data ingestion spec, demand model documentation, exception rule library, planner workbench prompts, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- S&OP exception management / control tower ----
+    {
+        "slug":         "sop-exception-management",
+        "title":        "S&OP exception management and control tower",
+        "description":  "Disruption triage compressed from days to hours. The planner reads a queue with hypothesis and recommended action, not a wall of disconnected alerts.",
+        "function":     "Supply Chain",
+        "sub_function": "S&OP",
+        "workflow":     "Control tower disruption triage",
+        "process_slug": "sop-control-tower",
+        "function_slug": "operations",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Disruption triage compressed from days to hours. The planner reads a queue with hypothesis and recommended action, not a wall of disconnected alerts.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the S&amp;OP function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise S&amp;OP and supply "
+            "planning – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's "
+            "planning, transportation, and control-tower stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today disruption triage runs through email threads and bridge calls. A port closure or supplier outage takes days to map across the affected SKUs and customers.",
+        "situation_body": "Control towers exist on slides; in practice planners stitch ERP, TMS, WMS, and supplier feeds by hand. Kinaxis Maestro Agents and Agent Studio report twelve to twenty-three times solve speedups on disruption replan; o9 and Blue Yonder converge on similar agentic exception handling. Gartner sizes the agentic SCM market at fifty-three billion by 2030. The legacy stack reads disruption late and replans by anecdote.",
+        "legacy_kpis": [
+            {"label": "Disruption-to-decision","value": "Days","sub": "Bridge calls and spreadsheet replan"},
+            {"label": "Affected scope view",   "value": "Partial","sub": "Stitched by hand across systems"},
+            {"label": "Replan speed",          "value": "Hours","sub": "Per scenario, single threaded"},
+            {"label": "Decision audit",        "value": "Email","sub": "Outcome lives in inboxes"},
+        ],
+        "legacy_nodes": [
+            {"id": "alert",     "label": "Disruption signal",    "type": "manual", "tools": ["Email", "Risk feed"],
+             "activities": ["Supplier or carrier reports an issue.", "Email lands with the affected planner.", "Bridge call gets stood up to triage."]},
+            {"id": "scope",     "label": "Map affected scope",   "type": "manual", "tools": ["Erp", "Excel"],
+             "activities": ["Pull affected SKUs, lots, and customers by hand.", "Cross-check transportation and inventory.", "Build a scratch view in the workbook."]},
+            {"id": "replan",    "label": "Replan options",       "type": "manual", "tools": ["Sap ibp", "Excel"],
+             "activities": ["Run scenarios in the planning system.", "Iterate with sourcing and logistics by email.", "Score options on cost and service."]},
+            {"id": "decide",    "label": "Decision",             "type": "human",  "tools": ["Meeting", "Email"],
+             "activities": ["Bridge call agrees the path.", "Owners take action items.", "Outcome documented in email thread."]},
+            {"id": "track",     "label": "Track resolution",     "type": "manual", "tools": ["Excel", "Email"],
+             "activities": ["Track shipments and replans in a side sheet.", "Update stakeholders by email.", "Close the issue when service recovers."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Days from disruption to decision.",
+             "body": "Bridge calls and spreadsheet replans run sequentially. The disruption widens while the planner stitches the picture."},
+            {"icon": "link",  "title": "Affected scope lives in five systems.",
+             "body": "ERP, TMS, WMS, supplier portals, and risk feeds each see one slice. The planner stitches all five under deadline pressure."},
+            {"icon": "user",  "title": "Audit trail lives in email.",
+             "body": "Decisions and rationale live in inboxes. The next disruption starts from scratch even when the playbook is the same."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Disruption-to-decision","value": "Hours","delta": "▼ ~80% vs today"},
+            {"label": "Affected scope view",   "value": "Live", "delta": "From partial to full across systems"},
+            {"label": "Replan speed",          "value": "Minutes","delta": "Kinaxis-band on agentic replan"},
+            {"label": "Decision audit",        "value": "Logged","delta": "From email thread to one queue"},
+        ],
+        "redesigned_nodes": [
+            {"id": "alert",     "label": "Live signal ingest",   "type": "automated", "tools": ["Risk feed", "Control tower"],
+             "activities": ["Ingests supplier, carrier, weather, and geopolitical signal on a schedule.", "Auto-classifies disruption type and severity.", "Suppresses repeat noise after planner disposition."]},
+            {"id": "scope",     "label": "AI scope mapping",     "type": "ai",        "tools": ["Kinaxis maestro", "Scm data lake"],
+             "activities": ["Maps affected SKUs, lots, customers, and lanes from one model.", "Cites the data line for every affected item.", "Surfaces second-order exposure across the network."]},
+            {"id": "replan",    "label": "Agentic replan",       "type": "ai",        "tools": ["Kinaxis maestro", "Sap ibp"],
+             "activities": ["Runs replan scenarios in minutes, not hours.", "Scores options on cost, service, and risk.", "Drafts the recommended path with rationale."]},
+            {"id": "decide",    "label": "Decision in one queue","type": "human",     "tools": ["Exception queue", "Review queue"],
+             "activities": ["Planner and S&OP lead read one queue, not an inbox.", "Approves or edits the recommended path.", "Edits feed back into the agent and the playbook."]},
+            {"id": "track",     "label": "Live tracking and audit","type": "automated","tools": ["Control tower", "Tms scm"],
+             "activities": ["Tracks shipments and replans against the decision.", "Logs every action for audit and post-mortem.", "Closes the issue when service recovers."]},
+        ],
+        "key_changes": [
+            {"theme": "Cycle compression", "bullets": [
+                "Disruption-to-decision moves from days to hours.",
+                "Replan runs in minutes on agentic engines, not hours single-threaded.",
+                "Second-order exposure surfaces with first-order."]},
+            {"theme": "Decision quality", "bullets": [
+                "Recommended path arrives with cost, service, and risk scoring.",
+                "Planner edits in place rather than rebuilds from scratch.",
+                "Edits feed back into the playbook for next time."]},
+            {"theme": "Scope visibility", "bullets": [
+                "Affected SKUs, lots, customers, and lanes resolve in one view.",
+                "Data lineage holds across ERP, TMS, WMS, and supplier portals.",
+                "Anecdote replaces with data."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every decision logs rationale and model version.",
+                "Post-mortem reads from the trail, not the inbox.",
+                "Control tower works as a system, not a slide."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Signal ingestion spec, scope-mapping rule library, replan agent prompts, decision queue schema, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Software Engineering autonomous coding + PR review ----
+    {
+        "slug":         "autonomous-coding-pr-review",
+        "title":        "Autonomous coding and PR review",
+        "description":  "Twenty-six percent more PRs per developer, fifty-five percent task speedup on net-new work. Reviewer time concentrates on spec and security, not syntax.",
+        "function":     "Software Engineering",
+        "sub_function": "Engineering Productivity",
+        "workflow":     "Autonomous coding and PR review",
+        "process_slug": "autonomous-coding",
+        "function_slug": "engineering",
+        "role_slug":    "individual-contributor",
+        "role_label":   "Individual Contributor",
+        "card_body":    "Twenty-six percent more PRs per developer, fifty-five percent task speedup on net-new work. Reviewer time concentrates on spec and security, not syntax.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the engineering productivity function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise platform engineering and "
+            "developer experience – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside "
+            "the team's GitHub, CI, and security stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today the developer writes code, opens a PR, and waits for a senior reviewer. Reviews queue behind real work; CI lags; security checks happen at merge.",
+        "situation_body": "GitHub Copilot Enterprise reports four point seven million paid seats by January 2026. Cui and Demirer at MIT measured twenty-six percent more PRs per week pooled across Microsoft, Accenture, and an anonymised firm. Peng et al. saw fifty-five point eight percent task speedup on net-new HTTP-server work. The bottleneck shifts: review time becomes the new constraint, and review focus shifts from syntax to spec.",
+        "legacy_kpis": [
+            {"label": "PRs per dev",       "value": "Baseline","sub": "Pre-AI cadence"},
+            {"label": "Task speed",        "value": "Baseline","sub": "Net-new feature work"},
+            {"label": "Review queue",      "value": "Hours-days","sub": "Senior reviewer wait"},
+            {"label": "Review focus",      "value": "Syntax", "sub": "Style, naming, structure"},
+        ],
+        "legacy_nodes": [
+            {"id": "ticket",    "label": "Pick up ticket",       "type": "manual", "tools": ["Jira", "Spec doc"],
+             "activities": ["Read the ticket and acceptance criteria.", "Ask clarifying questions in Slack.", "Decompose into local tasks."]},
+            {"id": "code",      "label": "Write code",           "type": "manual", "tools": ["Ide", "Github"],
+             "activities": ["Write feature code by hand.", "Search docs and Stack Overflow.", "Run tests locally as the change shapes."]},
+            {"id": "tests",     "label": "Write tests",          "type": "manual", "tools": ["Test runner", "Ide"],
+             "activities": ["Write unit and integration tests by hand.", "Iterate until they pass.", "Refactor for coverage targets."]},
+            {"id": "pr",        "label": "Open PR",              "type": "manual", "tools": ["Github", "Pr review"],
+             "activities": ["Push the branch and open a PR.", "Tag reviewers from the team.", "Wait for review while context cools."]},
+            {"id": "review",    "label": "Senior reviewer",      "type": "human",  "tools": ["Github", "Pr review"],
+             "activities": ["Senior reviewer reads diff line by line.", "Comments on syntax, naming, and structure.", "Cycle continues until approval."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Reviews queue behind real work.",
+             "body": "Senior reviewers read diffs between their own coding sessions. PRs sit for hours or days while context cools."},
+            {"icon": "user",  "title": "Review focus is syntax under volume.",
+             "body": "Most review comments target style and structure. Spec validation and security review get the leftover attention."},
+            {"icon": "shield","title": "IP and licensing exposure rises.",
+             "body": "Generated code carries training-data provenance questions. Without explicit guardrails, exposure compounds across the codebase."},
+        ],
+        "redesigned_kpis": [
+            {"label": "PRs per dev",       "value": "▲ 26%",  "delta": "MIT pooled measurement"},
+            {"label": "Task speed",        "value": "▲ 56%",  "delta": "Peng et al. RCT band"},
+            {"label": "Review queue",      "value": "Minutes","delta": "AI first-pass; humans rule on spec and security"},
+            {"label": "Review focus",      "value": "Spec + security","delta": "From syntax to judgement"},
+        ],
+        "redesigned_nodes": [
+            {"id": "ticket",    "label": "Drafted spec",         "type": "semi-auto", "tools": ["Claude code", "Jira"],
+             "activities": ["Agent drafts a structured spec from the ticket.", "Pulls related code and prior decisions.", "Engineer reviews and approves before code lands."]},
+            {"id": "code",      "label": "Co-written code",      "type": "semi-auto", "tools": ["Cursor", "Copilot"],
+             "activities": ["Agent drafts implementation against the spec.", "Engineer reviews, edits, and steers.", "Pair-programming pattern, not autocomplete."]},
+            {"id": "tests",     "label": "Generated tests",      "type": "ai",        "tools": ["Claude code", "Test runner"],
+             "activities": ["Drafts unit and integration tests against the spec and code.", "Cites the spec line for every test case.", "Engineer reviews and edits."]},
+            {"id": "review",    "label": "AI first-pass review", "type": "ai",        "tools": ["Claude code", "Sast"],
+             "activities": ["Reviews diffs against style, security, and spec rules.", "Drafts review comments with rationale.", "Surfaces high-risk changes for senior review."]},
+            {"id": "human",     "label": "Senior reviewer rules","type": "human",     "tools": ["Github", "Review queue"],
+             "activities": ["Senior reviewer focuses on spec, design, and security.", "Reads the AI's first-pass and the diff together.", "Edits feed back into the prompt and review rules."]},
+        ],
+        "key_changes": [
+            {"theme": "Throughput", "bullets": [
+                "PRs per developer rise around twenty-six percent in the MIT band.",
+                "Net-new feature work runs roughly fifty-six percent faster.",
+                "Review queues drop from hours toward minutes for routine PRs."]},
+            {"theme": "Review quality", "bullets": [
+                "AI first-pass handles syntax and style.",
+                "Senior reviewers concentrate on spec and security.",
+                "High-risk diffs surface, not hide."]},
+            {"theme": "IP and licensing", "bullets": [
+                "Generated code routes through licensing and security guardrails.",
+                "Provenance logs on every drafted change.",
+                "Exposure stays bounded as adoption grows."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every drafted change logs model version and prompt.",
+                "Reviewer overrides feed back into the rules.",
+                "Engineering managers read throughput against quality, not anecdote."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Spec template, agent prompt library, AI review rule set, security and licensing guardrails, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Spec-to-code ----
+    {
+        "slug":         "spec-to-code-jira",
+        "title":        "Spec-to-code from ticket to tested PR",
+        "description":  "Jira ticket to drafted spec to tested PR, run end-to-end. Engineers review and steer rather than implement from scratch.",
+        "function":     "Software Engineering",
+        "sub_function": "Engineering Productivity",
+        "workflow":     "Spec-to-code",
+        "process_slug": "spec-to-code",
+        "function_slug": "engineering",
+        "role_slug":    "individual-contributor",
+        "role_label":   "Individual Contributor",
+        "card_body":    "Jira ticket to drafted spec to tested PR, run end-to-end. Engineers review and steer rather than implement from scratch.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the engineering productivity function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise platform engineering and "
+            "developer experience – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside "
+            "the team's Jira, GitHub, CI, and security stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today a Jira ticket goes to an engineer who drafts a spec, codes it, writes tests, and opens a PR. The spec lives in their head as often as in a doc.",
+        "situation_body": "Cognition's Devin and Anthropic's Claude Code, together with Cursor and Windsurf, run the loop end-to-end on bounded tickets. The engineer's role shifts from implementation to spec validation and review. The McKinsey value pool ranks software engineering top-four; the bottleneck moves from typing to specification, with senior reviewer time as the new constraint.",
+        "legacy_kpis": [
+            {"label": "Cycle time",        "value": "Days",   "sub": "Ticket to merged PR"},
+            {"label": "Spec rigour",       "value": "Variable","sub": "Spec lives in the engineer's head"},
+            {"label": "Test coverage",     "value": "Uneven", "sub": "Time pressure trims tests first"},
+            {"label": "Engineer leverage", "value": "1×",     "sub": "One ticket at a time"},
+        ],
+        "legacy_nodes": [
+            {"id": "ticket",    "label": "Read ticket",          "type": "manual", "tools": ["Jira", "Slack"],
+             "activities": ["Engineer reads the ticket and AC.", "Asks clarifying questions to PM.", "Decomposes into tasks."]},
+            {"id": "spec",      "label": "Implicit spec",        "type": "manual", "tools": ["Notes", "Slack"],
+             "activities": ["Spec lives in the engineer's head or a private doc.", "Edge cases surface during coding.", "Iterates with PM by message."]},
+            {"id": "code",      "label": "Write code",           "type": "manual", "tools": ["Ide", "Github"],
+             "activities": ["Engineer writes code by hand.", "Iterates with tests as the change shapes.", "Commits to the feature branch."]},
+            {"id": "tests",     "label": "Write tests",          "type": "manual", "tools": ["Test runner"],
+             "activities": ["Adds unit and integration tests under deadline pressure.", "Trims edge cases to ship.", "Iterates until CI passes."]},
+            {"id": "pr",        "label": "Open PR",              "type": "manual", "tools": ["Github", "Pr review"],
+             "activities": ["Push branch and open PR.", "Tag reviewers.", "Wait for review."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "Days from ticket to merged PR.",
+             "body": "Implementation, tests, and review run sequentially on each ticket. Engineers context-switch through the cycle."},
+            {"icon": "chat",  "title": "Spec rigour varies by engineer.",
+             "body": "Some engineers write a spec; some hold it in their head. Edge cases land in production rather than in tests."},
+            {"icon": "user",  "title": "One ticket at a time per engineer.",
+             "body": "Even strong engineers run linearly through the queue. Throughput scales with headcount, not with leverage."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Cycle time",        "value": "Hours",  "delta": "▼ 70–90% on bounded tickets"},
+            {"label": "Spec rigour",       "value": "Drafted","delta": "Every ticket gets a structured spec"},
+            {"label": "Test coverage",     "value": "Spec-driven","delta": "Tests cite the spec line"},
+            {"label": "Engineer leverage", "value": "Multi", "delta": "Steer multiple drafted PRs at once"},
+        ],
+        "redesigned_nodes": [
+            {"id": "ticket",    "label": "Structured ticket",    "type": "semi-auto", "tools": ["Jira", "Claude code"],
+             "activities": ["Agent runs a structured intake against the ticket.", "Pulls related code, prior tickets, and ADRs.", "Drafts a structured spec for engineer review."]},
+            {"id": "spec",      "label": "Drafted spec",         "type": "semi-auto", "tools": ["Claude code", "Spec doc"],
+             "activities": ["Drafts the spec with edge cases enumerated.", "Cites the related code and prior decisions.", "Engineer and PM review and approve."]},
+            {"id": "code",      "label": "Drafted PR",           "type": "ai",        "tools": ["Devin", "Cursor"],
+             "activities": ["Agent drafts implementation against the spec.", "Runs tests locally and iterates.", "Opens a PR with the spec in the description."]},
+            {"id": "tests",     "label": "Generated tests",      "type": "ai",        "tools": ["Claude code", "Test runner"],
+             "activities": ["Drafts unit and integration tests against every spec line.", "Cites the spec line for every case.", "Engineer reviews and edits."]},
+            {"id": "review",    "label": "Engineer steers",      "type": "human",     "tools": ["Github", "Review queue"],
+             "activities": ["Engineer reviews spec, code, and tests together.", "Edits feed back into the agent's prompt.", "Senior reviewer rules on architectural and security risk."]},
+        ],
+        "key_changes": [
+            {"theme": "Cycle compression", "bullets": [
+                "Bounded tickets move from days to hours.",
+                "Spec, code, and tests draft in parallel rather than serially.",
+                "Engineer leverage moves from one ticket at a time to multiple drafted PRs in flight."]},
+            {"theme": "Spec discipline", "bullets": [
+                "Every ticket gets a structured spec with edge cases enumerated.",
+                "Tests cite the spec line they cover.",
+                "Edge cases land in tests, not in production."]},
+            {"theme": "Reviewer focus", "bullets": [
+                "Engineers steer multiple drafted PRs.",
+                "Senior reviewer rules on architectural and security risk.",
+                "Review reads spec, code, and tests together."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every drafted change logs spec line, model version, and prompt.",
+                "Reviewer overrides feed back into the rules.",
+                "Engineering managers read throughput against quality, not anecdote."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Structured ticket template, spec drafting prompts, agent guardrails, test-from-spec rule library, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Procurement: tail-spend autonomous negotiation ----
+    {
+        "slug":         "tail-spend-negotiation",
+        "title":        "Tail-spend autonomous negotiation",
+        "description":  "Long-tail supplier negotiation handled by an agent inside policy. Procurement signs off rather than negotiates every line.",
+        "function":     "Procurement",
+        "sub_function": "Tail Spend",
+        "workflow":     "Tail-spend negotiation",
+        "process_slug": "tail-spend-negotiation",
+        "function_slug": "procurement",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Long-tail supplier negotiation handled by an agent inside policy. Procurement signs off rather than negotiates every line.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the procurement function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise procurement and supplier "
+            "management – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside the team's "
+            "Coupa, contract, and supplier-master stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today the long tail is roughly twenty percent of spend across thousands of suppliers. Procurement triages by value; the tail negotiates itself or not at all.",
+        "situation_body": "Pactum at Walmart handles long-tail negotiations across roughly twenty percent of spend; Maersk uses the agent for rate-card lookups and auto-quotes with human final approval. The MIT Sloan Management Review case series and Thunderbird Pactum case map the design space. The legacy stack treats the tail as a coverage gap; the redesign treats it as throughput.",
+        "legacy_kpis": [
+            {"label": "Tail-spend coverage","value": "Patchy","sub": "Triaged by value, not by potential"},
+            {"label": "Negotiated savings","value": "Low",   "sub": "Tail rarely renegotiated"},
+            {"label": "Procurement load",  "value": "Heavy", "sub": "Manual focus on top suppliers"},
+            {"label": "Cycle time",        "value": "Weeks", "sub": "Per tail event when it happens"},
+        ],
+        "legacy_nodes": [
+            {"id": "scope",     "label": "Scope event",          "type": "manual", "tools": ["Coupa", "Excel"],
+             "activities": ["Identify a tail-spend category for review.", "Pull suppliers and contract terms.", "Brief the sourcing manager."]},
+            {"id": "outreach",  "label": "Outreach",             "type": "manual", "tools": ["Email", "Coupa"],
+             "activities": ["Email each tail supplier individually.", "Request updated quotes and terms.", "Chase responses through the deadline."]},
+            {"id": "negotiate", "label": "Negotiate by hand",    "type": "manual", "tools": ["Email", "Excel"],
+             "activities": ["Counter terms manually with each supplier.", "Track replies in a workbook.", "Settle on terms one by one."]},
+            {"id": "approve",   "label": "Internal approval",    "type": "human",  "tools": ["Coupa", "Email"],
+             "activities": ["Procurement and legal review final terms.", "Approvals route by email.", "Contract signs."]},
+            {"id": "publish",   "label": "Publish to ERP",       "type": "manual", "tools": ["Coupa"],
+             "activities": ["Update Coupa with new terms.", "Send confirmations to suppliers.", "Close the event in the tracker."]},
+        ],
+        "complications": [
+            {"icon": "user",  "title": "Procurement cannot negotiate every tail supplier.",
+             "body": "Headcount caps the number of tail events. The long tail goes unaddressed even when savings are real."},
+            {"icon": "dollar","title": "Tail savings sit unrealised.",
+             "body": "Twenty percent of spend at Walmart-scale operations is a large unrealised pool. Manual negotiation cannot reach it."},
+            {"icon": "shield","title": "Supplier master data drift.",
+             "body": "Tail suppliers often sit in the master with stale terms. Negotiation runs against bad data unless the master refreshes."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Tail-spend coverage","value": "Full",  "delta": "Every supplier in scope"},
+            {"label": "Negotiated savings","value": "+3–6%", "delta": "Pactum-band on tail engagements"},
+            {"label": "Procurement load",  "value": "Sign-off","delta": "Approve, not negotiate every line"},
+            {"label": "Cycle time",        "value": "Days",  "delta": "▼ from weeks vs today"},
+        ],
+        "redesigned_nodes": [
+            {"id": "scope",     "label": "Auto event scoping",   "type": "automated", "tools": ["Coupa", "Tail-spend agent"],
+             "activities": ["Identifies tail-spend categories ripe for renegotiation.", "Pulls supplier and contract data automatically.", "Refreshes supplier master data on entry."]},
+            {"id": "outreach",  "label": "Auto outreach",        "type": "automated", "tools": ["Pactum", "Email"],
+             "activities": ["Sends structured outreach to every tail supplier in scope.", "Tracks responses in one queue.", "Auto-chases late responses on cadence."]},
+            {"id": "negotiate", "label": "Agentic negotiation",  "type": "ai",        "tools": ["Pactum", "Discount policy"],
+             "activities": ["Negotiates terms inside policy bounds.", "Cites the policy line for every counter.", "Surfaces non-standard requests for human review."]},
+            {"id": "approve",   "label": "Human sign-off",       "type": "human",     "tools": ["Review queue", "Coupa"],
+             "activities": ["Procurement and legal review settled terms in one queue.", "Approves, edits, or escalates each event.", "Edits feed back into the policy library."]},
+            {"id": "publish",   "label": "Auto publish",         "type": "automated", "tools": ["Coupa"],
+             "activities": ["Pushes terms to Coupa with provenance.", "Notifies suppliers automatically.", "Logs every event for audit."]},
+        ],
+        "key_changes": [
+            {"theme": "Coverage", "bullets": [
+                "Every tail supplier enters the negotiation cycle.",
+                "Roughly twenty percent of spend stops sitting unaddressed.",
+                "Coverage scales with policy, not with headcount."]},
+            {"theme": "Procurement capacity", "bullets": [
+                "Procurement signs off rather than negotiates every line.",
+                "Senior buyers concentrate on top suppliers.",
+                "Cycle time drops from weeks to days per event."]},
+            {"theme": "Policy discipline", "bullets": [
+                "Every counter cites the policy line.",
+                "Non-standard requests route to humans with context.",
+                "Edits feed back into the policy library."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every event logs model version and policy band.",
+                "Legal sign-off flows on settled terms, not raw drafts.",
+                "Supplier master refreshes at scoping, not after the fact."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Tail-spend identification rubric, agent policy bounds, sign-off review queue spec, supplier-master refresh pipeline, and the rollout cadence we use on engagements.",
+    },
+
+    # ---- Procurement: continuous supplier risk monitoring ----
+    {
+        "slug":         "supplier-risk-continuous",
+        "title":        "Continuous supplier and third-party risk",
+        "description":  "Point-in-time supplier risk replaced by continuous monitoring of ESG, financial health, and geopolitical signal. Procurement reads risk movement, not annual snapshots.",
+        "function":     "Procurement",
+        "sub_function": "Supplier Risk",
+        "workflow":     "Continuous third-party risk monitoring",
+        "process_slug": "supplier-risk-monitoring",
+        "function_slug": "procurement",
+        "role_slug":    "manager",
+        "role_label":   "Manager",
+        "card_body":    "Point-in-time supplier risk replaced by continuous monitoring of ESG, financial health, and geopolitical signal. Procurement reads risk movement, not annual snapshots.",
+        "expertise_html": (
+            "<strong>A senior Convolving delivery team partnered with the procurement function for one sprint.</strong> "
+            "Operators from our expert network – with forty combined years inside enterprise third-party risk and "
+            "supplier management – reviewed the redesign at each checkpoint. Forward-deployed engineers built inside "
+            "the team's Aravo, supplier-master, and external risk-feed stack. One flat fee, artifact out, no retainer creep."
+        ),
+        "situation_lede": "Today supplier risk gets reviewed at onboarding and once a year. ESG, financial health, and geopolitical exposure shift quarterly; the legacy review does not.",
+        "situation_body": "The existing supplier-onboarding card covers point-in-time review. This workflow continues the loop. Spend Matters 2026 and ISM put continuous monitoring as the next step beyond onboarding; signal-source licensing and explainability for regulators are the named obstacles. The redesign treats supplier risk as a feed problem, not a calendar problem.",
+        "legacy_kpis": [
+            {"label": "Review cadence",    "value": "Annual", "sub": "Per supplier on the active list"},
+            {"label": "Signal sources",    "value": "Few",    "sub": "Aravo + ad-hoc news"},
+            {"label": "Risk lead time",    "value": "Months", "sub": "Issues surface late"},
+            {"label": "Supplier coverage", "value": "Tier 1", "sub": "Long tail rarely re-reviewed"},
+        ],
+        "legacy_nodes": [
+            {"id": "schedule",  "label": "Annual review",        "type": "manual", "tools": ["Aravo", "Excel"],
+             "activities": ["Pull active suppliers by tier.", "Schedule annual reviews against the calendar.", "Email each supplier the questionnaire."]},
+            {"id": "questionnaire","label": "Questionnaire",     "type": "manual", "tools": ["Aravo", "Email"],
+             "activities": ["Supplier returns the questionnaire.", "Procurement reads and scores by hand.", "Chase missing fields."]},
+            {"id": "news",      "label": "Ad-hoc news scan",     "type": "manual", "tools": ["External feeds", "Email"],
+             "activities": ["Scan press for material supplier events.", "Flag concerns by exception.", "Note in the supplier file."]},
+            {"id": "review",    "label": "Risk committee",       "type": "human",  "tools": ["Meeting", "PowerPoint"],
+             "activities": ["Quarterly committee reads sampled risk packs.", "Most suppliers do not surface.", "Escalations rely on luck of the news scan."]},
+            {"id": "act",       "label": "Action",               "type": "human",  "tools": ["Email", "Aravo"],
+             "activities": ["Issue mitigation plan to the supplier.", "Track remediation manually.", "Close when documents return."]},
+        ],
+        "complications": [
+            {"icon": "clock", "title": "An annual snapshot misses quarterly risk.",
+             "body": "Financial health and geopolitical exposure shift faster than the review cycle. Material risk lands months before procurement sees it."},
+            {"icon": "link",  "title": "Risk signal lives in dozens of feeds.",
+             "body": "ESG ratings, credit feeds, sanctions lists, and regional news each see one slice. Procurement scans a fraction by hand."},
+            {"icon": "shield","title": "Long tail rarely re-reviews.",
+             "body": "Tier-1 suppliers get attention; the tail surfaces only when something breaks. Concentration risk hides until disruption."},
+        ],
+        "redesigned_kpis": [
+            {"label": "Review cadence",    "value": "Continuous","delta": "From annual to live"},
+            {"label": "Signal sources",    "value": "Many",    "delta": "ESG, credit, sanctions, news, geopolitics"},
+            {"label": "Risk lead time",    "value": "Days",    "delta": "▼ from months vs today"},
+            {"label": "Supplier coverage", "value": "Full base","delta": "Tier 1 and long tail alike"},
+        ],
+        "redesigned_nodes": [
+            {"id": "ingest",    "label": "Auto signal ingest",   "type": "automated", "tools": ["Risk feed", "Esg feed"],
+             "activities": ["Pulls ESG, financial health, sanctions, and geopolitical signal daily.", "Resolves supplier identity across feeds.", "Hashes inputs for lineage and replay."]},
+            {"id": "score",     "label": "AI risk scoring",      "type": "ai",        "tools": ["Aravo", "Sentiment model"],
+             "activities": ["Scores every supplier daily on each risk band.", "Decomposes drivers so procurement reads what changed.", "Surfaces silent declines before they break."]},
+            {"id": "flag",      "label": "Threshold flags",      "type": "automated", "tools": ["Aravo", "Risk feed"],
+             "activities": ["Triggers alerts when score crosses policy bands.", "Routes to the right buyer with context.", "Suppresses repeat noise after disposition."]},
+            {"id": "review",    "label": "Drafted risk pack",    "type": "semi-auto", "tools": ["Claude", "Aravo"],
+             "activities": ["Drafts a one-page brief per flagged supplier.", "Cites the source line for every claim.", "Procurement reviews, edits, and signs off."]},
+            {"id": "act",       "label": "Action and audit",     "type": "human",     "tools": ["Aravo", "Review queue"],
+             "activities": ["Issues mitigation plan with explicit owner and deadline.", "Tracks remediation in one queue.", "Edits feed back into the score model."]},
+        ],
+        "key_changes": [
+            {"theme": "Lead time", "bullets": [
+                "Risk surfaces in days, not months.",
+                "Silent decline shows up before disruption.",
+                "Risk movement reads as signal, not as anecdote."]},
+            {"theme": "Coverage", "bullets": [
+                "Every supplier on the active base scored daily.",
+                "Long-tail concentration risk surfaces.",
+                "Tier-1 review compresses to where it matters."]},
+            {"theme": "Signal quality", "bullets": [
+                "ESG, credit, sanctions, news, and geopolitical signal feed one score.",
+                "Driver attribution explains every flag.",
+                "Procurement edits feed back into the model."]},
+            {"theme": "Audit and control", "bullets": [
+                "Every score change logs source and timestamp.",
+                "Every flag cites the rule that drove it.",
+                "Regulators read the same trail as the risk committee."]},
+        ],
+        "playbook_url":  "#playbook",
+        "playbook_body": "The redesign above ships as a step-by-step playbook. Signal-source licensing map, scoring model documentation, threshold rule library, mitigation queue schema, and the rollout cadence we use on engagements.",
     },
 ]
 
