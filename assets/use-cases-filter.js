@@ -1,6 +1,5 @@
 // Use-cases catalog: client-side faceted filter with query-string deep-linking.
-// Pills can be toggled within each facet (Industry, Function, Role). Cards show
-// when they match every active facet (AND across facets, OR within a facet).
+// Currently a single facet (Function); the filter framework supports more.
 (() => {
   const cards = document.querySelectorAll('[data-usecase]');
   const pillGroups = document.querySelectorAll('[data-filter-group]');
@@ -9,7 +8,7 @@
   if (!cards.length || !pillGroups.length) return;
 
   // facet name -> Set of selected values
-  const state = { industry: new Set(), function: new Set(), role: new Set() };
+  const state = { function: new Set() };
 
   function parseQuery() {
     const q = new URLSearchParams(window.location.search);
@@ -52,7 +51,7 @@
     });
     if (summary) {
       summary.textContent = visible === cards.length
-        ? `Showing a select ${cards.length} use cases.`
+        ? `Showing ${cards.length} use cases.`
         : `Showing ${visible} of ${cards.length} use cases.`;
     }
     if (clearBtn) {

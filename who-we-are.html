@@ -7,6 +7,7 @@
 <meta name="description" content="A small Swiss-based AI services firm. AI technical depth paired with operating fluency across regulated industries. Meet the team and the industries we know best.">
   <meta property="og:title" content="Who We Are – Convolving">
   <meta property="og:description" content="A small Swiss-based AI services firm. AI technical depth paired with operating fluency across regulated industries. Meet the team and the industries we know best.">
+  <link rel="canonical" href="https://convolving.com/who-we-are">
   <meta property="og:url" content="https://convolving.com/who-we-are">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Convolving">
@@ -36,14 +37,14 @@
           {
             "@type": "Person",
             "name": "Cameron Weibel",
-            "jobTitle": "Co-founder",
+            "jobTitle": "AI Engineering Lead",
             "worksFor": { "@id": "https://convolving.com/#organization" },
             "sameAs": "https://www.linkedin.com/in/cweibel/"
           },
           {
             "@type": "Person",
             "name": "Spencer Johnson",
-            "jobTitle": "Co-founder",
+            "jobTitle": "Strategy & Value Creation",
             "worksFor": { "@id": "https://convolving.com/#organization" },
             "sameAs": "https://www.linkedin.com/in/srj523/"
           }
@@ -95,7 +96,7 @@
   <div class="idx-hero-container">
     <div class="idx-hero-content">
       <p class="idx-hero-eyebrow">The people &middot; Zurich / Oberrieden</p>
-      <h1>AI depth, paired with operating fluency.</h1>
+      <h1>AI depth, paired with function fluency.</h1>
       <a href="mailto:team@convolving.com" class="idx-hero-btn">
         Book a Coffee
         <span class="arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
@@ -105,42 +106,182 @@
 </section>
 <script src="/assets/index-hero-waves.js"></script>
 
-<section class="section" id="founders">
+<style>
+.tm-section{padding:clamp(4rem,8vw,7rem) 0}
+.tm-layout{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+.tm-intro{position:sticky;top:6rem}
+.tm-intro .eyebrow{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);margin-bottom:1.25rem;display:block}
+.tm-intro h2{font-family:var(--f-serif);font-weight:300;font-size:clamp(2.5rem,4.5vw,3.75rem);letter-spacing:-.04em;line-height:1.02;margin:0 0 1.5rem;color:var(--fg)}
+.tm-intro p{font-family:var(--f-sans);color:var(--fg-2);font-size:.95rem;line-height:1.55;max-width:34ch;margin:0 0 1.75rem}
+.tm-pills{display:flex;flex-wrap:wrap;gap:.5rem}
+.tm-pill{font-family:var(--f-sans);font-size:.78rem;font-weight:500;letter-spacing:.01em;color:var(--fg-2);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:.45rem .95rem;cursor:default;user-select:none;transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
+.tm-pill[aria-pressed="true"]{background:var(--fg);color:#0b0c11;border-color:var(--fg)}
+.tm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,3vw,2.75rem) clamp(1rem,2vw,1.75rem)}
+.tm-card{display:flex;flex-direction:column;gap:.95rem}
+.tm-photo{aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:linear-gradient(160deg,#1a1f2e 0%,#0f1218 100%);border:1px solid var(--line);position:relative;width:100%}
+.tm-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.tm-photo.placeholder{display:flex;align-items:center;justify-content:center}
+.tm-photo.placeholder::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(106,166,255,.08) 0%,transparent 60%)}
+.tm-photo.placeholder svg{position:relative;width:42%;height:42%;opacity:.18;color:var(--fg)}
+.tm-meta{padding:0 .15rem;display:flex;flex-direction:column;gap:.6rem}
+.tm-name{font-family:var(--f-sans);font-size:1.0625rem;font-weight:500;letter-spacing:-.005em;color:var(--fg);margin:0;line-height:1.25}
+.tm-role{font-family:var(--f-sans);font-size:.875rem;font-weight:400;color:var(--fg-2);line-height:1.4;margin:0}
+.tm-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.1rem}
+.tm-tag{font-family:var(--f-sans);font-size:.6875rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-2);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:4px;padding:.25rem .5rem;line-height:1}
+.tm-experience{margin-top:.4rem;padding-top:.85rem;border-top:1px solid var(--line)}
+.tm-experience-label{font-family:var(--f-sans);font-size:.6875rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);margin:0 0 .55rem;display:block}
+.tm-logos{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.15rem;min-height:22px}
+.tm-logo{font-family:var(--f-sans);font-size:.85rem;font-weight:600;letter-spacing:.01em;color:var(--fg-2);line-height:1;white-space:nowrap}
+.tm-logo--pwc{font-family:var(--f-serif);font-style:italic;font-size:1.05rem;font-weight:600;letter-spacing:-.02em}
+.tm-logo--tesla{font-family:var(--f-sans);font-weight:700;letter-spacing:.32em;font-size:.78rem;text-transform:uppercase}
+.tm-logo--eth{font-family:var(--f-sans);font-weight:700;letter-spacing:.04em;font-size:.85rem}
+.tm-logo--swiss{font-family:var(--f-sans);font-weight:700;letter-spacing:.18em;font-size:.78rem;text-transform:uppercase}
+.tm-logo--placeholder{color:var(--fg-3);font-weight:400;font-style:italic;letter-spacing:0}
+@media(max-width:980px){
+  .tm-layout{grid-template-columns:1fr;gap:2.5rem}
+  .tm-intro{position:static}
+  .tm-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .tm-grid{grid-template-columns:1fr;gap:1.75rem}
+}
+</style>
+
+<section class="tm-section" id="team">
   <div class="container">
-    <div class="section-head-inline reveal">
-      <div class="section-badge">Founders</div>
-      <h2>The voice of the frontier, applied to your work.</h2>
-      <p>Our team consists of active AI leaders embedded at frontier institutions globally. Below are your two main contact points.</p>
-    </div>
-    <div class="founder-grid">
-      <article class="founder reveal">
-        <div class="founder-photo">
-          <img src="/assets/cameron-weibel.jpeg" alt="Cameron Weibel" width="1024" height="1024" loading="lazy" decoding="async" onerror="this.style.display='none'">
+    <div class="tm-layout">
+      <div class="tm-intro reveal">
+        <span class="eyebrow"><span class="eyebrow-num">01</span>Your team</span>
+        <h2>Meet the people on your engagement.</h2>
+        <p>Active AI leaders and operators, embedded at frontier institutions and matched to the workflow you are redesigning.</p>
+        <div class="tm-pills" role="group" aria-label="Team categories">
+          <span class="tm-pill" aria-pressed="true">All</span>
+          <span class="tm-pill">Leadership</span>
+          <span class="tm-pill">Engineering</span>
+          <span class="tm-pill">Strategy</span>
+          <span class="tm-pill">Operations</span>
         </div>
-        <div class="founder-body">
-          <h3>Cameron Weibel</h3>
-          <div class="founder-role">Co-founder · Manager of AI, SWISS (LHG)</div>
-          <p class="founder-bio">AI strategy and deployment (agentic, MCP, fine-tuning). Built and shipped enterprise AI infrastructure at LHG, regulated financial firms, and across industrial operators. MSc in robotics from ETH Zurich, BSc in computer science from TU/e (cum laude). Leads Shipped, the highest-rated entrepreneurship Meetup in Zurich with 1600+ members.</p>
-          <div class="founder-links">
-            <a href="https://www.linkedin.com/in/cweibel/" target="_blank" rel="noopener">LinkedIn →</a>
-            <a href="mailto:team@convolving.com">Email</a>
+      </div>
+
+      <div class="tm-grid">
+        <article class="tm-card reveal">
+          <div class="tm-photo">
+            <img src="/assets/spencer-johnson.jpeg" alt="Spencer Johnson" width="1024" height="1024" loading="lazy" decoding="async">
           </div>
-        </div>
-      </article>
-      <article class="founder reveal d1">
-        <div class="founder-photo">
-          <img src="/assets/spencer-johnson.jpeg" alt="Spencer Johnson" width="1024" height="1024" loading="lazy" decoding="async" onerror="this.style.display='none'">
-        </div>
-        <div class="founder-body">
-          <h3>Spencer Johnson</h3>
-          <div class="founder-role">Co-founder · Deals Strategy &amp; Value Creation, PwC CH</div>
-          <p class="founder-bio">30+ engagements across financial services, retail, industrials, and healthcare. Led PwC Switzerland's AI adoption strategy. Ex-Tesla. Deep fluency in regulated operating environments and bridging AI capability with the workflows that produce business outcomes.</p>
-          <div class="founder-links">
-            <a href="https://www.linkedin.com/in/srj523/" target="_blank" rel="noopener">LinkedIn →</a>
-            <a href="mailto:team@convolving.com">Email</a>
+          <div class="tm-meta">
+            <h3 class="tm-name">Spencer Johnson</h3>
+            <p class="tm-role">Strategy &amp; Value Creation, Convolving</p>
+            <div class="tm-tags">
+              <span class="tm-tag">Functional Expert</span>
+              <span class="tm-tag">Leadership</span>
+            </div>
+            <div class="tm-experience">
+              <span class="tm-experience-label">Experience with</span>
+              <div class="tm-logos">
+                <span class="tm-logo tm-logo--pwc">PwC</span>
+                <span class="tm-logo tm-logo--tesla">Tesla</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+
+        <article class="tm-card reveal d1">
+          <div class="tm-photo">
+            <img src="/assets/cameron-weibel.jpeg" alt="Cameron Weibel" width="1024" height="1024" loading="lazy" decoding="async">
+          </div>
+          <div class="tm-meta">
+            <h3 class="tm-name">Cameron Weibel</h3>
+            <p class="tm-role">AI Engineering Lead, Convolving</p>
+            <div class="tm-tags">
+              <span class="tm-tag">FDE</span>
+              <span class="tm-tag">Leadership</span>
+            </div>
+            <div class="tm-experience">
+              <span class="tm-experience-label">Experience with</span>
+              <div class="tm-logos">
+                <span class="tm-logo tm-logo--eth">ETH Zürich</span>
+                <span class="tm-logo tm-logo--swiss">SWISS</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tm-card reveal d2">
+          <div class="tm-photo placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+          </div>
+          <div class="tm-meta">
+            <h3 class="tm-name">Name forthcoming</h3>
+            <p class="tm-role">Senior AI Engineer, Convolving</p>
+            <div class="tm-tags">
+              <span class="tm-tag">FDE</span>
+            </div>
+            <div class="tm-experience">
+              <span class="tm-experience-label">Experience with</span>
+              <div class="tm-logos">
+                <span class="tm-logo tm-logo--placeholder">To be announced</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tm-card reveal">
+          <div class="tm-photo placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+          </div>
+          <div class="tm-meta">
+            <h3 class="tm-name">Name forthcoming</h3>
+            <p class="tm-role">Workflow Designer, Convolving</p>
+            <div class="tm-tags">
+              <span class="tm-tag">Functional Expert</span>
+            </div>
+            <div class="tm-experience">
+              <span class="tm-experience-label">Experience with</span>
+              <div class="tm-logos">
+                <span class="tm-logo tm-logo--placeholder">To be announced</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tm-card reveal d1">
+          <div class="tm-photo placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+          </div>
+          <div class="tm-meta">
+            <h3 class="tm-name">Name forthcoming</h3>
+            <p class="tm-role">Engagement Lead, Convolving</p>
+            <div class="tm-tags">
+              <span class="tm-tag">Leadership</span>
+            </div>
+            <div class="tm-experience">
+              <span class="tm-experience-label">Experience with</span>
+              <div class="tm-logos">
+                <span class="tm-logo tm-logo--placeholder">To be announced</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="tm-card reveal d2">
+          <div class="tm-photo placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+          </div>
+          <div class="tm-meta">
+            <h3 class="tm-name">Name forthcoming</h3>
+            <p class="tm-role">Industry Specialist, Convolving</p>
+            <div class="tm-tags">
+              <span class="tm-tag">Functional Expert</span>
+            </div>
+            <div class="tm-experience">
+              <span class="tm-experience-label">Experience with</span>
+              <div class="tm-logos">
+                <span class="tm-logo tm-logo--placeholder">To be announced</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </section>

@@ -21,8 +21,8 @@ For devtools-driven verification (screenshots, computed styles), use `file:///` 
 
 - **Top-level pages** (root): `index.html`, `ai-transformation.html`, `who-we-are.html`, `use-cases.html`, `privacy.html`, `terms.html`.
 - **`ai-transformation/*.html`** – 4 sub-service pages: `use-case-lab`, `workflow-redesign`, `upskilling`, `ai-tooling`.
-- **`use-cases/*.html`** – 15 use-case one-pagers (3 per industry × 5 industries: Financial Services, Retail, Industrial Products, Healthcare, Legal). **Before editing any file in `use-cases/` or writing a new one-pager, read `use-cases/STYLE.md`** – it defines the structural template, voice, word-choice allow/avoid list, illustrative-outcomes rule, and pre-ship checklist. It extends `design.md` and does not replace it.
-- **`scripts/generate_pages.py`** – one-shot Python generator that produced the 9 offering sub-pages and the 15 use-case one-pagers. Re-run with `python3 scripts/generate_pages.py` from repo root after editing the spec dictionaries inside it; commit both the script and the regenerated HTML.
+- **`use-cases/*.html`** – workflow one-pagers organised by function and process (currently 7: FP&A monthly variance pack plus 6 Procurement workflows). The industry-based taxonomy (15 pages across 5 industries) was retired; use cases are now grouped by workflow, not sector. **Before editing any file in `use-cases/` or writing a new one-pager, read `use-cases/STYLE.md` and `scripts/USE_CASE_PAGE_BUILDER.md`** – the latter is the authoritative generator for new workflow pages; STYLE.md is the editorial layer.
+- **`scripts/generate_pages.py`** – one-shot Python generator that produced the offering sub-pages and the original use-case one-pagers. Re-run with `python3 scripts/generate_pages.py` from repo root after editing the spec dictionaries inside it; commit both the script and the regenerated HTML. New workflow-format use cases are now generated via `scripts/USE_CASE_PAGE_BUILDER.md`.
 
 Top nav across all pages is structurally identical: `[logo] AI Transformation · Who We Are · Use Cases · [Book a Coffee]`. The `.nav-cta` "Book a Coffee" pill is included on every page. If it stops rendering on a page, the bug is almost always CSS specificity – see **Gotchas** below.
 
@@ -71,8 +71,9 @@ HTML pages are not in `/assets/` and use the platform default (revalidate each l
 | `/partnerships` | `/ai-transformation` |
 | `/ai-engineering` and `/ai-engineering/*` | `/ai-transformation` |
 | `/insights` and `/insights/*` | `/use-cases` |
-| `/state-of-the-union` and `/state-of-the-union/*` | `/use-cases/ic-briefing-redesign` |
+| `/state-of-the-union` and `/state-of-the-union/*` | `/use-cases` |
 | `/team` | `/who-we-are` |
+| The 15 retired industry use-case slugs (`ic-briefing-redesign`, `diligence-research-pack`, `portfolio-monitoring-loop`, `merchandising-decision-loop`, `customer-service-knowledge-base`, `demand-planning-copilot`, `field-service-knowledge-base`, `supplier-rfp-redesign`, `engineering-spec-search`, `clinical-documentation-redesign`, `prior-auth-workflow`, `patient-intake-triage`, `contract-review-loop`, `discovery-redesign`, `matter-intake-triage`) | `/use-cases` |
 
 ## JavaScript
 

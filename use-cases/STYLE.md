@@ -2,6 +2,8 @@
 
 Read this before editing any file in `use-cases/` or writing a new one-pager. It is the catalogue-specific layer on top of `../design.md` (brand system) and `../CLAUDE.md` (repo rules). Where this file is silent, defer to `design.md`. Where `design.md` gives a rule, do not contradict it here.
 
+**For new pages, the authoritative generator is `../scripts/USE_CASE_PAGE_BUILDER.md`.** It encodes the workflow-page scaffold (Situation, Convolving expertise, Key changes, Sources), the three required inputs (function, sub_function, workflow), and the editorial rules below in machine-runnable form. Use this file when editing existing pages or sanity-checking output from the builder.
+
 A use-case one-pager at Convolving should feel like a **McKinsey insight piece or an Economist long-read**, rendered in our dark editorial palette. Quiet, confident, specific. Not a case study, not a brochure. Each one describes a single workflow we have seen redesigned, with the data, risk, and delivery shape behind it.
 
 ---
@@ -54,7 +56,7 @@ This is the one rule that, broken, ages into liability. Until a client has permi
 > "What the workflow looks like today."
 > "The AI-native version."
 
-**Eyebrow shape:** `Use case · <Industry> · <Function>`. Industry and Function values come from the catalogue taxonomy on `/use-cases`.
+**Eyebrow shape:** `Use case`. Workflow pages use the plain eyebrow; function and process metadata live on the catalogue card and in the body of the page, not in the hero.
 
 **Do not:**
 - End an H1 or H2 with `?`, `!`, or an em dash.
@@ -130,13 +132,13 @@ Every statistic or claim about the outside world gets an inline anchor: how many
 
 ## 7. Catalogue taxonomy – data attributes
 
-Every use-case card on `/use-cases` carries three data attributes that drive the filter. The same values must be reflected in the page's hero eyebrow.
+Every use-case card on `/use-cases` carries three data attributes. Only `data-function` drives the live filter today; `data-process` and `data-role` are kept for future facets and for the card's own tag chips.
 
-- `data-industry` – exactly one of: `financial-services`, `retail`, `industrial-products`, `healthcare`, `legal`.
-- `data-function` – one or more (space-separated) of: `operations`, `strategy`, `risk-and-compliance`, `sales-and-marketing`, `engineering`, `legal`, `finance`, `hr`, `product`.
+- `data-process` – the workflow handle in kebab-case (e.g. `monthly-close`, `rfp-creation`, `invoice-matching`). One per card.
+- `data-function` – exactly one of: `operations`, `strategy`, `risk-and-compliance`, `sales-and-marketing`, `engineering`, `legal`, `finance`, `hr`, `product`, `procurement`.
 - `data-role` – exactly one of: `executive`, `manager`, `individual-contributor`.
 
-When adding a new use-case, update the catalogue card in `/use-cases.html` in the same commit so the filter stays in sync.
+The industry-based taxonomy (`data-industry`) was retired – use cases are now organised by workflow and function, not by sector. When adding a new use-case, update the catalogue card inside the `WORKFLOW_USE_CASES:START/END` block in `/use-cases.html` in the same commit.
 
 ---
 
@@ -171,7 +173,7 @@ Run this in addition to the checklist in `design.md` §14.
 - [ ] No client name, sector, or specific metric attributed without written permission.
 - [ ] No banned words (§4) appear without a sourced anchor.
 - [ ] Industry-specific vocabulary is used only on the matching industry's use-cases.
-- [ ] Catalogue card on `/use-cases.html` exists with correct `data-*` attributes.
+- [ ] Catalogue card on `/use-cases.html` exists inside the `WORKFLOW_USE_CASES:START/END` block with correct `data-process`, `data-function`, `data-role` attributes.
 - [ ] `sitemap.xml` updated.
 - [ ] `og:url` matches the page's live URL and is unique.
 

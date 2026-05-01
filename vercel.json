@@ -17,8 +17,23 @@
     { "source": "/ai-engineering/:slug*", "destination": "/ai-transformation", "permanent": true },
     { "source": "/insights", "destination": "/use-cases", "permanent": true },
     { "source": "/insights/:slug*", "destination": "/use-cases", "permanent": true },
-    { "source": "/state-of-the-union", "destination": "/use-cases/ic-briefing-redesign", "permanent": true },
-    { "source": "/state-of-the-union/:slug*", "destination": "/use-cases/ic-briefing-redesign", "permanent": true },
-    { "source": "/team", "destination": "/who-we-are", "permanent": true }
+    { "source": "/state-of-the-union", "destination": "/use-cases", "permanent": true },
+    { "source": "/state-of-the-union/:slug*", "destination": "/use-cases", "permanent": true },
+    { "source": "/team", "destination": "/who-we-are", "permanent": true },
+    { "source": "/use-cases/ic-briefing-redesign", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/diligence-research-pack", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/portfolio-monitoring-loop", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/merchandising-decision-loop", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/customer-service-knowledge-base", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/demand-planning-copilot", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/field-service-knowledge-base", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/supplier-rfp-redesign", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/engineering-spec-search", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/clinical-documentation-redesign", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/prior-auth-workflow", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/patient-intake-triage", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/contract-review-loop", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/discovery-redesign", "destination": "/use-cases", "permanent": true },
+    { "source": "/use-cases/matter-intake-triage", "destination": "/use-cases", "permanent": true }
   ]
 }
