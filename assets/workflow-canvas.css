@@ -640,3 +640,18 @@
 .wf:fullscreen .wf-edges { display: block }
 .wf:fullscreen .wf-graph .wf-node + .wf-node::before { display: none }
 .wf:fullscreen .wf-stage { overflow-x: auto }
+
+/* === Mobile fullscreen prompt ("We recommend desktop...") === */
+.wf-fs-modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 1.25rem; }
+.wf-fs-modal__backdrop { position: absolute; inset: 0; background: rgba(8, 10, 16, 0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.wf-fs-modal__panel { position: relative; max-width: 420px; width: 100%; background: var(--bg, #0f1218); border: 1px solid var(--line, rgba(255,255,255,0.08)); border-radius: 14px; padding: 1.75rem 1.5rem 1.5rem; box-shadow: 0 24px 60px rgba(0,0,0,0.55); color: var(--fg, #eef0f4); }
+.wf-fs-modal__eyebrow { font-family: var(--f-mono, ui-monospace, monospace); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent, #6aa6ff); margin: 0 0 0.85rem; }
+.wf-fs-modal__title { font-family: var(--f-serif, Georgia, serif); font-weight: 300; font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.018em; color: var(--fg, #eef0f4); margin: 0 0 0.85rem; text-wrap: balance; }
+.wf-fs-modal__body { font-size: 0.9rem; line-height: 1.55; color: var(--fg-2, rgba(238,240,244,0.72)); margin: 0 0 1.5rem; }
+.wf-fs-modal__actions { display: flex; flex-direction: column; gap: 0.6rem; }
+.wf-fs-modal__btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 1.1rem; border-radius: 999px; border: 1px solid var(--line, rgba(255,255,255,0.12)); background: transparent; color: var(--fg, #eef0f4); font-family: inherit; font-size: 0.9rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.wf-fs-modal__btn:hover { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.04); }
+.wf-fs-modal__btn--primary { background: var(--fg, #eef0f4); color: var(--bg, #0b0c11); border-color: transparent; }
+.wf-fs-modal__btn--primary:hover { background: #fff; color: #0b0c11; }
+.wf-fs-modal__btn--ghost { color: var(--fg-3, rgba(238,240,244,0.5)); }
+body.wf-fs-modal-open { overflow: hidden; }

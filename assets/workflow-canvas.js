@@ -534,6 +534,42 @@
     requestAnimationFrame(() => drawEdges(canvas, canvas._wfData));
   }
 
+  function showMobileFullscreenPrompt(onContinue) {
+    if (document.querySelector('.wf-fs-modal')) return;
+    const url = window.location.href;
+    const subject = encodeURIComponent('Convolving – view this workflow on desktop');
+    const body = encodeURIComponent(`This workflow is best viewed on desktop:\n\n${url}\n`);
+    const modal = document.createElement('div');
+    modal.className = 'wf-fs-modal';
+    modal.innerHTML = `
+      <div class="wf-fs-modal__backdrop" data-wf-fs-close></div>
+      <div class="wf-fs-modal__panel" role="dialog" aria-modal="true" aria-labelledby="wf-fs-title">
+        <p class="wf-fs-modal__eyebrow">Heads up</p>
+        <h3 id="wf-fs-title" class="wf-fs-modal__title">We recommend desktop for a better experience.</h3>
+        <p class="wf-fs-modal__body">The full workflow canvas is laid out horizontally and reads more easily on a wider screen. You can email yourself the link, exit, or continue on mobile.</p>
+        <div class="wf-fs-modal__actions">
+          <a class="wf-fs-modal__btn wf-fs-modal__btn--primary" href="mailto:?subject=${subject}&body=${body}" data-wf-fs-email>Email me the link</a>
+          <button class="wf-fs-modal__btn" type="button" data-wf-fs-continue>Continue</button>
+          <button class="wf-fs-modal__btn wf-fs-modal__btn--ghost" type="button" data-wf-fs-close>Exit</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    document.body.classList.add('wf-fs-modal-open');
+    const close = () => {
+      modal.remove();
+      document.body.classList.remove('wf-fs-modal-open');
+      document.removeEventListener('keydown', onKey);
+    };
+    const onKey = (e) => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
+    modal.addEventListener('click', (e) => {
+      if (e.target.closest('[data-wf-fs-close]')) { close(); return; }
+      if (e.target.closest('[data-wf-fs-email]')) { close(); return; }
+      if (e.target.closest('[data-wf-fs-continue]')) { close(); onContinue(); return; }
+    });
+  }
+
   function init(canvas) {
     let data;
     const ref = canvas.dataset.workflowId;
@@ -597,7 +633,13 @@
         if (document.fullscreenElement) {
           document.exitFullscreen?.();
         } else {
-          (canvas.requestFullscreen || canvas.webkitRequestFullscreen)?.call(canvas);
+          const goFullscreen = () => (canvas.requestFullscreen || canvas.webkitRequestFullscreen)?.call(canvas);
+          const isMobileViewport = window.matchMedia('(max-width: 820px)').matches;
+          if (isMobileViewport) {
+            showMobileFullscreenPrompt(goFullscreen);
+          } else {
+            goFullscreen();
+          }
         }
       }
     });
