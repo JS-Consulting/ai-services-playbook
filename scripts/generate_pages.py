@@ -1200,8 +1200,7 @@ def render_workflow_card(case: dict) -> str:
         f'        <h3>{_txt(case["title"])}.</h3>\n'
         f'        <p>{_txt(case["card_body"])}</p>\n'
         f'        <div class="uc-tags"><span class="uc-tag process">{_txt(case["workflow"])}</span>'
-        f'<span class="uc-tag">{_txt(case["function"])}</span>'
-        f'<span class="uc-tag">{_txt(case["role_label"])}</span></div>\n'
+        f'<span class="uc-tag">{_txt(case["function"])}</span></div>\n'
         f'      </a>'
     )
 
