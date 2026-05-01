@@ -108,6 +108,26 @@
 </section>
 <script src="/assets/index-hero-waves.js"></script>
 
+<!-- ── Logo rail ── -->
+<div class="logo-rail">
+  <div class="rail-inner">
+    <span class="rail-label">Experience drawn from</span>
+    <div class="rail-track" id="railTrack"></div>
+  </div>
+</div>
+<script>
+(() => {
+  const railItems = [
+    'Swiss International Air Lines','LHG','PwC','IMA USA','Zurich Family Offices','McKinsey alumni','Benelux PE funds','Claude Enterprise'
+  ];
+  const railTrack = document.getElementById('railTrack');
+  if (!railTrack) return;
+  railTrack.innerHTML = [...railItems, ...railItems]
+    .map((x, i) => `<span>${x}</span>${i < railItems.length * 2 - 1 ? '<span class="dot">◆</span>' : ''}`)
+    .join('');
+})();
+</script>
+
 <section class="section">
   <div class="container">
     <div class="eyebrow reveal">Catalogue</div>
