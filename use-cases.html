@@ -402,6 +402,26 @@
 })();
 </script>
 
+<!-- ── Experience building with (scrolling marquee) ── -->
+<section class="integrations-band" id="integrations">
+  <p class="integrations-label">Experience building with</p>
+  <div class="integrations-marquee">
+    <div class="integrations-track" id="integrationsTrack"></div>
+  </div>
+</section>
+<script>
+(() => {
+  const track = document.getElementById('integrationsTrack');
+  if (!track) return;
+  const total = 26;
+  const tiles = [];
+  for (let i = 1; i <= total; i++) {
+    tiles.push(`<span class="integrations-tile"><img src="/assets/integrations/integration_${i}.svg" alt="" loading="lazy"></span>`);
+  }
+  track.innerHTML = tiles.join('') + tiles.join('');
+})();
+</script>
+
 <section class="cta">
   <canvas class="cta-canvas" id="ctaCanvas"></canvas>
   <div class="container cta-inner">
