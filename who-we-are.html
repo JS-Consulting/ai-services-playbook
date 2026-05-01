@@ -107,188 +107,229 @@
 <script src="/assets/index-hero-waves.js"></script>
 
 <style>
-.tm-section{padding:clamp(4rem,8vw,7rem) 0}
-.tm-layout{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
-.tm-intro{position:sticky;top:6rem}
-.tm-intro .eyebrow{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);margin-bottom:1.25rem;display:block}
-.tm-intro h2{font-family:var(--f-serif);font-weight:300;font-size:clamp(2.5rem,4.5vw,3.75rem);letter-spacing:-.04em;line-height:1.02;margin:0 0 1.5rem;color:var(--fg)}
-.tm-intro p{font-family:var(--f-sans);color:var(--fg-2);font-size:.95rem;line-height:1.55;max-width:34ch;margin:0 0 1.75rem}
-.tm-pills{display:flex;flex-wrap:wrap;gap:.5rem}
-.tm-pill{font-family:var(--f-sans);font-size:.78rem;font-weight:500;letter-spacing:.01em;color:var(--fg-2);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:.45rem .95rem;cursor:default;user-select:none;transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
-.tm-pill[aria-pressed="true"]{background:var(--fg);color:#0b0c11;border-color:var(--fg)}
-.tm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,3vw,2.75rem) clamp(1rem,2vw,1.75rem)}
-.tm-card{display:flex;flex-direction:column;gap:.95rem}
-.tm-photo{aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:linear-gradient(160deg,#1a1f2e 0%,#0f1218 100%);border:1px solid var(--line);position:relative;width:100%}
+.tm-section{padding:clamp(3.5rem,6vw,5.5rem) 0}
+.tm-marquee{position:relative;overflow:hidden;margin-top:2.5rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.tm-track{display:flex;gap:1.5rem;width:max-content;animation:tm-scroll 65s linear infinite;will-change:transform;padding:0 .75rem}
+.tm-marquee:hover .tm-track,.tm-marquee:focus-within .tm-track{animation-play-state:paused}
+@keyframes tm-scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - .75rem))}}
+@media(prefers-reduced-motion:reduce){.tm-track{animation:none}}
+.tm-card{width:280px;flex:0 0 280px;height:420px;display:flex;flex-direction:column;gap:.9rem;background:transparent}
+.tm-photo{aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:linear-gradient(160deg,#1a1f2e 0%,#0f1218 100%);border:1px solid var(--line);position:relative;width:100%;flex:0 0 auto}
 .tm-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
 .tm-photo.placeholder{display:flex;align-items:center;justify-content:center}
 .tm-photo.placeholder::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(106,166,255,.08) 0%,transparent 60%)}
 .tm-photo.placeholder svg{position:relative;width:42%;height:42%;opacity:.18;color:var(--fg)}
-.tm-meta{padding:0 .15rem;display:flex;flex-direction:column;gap:.6rem}
+.tm-meta{padding:0 .15rem;display:flex;flex-direction:column;gap:.55rem;flex:1;min-height:0}
 .tm-name{font-family:var(--f-sans);font-size:1.0625rem;font-weight:500;letter-spacing:-.005em;color:var(--fg);margin:0;line-height:1.25}
-.tm-role{font-family:var(--f-sans);font-size:.875rem;font-weight:400;color:var(--fg-2);line-height:1.4;margin:0}
-.tm-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.1rem}
+.tm-role{font-family:var(--f-sans);font-size:.85rem;font-weight:400;color:var(--fg-2);line-height:1.4;margin:0}
+.tm-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.05rem}
 .tm-tag{font-family:var(--f-sans);font-size:.6875rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-2);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:4px;padding:.25rem .5rem;line-height:1}
-.tm-experience{margin-top:.4rem;padding-top:.85rem;border-top:1px solid var(--line)}
+.tm-experience{margin-top:auto;padding-top:.85rem;border-top:1px solid var(--line)}
 .tm-experience-label{font-family:var(--f-sans);font-size:.6875rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);margin:0 0 .55rem;display:block}
-.tm-logos{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.25rem;min-height:24px}
+.tm-logos{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1.15rem;min-height:24px}
 .tm-logo{height:22px;width:auto;display:block;filter:brightness(0) invert(1);opacity:.7;transition:opacity .2s var(--ease)}
 .tm-card:hover .tm-logo{opacity:.95}
 .tm-logo--tall{height:26px}
 .tm-logo--placeholder{font-family:var(--f-sans);font-size:.8rem;color:var(--fg-3);font-style:italic;line-height:1}
-@media(max-width:980px){
-  .tm-layout{grid-template-columns:1fr;gap:2.5rem}
-  .tm-intro{position:static}
-  .tm-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:560px){
-  .tm-grid{grid-template-columns:1fr;gap:1.75rem}
-}
+.tm-head{display:flex;flex-direction:column;gap:.9rem;max-width:760px}
+.tm-head .eyebrow{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);display:inline-flex;align-items:baseline;gap:.6rem}
+.tm-head .eyebrow-num{font-family:var(--f-mono,'JetBrains Mono',monospace);color:var(--accent-2,#a8c7ff);font-weight:500;letter-spacing:.05em}
+.tm-head h2{font-family:var(--f-serif);font-weight:300;font-size:clamp(2rem,3.5vw,2.85rem);letter-spacing:-.035em;line-height:1.05;margin:0;color:var(--fg)}
+.tm-head p{font-family:var(--f-sans);color:var(--fg-2);font-size:1rem;line-height:1.6;margin:0;max-width:62ch}
 </style>
 
-<section class="tm-section" id="team">
+<section class="tm-section" id="function-experts">
   <div class="container">
-    <div class="tm-layout">
-      <div class="tm-intro reveal">
-        <span class="eyebrow"><span class="eyebrow-num">01</span>Your team</span>
-        <h2>Meet the people on your engagement.</h2>
-        <p>Active AI leaders and operators, embedded at frontier institutions and matched to the workflow you are redesigning.</p>
-        <div class="tm-pills" role="group" aria-label="Team categories">
-          <span class="tm-pill" aria-pressed="true">All</span>
-          <span class="tm-pill">Leadership</span>
-          <span class="tm-pill">Engineering</span>
-          <span class="tm-pill">Strategy</span>
-          <span class="tm-pill">Operations</span>
+    <div class="tm-head reveal">
+      <span class="eyebrow"><span class="eyebrow-num">01</span>Function Domain Experts</span>
+      <h2>Operators who have run the workflow you are redesigning.</h2>
+      <p>Senior practitioners with deep operational fluency in the functions we touch – finance, procurement, clinical operations, deal teams. They sit across the table from your team and translate AI capability into workflow change that survives audit, regulator, and board.</p>
+    </div>
+  </div>
+  <div class="tm-marquee">
+    <div class="tm-track" data-clone>
+      <article class="tm-card">
+        <div class="tm-photo"><img src="/assets/spencer-johnson.jpeg" alt="Spencer Johnson" width="1024" height="1024" decoding="async"></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Spencer Johnson</h3>
+          <p class="tm-role">Strategy &amp; Value Creation, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Functional Expert</span><span class="tm-tag">Leadership</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><img class="tm-logo tm-logo--tall" src="/assets/logos/pwc.svg" alt="PwC"><img class="tm-logo" src="/assets/logos/tesla.svg" alt="Tesla"></div></div>
         </div>
-      </div>
-
-      <div class="tm-grid">
-        <article class="tm-card reveal">
-          <div class="tm-photo">
-            <img src="/assets/spencer-johnson.jpeg" alt="Spencer Johnson" width="1024" height="1024" decoding="async">
-          </div>
-          <div class="tm-meta">
-            <h3 class="tm-name">Spencer Johnson</h3>
-            <p class="tm-role">Strategy &amp; Value Creation, Convolving</p>
-            <div class="tm-tags">
-              <span class="tm-tag">Functional Expert</span>
-              <span class="tm-tag">Leadership</span>
-            </div>
-            <div class="tm-experience">
-              <span class="tm-experience-label">Experience with</span>
-              <div class="tm-logos">
-                <img class="tm-logo tm-logo--tall" src="/assets/logos/pwc.svg" alt="PwC">
-                <img class="tm-logo" src="/assets/logos/tesla.svg" alt="Tesla">
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="tm-card reveal d1">
-          <div class="tm-photo">
-            <img src="/assets/cameron-weibel.jpeg" alt="Cameron Weibel" width="1024" height="1024" decoding="async">
-          </div>
-          <div class="tm-meta">
-            <h3 class="tm-name">Cameron Weibel</h3>
-            <p class="tm-role">AI Engineering Lead, Convolving</p>
-            <div class="tm-tags">
-              <span class="tm-tag">FDE</span>
-              <span class="tm-tag">Leadership</span>
-            </div>
-            <div class="tm-experience">
-              <span class="tm-experience-label">Experience with</span>
-              <div class="tm-logos">
-                <img class="tm-logo" src="/assets/logos/eth.svg" alt="ETH Zürich">
-                <img class="tm-logo tm-logo--tall" src="/assets/logos/swiss.svg" alt="SWISS">
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="tm-card reveal d2">
-          <div class="tm-photo placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
-          </div>
-          <div class="tm-meta">
-            <h3 class="tm-name">Name forthcoming</h3>
-            <p class="tm-role">Senior AI Engineer, Convolving</p>
-            <div class="tm-tags">
-              <span class="tm-tag">FDE</span>
-            </div>
-            <div class="tm-experience">
-              <span class="tm-experience-label">Experience with</span>
-              <div class="tm-logos">
-                <span class="tm-logo tm-logo--placeholder">To be announced</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="tm-card reveal">
-          <div class="tm-photo placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
-          </div>
-          <div class="tm-meta">
-            <h3 class="tm-name">Name forthcoming</h3>
-            <p class="tm-role">Workflow Designer, Convolving</p>
-            <div class="tm-tags">
-              <span class="tm-tag">Functional Expert</span>
-            </div>
-            <div class="tm-experience">
-              <span class="tm-experience-label">Experience with</span>
-              <div class="tm-logos">
-                <span class="tm-logo tm-logo--placeholder">To be announced</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="tm-card reveal d1">
-          <div class="tm-photo placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
-          </div>
-          <div class="tm-meta">
-            <h3 class="tm-name">Name forthcoming</h3>
-            <p class="tm-role">Engagement Lead, Convolving</p>
-            <div class="tm-tags">
-              <span class="tm-tag">Leadership</span>
-            </div>
-            <div class="tm-experience">
-              <span class="tm-experience-label">Experience with</span>
-              <div class="tm-logos">
-                <span class="tm-logo tm-logo--placeholder">To be announced</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="tm-card reveal d2">
-          <div class="tm-photo placeholder" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
-          </div>
-          <div class="tm-meta">
-            <h3 class="tm-name">Name forthcoming</h3>
-            <p class="tm-role">Industry Specialist, Convolving</p>
-            <div class="tm-tags">
-              <span class="tm-tag">Functional Expert</span>
-            </div>
-            <div class="tm-experience">
-              <span class="tm-experience-label">Experience with</span>
-              <div class="tm-logos">
-                <span class="tm-logo tm-logo--placeholder">To be announced</span>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Financial Services Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Functional Expert</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Healthcare Operations Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Functional Expert</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Industrial Operations Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Functional Expert</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Legal &amp; Compliance Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Functional Expert</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
+
+<section class="tm-section" id="ai-engineers">
+  <div class="container">
+    <div class="tm-head reveal">
+      <span class="eyebrow"><span class="eyebrow-num">02</span>AI Process Engineers</span>
+      <h2>Engineers who build, ship, and harden the workflow.</h2>
+      <p>Forward-deployed engineers responsible for the agentic systems, retrieval pipelines, evals, and integration plumbing that turn a designed workflow into a production artifact your team uses on Monday.</p>
+    </div>
+  </div>
+  <div class="tm-marquee">
+    <div class="tm-track" data-clone>
+      <article class="tm-card">
+        <div class="tm-photo"><img src="/assets/cameron-weibel.jpeg" alt="Cameron Weibel" width="1024" height="1024" decoding="async"></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Cameron Weibel</h3>
+          <p class="tm-role">AI Engineering Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">FDE</span><span class="tm-tag">Leadership</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><img class="tm-logo" src="/assets/logos/eth.svg" alt="ETH Zürich"><img class="tm-logo tm-logo--tall" src="/assets/logos/swiss.svg" alt="SWISS"></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Senior AI Engineer, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">FDE</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">ML Platform Engineer, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">FDE</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Workflow Automation Engineer, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">FDE</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Data Pipeline Engineer, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">FDE</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="tm-section" id="adoption-managers">
+  <div class="container">
+    <div class="tm-head reveal">
+      <span class="eyebrow"><span class="eyebrow-num">03</span>Adoption Managers</span>
+      <h2>The people who make the artifact stick.</h2>
+      <p>Engagement leads who own the change, the training, and the post-launch metrics. They keep the workflow in daily use ninety days after the sprint closes – the line between a tool that ships and a tool that earns its keep.</p>
+    </div>
+  </div>
+  <div class="tm-marquee">
+    <div class="tm-track" data-clone>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Engagement Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Adoption</span><span class="tm-tag">Leadership</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Change Management Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Adoption</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Training Designer, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Adoption</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Adoption Metrics Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Adoption</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+      <article class="tm-card">
+        <div class="tm-photo placeholder" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg></div>
+        <div class="tm-meta">
+          <h3 class="tm-name">Name forthcoming</h3>
+          <p class="tm-role">Customer Success Lead, Convolving</p>
+          <div class="tm-tags"><span class="tm-tag">Adoption</span></div>
+          <div class="tm-experience"><span class="tm-experience-label">Experience with</span><div class="tm-logos"><span class="tm-logo tm-logo--placeholder">To be announced</span></div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.tm-track[data-clone]').forEach(track=>{
+  track.querySelectorAll(':scope > .tm-card').forEach(c=>{
+    const dup=c.cloneNode(true);
+    dup.setAttribute('aria-hidden','true');
+    track.appendChild(dup);
+  });
+});
+</script>
 
 <section class="section section-alt" id="industries">
   <div class="container-wide">
     <div class="section-head reveal">
       <div class="section-head-left">
-        <span class="eyebrow"><span class="eyebrow-num">02</span>Industry depth</span>
+        <span class="eyebrow"><span class="eyebrow-num">04</span>Industry depth</span>
         <h2>Industry-agnostic capability, with depth where it matters.</h2>
       </div>
       <div class="section-head-right">
@@ -347,7 +388,7 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="section-head-left">
-        <span class="eyebrow"><span class="eyebrow-num">03</span>Why us</span>
+        <span class="eyebrow"><span class="eyebrow-num">05</span>Why us</span>
         <h2>The commercial model is the message.</h2>
       </div>
       <div class="section-head-right">
