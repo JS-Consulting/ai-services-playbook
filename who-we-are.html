@@ -185,6 +185,62 @@
 </section>
 
 <style>
+.why-us .why-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:1rem}
+.why-us .why-col{display:flex;flex-direction:column;gap:1.25rem;padding:2.25rem clamp(1.5rem,3vw,2.5rem)}
+.why-us .why-col + .why-col{border-left:1px solid var(--line)}
+.why-us .why-col:first-child{padding-left:0}
+.why-us .why-col:last-child{padding-right:0}
+.why-us .why-label{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3)}
+.why-us .why-marks{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.6rem;min-height:34px}
+.why-us .wm{font-family:var(--f-sans);font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--fg-3);white-space:nowrap}
+.why-us .why-marks-us img{height:24px;width:auto;display:block}
+.why-us .why-claim{font-family:var(--f-serif);font-weight:300;font-size:clamp(1.05rem,1.4vw,1.25rem);line-height:1.45;color:var(--fg-2);max-width:48ch;margin:0}
+.why-us .why-claim-us{color:var(--fg)}
+.why-us .why-claim-us strong{font-weight:500;color:var(--fg);font-style:italic;font-family:var(--f-serif)}
+@media(max-width:820px){
+  .why-us .why-cols{grid-template-columns:1fr}
+  .why-us .why-col{padding:2rem 0}
+  .why-us .why-col + .why-col{border-left:0;border-top:1px solid var(--line)}
+}
+</style>
+
+<section class="section why-us" id="why-us">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-head-left">
+        <span class="eyebrow"><span class="eyebrow-num">02</span>Why us</span>
+        <h2>The commercial model is the message.</h2>
+      </div>
+      <div class="section-head-right">
+        <p>Legacy consulting bills by the hour. The longer the engagement, the better the margin. We bill one flat fee per sprint, and the work closes when the artifact ships.</p>
+      </div>
+    </div>
+
+    <div class="why-cols reveal">
+      <div class="why-col">
+        <div class="why-label">Them</div>
+        <div class="why-marks why-marks-others">
+          <span class="wm">McKinsey &amp; Company</span>
+          <span class="wm">BCG</span>
+          <span class="wm">Deloitte</span>
+          <span class="wm">PwC</span>
+          <span class="wm">KPMG</span>
+          <span class="wm">Tenex.co</span>
+        </div>
+        <p class="why-claim">Day rates. Time and materials. Multi-year retainers. Junior teams billed at partner-adjacent rates. The economics reward duration, not delivery.</p>
+      </div>
+      <div class="why-col">
+        <div class="why-label">Us</div>
+        <div class="why-marks why-marks-us">
+          <img src="/assets/convolving-logo-white.svg" alt="Convolving" height="24">
+        </div>
+        <p class="why-claim why-claim-us"><strong>One flat fee per sprint.</strong> Development, training, and reporting included. No change orders, no team expansions, no retainer creep. When the artifact is shipped, the engagement is closed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
 .tm-section{padding:clamp(3.5rem,6vw,5.5rem) 0}
 .tm-marquee{position:relative;overflow:hidden;margin-top:2.5rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
 .tm-track{display:flex;gap:1.5rem;width:max-content;animation:tm-scroll 65s linear infinite;will-change:transform;padding:0 .75rem}
@@ -226,7 +282,7 @@
 <section class="tm-section" id="function-experts">
   <div class="container">
     <div class="tm-head reveal">
-      <span class="eyebrow"><span class="eyebrow-num">02</span>Function Domain Experts</span>
+      <span class="eyebrow"><span class="eyebrow-num">03</span>Function Domain Experts</span>
       <h2>Operators who have run the workflow you are redesigning.</h2>
       <p>Senior practitioners with deep operational fluency in the functions we touch – finance, procurement, clinical operations, deal teams. They sit across the table from your team and translate AI capability into workflow change that survives audit, regulator, and board.</p>
     </div>
@@ -285,7 +341,7 @@
 <section class="tm-section" id="ai-engineers">
   <div class="container">
     <div class="tm-head reveal">
-      <span class="eyebrow"><span class="eyebrow-num">03</span>AI Process Engineers</span>
+      <span class="eyebrow"><span class="eyebrow-num">04</span>AI Process Engineers</span>
       <h2>Engineers who build, ship, and harden the workflow.</h2>
       <p>Forward-deployed engineers responsible for the agentic systems, retrieval pipelines, evals, and integration plumbing that turn a designed workflow into a production artifact your team uses on Monday.</p>
     </div>
@@ -339,7 +395,7 @@
 <section class="tm-section" id="adoption-managers">
   <div class="container">
     <div class="tm-head reveal">
-      <span class="eyebrow"><span class="eyebrow-num">04</span>Adoption Managers</span>
+      <span class="eyebrow"><span class="eyebrow-num">05</span>Adoption Managers</span>
       <h2>The people who make the artifact stick.</h2>
       <p>Engagement leads who own the change, the training, and the post-launch metrics. They keep the workflow in daily use ninety days after the sprint closes – the line between a tool that ships and a tool that earns its keep.</p>
     </div>
@@ -401,57 +457,6 @@ document.querySelectorAll('.tm-track[data-clone]').forEach(track=>{
 </script>
 
 
-<style>
-.why-us .why-row{display:grid;grid-template-columns:80px 1fr;column-gap:clamp(1.5rem,4vw,3rem);row-gap:.75rem;align-items:start;padding:2.25rem 0;border-top:1px solid var(--line)}
-.why-us .why-row:last-of-type{border-bottom:1px solid var(--line)}
-.why-us .why-label{font-family:var(--f-sans);font-size:.6875rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);padding-top:.4rem}
-.why-us .why-marks{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem 2.4rem;min-height:34px}
-.why-us .wm{font-family:var(--f-sans);font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--fg-3);white-space:nowrap}
-.why-us .why-marks-us img{height:24px;width:auto;display:block}
-.why-us .why-claim{grid-column:2;font-family:var(--f-serif);font-weight:300;font-size:clamp(1.05rem,1.4vw,1.25rem);line-height:1.45;color:var(--fg-2);max-width:62ch;margin-top:.25rem}
-.why-us .why-claim-us{color:var(--fg)}
-.why-us .why-claim-us strong{font-weight:500;color:var(--fg);font-style:italic;font-family:var(--f-serif)}
-@media(max-width:640px){
-  .why-us .why-row{grid-template-columns:1fr;row-gap:.9rem;padding:1.75rem 0}
-  .why-us .why-claim{grid-column:1}
-  .why-us .why-marks{gap:1rem 1.6rem}
-}
-</style>
-
-<section class="section why-us" id="why-us">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-head-left">
-        <span class="eyebrow"><span class="eyebrow-num">05</span>Why us</span>
-        <h2>The commercial model is the message.</h2>
-      </div>
-      <div class="section-head-right">
-        <p>Legacy consulting bills by the hour. The longer the engagement, the better the margin. We bill one flat fee per sprint, and the work closes when the artifact ships.</p>
-      </div>
-    </div>
-
-    <div class="why-row reveal">
-      <div class="why-label">Them</div>
-      <div class="why-marks why-marks-others">
-        <span class="wm">McKinsey &amp; Company</span>
-        <span class="wm">BCG</span>
-        <span class="wm">Deloitte</span>
-        <span class="wm">PwC</span>
-        <span class="wm">KPMG</span>
-        <span class="wm">Tenex.co</span>
-      </div>
-      <p class="why-claim">Day rates. Time and materials. Multi-year retainers. Junior teams billed at partner-adjacent rates. The economics reward duration, not delivery.</p>
-    </div>
-
-    <div class="why-row reveal d1">
-      <div class="why-label">Us</div>
-      <div class="why-marks why-marks-us">
-        <img src="/assets/convolving-logo-white.svg" alt="Convolving" height="24">
-      </div>
-      <p class="why-claim why-claim-us"><strong>One flat fee per sprint.</strong> Development, training, and reporting included. No change orders, no team expansions, no retainer creep. When the artifact is shipped, the engagement is closed.</p>
-    </div>
-  </div>
-</section>
 
 <section class="cta">
   <canvas class="cta-canvas" id="ctaCanvas"></canvas>
