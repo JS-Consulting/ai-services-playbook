@@ -61,14 +61,20 @@
 .uc-card:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);transform:translateY(-2px)}
 .uc-card h3{font-size:1.25rem;line-height:1.15;color:var(--fg);font-family:var(--f-serif);font-weight:300}
 .uc-card p{font-size:.9rem;color:var(--fg-2);line-height:1.5}
+.uc-pagination{display:flex;justify-content:flex-end;align-items:center;gap:.6rem;margin-top:2rem;font-family:var(--f-sans)}
+.uc-pagination .uc-page-info{font-size:.8rem;color:var(--fg-3);letter-spacing:.04em;margin-right:.5rem}
+.uc-pagination button{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--fg-2);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.uc-pagination button:hover:not(:disabled){background:rgba(255,255,255,.08);color:var(--fg);border-color:rgba(255,255,255,.18)}
+.uc-pagination button:disabled{opacity:.35;cursor:not-allowed}
+.uc-pagination svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .uc-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto}
 .uc-tag{font-size:.7rem;font-weight:500;letter-spacing:.04em;color:var(--fg-3);padding:.25rem .55rem;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
 .uc-tag.industry{color:var(--accent-2)}
 .uc-tag.process{color:var(--accent-warm)}
 .uc-tag.function{color:#93c5fd}
 </style>
-  <link rel="preload" href="/assets/site.css?v=20260430h" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/assets/site.css?v=20260430h"></noscript>
+  <link rel="preload" href="/assets/site.css?v=20260501" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/site.css?v=20260501"></noscript>
 </head>
 <body data-accent="blue">
 
@@ -262,6 +268,16 @@
       </a>
       <!-- WORKFLOW_USE_CASES:END -->
     </div>
+
+    <div class="uc-pagination" id="useCasesPagination" aria-label="Use cases pagination">
+      <span class="uc-page-info" id="useCasesPageInfo"></span>
+      <button type="button" id="useCasesPrev" aria-label="Previous page">
+        <svg viewBox="0 0 16 16"><path d="M10 4l-4 4 4 4"/></svg>
+      </button>
+      <button type="button" id="useCasesNext" aria-label="Next page">
+        <svg viewBox="0 0 16 16"><path d="M6 4l4 4-4 4"/></svg>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -326,6 +342,6 @@
 
 <script src="/cookie-consent.js" defer></script>
 <script src="/assets/subpage.js?v=20260430b"></script>
-<script src="/assets/use-cases-filter.js?v=20260501" defer></script>
+<script src="/assets/use-cases-filter.js?v=20260501b" defer></script>
 </body>
 </html>

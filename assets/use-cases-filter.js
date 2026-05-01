@@ -1,14 +1,17 @@
-// Use-cases catalog: client-side faceted filter with query-string deep-linking.
-// Currently a single facet (Function); the filter framework supports more.
+// Use-cases catalog: client-side faceted filter with query-string deep-linking + pagination.
 (() => {
-  const cards = document.querySelectorAll('[data-usecase]');
+  const cards = Array.from(document.querySelectorAll('[data-usecase]'));
   const pillGroups = document.querySelectorAll('[data-filter-group]');
   const summary = document.getElementById('useCasesSummary');
   const clearBtn = document.getElementById('useCasesClear');
+  const prevBtn = document.getElementById('useCasesPrev');
+  const nextBtn = document.getElementById('useCasesNext');
+  const pageInfo = document.getElementById('useCasesPageInfo');
   if (!cards.length || !pillGroups.length) return;
 
-  // facet name -> Set of selected values
+  const PAGE_SIZE = 9;
   const state = { function: new Set() };
+  let page = 1;
 
   function parseQuery() {
     const q = new URLSearchParams(window.location.search);
@@ -38,26 +41,36 @@
     });
   }
 
-  function applyFilter() {
-    let visible = 0;
-    cards.forEach(card => {
-      const matches = Object.entries(state).every(([facet, sel]) => {
-        if (!sel.size) return true;
-        const cardVals = (card.dataset[facet] || '').split(/\s+/).filter(Boolean);
-        return cardVals.some(v => sel.has(v));
-      });
-      card.style.display = matches ? '' : 'none';
-      if (matches) visible++;
-    });
+  function matchedCards() {
+    return cards.filter(card => Object.entries(state).every(([facet, sel]) => {
+      if (!sel.size) return true;
+      const cardVals = (card.dataset[facet] || '').split(/\s+/).filter(Boolean);
+      return cardVals.some(v => sel.has(v));
+    }));
+  }
+
+  function render() {
+    const matched = matchedCards();
+    const totalPages = Math.max(1, Math.ceil(matched.length / PAGE_SIZE));
+    if (page > totalPages) page = totalPages;
+    if (page < 1) page = 1;
+    const start = (page - 1) * PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+    const pageSet = new Set(matched.slice(start, end));
+    cards.forEach(card => { card.style.display = pageSet.has(card) ? '' : 'none'; });
+
     if (summary) {
-      summary.textContent = visible === cards.length
+      summary.textContent = matched.length === cards.length
         ? `Showing ${cards.length} use cases.`
-        : `Showing ${visible} of ${cards.length} use cases.`;
+        : `Showing ${matched.length} of ${cards.length} use cases.`;
     }
     if (clearBtn) {
       const anyActive = Object.values(state).some(s => s.size);
       clearBtn.style.display = anyActive ? '' : 'none';
     }
+    if (pageInfo) pageInfo.textContent = matched.length ? `Page ${page} of ${totalPages}` : '';
+    if (prevBtn) prevBtn.disabled = page <= 1;
+    if (nextBtn) nextBtn.disabled = page >= totalPages;
   }
 
   pillGroups.forEach(group => {
@@ -67,22 +80,27 @@
       if (!pill) return;
       const v = pill.dataset.value;
       if (state[facet].has(v)) state[facet].delete(v); else state[facet].add(v);
+      page = 1;
       syncPills();
       syncQuery();
-      applyFilter();
+      render();
     });
   });
 
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
       for (const set of Object.values(state)) set.clear();
+      page = 1;
       syncPills();
       syncQuery();
-      applyFilter();
+      render();
     });
   }
 
+  if (prevBtn) prevBtn.addEventListener('click', () => { page--; render(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { page++; render(); });
+
   parseQuery();
   syncPills();
-  applyFilter();
+  render();
 })();
