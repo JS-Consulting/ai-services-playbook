@@ -98,6 +98,10 @@ Every page has a full Open Graph + Twitter block plus JSON-LD in `<head>`:
 
 When adding a new use-case page, you must (1) write the one-pager under `use-cases/`, (2) add the catalogue card to `use-cases.html` with correct `data-industry`/`data-function`/`data-role`, and (3) append the URL to `sitemap.xml`. The pre-ship checklist in `use-cases/STYLE.md` §9 is the authoritative list.
 
+## Logos
+
+When the user asks for company / institution logos and the file is not already in `/assets/`, fetch a real SVG (or transparent PNG) from the web and save it under `/assets/logos/<slug>.svg` – do not fall back to text wordmarks. Prefer the brand's own press kit, then Wikimedia Commons, then a reputable logo CDN (e.g. simpleicons.org, worldvectorlogo.com). After saving, reference it with `<img src="/assets/logos/<slug>.svg" alt="<Brand>" height="..." loading="lazy">` and respect the brand's monochrome / dark-bg variant where one exists. Commit the file in the same commit as the page that uses it.
+
 ## Typography rule
 
 **Never use em dashes (`—`) anywhere – in HTML, copy, design.md, or comments.** Always use en dashes (`–`) with spaces: `word – word`. This is enforced project-wide; `grep -rn "—" *.html ai-*/*.html use-cases/*.html design.md` should return zero. See `design.md` § 11 "Voice & copywriting → Dashes" for the rationale.
