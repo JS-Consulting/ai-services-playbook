@@ -9,8 +9,14 @@
 
     function resize() {
       const r = canvas.parentElement.getBoundingClientRect();
-      w = canvas.width = r.width;
-      h = canvas.height = r.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      w = r.width;
+      h = r.height;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     canvas.parentElement.addEventListener('mousemove', (e) => {
@@ -56,7 +62,7 @@
       waves.forEach(wv => {
         ctx.beginPath();
         let started = false;
-        for (let x = 0; x <= w; x += 2) {
+        for (let x = 0; x <= w; x += 1) {
           const nx = x / w;
           const env = 1 - smoothstep(0.55, 0.985, nx);
           const homeY = oy + (h * wv.y - oy) * env;
@@ -67,10 +73,10 @@
           else ctx.lineTo(x, y);
         }
         ctx.save();
-        ctx.shadowColor = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},0.9)`;
-        ctx.shadowBlur = 14;
-        ctx.strokeStyle = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},${wv.col[3] * 0.45})`;
-        ctx.lineWidth = wv.lw + 2.5;
+        ctx.shadowColor = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},0.7)`;
+        ctx.shadowBlur = 7;
+        ctx.strokeStyle = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},${wv.col[3] * 0.35})`;
+        ctx.lineWidth = wv.lw + 1.25;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.stroke();

@@ -65,7 +65,7 @@ function initWaves(canvasId) {
   let mouse = { x: 0.5, y: 0.5, active: false };
   let sm = { x: 0.5, y: 0.5 };
 
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, 3);
   function resize() {
     const r = parent.getBoundingClientRect();
     if (!r.width || !r.height) return;
@@ -130,7 +130,7 @@ function initWaves(canvasId) {
     waves.forEach(wv => {
       ctx.beginPath();
       let started = false;
-      for (let x = 0; x <= w; x += 2) {
+      for (let x = 0; x <= w; x += 1) {
         const nx = x / w;
         const env = 1 - smoothstep(0.55, 0.985, nx);
         const homeY = oy + (h * wv.y - oy) * env;
@@ -141,10 +141,10 @@ function initWaves(canvasId) {
         else ctx.lineTo(x, y);
       }
       ctx.save();
-      ctx.shadowColor = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},0.9)`;
-      ctx.shadowBlur = 14;
-      ctx.strokeStyle = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},${wv.col[3] * 0.45})`;
-      ctx.lineWidth = wv.lw + 2.5;
+      ctx.shadowColor = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},0.7)`;
+      ctx.shadowBlur = 7;
+      ctx.strokeStyle = `rgba(${wv.col[0]},${wv.col[1]},${wv.col[2]},${wv.col[3] * 0.35})`;
+      ctx.lineWidth = wv.lw + 1.25;
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
       ctx.stroke();
@@ -206,7 +206,7 @@ function initAmbientCanvas(id, opts = {}) {
   const canvas = document.getElementById(id);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, 3);
   let w = 0, h = 0, t = 0;
 
   const ro = new ResizeObserver(entries => {
