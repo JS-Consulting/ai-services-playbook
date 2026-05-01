@@ -141,6 +141,23 @@
 </section>
 <script src="/assets/index-hero-waves.js"></script>
 
+<div class="logo-rail" id="aitx-rail">
+  <div class="rail-inner">
+    <span class="rail-label">Experience drawn from</span>
+    <div class="rail-track" id="aitxRailTrack"></div>
+  </div>
+</div>
+<script>
+(() => {
+  const items = ['Swiss International Air Lines','LHG','PwC','IMA USA','Zurich Family Offices','McKinsey alumni','Benelux PE funds','Claude Enterprise'];
+  const track = document.getElementById('aitxRailTrack');
+  if (!track) return;
+  track.innerHTML = [...items, ...items]
+    .map((x, i, a) => `<span>${x}</span>${i < a.length - 1 ? '<span class="dot">◆</span>' : ''}`)
+    .join('');
+})();
+</script>
+
 <section class="section" style="padding:clamp(2.5rem,5vw,4.5rem) 0">
   <div class="container">
     <div class="eyebrow reveal">Premise</div>
