@@ -225,7 +225,6 @@
           <img class="wm-logo" src="/assets/logos/tenex.svg" alt="Tenex.co">
           <img class="wm-logo" src="/assets/logos/bcg.svg" alt="BCG">
           <img class="wm-logo" src="/assets/logos/accenture.svg" alt="Accenture">
-          <img class="wm-logo" src="/assets/logos/pwc.svg" alt="PwC">
         </div>
         <p class="why-claim">Time and materials billing. Charge for strategy, planning, and development separately. The economics reward duration, not delivery.</p>
       </div>
@@ -281,7 +280,17 @@
 .tm-role-icon svg{width:100%;height:100%;display:block}
 .tm-role-card h3{font-family:var(--f-serif);font-weight:300;font-size:1.4rem;letter-spacing:-.02em;line-height:1.15;margin:0;color:var(--fg);position:relative;z-index:1}
 .tm-role-card p{font-family:var(--f-sans);color:var(--fg-2);font-size:.9rem;line-height:1.55;margin:0;position:relative;z-index:1}
-@media(max-width:820px){.tm-roles{grid-template-columns:1fr}}
+@media(max-width:820px){
+  /* Project Team Model card-deck on mobile: each role card pins to the top
+     and the next card slides up over it on scroll. Mirrors the #industries
+     pattern in site.css (2026-05-01). */
+  #project-team-model .tm-roles{display:block !important;grid-template-columns:none !important;margin-top:1.5rem !important}
+  #project-team-model .tm-role-card{position:sticky;display:flex;margin:0 0 1rem;box-shadow:0 -8px 24px -12px rgba(0,0,0,.55)}
+  #project-team-model .tm-role-card:nth-child(1){top:5rem}
+  #project-team-model .tm-role-card:nth-child(2){top:5.75rem}
+  #project-team-model .tm-role-card:nth-child(3){top:6.5rem}
+  #project-team-model .tm-role-card:hover{transform:none}
+}
 </style>
 
 <section class="tm-section" id="function-experts">
