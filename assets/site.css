@@ -160,3 +160,11 @@
   #industries .principle:nth-child(5){top:8rem}
   #industries .principle:hover{transform:none}
 }
+
+/* Journey rail: 3-column variant + step-anchored CTA */
+.journey-steps.journey-steps--3{grid-template-columns:repeat(3,1fr)}
+.jstep-cta-row{margin-top:1.5rem;display:flex;justify-content:flex-end}
+.jstep-cta-row .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.55rem .55rem .55rem 1.1rem;border-radius:999px;background:var(--fg);color:#0b0c11;font-family:var(--f-sans);font-size:.875rem;font-weight:500}
+.jstep-cta-row .btn .dot{width:30px;height:30px;border-radius:999px;background:#0b0c11;color:var(--fg);display:inline-flex;align-items:center;justify-content:center}
+.jstep-cta-row .btn .dot svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:820px){.jstep-cta-row{justify-content:flex-start}}
