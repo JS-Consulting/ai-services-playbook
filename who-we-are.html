@@ -565,6 +565,78 @@ document.querySelectorAll('.tm-marquee').forEach(marquee=>{
 
 
 
+<style>
+.ts-section{padding:clamp(3.5rem,6vw,5.5rem) 0}
+.ts-head{max-width:780px;margin-bottom:clamp(2.25rem,4vw,3.25rem)}
+.ts-head h2{margin:.85rem 0 0}
+.ts-accent{color:var(--color-accent-light);position:relative;display:inline-block}
+.ts-accent::after{content:"";position:absolute;left:0;right:0;bottom:-.04em;height:.16em;background:rgba(59,130,246,.28);z-index:-1;border-radius:2px}
+.ts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.25rem,2.5vw,2rem)}
+@media(max-width:820px){.ts-grid{grid-template-columns:1fr}}
+.ts-card{position:relative;padding:clamp(1.75rem,3vw,2.5rem);background:linear-gradient(160deg,rgba(59,130,246,.07) 0%,rgba(15,18,24,.55) 65%);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;gap:1.4rem;min-height:340px;transition:transform .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease)}
+.ts-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--color-accent) 0%,rgba(59,130,246,.0) 70%);opacity:.85}
+.ts-card:hover{transform:translateY(-3px);border-color:rgba(59,130,246,.45);box-shadow:0 22px 50px -28px rgba(59,130,246,.55)}
+.ts-mark{position:absolute;top:1.5rem;right:1.75rem;width:clamp(72px,9vw,108px);height:auto;color:var(--color-accent);opacity:.92;pointer-events:none}
+.ts-logo{display:flex;align-items:center;height:32px;color:var(--fg);position:relative;z-index:1}
+.ts-logo img{height:100%;width:auto;filter:brightness(0) invert(1);opacity:.85}
+.ts-logo-placeholder{font-family:var(--f-sans);font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);border:1px dashed var(--line);padding:.45rem .7rem;border-radius:3px}
+.ts-quote{font-family:var(--f-serif);font-weight:300;font-size:clamp(1.1rem,1.45vw,1.32rem);line-height:1.5;color:var(--fg);margin:0;letter-spacing:-.005em;position:relative;z-index:1}
+.ts-attrib{margin-top:auto;padding-top:1.2rem;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:.2rem}
+.ts-attrib-name{font-family:var(--f-sans);font-weight:500;font-size:.95rem;color:var(--fg);letter-spacing:-.005em}
+.ts-attrib-role{font-family:var(--f-sans);font-size:.825rem;color:var(--fg-3);line-height:1.4}
+</style>
+
+<section class="ts-section" id="testimonials">
+  <div class="container">
+    <div class="ts-head reveal">
+      <span class="eyebrow"><span class="eyebrow-num">05</span>Client voices</span>
+      <h2>The work, <span class="ts-accent">in clients' words</span>.</h2>
+    </div>
+    <div class="ts-grid reveal">
+      <article class="ts-card">
+        <svg class="ts-mark" viewBox="0 0 9 7" aria-hidden="true">
+          <g fill="currentColor">
+            <rect x="0" y="0" width=".82" height=".82"/><rect x="1" y="0" width=".82" height=".82"/><rect x="2" y="0" width=".82" height=".82"/>
+            <rect x="0" y="1" width=".82" height=".82"/><rect x="1" y="1" width=".82" height=".82"/><rect x="2" y="1" width=".82" height=".82"/>
+            <rect x="0" y="2" width=".82" height=".82"/><rect x="1" y="2" width=".82" height=".82"/><rect x="2" y="2" width=".82" height=".82"/>
+            <rect x="0" y="3.5" width=".82" height=".82"/><rect x="0" y="4.5" width=".82" height=".82"/><rect x="0" y="5.5" width=".82" height=".82"/>
+            <rect x="5" y="0" width=".82" height=".82"/><rect x="6" y="0" width=".82" height=".82"/><rect x="7" y="0" width=".82" height=".82"/>
+            <rect x="5" y="1" width=".82" height=".82"/><rect x="6" y="1" width=".82" height=".82"/><rect x="7" y="1" width=".82" height=".82"/>
+            <rect x="5" y="2" width=".82" height=".82"/><rect x="6" y="2" width=".82" height=".82"/><rect x="7" y="2" width=".82" height=".82"/>
+            <rect x="5" y="3.5" width=".82" height=".82"/><rect x="5" y="4.5" width=".82" height=".82"/><rect x="5" y="5.5" width=".82" height=".82"/>
+          </g>
+        </svg>
+        <div class="ts-logo"><span class="ts-logo-placeholder">Client logo</span></div>
+        <blockquote class="ts-quote">Placeholder testimonial. Replace with a real client quote that anchors to a concrete result – the workflow that was redesigned, the day the artifact shipped, or the metric that moved.</blockquote>
+        <div class="ts-attrib">
+          <strong class="ts-attrib-name">Client name</strong>
+          <span class="ts-attrib-role">Role, Company</span>
+        </div>
+      </article>
+      <article class="ts-card">
+        <svg class="ts-mark" viewBox="0 0 9 7" aria-hidden="true">
+          <g fill="currentColor">
+            <rect x="0" y="0" width=".82" height=".82"/><rect x="1" y="0" width=".82" height=".82"/><rect x="2" y="0" width=".82" height=".82"/>
+            <rect x="0" y="1" width=".82" height=".82"/><rect x="1" y="1" width=".82" height=".82"/><rect x="2" y="1" width=".82" height=".82"/>
+            <rect x="0" y="2" width=".82" height=".82"/><rect x="1" y="2" width=".82" height=".82"/><rect x="2" y="2" width=".82" height=".82"/>
+            <rect x="0" y="3.5" width=".82" height=".82"/><rect x="0" y="4.5" width=".82" height=".82"/><rect x="0" y="5.5" width=".82" height=".82"/>
+            <rect x="5" y="0" width=".82" height=".82"/><rect x="6" y="0" width=".82" height=".82"/><rect x="7" y="0" width=".82" height=".82"/>
+            <rect x="5" y="1" width=".82" height=".82"/><rect x="6" y="1" width=".82" height=".82"/><rect x="7" y="1" width=".82" height=".82"/>
+            <rect x="5" y="2" width=".82" height=".82"/><rect x="6" y="2" width=".82" height=".82"/><rect x="7" y="2" width=".82" height=".82"/>
+            <rect x="5" y="3.5" width=".82" height=".82"/><rect x="5" y="4.5" width=".82" height=".82"/><rect x="5" y="5.5" width=".82" height=".82"/>
+          </g>
+        </svg>
+        <div class="ts-logo"><span class="ts-logo-placeholder">Client logo</span></div>
+        <blockquote class="ts-quote">Placeholder testimonial. Use the second card to vary the angle – speed of delivery, fluency with the function, or the team's ability to land the artifact in production without a hand-off.</blockquote>
+        <div class="ts-attrib">
+          <strong class="ts-attrib-name">Client name</strong>
+          <span class="ts-attrib-role">Role, Company</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="cta">
   <canvas class="cta-canvas" id="ctaCanvas"></canvas>
   <div class="container cta-inner">
